@@ -23,8 +23,8 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;ov
 
 /* ─── CUSTOM CURSOR ─── */
 #cur,#cur-r{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-#cur{width:10px;height:10px;background:var(--gold);border-radius:50%;mix-blend-mode:screen;transition:transform .15s ease,background .2s ease;top:0;left:0}
-#cur-r{width:36px;height:36px;border:1.5px solid rgba(201,168,76,.55);border-radius:50%;z-index:9998;transition:width .25s,height .25s,border-color .25s;top:0;left:0}
+#cur{width:10px;height:10px;background:var(--gold);border-radius:50%;mix-blend-mode:screen;transition:transform .15s ease,background .2s ease;top:0;left:0;opacity:0}
+#cur-r{width:36px;height:36px;border:1.5px solid rgba(201,168,76,.55);border-radius:50%;z-index:9998;transition:width .25s,height .25s,border-color .25s;top:0;left:0;opacity:0}
 
 /* ─── NOISE GRAIN ─── */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
@@ -593,7 +593,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="card-lbl">About Me</div>
       <div class="stat-grid">
         <div class="stat"><div class="stat-l">Degree</div><div class="stat-v">M.S. Applied ML</div></div>
-        <div class="stat"><div class="stat-l">University</div><div class="stat-v">U of Maryland</div></div>
+        <div class="stat"><div class="stat-l">University</div><div class="stat-v">Univ. of Maryland</div></div>
         <div class="stat"><div class="stat-l">Status</div><div class="stat-v">Available</div></div>
         <div class="stat"><div class="stat-l">Location</div><div class="stat-v">College Park</div></div>
       </div>
@@ -776,12 +776,15 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 /* ══ CURSOR ══ */
 const cur  = document.getElementById('cur');
 const curR = document.getElementById('cur-r');
-let mx = 0, my = 0, rx = 0, ry = 0;
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my;
 
 document.addEventListener('mousemove', e => {
   mx = e.clientX; my = e.clientY;
   cur.style.left = mx + 'px';
   cur.style.top  = my + 'px';
+  cur.style.opacity = '1';
+  curR.style.opacity = '1';
 });
 
 (function tickRing() {
