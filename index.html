@@ -590,10 +590,10 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
     <!-- RIGHT — character card -->
     <div class="hero-card">
-      <div class="card-lbl">Character Profile</div>
+      <div class="card-lbl">About Me</div>
       <div class="stat-grid">
-        <div class="stat"><div class="stat-l">Degree</div><div class="stat-v">M.S. App. ML</div></div>
-        <div class="stat"><div class="stat-l">University</div><div class="stat-v">UMD · 2026</div></div>
+        <div class="stat"><div class="stat-l">Degree</div><div class="stat-v">M.S. Applied ML</div></div>
+        <div class="stat"><div class="stat-l">University</div><div class="stat-v">U of Maryland</div></div>
         <div class="stat"><div class="stat-l">Status</div><div class="stat-v">Available</div></div>
         <div class="stat"><div class="stat-l">Location</div><div class="stat-v">College Park</div></div>
       </div>
@@ -601,8 +601,9 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
         <span class="chip">PyTorch</span><span class="chip">LangChain</span>
         <span class="chip">LangGraph</span><span class="chip">vLLM</span>
         <span class="chip">RAG</span><span class="chip">QLoRA</span>
-        <span class="chip">Docker</span><span class="chip">Azure</span>
-        <span class="chip">MLflow</span><span class="chip">Pinecone</span>
+        <span class="chip">ChromaDB</span><span class="chip">Pinecone</span>
+        <span class="chip">Ragas</span><span class="chip">Groq</span>
+        <span class="chip">Docker</span><span class="chip">MLflow</span>
         <span class="chip">FastAPI</span><span class="chip">CUDA</span>
       </div>
     </div>
@@ -617,54 +618,54 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">LLMOps · Fine-Tuning · RAG</div>
-      <h3 class="proj-title">LLMOps Pipeline — Fine-Tune, Evaluate, Deploy</h3>
-      <p class="proj-desc">End-to-end Llama 3 8B fine-tuning via QLoRA on RTX 3080. 12 MLflow-tracked experiments, Azure Container deployment, and LangChain + Pinecone RAG on top — live public REST API.</p>
-      <div class="proj-metrics"><span class="metric">+18% F1 over base</span><span class="metric">5.2GB VRAM (4-bit)</span><span class="metric">&lt;200ms response</span></div>
-      <a href="https://github.com/MukulRay1603/llmops-pipeline" target="_blank" class="proj-link">View on GitHub ↗</a>
+      <div class="proj-type">LLMOps · Fine-Tuning · RAG · HuggingFace Spaces</div>
+      <h3 class="proj-title">Irminsul — Production LLMOps System</h3>
+      <p class="proj-desc">Fine-tuned Llama 3.1 8B with QLoRA (rank 16, lr 2e-4); selected the winning checkpoint from 3 MLflow-tracked experiments by faithfulness (0.826) and ROUGE-L (0.466). Deployed FastAPI + LangChain + Pinecone RAG with guardrails and a confidence-gated web fallback on HuggingFace Spaces. Companion corpus pipeline autonomously ingests 794 documents and upserts 4,036 vectors to Pinecone weekly via GitHub Actions.</p>
+      <div class="proj-metrics"><span class="metric">Faithfulness 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric">4,036 vectors</span><span class="metric">794 docs ingested</span></div>
+      <a href="https://github.com/MukulRay1603/Irminsul" target="_blank" class="proj-link">View on GitHub ↗</a>
     </div>
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">GenAI · Game AI · Emotion</div>
-      <h3 class="proj-title">Generative AI NPC System — LLM + RAG + Guardrails</h3>
-      <p class="proj-desc">vLLM-powered NPC dialogue in Unity over TCP. LangChain guardrails cut hallucinations 31%. Facial emotion recognition (60ms inference) shifts NPC tone based on the player's live expression.</p>
-      <div class="proj-metrics"><span class="metric">−31% hallucinations</span><span class="metric">sub-1s P95</span><span class="metric">60ms emotion model</span></div>
+      <div class="proj-type">GenAI · Game AI · Multimodal · Real-Time</div>
+      <h3 class="proj-title">Conversational NPC Agent — Real-Time Multimodal Game AI</h3>
+      <p class="proj-desc">Sub-1s NPC dialogue system for a Genshin-style Unity game: Mistral 7B via vLLM over TCP, ChromaDB lore retrieval, and NeMo guardrails cutting hallucination rate 31% vs. baseline (Ragas, 500+ queries). Session-aware conversation memory and a FER emotion model (60ms) shift NPC tone based on the player's live expression.</p>
+      <div class="proj-metrics"><span class="metric">−31% hallucinations</span><span class="metric">sub-1s P95</span><span class="metric">60ms FER model</span><span class="metric">500+ query eval</span></div>
       <a href="https://github.com/MukulRay1603/EmotionAwareNPCs" target="_blank" class="proj-link">View on GitHub ↗</a>
     </div>
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">Multi-Agent · LangGraph · RAG</div>
-      <h3 class="proj-title">Multi-Agent Research Assistant</h3>
-      <p class="proj-desc">LangGraph pipeline: planner → retriever → critic → synthesizer. Critic node rejects low-confidence answers and triggers re-retrieval, cutting unsupported claims 40% vs. single-agent baseline.</p>
-      <div class="proj-metrics"><span class="metric">−40% unsupported claims</span><span class="metric">200-query eval</span><span class="metric">4-node pipeline</span></div>
+      <div class="proj-type">Multi-Agent · LangGraph · RAG · Benchmarking</div>
+      <h3 class="proj-title">Multi-Agent Research Assistant — LangGraph</h3>
+      <p class="proj-desc">Four-agent LangGraph pipeline (planner → retriever → critic → synthesizer). Critic node rewrites low-confidence queries before re-retrieval, cutting unsupported claims 40% vs. single-pass RAG on a 200-question eval. Benchmarked single-agent RAG, naive multi-agent, and critic-loop across faithfulness and citation accuracy; re-retrieval added 220ms but recovered 40% of initially failed answers.</p>
+      <div class="proj-metrics"><span class="metric">−40% unsupported claims</span><span class="metric">200-question eval</span><span class="metric">+220ms → +40% recovery</span></div>
       <a href="https://github.com/MukulRay1603/multiagent-research-assistant" target="_blank" class="proj-link">View on GitHub ↗</a>
     </div>
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">Reinforcement Learning · Robotics</div>
-      <h3 class="proj-title">Robotic Defense Agent — PPO RL</h3>
-      <p class="proj-desc">Dual-arm PyBullet agent trained 200k timesteps via PPO. Blocking strategies emerged purely from reward shaping — zero explicit defensive logic. Parallelized rollouts on RTX 3080 cut training 40%.</p>
+      <div class="proj-type">Reinforcement Learning · Robotics · PPO</div>
+      <h3 class="proj-title">Robotic Defense Agent — PPO Reinforcement Learning</h3>
+      <p class="proj-desc">Dual-arm PyBullet agent trained for 200k timesteps using PPO with dense reward shaping — blocking strategies emerged without any explicit defensive logic coded in. Parallelized rollouts on an RTX 3080 cut wall-clock training time 40%; training curves and demo documented in the repo README.</p>
       <div class="proj-metrics"><span class="metric">−40% training time</span><span class="metric">200k timesteps</span><span class="metric">Emergent behavior</span></div>
       <a href="https://github.com/MukulRay1603/RoboticParry-PPO" target="_blank" class="proj-link">View on GitHub ↗</a>
     </div>
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">NLP · Transformers · Production</div>
-      <h3 class="proj-title">XR Corpus NLP Search</h3>
-      <p class="proj-desc">Transformer fine-tuned NLP search for 100-page XR corpus. ONNX export + INT8 quantization tripled throughput (185→62ms P95). Deployed to AWS EC2 via Docker + GitHub Actions CI/CD.</p>
-      <div class="proj-metrics"><span class="metric">83.2% F1</span><span class="metric">3× throughput</span><span class="metric">62ms P95</span></div>
+      <div class="proj-type">NLP · Transformers · Production · AWS</div>
+      <h3 class="proj-title">XR Corpus NLP Search — BeeBox Studios</h3>
+      <p class="proj-desc">Transformer-based QA system for a 100-page XR corpus achieving 83.2% F1 and 71.8% Exact Match — replacing manual in-headset lookup entirely. ONNX export + INT8 quantization cut latency 3× (185→62ms P95). Shipped via Docker and GitHub Actions CI/CD to AWS EC2.</p>
+      <div class="proj-metrics"><span class="metric">83.2% F1</span><span class="metric">71.8% Exact Match</span><span class="metric">3× latency cut</span><span class="metric">62ms P95</span></div>
       <a href="https://github.com/MukulRay1603" target="_blank" class="proj-link">View on GitHub ↗</a>
     </div>
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">📄</span>IEEE · IDCIoT 2024</div></div>
-      <div class="proj-type">IEEE Publication · GenAI · VR</div>
+      <div class="proj-type">IEEE Publication · GenAI · VR · Stable Diffusion</div>
       <h3 class="proj-title">Voice-Driven Panoramic VR Generation</h3>
-      <p class="proj-desc">Speech → 360° image pipeline: Whisper → GPT-Neo → Stable Diffusion. Attention slicing + xFormers boosted throughput 2.3× within a 10GB VRAM budget. Published IEEE IDCIoT 2024.</p>
+      <p class="proj-desc">Speech → 360° image pipeline: Whisper → GPT-Neo → Stable Diffusion. Attention slicing and xFormers optimizations delivered 2.3× throughput within a 10GB VRAM budget. Published at IEEE IDCIoT 2024.</p>
       <div class="proj-metrics"><span class="metric">2.3× throughput</span><span class="metric">10GB VRAM budget</span><span class="metric">IEEE Published</span></div>
       <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="proj-link">Read Paper ↗</a>
     </div>
@@ -683,8 +684,9 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="tl-role">AI Research Intern</div>
       <div class="tl-co">BeeBox Studios — IIT Madras Research Park</div>
       <ul class="tl-list">
-        <li>Modernized NLP search for a 100-page XR corpus via transformer fine-tuning — 83.2% F1, 71.8% EM — accurate enough to replace manual lookup for in-headset users.</li>
-        <li>Boosted throughput 3× (185ms → 62ms P95) via ONNX export + INT8 quantization; deployed via Docker and GitHub Actions CI/CD to AWS EC2.</li>
+        <li>Built a transformer-based QA system for a 100-page XR corpus achieving 83.2% F1 and 71.8% Exact Match — accurate enough to replace manual in-headset lookup entirely.</li>
+        <li>Cut inference latency 3× (185ms → 62ms P95) via ONNX export and INT8 quantization; shipped via Docker and GitHub Actions CI/CD to AWS EC2.</li>
+        <li>Showcased leadership in technical plan drafting and coordinating a cross-functional team on WebRTC integration for real-time XR data streaming.</li>
       </ul>
     </div>
 
@@ -770,7 +772,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
 <footer>© 2026 Mukul Rayana · College Park, MD · Forged in caffeine and curiosity</footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ══ CURSOR ══ */
 const cur  = document.getElementById('cur');
 const curR = document.getElementById('cur-r');
@@ -972,9 +974,3 @@ function setMenu(open) {
 
 ham.addEventListener('click', () => setMenu(!mobOverlay.classList.contains('open')));
 mobClose.addEventListener('click', () => setMenu(false));
-document.querySelectorAll('.mob-nav-link').forEach(a =>
-  a.addEventListener('click', () => setMenu(false))
-);
-</script>
-</body>
-</html>
