@@ -228,7 +228,6 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 /* ─── SECTIONS ─── */
 .s-wrap{max-width:1300px;margin:0 auto;padding:5rem 5vw}
 .s-head{display:flex;align-items:center;gap:1.5rem;margin-bottom:3.5rem}
-.s-num{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);opacity:.5}
 .s-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;color:#fff;letter-spacing:.06em}
 .s-head::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
 
@@ -272,7 +271,7 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .proj-media-icon{font-size:2rem;display:block;margin-bottom:.2rem;opacity:.4}
 .proj-type{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.65rem}
 .proj-title{font-family:'Cinzel',serif;font-size:1.02rem;font-weight:600;color:var(--gold-l);margin-bottom:.85rem;line-height:1.35}
-.proj-desc{font-size:.95rem;line-height:1.75;color:var(--dim);margin-bottom:1.2rem;flex:1}
+.proj-desc{font-size:.95rem;line-height:1.75;color:var(--dim);margin-bottom:1.2rem;flex:1;text-align:justify}
 .proj-metrics{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.3rem}
 .metric{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);padding:.26rem .6rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15)}
 .proj-link{
@@ -313,47 +312,52 @@ nav.scrolled{background:rgba(3,5,16,.97)}
   background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.05),transparent 65%)}
 .talent-group{position:relative;z-index:2}
 .talent-label{
-  font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;
+  font-family:'Cinzel',serif;font-size:.74rem;font-weight:600;
   letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
   margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
 .talent-label::before{content:'◆';font-size:.45rem;color:var(--teal);filter:drop-shadow(0 0 4px var(--teal))}
 .talent-tags{display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin-bottom:.2rem}
 .t-tag{
-  font-family:'JetBrains Mono',monospace;font-size:.64rem;
-  padding:.3rem .7rem;border:1px solid rgba(201,168,76,.18);
-  color:var(--text);letter-spacing:.05em;
-  transition:all .22s;cursor:default;
-  background:rgba(201,168,76,.03)}
-.t-tag:hover{border-color:var(--teal);color:var(--gold-l);background:rgba(79,209,197,.06);transform:translateY(-2px)}
-.t-tag.accent{border-color:rgba(79,209,197,.35);color:var(--teal);background:rgba(79,209,197,.06)}
-.t-tag.accent:hover{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.08)}
-.talent-sep{height:1px;background:linear-gradient(90deg,transparent,var(--bdr),transparent);margin:1.2rem 0}
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  padding:.38rem .85rem;border:1px solid rgba(201,168,76,.22);
+  color:var(--teal);letter-spacing:.06em;
+  transition:all .25s;cursor:default;
+  background:rgba(79,209,197,.04)}
+.t-tag:hover{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.08);transform:translateY(-2px);box-shadow:0 4px 12px rgba(201,168,76,.15)}
+.talent-sep{height:1px;background:linear-gradient(90deg,transparent,var(--bdr),transparent);margin:1.5rem 0}
 
 /* ─── BEYOND ─── */
-.beyond-scroll{
-  display:flex;gap:1.2rem;overflow-x:auto;overflow-y:hidden;
-  padding:0 0 1.2rem;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;scrollbar-width:thin;
-  scrollbar-color:var(--gold-d) transparent}
-.beyond-scroll::-webkit-scrollbar{height:3px}
-.beyond-scroll::-webkit-scrollbar-track{background:transparent}
-.beyond-scroll::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
+.beyond-carousel{position:relative;height:380px;perspective:1200px;overflow:hidden}
+.beyond-track{
+  position:absolute;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
 .beyond-card{
-  min-width:220px;max-width:220px;flex-shrink:0;scroll-snap-align:start;
-  background:linear-gradient(135deg,rgba(10,16,36,.9),rgba(6,10,22,.95));
+  position:absolute;width:240px;left:50%;top:50%;
+  margin-left:-120px;margin-top:-170px;
+  background:linear-gradient(135deg,rgba(10,16,36,.92),rgba(6,10,22,.96));
   border:1px solid var(--bdr);padding:1.6rem;text-align:center;
-  position:relative;overflow:hidden;
   clip-path:polygon(0 0,calc(100% - 13px) 0,100% 13px,100% 100%,13px 100%,0 calc(100% - 13px));
-  transition:transform .35s,border-color .35s,box-shadow .35s}
-.beyond-card:hover{transform:translateY(-6px);border-color:var(--bdr-b);box-shadow:0 20px 55px rgba(0,0,0,.4)}
-.beyond-card::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 80% at 50% 110%,rgba(201,168,76,.09),transparent 65%);
-  opacity:0;transition:opacity .4s}
-.beyond-card:hover::before{opacity:1}
-.beyond-icon{font-size:2.5rem;margin-bottom:.9rem;display:block;filter:drop-shadow(0 0 14px rgba(201,168,76,.55))}
-.beyond-name{font-family:'Cinzel',serif;font-size:.84rem;font-weight:600;color:var(--gold);margin-bottom:.45rem}
-.beyond-text{font-size:.88rem;color:var(--dim);line-height:1.65}
+  transition:opacity .6s,filter .4s;
+  backface-visibility:hidden}
+.beyond-card.active{border-color:rgba(201,168,76,.5);box-shadow:0 0 35px rgba(201,168,76,.15)}
+.beyond-card:not(.active){opacity:.55;filter:brightness(.7)}
+.beyond-icon{font-size:2.2rem;margin-bottom:.7rem;display:block;filter:drop-shadow(0 0 12px rgba(201,168,76,.5))}
+.beyond-name{font-family:'Cinzel',serif;font-size:.82rem;font-weight:600;color:var(--gold);margin-bottom:.4rem}
+.beyond-text{font-size:.82rem;color:var(--dim);line-height:1.65}
+.carousel-nav{display:flex;justify-content:center;gap:.8rem;margin-top:1rem}
+.carousel-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(201,168,76,.25);border:none;
+  cursor:pointer;transition:all .3s;padding:0}
+.carousel-dot.active{background:var(--gold);box-shadow:0 0 8px rgba(201,168,76,.5);transform:scale(1.3)}
+.carousel-arrows{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;pointer-events:none;z-index:10;transform:translateY(-50%)}
+.carousel-arrow{
+  pointer-events:auto;background:none;border:1px solid rgba(201,168,76,.3);
+  color:var(--gold);font-size:1.2rem;width:36px;height:36px;
+  border-radius:50%;cursor:pointer;transition:all .3s;
+  display:flex;align-items:center;justify-content:center}
+.carousel-arrow:hover{border-color:var(--gold);background:rgba(201,168,76,.1);box-shadow:0 0 15px rgba(201,168,76,.2)}
 
 /* ─── CONTACT ─── */
 .contact-wrap{max-width:1300px;margin:0 auto;padding:5rem 5vw}
@@ -634,7 +638,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
 <!-- ══ PROJECTS ══ -->
 <div class="s-wrap" id="projects">
-  <div class="s-head"><span class="s-num">01</span><h2 class="s-title">Projects</h2></div>
+  <div class="s-head"><h2 class="s-title">Projects</h2></div>
   <div class="proj-grid">
 
     <div class="proj-card reveal">
@@ -689,7 +693,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
 <!-- ══ EXPERIENCE ══ -->
 <div class="s-wrap" id="experience" style="padding-top:2rem">
-  <div class="s-head"><span class="s-num">02</span><h2 class="s-title">Experience</h2></div>
+  <div class="s-head"><h2 class="s-title">Experience</h2></div>
   <div class="timeline">
 
     <div class="tl-item reveal lft">
@@ -720,7 +724,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
 <!-- ══ EDUCATION ══ -->
 <div class="s-wrap" id="education" style="padding-top:2rem">
-  <div class="s-head"><span class="s-num">03</span><h2 class="s-title">Education</h2></div>
+  <div class="s-head"><h2 class="s-title">Education</h2></div>
   <div class="timeline">
     <div class="tl-item reveal lft">
       <div class="tl-dot"></div>
@@ -748,7 +752,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
 <!-- ══ SKILLS ══ -->
 <div class="s-wrap" id="skills" style="padding-top:2rem">
-  <div class="s-head"><span class="s-num">04</span><h2 class="s-title">Skills</h2></div>
+  <div class="s-head"><h2 class="s-title">Skills</h2></div>
   <div class="talent-wrap">
   <div class="talent-group reveal">
     <h3 class="talent-label">Languages</h3>
@@ -760,28 +764,28 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   <div class="talent-group reveal">
     <h3 class="talent-label">GenAI & LLMs</h3>
     <div class="talent-tags">
-      <span class="t-tag accent">LangChain</span><span class="t-tag accent">LangGraph</span><span class="t-tag">PEFT / LoRA / QLoRA</span><span class="t-tag accent">RAG</span><span class="t-tag">Agentic AI</span><span class="t-tag">Multi-Agent Systems</span><span class="t-tag">Prompt Engineering</span><span class="t-tag">Fine-tuning</span><span class="t-tag">vLLM</span><span class="t-tag">Pinecone</span><span class="t-tag">ChromaDB</span><span class="t-tag">Guardrails</span><span class="t-tag">Ragas</span><span class="t-tag">Groq</span>
+      <span class="t-tag">LangChain</span><span class="t-tag">LangGraph</span><span class="t-tag">PEFT / LoRA / QLoRA</span><span class="t-tag">RAG</span><span class="t-tag">Agentic AI</span><span class="t-tag">Multi-Agent Systems</span><span class="t-tag">Prompt Engineering</span><span class="t-tag">Fine-tuning</span><span class="t-tag">vLLM</span><span class="t-tag">Pinecone</span><span class="t-tag">ChromaDB</span><span class="t-tag">Guardrails</span><span class="t-tag">Ragas</span><span class="t-tag">Groq</span>
     </div>
   </div>
   <div class="talent-sep"></div>
   <div class="talent-group reveal">
     <h3 class="talent-label">ML & Deep Learning</h3>
     <div class="talent-tags">
-      <span class="t-tag accent">PyTorch</span><span class="t-tag">TensorFlow</span><span class="t-tag">HuggingFace Transformers</span><span class="t-tag accent">Reinforcement Learning</span><span class="t-tag">Scikit-learn</span><span class="t-tag">OpenCV</span><span class="t-tag">NumPy</span><span class="t-tag">Pandas</span>
+      <span class="t-tag">PyTorch</span><span class="t-tag">TensorFlow</span><span class="t-tag">HuggingFace Transformers</span><span class="t-tag">Reinforcement Learning</span><span class="t-tag">Scikit-learn</span><span class="t-tag">OpenCV</span><span class="t-tag">NumPy</span><span class="t-tag">Pandas</span>
     </div>
   </div>
   <div class="talent-sep"></div>
   <div class="talent-group reveal">
     <h3 class="talent-label">MLOps & Infra</h3>
     <div class="talent-tags">
-      <span class="t-tag">MLflow</span><span class="t-tag">FastAPI</span><span class="t-tag accent">Docker</span><span class="t-tag accent">ONNX</span><span class="t-tag accent">Unity Sentis</span><span class="t-tag accent">Ray RLlib</span><span class="t-tag">AWS (EC2/S3)</span><span class="t-tag">Azure (ACR/ACI)</span><span class="t-tag">GitHub Actions CI/CD</span><span class="t-tag">HuggingFace Spaces</span><span class="t-tag">CUDA</span><span class="t-tag">Linux</span>
+      <span class="t-tag">MLflow</span><span class="t-tag">FastAPI</span><span class="t-tag">Docker</span><span class="t-tag">ONNX</span><span class="t-tag">Unity Sentis</span><span class="t-tag">Ray RLlib</span><span class="t-tag">AWS (EC2/S3)</span><span class="t-tag">Azure (ACR/ACI)</span><span class="t-tag">GitHub Actions CI/CD</span><span class="t-tag">HuggingFace Spaces</span><span class="t-tag">CUDA</span><span class="t-tag">Linux</span>
     </div>
   </div>
   <div class="talent-sep"></div>
   <div class="talent-group reveal">
     <h3 class="talent-label">Game AI & Engines</h3>
     <div class="talent-tags">
-      <span class="t-tag accent">Unity 2022.3 LTS</span><span class="t-tag">Unity ML-Agents</span><span class="t-tag accent">Unity Sentis</span><span class="t-tag">C# Scripting</span><span class="t-tag">ONNX Runtime</span><span class="t-tag">NeMo Guardrails</span>
+      <span class="t-tag">Unity 2022.3 LTS</span><span class="t-tag">Unity ML-Agents</span><span class="t-tag">Unity Sentis</span><span class="t-tag">C# Scripting</span><span class="t-tag">ONNX Runtime</span><span class="t-tag">NeMo Guardrails</span>
     </div>
   </div>
 </div>
@@ -789,16 +793,23 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
 <!-- ══ BEYOND CODE ══ -->
 <div class="s-wrap" id="beyond" style="padding-top:2rem">
-  <div class="s-head"><span class="s-num">05</span><h2 class="s-title">Beyond Code</h2></div>
-  <div class="beyond-scroll">
-    <div class="beyond-card reveal"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 60 since 2021. Full 36-star Spiral Abyss clears — often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis? Yeah, that's basically a love letter to Azhdaha.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen battle arcs, psychological thrillers, and anything with a hard magic system. Currently on a hunter exam binge. Always looking for the next arc that hits like Chimera Ant or Shibuya — send recs.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Sprinter — hurdles and 4×100 relay. I ran track competitively and the start-gun adrenaline honestly never goes away.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">I play acoustic covers when I need a break. Nothing fancy — just vibing with whatever sounds right.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">I work at UMD's climbing facility and climb regularly. Managing patron safety and sending problems on a 55 ft wall in the same shift is pretty great honestly.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery</div><div class="beyond-text">Range sessions at UMD Archery Club. Recurve bow, target shooting. Nothing clears the head like a clean release.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">⛸️</span><div class="beyond-name">Figure Skating</div><div class="beyond-text">UMD Figure Skating Club. Still learning edges and crossovers but the ice is genuinely addictive.</div></div>
+  <div class="s-head"><h2 class="s-title">Beyond Code</h2></div>
+  <div class="beyond-carousel" id="beyondCarousel">
+  <div class="carousel-arrows">
+    <button class="carousel-arrow" id="carPrev" aria-label="Previous">‹</button>
+    <button class="carousel-arrow" id="carNext" aria-label="Next">›</button>
   </div>
+  <div class="beyond-track" id="beyondTrack">
+    <div class="beyond-card"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 60 since 2021. Full 36-star Spiral Abyss clears — often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis? Yeah, that's basically a love letter to Azhdaha.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen battle arcs, psychological thrillers, and anything with a hard magic system. Currently on a hunter exam binge. Always looking for the next arc that hits like Chimera Ant or Shibuya — send recs.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Sprinter — hurdles and 4×100 relay. I ran track competitively and the start-gun adrenaline honestly never goes away.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">I play acoustic covers when I need a break. Nothing fancy — just vibing with whatever sounds right.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">I work at UMD's climbing facility and climb regularly. Managing patron safety and sending problems on a 55 ft wall in the same shift is pretty great honestly.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery</div><div class="beyond-text">Range sessions at UMD Archery Club. Recurve bow, target shooting. Nothing clears the head like a clean release.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">⛸️</span><div class="beyond-name">Figure Skating</div><div class="beyond-text">UMD Figure Skating Club. Still learning edges and crossovers but the ice is genuinely addictive.</div></div>
+  </div>
+  <div class="carousel-nav" id="carouselNav"></div>
+</div>
 </div>
 
 <!-- ══ CONTACT ══ -->
@@ -983,6 +994,69 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     });
   }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
   document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+})();
+
+/* ══ BEYOND CAROUSEL ══ */
+(function() {
+  var track = document.getElementById('beyondTrack');
+  var nav = document.getElementById('carouselNav');
+  var prevBtn = document.getElementById('carPrev');
+  var nextBtn = document.getElementById('carNext');
+  if (!track) return;
+  var cards = track.querySelectorAll('.beyond-card');
+  var total = cards.length;
+  var current = 0;
+  var autoTimer;
+
+  // create dots
+  for (var i = 0; i < total; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.dataset.idx = i;
+    dot.addEventListener('click', function() { goTo(parseInt(this.dataset.idx)); });
+    nav.appendChild(dot);
+  }
+
+  function arrange() {
+    var dots = nav.querySelectorAll('.carousel-dot');
+    cards.forEach(function(card, i) {
+      var offset = i - current;
+      // wrap around
+      if (offset > Math.floor(total / 2)) offset -= total;
+      if (offset < -Math.floor(total / 2)) offset += total;
+      var x = offset * 270;
+      var z = -Math.abs(offset) * 180;
+      var rotY = offset * -8;
+      card.style.transform = 'translateX(' + x + 'px) translateZ(' + z + 'px) rotateY(' + rotY + 'deg)';
+      card.style.zIndex = total - Math.abs(offset);
+      card.classList.toggle('active', offset === 0);
+    });
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+  }
+
+  function goTo(idx) {
+    current = ((idx % total) + total) % total;
+    arrange();
+    resetAuto();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 4000);
+  }
+
+  // pause on hover
+  track.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
+  track.addEventListener('mouseleave', resetAuto);
+
+  arrange();
+  resetAuto();
 })();
 
 /* ══ HAMBURGER ══ */
