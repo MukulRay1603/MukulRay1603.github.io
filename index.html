@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mukul Rayana · AI Engineer</title>
+<meta name="description" content="Mukul Rayana — AI/ML Engineer specializing in LLMs, RAG, multi-agent systems, reinforcement learning, and game AI. M.S. Applied Machine Learning, University of Maryland. IEEE published.">
+<meta property="og:title" content="Mukul Rayana · AI/ML Engineer">
+<meta property="og:description" content="AI/ML Engineer | LLMs, RAG, Multi-Agent Systems, RL, Game AI | UMD M.S. Applied ML 2026">
+<meta property="og:image" content="https://mukulray1603.github.io/assets/images/Mypic.jpeg">
+<meta property="og:url" content="https://mukulray1603.github.io">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://mukulray1603.github.io">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -15,7 +23,7 @@
   --sky:#90c8f0;--sky-d:#3a78a8;
   --violet:#9b7fe8;--crimson:#e63946;
   --bg:#030510;--panel:rgba(8,12,28,.88);
-  --text:#ccd6f6;--dim:#5a6a9a;
+  --text:#ccd6f6;--dim:#7a8aba;
   --bdr:rgba(201,168,76,.18);--bdr-b:rgba(201,168,76,.55);
 }
 html{scroll-behavior:smooth}
@@ -560,6 +568,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
         <a href="#projects" class="btn btn-gold">Explore Projects</a>
         <a href="https://github.com/MukulRay1603" target="_blank" class="btn btn-ghost">GitHub ↗</a>
         <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+        <a href="https://huggingface.co/spaces/MukulRay" target="_blank" class="btn btn-ghost">HuggingFace ↗</a>
       </div>
     </div>
 
@@ -569,17 +578,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
         <div class="orbit-outer"></div>
         <div class="orbit-inner"></div>
         <div class="photo-img-wrap">
-          <!--
-            TO ADD YOUR PHOTO:
-            1. Put your photo file (e.g. mukul.jpg) next to index.html
-            2. Delete the <div class="photo-ph">...</div> below
-            3. Uncomment the <img> line
-          -->
-          <div class="photo-ph">
-            <span class="photo-ph-icon">🧑‍💻</span>
-            <img src="MukulRay1603.github.io\assets\images\Mypic.jpeg" alt="Mukul Rayana">
-          </div>
-          <!-- <img src="mukul.jpg" alt="Mukul Rayana"> -->
+          <img src="assets/images/Mypic.jpeg" alt="Mukul Rayana">
         </div>
       </div>
       <p class="photo-nametag">Mukul Rayana</p>
@@ -603,10 +602,11 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
         <span class="chip">PyTorch</span><span class="chip">LangChain</span>
         <span class="chip">LangGraph</span><span class="chip">vLLM</span>
         <span class="chip">RAG</span><span class="chip">QLoRA</span>
-        <span class="chip">ChromaDB</span><span class="chip">Pinecone</span>
-        <span class="chip">Ragas</span><span class="chip">Groq</span>
-        <span class="chip">Docker</span><span class="chip">MLflow</span>
-        <span class="chip">FastAPI</span><span class="chip">CUDA</span>
+        <span class="chip">Pinecone</span><span class="chip">Ray RLlib</span>
+        <span class="chip">Unity Sentis</span><span class="chip">ONNX</span>
+        <span class="chip">Guardrails</span><span class="chip">Docker</span>
+        <span class="chip">MLflow</span><span class="chip">FastAPI</span>
+        <span class="chip">CUDA</span>
       </div>
     </div>
 
@@ -620,55 +620,46 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">LLMOps · Fine-Tuning · RAG · HuggingFace Spaces</div>
+      <div class="proj-type">Reinforcement Learning · Game AI · Ray RLlib · Unity Sentis · Groq</div>
+      <h3 class="proj-title">Nemesis — Distributed RL Boss AI with Real-Time LLM Narration</h3>
+      <p class="proj-desc">Trained a phase-conditioned PPO agent with 3-stage curriculum learning (300K steps, reward −2.4→13.2) via Ray RLlib across 8 parallel workers (2.6× speedup). Exported to ONNX, deployed via Unity Sentis at <2 ms/frame — production-grade in-engine inference at 60 fps, zero Python runtime. Integrated real-time LLM narration (Groq LLaMA-3.3-70B + NeMo Guardrails over TCP, 114–352 ms). RL boss outlasted scripted FSM baseline by 85% across 50 evaluation episodes.</p>
+      <div class="proj-metrics"><span class="metric">2.6× RLlib speedup</span><span class="metric">&lt;2 ms/frame</span><span class="metric">60 fps</span><span class="metric">85% outlast FSM</span></div>
+      <a href="https://github.com/MukulRay1603/nemesis-boss-ai" target="_blank" class="proj-link">View on GitHub ↗</a>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
+      <div class="proj-type">NLI · Safety Guardrails · Emotion-Conditioned RAG · DeBERTa · captum</div>
+      <h3 class="proj-title">EmpathRAG — NLI Safety Guardrail & Emotion-Conditioned RAG</h3>
+      <p class="proj-desc">Fine-tuned DeBERTa-v3-base on 232K NLI pairs (crisis-hypothesis framing); 0.9629 crisis recall on 30 adversarial probes across 6 attack categories. captum Integrated Gradients on every safety intercept for auditable token-level XAI. Built 5-stage emotion-conditioned RAG over a 1.67M-vector FAISS index (RoBERTa + LoRA, 0.7127 F1). Four-condition ablation: emotion alignment 0.88 vs. 0.30 BM25 baseline — Wilcoxon p = 3.62 × 10⁻⁸.</p>
+      <div class="proj-metrics"><span class="metric">0.9629 recall</span><span class="metric">1.67M vectors</span><span class="metric">p = 3.62e-8</span><span class="metric">0.88 alignment</span></div>
+      <a href="https://github.com/MukulRay1603/Empath-RAG" target="_blank" class="proj-link">View on GitHub ↗</a>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
+      <div class="proj-type">Multi-Agent · LangGraph · Agentic AI · Staleness Detection</div>
+      <h3 class="proj-title">RECON — Agentic ML Research Navigator</h3>
+      <p class="proj-desc">Four-agent LangGraph state machine (planner → retriever → critic → synthesizer) with a retry loop. Critic applies a 4-verdict taxonomy (PASS / STALE / CONTRADICTED / INSUFFICIENT) — catching 52% of superseded ML claims vs. 0% for single-pass RAG on a 130-question ground-truth eval. Ablated 3 recency-decay formulas; linear decay optimal (52% vs. 42% no-decay, 38% log-decay). Position accuracy 43.9% vs. 32.3% baseline.</p>
+      <div class="proj-metrics"><span class="metric">52% staleness catch</span><span class="metric">130-question eval</span><span class="metric">43.9% position acc.</span></div>
+      <a href="https://huggingface.co/spaces/MukulRay/recon" target="_blank" class="proj-link">Live Demo ↗</a>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
+      <div class="proj-type">LLMOps · QLoRA Fine-Tuning · RAG · CI/CD · HuggingFace Spaces</div>
       <h3 class="proj-title">Irminsul — Production LLMOps System</h3>
-      <p class="proj-desc">Fine-tuned Llama 3.1 8B with QLoRA (rank 16, lr 2e-4); selected the winning checkpoint from 3 MLflow-tracked experiments by faithfulness (0.826) and ROUGE-L (0.466). Deployed FastAPI + LangChain + Pinecone RAG with guardrails and a confidence-gated web fallback on HuggingFace Spaces. Companion corpus pipeline autonomously ingests 794 documents and upserts 4,036 vectors to Pinecone weekly via GitHub Actions.</p>
-      <div class="proj-metrics"><span class="metric">Faithfulness 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric">4,036 vectors</span><span class="metric">794 docs ingested</span></div>
-      <a href="https://github.com/MukulRay1603/Irminsul" target="_blank" class="proj-link">View on GitHub ↗</a>
-    </div>
-
-    <div class="proj-card reveal">
-      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">GenAI · Game AI · Multimodal · Real-Time</div>
-      <h3 class="proj-title">Conversational NPC Agent — Real-Time Multimodal Game AI</h3>
-      <p class="proj-desc">Sub-1s NPC dialogue system for a Genshin-style Unity game: Mistral 7B via vLLM over TCP, ChromaDB lore retrieval, and NeMo guardrails cutting hallucination rate 31% vs. baseline (Ragas, 500+ queries). Session-aware conversation memory and a FER emotion model (60ms) shift NPC tone based on the player's live expression.</p>
-      <div class="proj-metrics"><span class="metric">−31% hallucinations</span><span class="metric">sub-1s P95</span><span class="metric">60ms FER model</span><span class="metric">500+ query eval</span></div>
-      <a href="https://github.com/MukulRay1603/EmotionAwareNPCs" target="_blank" class="proj-link">View on GitHub ↗</a>
-    </div>
-
-    <div class="proj-card reveal">
-      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">Multi-Agent · LangGraph · RAG · Benchmarking</div>
-      <h3 class="proj-title">Multi-Agent Research Assistant — LangGraph</h3>
-      <p class="proj-desc">Four-agent LangGraph pipeline (planner → retriever → critic → synthesizer). Critic node rewrites low-confidence queries before re-retrieval, cutting unsupported claims 40% vs. single-pass RAG on a 200-question eval. Benchmarked single-agent RAG, naive multi-agent, and critic-loop across faithfulness and citation accuracy; re-retrieval added 220ms but recovered 40% of initially failed answers.</p>
-      <div class="proj-metrics"><span class="metric">−40% unsupported claims</span><span class="metric">200-question eval</span><span class="metric">+220ms → +40% recovery</span></div>
-      <a href="https://github.com/MukulRay1603/multiagent-research-assistant" target="_blank" class="proj-link">View on GitHub ↗</a>
-    </div>
-
-    <div class="proj-card reveal">
-      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">Reinforcement Learning · Robotics · PPO</div>
-      <h3 class="proj-title">Robotic Defense Agent — PPO Reinforcement Learning</h3>
-      <p class="proj-desc">Dual-arm PyBullet agent trained for 200k timesteps using PPO with dense reward shaping — blocking strategies emerged without any explicit defensive logic coded in. Parallelized rollouts on an RTX 3080 cut wall-clock training time 40%; training curves and demo documented in the repo README.</p>
-      <div class="proj-metrics"><span class="metric">−40% training time</span><span class="metric">200k timesteps</span><span class="metric">Emergent behavior</span></div>
-      <a href="https://github.com/MukulRay1603/RoboticParry-PPO" target="_blank" class="proj-link">View on GitHub ↗</a>
-    </div>
-
-    <div class="proj-card reveal">
-      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
-      <div class="proj-type">NLP · Transformers · Production · AWS</div>
-      <h3 class="proj-title">XR Corpus NLP Search — BeeBox Studios</h3>
-      <p class="proj-desc">Transformer-based QA system for a 100-page XR corpus achieving 83.2% F1 and 71.8% Exact Match — replacing manual in-headset lookup entirely. ONNX export + INT8 quantization cut latency 3× (185→62ms P95). Shipped via Docker and GitHub Actions CI/CD to AWS EC2.</p>
-      <div class="proj-metrics"><span class="metric">83.2% F1</span><span class="metric">71.8% Exact Match</span><span class="metric">3× latency cut</span><span class="metric">62ms P95</span></div>
-      <a href="https://github.com/MukulRay1603" target="_blank" class="proj-link">View on GitHub ↗</a>
+      <p class="proj-desc">Fine-tuned Llama 3.1 8B with QLoRA (rank 16, lr 2e-4); selected winning checkpoint from 3 MLflow-tracked experiments by semantic similarity (0.826) and ROUGE-L (0.466). Deployed FastAPI + LangChain + Pinecone RAG with guardrails and confidence-gated web fallback on HuggingFace Spaces. Companion corpus pipeline autonomously ingests 840 documents across 3 trust tiers and upserts 6,876 vectors to Pinecone weekly via GitHub Actions.</p>
+      <div class="proj-metrics"><span class="metric">Sim 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric">6,876 vectors</span><span class="metric">840 docs</span></div>
+      <a href="https://huggingface.co/spaces/MukulRay/Irminsul" target="_blank" class="proj-link">Live Demo ↗</a>
     </div>
 
     <div class="proj-card reveal">
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">📄</span>IEEE · IDCIoT 2024</div></div>
       <div class="proj-type">IEEE Publication · GenAI · VR · Stable Diffusion</div>
-      <h3 class="proj-title">Voice-Driven Panoramic VR Generation</h3>
-      <p class="proj-desc">Speech → 360° image pipeline: Whisper → GPT-Neo → Stable Diffusion. Attention slicing and xFormers optimizations delivered 2.3× throughput within a 10GB VRAM budget. Published at IEEE IDCIoT 2024.</p>
-      <div class="proj-metrics"><span class="metric">2.3× throughput</span><span class="metric">10GB VRAM budget</span><span class="metric">IEEE Published</span></div>
+      <h3 class="proj-title">Voice-Driven Panoramic VR Generation — IEEE IDCIoT 2024</h3>
+      <p class="proj-desc">Speech → 360° image pipeline: Whisper (speech recognition) → GPT-Neo (text generation) → Stable Diffusion (image synthesis). Attention slicing and xFormers optimizations delivered 2.3× throughput within a 10 GB VRAM budget. Peer-reviewed and published at IEEE IDCIoT 2024.</p>
+      <div class="proj-metrics"><span class="metric">2.3× throughput</span><span class="metric">10 GB VRAM</span><span class="metric">IEEE Published</span></div>
       <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="proj-link">Read Paper ↗</a>
     </div>
 
@@ -684,7 +675,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="tl-dot"></div>
       <div class="tl-date">Jun 2023 – Apr 2024 · Chennai, India</div>
       <div class="tl-role">AI Research Intern</div>
-      <div class="tl-co">BeeBox Studios — IIT Madras Research Park</div>
+      <div class="tl-co">BeeBox Studios</div>
       <ul class="tl-list">
         <li>Built a transformer-based QA system for a 100-page XR corpus achieving 83.2% F1 and 71.8% Exact Match — accurate enough to replace manual in-headset lookup entirely.</li>
         <li>Cut inference latency 3× (185ms → 62ms P95) via ONNX export and INT8 quantization; shipped via Docker and GitHub Actions CI/CD to AWS EC2.</li>
@@ -694,11 +685,11 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
     <div class="tl-item reveal lft">
       <div class="tl-dot"></div>
-      <div class="tl-date">Jun 2025 – May 2026 · College Park, MD</div>
-      <div class="tl-role">Climbing Wall Supervisor</div>
+      <div class="tl-date">Jun 2025 – Present · College Park, MD</div>
+      <div class="tl-role">Operations Supervisor (Climbing & Bouldering Facility)</div>
       <div class="tl-co">Campus Recreation — University of Maryland</div>
       <ul class="tl-list">
-        <li>Advanced from belay staff to supervisor in 7 months. Manages shift operations, safety protocols, and staff training across two climbing facilities serving 100+ daily patrons.</li>
+        <li>Advanced from belay staff to supervisor in 7 months. Manages shift operations, safety protocols, and staff training across two climbing facilities serving a 75+ patron/day facility.</li>
       </ul>
     </div>
 
@@ -728,6 +719,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
         <div class="skill-row"><div class="skill-info"><span class="skill-name">HuggingFace Transformers</span><span class="skill-pct">92%</span></div><div class="bar-track"><div class="bar-fill tl" data-w="92"></div></div></div>
         <div class="skill-row"><div class="skill-info"><span class="skill-name">Scikit-learn</span><span class="skill-pct">88%</span></div><div class="bar-track"><div class="bar-fill tl" data-w="88"></div></div></div>
         <div class="skill-row"><div class="skill-info"><span class="skill-name">Reinforcement Learning</span><span class="skill-pct">80%</span></div><div class="bar-track"><div class="bar-fill tl" data-w="80"></div></div></div>
+        <div class="skill-row"><div class="skill-info"><span class="skill-name">Ray RLlib / Unity Sentis</span><span class="skill-pct">82%</span></div><div class="bar-track"><div class="bar-fill tl" data-w="82"></div></div></div>
         <div class="skill-row"><div class="skill-info"><span class="skill-name">Computer Vision / OpenCV</span><span class="skill-pct">78%</span></div><div class="bar-track"><div class="bar-fill tl" data-w="78"></div></div></div>
       </div>
     </div>
@@ -740,6 +732,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
         <div class="skill-row"><div class="skill-info"><span class="skill-name">Azure ACR / ACI</span><span class="skill-pct">82%</span></div><div class="bar-track"><div class="bar-fill sk" data-w="82"></div></div></div>
         <div class="skill-row"><div class="skill-info"><span class="skill-name">AWS EC2 / S3</span><span class="skill-pct">78%</span></div><div class="bar-track"><div class="bar-fill sk" data-w="78"></div></div></div>
         <div class="skill-row"><div class="skill-info"><span class="skill-name">GitHub Actions CI/CD</span><span class="skill-pct">83%</span></div><div class="bar-track"><div class="bar-fill sk" data-w="83"></div></div></div>
+        <div class="skill-row"><div class="skill-info"><span class="skill-name">ONNX / Model Export</span><span class="skill-pct">85%</span></div><div class="bar-track"><div class="bar-fill sk" data-w="85"></div></div></div>
       </div>
     </div>
 
@@ -767,6 +760,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <a href="mailto:mukulray@umd.edu" class="c-link">✉ Email</a>
       <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="c-link">LinkedIn ↗</a>
       <a href="https://github.com/MukulRay1603" target="_blank" class="c-link">GitHub ↗</a>
+      <a href="https://huggingface.co/spaces/MukulRay" target="_blank" class="c-link">HuggingFace ↗</a>
       <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="c-link">IEEE Paper ↗</a>
     </div>
   </div>
@@ -830,7 +824,8 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
   function mkStars() {
     stars = [];
-    for (var i = 0; i < 240; i++) {
+    var _pc = window.innerWidth < 768 ? 100 : 240;
+    for (var i = 0; i < _pc; i++) {
       stars.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4+.2,
         a:Math.random(), drift:(Math.random()-.5)*.11, linked:Math.random()<.18, tw:Math.random()*Math.PI*2 });
     }
