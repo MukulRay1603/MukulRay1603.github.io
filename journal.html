@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal · Mukul Rayana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;--gold-l:#f5e09a;--gold-d:#7a5e20;
+  --teal:#4fd1c5;--bg:#030510;--text:#ccd6f6;--dim:#7a8aba;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+
+.tape-wrap{position:relative;width:100%;max-width:700px;text-align:center;padding:4rem 2rem}
+
+/* construction tape */
+.tape{
+  position:absolute;left:-5%;width:110%;height:38px;
+  background:repeating-linear-gradient(-45deg,#f5c518,#f5c518 20px,#1a1a1a 20px,#1a1a1a 40px);
+  opacity:.85;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.tape-top{top:-10px;transform:rotate(-2deg)}
+.tape-bottom{bottom:-10px;transform:rotate(1.5deg)}
+
+.wip-title{
+  font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:900;color:var(--gold-l);margin-bottom:1rem;
+  text-shadow:0 0 40px rgba(201,168,76,.3)}
+.wip-sub{
+  font-family:'Rajdhani',sans-serif;font-size:1.1rem;
+  color:var(--dim);line-height:1.8;max-width:500px;margin:0 auto 2.5rem}
+.wip-back{
+  font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+  padding:.85rem 2rem;color:var(--gold);border:1px solid rgba(201,168,76,.55);
+  transition:all .3s;display:inline-block}
+.wip-back:hover{background:rgba(201,168,76,.1);transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,168,76,.2)}
+
+/* starfield background (simplified) */
+.stars{position:fixed;inset:0;z-index:0}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.2}to{opacity:.8}}
+</style>
+</head>
+<body>
+
+<!-- simple starfield -->
+<div class="stars" id="stars"></div>
+
+<div class="tape-wrap" style="position:relative;z-index:5">
+  <div class="tape tape-top"></div>
+  <div class="tape tape-bottom"></div>
+  <h1 class="wip-title">Under Construction</h1>
+  <p class="wip-sub">The journal is being forged. Expect field notes on ML experiments, archery sessions, travel photography, and the occasional deep dive into things that fascinate me.</p>
+  <a href="index.html" class="wip-back">← Back to Portfolio</a>
+</div>
+
+<script>
+// simple star dots
+var s=document.getElementById('stars');
+for(var i=0;i<80;i++){
+  var d=document.createElement('div');d.className='star';
+  d.style.cssText='width:'+(.5+Math.random()*2)+'px;height:'+(.5+Math.random()*2)+'px;left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--d:'+(2+Math.random()*4)+'s;animation-delay:-'+Math.random()*4+'s';
+  s.appendChild(d);
+}
+</script>
+</body>
+</html>

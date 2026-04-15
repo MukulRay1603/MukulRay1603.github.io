@@ -69,7 +69,7 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:8rem 5vw 5rem}
 
 /* parallax bg layers */
-.p-layer{position:absolute;inset:0;pointer-events:none;will-change:transform}
+.p-layer{position:absolute;inset:-15%;pointer-events:none;will-change:transform}
 .l-nebula{background:
   radial-gradient(ellipse 80% 70% at 75% 40%,rgba(78,205,196,.07) 0%,transparent 55%),
   radial-gradient(ellipse 60% 60% at 20% 70%,rgba(201,168,76,.09) 0%,transparent 55%),
@@ -78,8 +78,8 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .l-grid{
   background-image:linear-gradient(rgba(201,168,76,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.032) 1px,transparent 1px);
   background-size:70px 70px;
-  -webkit-mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 20%,transparent 75%);
-  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 20%,transparent 75%)}
+  -webkit-mask-image:radial-gradient(ellipse 120% 120% at 50% 50%,black 30%,transparent 80%);
+  mask-image:radial-gradient(ellipse 120% 120% at 50% 50%,black 30%,transparent 80%)}
 .l-rune{display:flex;align-items:center;justify-content:center;opacity:.11}
 .rune-svg{width:min(680px,90vw);height:min(680px,90vw);animation:rspin 60s linear infinite}
 @keyframes rspin{to{transform:rotate(360deg)}}
@@ -239,7 +239,8 @@ nav.scrolled{background:rgba(3,5,16,.97)}
   background:linear-gradient(135deg,rgba(10,16,36,.92),rgba(6,10,22,.96));
   border:1px solid var(--bdr);padding:2.1rem;
   transition:transform .35s cubic-bezier(.25,.46,.45,.94),border-color .35s;
-  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+  display:flex;flex-direction:column}
 .proj-card:hover{transform:translateY(-6px) scale(1.01);border-color:rgba(201,168,76,.42)}
 /* top gradient bar */
 .proj-card::before{
@@ -271,7 +272,7 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .proj-media-icon{font-size:2rem;display:block;margin-bottom:.2rem;opacity:.4}
 .proj-type{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.65rem}
 .proj-title{font-family:'Cinzel',serif;font-size:1.02rem;font-weight:600;color:var(--gold-l);margin-bottom:.85rem;line-height:1.35}
-.proj-desc{font-size:.95rem;line-height:1.75;color:var(--dim);margin-bottom:1.2rem}
+.proj-desc{font-size:.95rem;line-height:1.75;color:var(--dim);margin-bottom:1.2rem;flex:1}
 .proj-metrics{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.3rem}
 .metric{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);padding:.26rem .6rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15)}
 .proj-link{
@@ -310,16 +311,6 @@ nav.scrolled{background:rgba(3,5,16,.97)}
   font-family:'Cinzel',serif;font-size:.71rem;font-weight:600;
   letter-spacing:.25em;text-transform:uppercase;color:var(--gold);
   margin-bottom:1.3rem;padding-bottom:.75rem;border-bottom:1px solid var(--bdr)}
-.skill-rows{display:flex;flex-direction:column;gap:.85rem}
-.skill-row{display:flex;flex-direction:column;gap:.28rem}
-.skill-info{display:flex;justify-content:space-between;align-items:baseline}
-.skill-name{font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:500;color:var(--text)}
-.skill-pct{font-family:'JetBrains Mono',monospace;font-size:.59rem;color:var(--dim);display:none}
-.bar-track{height:2px;background:rgba(255,255,255,.06);overflow:hidden}
-.bar-fill{height:100%;width:0;transition:width 1.4s cubic-bezier(.22,1,.36,1)}
-.bar-fill.gd{background:linear-gradient(90deg,var(--gold-d),var(--gold))}
-.bar-fill.tl{background:linear-gradient(90deg,var(--teal-d),var(--teal))}
-.bar-fill.sk{background:linear-gradient(90deg,var(--sky-d),var(--sky))}
 
 /* ─── BEYOND ─── */
 .beyond-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1.2rem}
@@ -496,6 +487,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     <li><a href="#skills">Skills</a></li>
     <li><a href="#beyond">Beyond</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="journal.html">Journal</a></li>
   </ul>
   <button class="ham" id="ham" aria-label="Toggle menu">
     <span class="ham-line"></span>
@@ -513,6 +505,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   <a href="#skills" class="mob-nav-link">Skills</a>
   <a href="#beyond" class="mob-nav-link">Beyond</a>
   <a href="#contact" class="mob-nav-link">Contact</a>
+  <a href="journal.html" class="mob-nav-link">Journal</a>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -565,13 +558,13 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="badge"><span class="bdot"></span>M.S. Applied ML · UMD · Graduating May 2026</div>
       <h1 class="hero-name">Mukul<br><span class="accent">Rayana</span></h1>
       <p class="hero-sub">AI/ML Engineer · LLMOps · Game AI · Reinforcement Learning</p>
-      <p class="hero-desc">I fine-tune LLMs, architect multi-agent pipelines, and build RAG systems that actually ship — from distributed RL training in Unity to production LLMOps on HuggingFace Spaces. IEEE-published researcher and M.S. candidate at the University of Maryland.</p>
+      <p class="hero-desc">AI/ML Engineer with a focus on building production-grade intelligent systems — from LLMOps pipelines and multi-agent architectures to reinforcement learning in game engines. IEEE-published researcher and M.S. candidate at the University of Maryland, graduating May 2026.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-gold">Explore Projects</a>
         <a href="https://github.com/MukulRay1603" target="_blank" class="btn btn-ghost">GitHub ↗</a>
         <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
         <a href="https://huggingface.co/spaces/MukulRay" target="_blank" class="btn btn-ghost">HuggingFace ↗</a>
-        <a href="assets/MukulRay_Resume.pdf" target="_blank" class="btn btn-ghost">Resume ↓</a>
+        <a href="assets/MukulRay_Resume.pdf" target="_blank" class="btn btn-gold">Resume ↓</a>
       </div>
     </div>
 
@@ -598,10 +591,11 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="stat-grid">
         <div class="stat"><div class="stat-l">Degree</div><div class="stat-v">M.S. Applied ML</div></div>
         <div class="stat"><div class="stat-l">University</div><div class="stat-v" style="font-size:.88rem;line-height:1.3">University of Maryland</div></div>
-        <div class="stat"><div class="stat-l">Status</div><div class="stat-v">Available</div></div>
+        <div class="stat"><div class="stat-l">Status</div><div class="stat-v">Open to Work</div></div>
         <div class="stat"><div class="stat-l">Location</div><div class="stat-v">College Park</div></div>
       </div>
       <div class="chips">
+        <span class="chip">Python</span><span class="chip">C++</span><span class="chip">C#</span>
         <span class="chip">PyTorch</span><span class="chip">LangChain</span>
         <span class="chip">LangGraph</span><span class="chip">vLLM</span>
         <span class="chip">RAG</span><span class="chip">QLoRA</span>
@@ -691,7 +685,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     <div class="tl-item reveal lft">
       <div class="tl-dot"></div>
       <div class="tl-date">Jun 2025 – Present · College Park, MD</div>
-      <div class="tl-role">Operations Supervisor (Climbing & Bouldering Facility)</div>
+      <div class="tl-role">Operations Supervisor — Part-Time (Climbing & Bouldering Facility)</div>
       <div class="tl-co">Campus Recreation — University of Maryland</div>
       <ul class="tl-list">
         <li>Promoted from belay staff to supervisor within 7 months; manage daily operations, safety protocols, and staff coordination for a 75+ patron/day facility across a 55 ft top-rope wall and 13 ft indoor bouldering zone.</li>
@@ -713,6 +707,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="tl-co">University of Maryland, College Park</div>
       <ul class="tl-list">
         <li>Relevant coursework: Deep Learning, Generative AI, NLP, Computer Vision, Cloud Computing, Algorithms</li>
+        <li>Clubs: AI & ML Club · UMD Figure Skating · UMD Archery · UMD Gaming</li>
       </ul>
     </div>
     <div class="tl-item reveal lft">
@@ -723,6 +718,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <ul class="tl-list">
         <li>IEEE Publication: Voice-Driven Panoramic VR Generation (IDCIoT 2024) — speech-to-360° image pipeline with 2.3× throughput improvement.</li>
         <li>IBM Data Science Professional Certificate (Coursera) · UC San Diego Data Structures & Algorithms (Coursera)</li>
+        <li>Head of Operations (Symposium Events) · Photography Head</li>
       </ul>
     </div>
   </div>
@@ -733,53 +729,74 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   <div class="s-head"><span class="s-num">04</span><h2 class="s-title">Skills</h2></div>
   <div class="skills-grid">
 
-    <div class="skill-panel reveal">
-      <div class="skill-panel-title">GenAI & LLMs</div>
-      <div class="skill-rows">
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">LangChain / LangGraph</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill gd" data-w="95"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">PEFT / LoRA / QLoRA</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill gd" data-w="90"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">RAG & Vector DBs</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill gd" data-w="92"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">vLLM / Inference Opt.</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill gd" data-w="85"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">Prompt Engineering</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill gd" data-w="93"></div></div></div>
-      </div>
+  <div class="skill-panel reveal">
+    <div class="skill-panel-title">Languages</div>
+    <div class="chips" style="gap:.5rem">
+      <span class="chip">Python</span><span class="chip">SQL</span>
+      <span class="chip">C++</span><span class="chip">C#</span>
+      <span class="chip">Bash</span>
     </div>
-
-    <div class="skill-panel reveal">
-      <div class="skill-panel-title">ML / DL Frameworks</div>
-      <div class="skill-rows">
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">PyTorch</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill tl" data-w="90"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">HuggingFace Transformers</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill tl" data-w="92"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">Scikit-learn</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill tl" data-w="88"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">Reinforcement Learning</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill tl" data-w="80"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">Ray RLlib / Unity Sentis</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill tl" data-w="82"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">Computer Vision / OpenCV</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill tl" data-w="78"></div></div></div>
-      </div>
-    </div>
-
-    <div class="skill-panel reveal">
-      <div class="skill-panel-title">MLOps & Cloud</div>
-      <div class="skill-rows">
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">Docker / Containers</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill sk" data-w="88"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">MLflow</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill sk" data-w="85"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">Azure ACR / ACI</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill sk" data-w="82"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">AWS EC2 / S3</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill sk" data-w="78"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">GitHub Actions CI/CD</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill sk" data-w="83"></div></div></div>
-        <div class="skill-row"><div class="skill-info"><span class="skill-name">ONNX / Model Export</span><span class="skill-pct"></span></div><div class="bar-track"><div class="bar-fill sk" data-w="85"></div></div></div>
-      </div>
-    </div>
-
   </div>
+
+  <div class="skill-panel reveal">
+    <div class="skill-panel-title">GenAI & LLMs</div>
+    <div class="chips" style="gap:.5rem">
+      <span class="chip">LangChain</span><span class="chip">LangGraph</span>
+      <span class="chip">PEFT / LoRA / QLoRA</span><span class="chip">RAG</span>
+      <span class="chip">Agentic AI</span><span class="chip">Multi-Agent Systems</span>
+      <span class="chip">Prompt Engineering</span><span class="chip">Fine-tuning</span>
+      <span class="chip">vLLM</span><span class="chip">Pinecone</span>
+      <span class="chip">ChromaDB</span><span class="chip">Guardrails</span>
+      <span class="chip">Ragas</span><span class="chip">Groq</span>
+    </div>
+  </div>
+
+  <div class="skill-panel reveal">
+    <div class="skill-panel-title">ML & Deep Learning</div>
+    <div class="chips" style="gap:.5rem">
+      <span class="chip">PyTorch</span><span class="chip">TensorFlow</span>
+      <span class="chip">HuggingFace Transformers</span>
+      <span class="chip">Reinforcement Learning</span>
+      <span class="chip">Scikit-learn</span><span class="chip">OpenCV</span>
+      <span class="chip">NumPy</span><span class="chip">Pandas</span>
+    </div>
+  </div>
+
+  <div class="skill-panel reveal">
+    <div class="skill-panel-title">MLOps & Infrastructure</div>
+    <div class="chips" style="gap:.5rem">
+      <span class="chip">MLflow</span><span class="chip">FastAPI</span>
+      <span class="chip">Docker</span><span class="chip">ONNX</span>
+      <span class="chip">Unity Sentis</span><span class="chip">Ray RLlib</span>
+      <span class="chip">AWS (EC2 / S3)</span><span class="chip">Azure (ACR / ACI)</span>
+      <span class="chip">GitHub Actions CI/CD</span>
+      <span class="chip">HuggingFace Spaces</span>
+      <span class="chip">CUDA</span><span class="chip">Linux</span>
+    </div>
+  </div>
+
+  <div class="skill-panel reveal">
+    <div class="skill-panel-title">Game AI & Engines</div>
+    <div class="chips" style="gap:.5rem">
+      <span class="chip">Unity 2022.3 LTS</span><span class="chip">Unity ML-Agents</span>
+      <span class="chip">Unity Sentis</span><span class="chip">C# Scripting</span>
+      <span class="chip">ONNX Runtime</span><span class="chip">NeMo Guardrails</span>
+    </div>
+  </div>
+
+</div>
 </div>
 
 <!-- ══ BEYOND CODE ══ -->
 <div class="s-wrap" id="beyond" style="padding-top:2rem">
   <div class="s-head"><span class="s-num">05</span><h2 class="s-title">Beyond Code</h2></div>
   <div class="beyond-grid">
-    <div class="beyond-card reveal"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 58 Traveler. When I'm not training PPO agents, I'm theorycrafting team rotations and chasing 36-star Abyss clears. Nemesis was literally inspired by this game.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen arcs, psychological thrillers, and anything with a good power system. Always chasing the next great arc. Open to recommendations.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🏃</span><div class="beyond-name">Long-Distance Running</div><div class="beyond-text">Half-marathon finisher. The discipline of long runs — pacing, endurance, knowing when to push — translates directly to shipping projects under deadline.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">Fingerstyle acoustic when the GPU is busy training. There's something about music theory and ML that share the same love of patterns and structure.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">Supervisor at UMD's climbing facility. Reading a climbing route and debugging a distributed system are the same problem: find the sequence, trust the holds, commit.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 60 Traveler since 2021. Spiral Abyss conqueror — I build winning teams from impossible lineups. Three years of elemental theorycrafting, and yes, Nemesis was directly inspired by Teyvat's boss design.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen arcs, psychological thrillers, and anything with a solid power system. Always chasing the next great arc — open to recommendations.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Sprinter at heart — hurdles and relay. The explosive discipline of track translates directly to shipping under pressure: burst, recover, hand off, repeat.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">Acoustic covers when the models are training. Music theory and machine learning share the same obsession with patterns, structure, and emergence.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">Supervisor at UMD's climbing facility and a regular climber. Patron safety, critical incident assessment, and incident documentation — plus reading beta on a 55 ft wall is its own kind of problem-solving.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery & Figure Skating</div><div class="beyond-text">Range sessions for focus and precision. Figure skating for balance and flow. Two disciplines that demand the same thing: commit to the line, trust your form.</div></div>
   </div>
 </div>
 
@@ -789,7 +806,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     <h2 class="contact-title">Let's Build Something Extraordinary</h2>
     <p class="contact-sub">Graduating May 2026 with an M.S. in Applied Machine Learning from the University of Maryland. Actively seeking full-time roles in AI/ML engineering, LLMOps, generative AI, game AI, and reinforcement learning. STEM OPT eligible.</p>
     <div class="contact-links">
-      <a href="mailto:mukulray@umd.edu" class="c-link">✉ Email</a>
+      <a href="mailto:mukulray@terpmail.umd.edu" class="c-link">✉ Email</a>
       <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="c-link">LinkedIn ↗</a>
       <a href="https://github.com/MukulRay1603" target="_blank" class="c-link">GitHub ↗</a>
       <a href="https://huggingface.co/spaces/MukulRay" target="_blank" class="c-link">HuggingFace ↗</a>
@@ -965,21 +982,6 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     });
   }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
   document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-})();
-
-/* ══ SKILL BARS ══ */
-(function() {
-  var barObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.bar-fill[data-w]').forEach(function(bar, j) {
-          setTimeout(function() { bar.style.width = bar.dataset.w + '%'; }, j*130+300);
-        });
-        barObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.skill-panel').forEach(function(el) { barObs.observe(el); });
 })();
 
 /* ══ HAMBURGER ══ */
