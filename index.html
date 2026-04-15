@@ -303,14 +303,18 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem}
 .skill-panel{
   background:linear-gradient(135deg,rgba(10,16,36,.9),rgba(6,10,22,.95));
-  border:1px solid var(--bdr);padding:1.9rem;
+  border:1px solid var(--bdr);padding:1.9rem;position:relative;overflow:hidden;
   clip-path:polygon(0 0,calc(100% - 13px) 0,100% 13px,100% 100%,0 100%);
-  transition:border-color .3s}
-.skill-panel:hover{border-color:rgba(201,168,76,.35)}
+  transition:border-color .3s,transform .3s,box-shadow .3s}
+.skill-panel:hover{border-color:rgba(201,168,76,.5);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.skill-panel::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--teal),transparent);transform:scaleX(0);transition:transform .5s}
+.skill-panel:hover::after{transform:scaleX(1)}
 .skill-panel-title{
   font-family:'Cinzel',serif;font-size:.71rem;font-weight:600;
   letter-spacing:.25em;text-transform:uppercase;color:var(--gold);
-  margin-bottom:1.3rem;padding-bottom:.75rem;border-bottom:1px solid var(--bdr)}
+  margin-bottom:1.3rem;padding-bottom:.75rem;border-bottom:1px solid var(--bdr);
+  display:flex;align-items:center;gap:.65rem}
+.skill-panel-title::before{content:'◆';font-size:.55rem;color:var(--teal);opacity:.7}
 
 /* ─── BEYOND ─── */
 .beyond-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1.2rem}
@@ -558,7 +562,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="badge"><span class="bdot"></span>M.S. Applied ML · UMD · Graduating May 2026</div>
       <h1 class="hero-name">Mukul<br><span class="accent">Rayana</span></h1>
       <p class="hero-sub">AI/ML Engineer · LLMOps · Game AI · Reinforcement Learning</p>
-      <p class="hero-desc">AI/ML Engineer with a focus on building production-grade intelligent systems — from LLMOps pipelines and multi-agent architectures to reinforcement learning in game engines. IEEE-published researcher and M.S. candidate at the University of Maryland, graduating May 2026.</p>
+      <p class="hero-desc">I build AI systems that actually ship — LLMOps pipelines, multi-agent RAG, and RL agents that run in game engines at 60 fps. M.S. Applied ML @ UMD (May 2026). IEEE-published. If it involves transformers, vector databases, or teaching a neural net to beat you at your own game, I'm in.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-gold">Explore Projects</a>
         <a href="https://github.com/MukulRay1603" target="_blank" class="btn btn-ghost">GitHub ↗</a>
@@ -791,12 +795,13 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 <div class="s-wrap" id="beyond" style="padding-top:2rem">
   <div class="s-head"><span class="s-num">05</span><h2 class="s-title">Beyond Code</h2></div>
   <div class="beyond-grid">
-    <div class="beyond-card reveal"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 60 Traveler since 2021. Spiral Abyss conqueror — I build winning teams from impossible lineups. Three years of elemental theorycrafting, and yes, Nemesis was directly inspired by Teyvat's boss design.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen arcs, psychological thrillers, and anything with a solid power system. Always chasing the next great arc — open to recommendations.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Sprinter at heart — hurdles and relay. The explosive discipline of track translates directly to shipping under pressure: burst, recover, hand off, repeat.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">Acoustic covers when the models are training. Music theory and machine learning share the same obsession with patterns, structure, and emergence.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">Supervisor at UMD's climbing facility and a regular climber. Patron safety, critical incident assessment, and incident documentation — plus reading beta on a 55 ft wall is its own kind of problem-solving.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery & Figure Skating</div><div class="beyond-text">Range sessions for focus and precision. Figure skating for balance and flow. Two disciplines that demand the same thing: commit to the line, trust your form.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 60 since 2021. Full 36-star Spiral Abyss clears — often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis? Yeah, that's basically a love letter to Azhdaha.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen battle arcs, psychological thrillers, and anything with a hard magic system. Currently on a hunter exam binge. Always looking for the next arc that hits like Chimera Ant or Shibuya — send recs.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Former sprinter — hurdles and 4×100 relay. That start-gun adrenaline never goes away. Shipping a model to prod has the same vibe: explode off the blocks, hold your form, don't look back until you cross.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">Fingerstyle acoustic when I need to think. Covers, improvisation, and the occasional failed attempt at music theory. Turns out chord progressions and attention mechanisms both love patterns — who knew.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">Operations supervisor at UMD's climbing wall — promoted from belay staff in 7 months. I manage daily ops, run safety protocols, and send routes when it's quiet. Beta-reading a crimpy overhang? Same logic as debugging: find the sequence, commit, don't second-guess mid-move.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery</div><div class="beyond-text">Target range sessions at UMD — recurve bow, Olympic-style. The mental game is everything: breath control, shoulder alignment, anchor consistency. You get one clean release per arrow. No iteration, no rollback.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">⛸️</span><div class="beyond-name">Figure Skating</div><div class="beyond-text">UMD Figure Skating club. Edges, crossovers, and single jumps. Ice doesn't forgive hesitation — commit to the edge or eat it. The physics are unforgiving, but that's exactly why it's addictive.</div></div>
   </div>
 </div>
 
@@ -804,7 +809,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 <div class="contact-wrap" id="contact">
   <div class="contact-box reveal">
     <h2 class="contact-title">Let's Build Something Extraordinary</h2>
-    <p class="contact-sub">Graduating May 2026 with an M.S. in Applied Machine Learning from the University of Maryland. Actively seeking full-time roles in AI/ML engineering, LLMOps, generative AI, game AI, and reinforcement learning. STEM OPT eligible.</p>
+    <p class="contact-sub">Graduating May 2026 from UMD with an M.S. in Applied ML. Looking for full-time roles where I can build production AI systems — LLMOps, agentic RAG, game AI, RL, or anything that involves making models actually work in the real world. STEM OPT eligible. Let's talk.</p>
     <div class="contact-links">
       <a href="mailto:mukulray@terpmail.umd.edu" class="c-link">✉ Email</a>
       <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="c-link">LinkedIn ↗</a>

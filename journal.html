@@ -21,7 +21,10 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;mi
 .tape{
   position:absolute;left:-5%;width:110%;height:38px;
   background:repeating-linear-gradient(-45deg,#f5c518,#f5c518 20px,#1a1a1a 20px,#1a1a1a 40px);
-  opacity:.85;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+  background-size:56px 56px;
+  opacity:.85;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.5);
+  animation:scrolltape 8s linear infinite}
+@keyframes scrolltape{to{background-position:56px 0}}
 .tape-top{top:-10px;transform:rotate(-2deg)}
 .tape-bottom{bottom:-10px;transform:rotate(1.5deg)}
 
@@ -54,7 +57,7 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;mi
   <div class="tape tape-top"></div>
   <div class="tape tape-bottom"></div>
   <h1 class="wip-title">Under Construction</h1>
-  <p class="wip-sub">The journal is being forged. Expect field notes on ML experiments, archery sessions, travel photography, and the occasional deep dive into things that fascinate me.</p>
+  <p class="wip-sub">The journal is still under construction. Eventually: deep dives on RL training runs, Genshin theorycrafting, archery form breakdowns, and whatever rabbit holes I fall into. For now, just this tape.</p>
   <a href="index.html" class="wip-back">← Back to Portfolio</a>
 </div>
 
