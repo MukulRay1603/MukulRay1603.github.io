@@ -300,27 +300,48 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .tl-list li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-size:.68rem;top:.12rem}
 
 /* ─── SKILLS ─── */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem}
-.skill-panel{
+.talent-wrap{
   background:linear-gradient(135deg,rgba(10,16,36,.9),rgba(6,10,22,.95));
-  border:1px solid var(--bdr);padding:1.9rem;position:relative;overflow:hidden;
-  clip-path:polygon(0 0,calc(100% - 13px) 0,100% 13px,100% 100%,0 100%);
-  transition:border-color .3s,transform .3s,box-shadow .3s}
-.skill-panel:hover{border-color:rgba(201,168,76,.5);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.skill-panel::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--teal),transparent);transform:scaleX(0);transition:transform .5s}
-.skill-panel:hover::after{transform:scaleX(1)}
-.skill-panel-title{
-  font-family:'Cinzel',serif;font-size:.71rem;font-weight:600;
-  letter-spacing:.25em;text-transform:uppercase;color:var(--gold);
-  margin-bottom:1.3rem;padding-bottom:.75rem;border-bottom:1px solid var(--bdr);
-  display:flex;align-items:center;gap:.65rem}
-.skill-panel-title::before{content:'◆';font-size:.55rem;color:var(--teal);opacity:.7}
+  border:1px solid var(--bdr);padding:2.5rem 3rem;
+  position:relative;overflow:hidden;
+  clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px))}
+.talent-wrap::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--teal),var(--violet),transparent)}
+.talent-wrap::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.05),transparent 65%)}
+.talent-group{position:relative;z-index:2}
+.talent-label{
+  font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
+.talent-label::before{content:'◆';font-size:.45rem;color:var(--teal);filter:drop-shadow(0 0 4px var(--teal))}
+.talent-tags{display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin-bottom:.2rem}
+.t-tag{
+  font-family:'JetBrains Mono',monospace;font-size:.64rem;
+  padding:.3rem .7rem;border:1px solid rgba(201,168,76,.18);
+  color:var(--text);letter-spacing:.05em;
+  transition:all .22s;cursor:default;
+  background:rgba(201,168,76,.03)}
+.t-tag:hover{border-color:var(--teal);color:var(--gold-l);background:rgba(79,209,197,.06);transform:translateY(-2px)}
+.t-tag.accent{border-color:rgba(79,209,197,.35);color:var(--teal);background:rgba(79,209,197,.06)}
+.t-tag.accent:hover{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.08)}
+.talent-sep{height:1px;background:linear-gradient(90deg,transparent,var(--bdr),transparent);margin:1.2rem 0}
 
 /* ─── BEYOND ─── */
-.beyond-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1.2rem}
+.beyond-scroll{
+  display:flex;gap:1.2rem;overflow-x:auto;overflow-y:hidden;
+  padding:0 0 1.2rem;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin;
+  scrollbar-color:var(--gold-d) transparent}
+.beyond-scroll::-webkit-scrollbar{height:3px}
+.beyond-scroll::-webkit-scrollbar-track{background:transparent}
+.beyond-scroll::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
 .beyond-card{
+  min-width:220px;max-width:220px;flex-shrink:0;scroll-snap-align:start;
   background:linear-gradient(135deg,rgba(10,16,36,.9),rgba(6,10,22,.95));
-  border:1px solid var(--bdr);padding:1.9rem;text-align:center;
+  border:1px solid var(--bdr);padding:1.6rem;text-align:center;
   position:relative;overflow:hidden;
   clip-path:polygon(0 0,calc(100% - 13px) 0,100% 13px,100% 100%,13px 100%,0 calc(100% - 13px));
   transition:transform .35s,border-color .35s,box-shadow .35s}
@@ -404,8 +425,6 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   .orbit-outer{inset:-22px}
   .s-wrap,.contact-wrap{padding:4rem 4vw}
   .proj-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-  .skills-grid{grid-template-columns:1fr 1fr}
-  .beyond-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
   .contact-box{padding:3rem 2.5rem}
 }
 
@@ -428,8 +447,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   .s-wrap,.contact-wrap{padding:3.5rem 4vw}
   .s-head{margin-bottom:2.5rem}
   .proj-grid{grid-template-columns:1fr}
-  .skills-grid{grid-template-columns:1fr}
-  .beyond-grid{grid-template-columns:1fr 1fr}
+  .talent-wrap{padding:1.8rem 1.5rem}
   .stat-grid{grid-template-columns:1fr 1fr}
   .contact-box{padding:2.5rem 1.5rem}
   .contact-title{font-size:1.5rem}
@@ -454,7 +472,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   .s-title{font-size:1.25rem}
   .proj-card{padding:1.6rem}
   .proj-media{height:125px}
-  .beyond-grid{grid-template-columns:1fr}
+  .talent-wrap{padding:1.4rem 1.2rem}
   .contact-box{padding:2rem 1.2rem}
   .contact-links{flex-direction:column;align-items:stretch}
   .c-link{text-align:center}
@@ -623,7 +641,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
       <div class="proj-type">Reinforcement Learning · Game AI · Ray RLlib · Unity Sentis · Groq</div>
       <h3 class="proj-title">Nemesis — Distributed RL Boss AI with Real-Time LLM Narration</h3>
-      <p class="proj-desc">Trained a phase-conditioned PPO agent with 3-stage curriculum learning (300K steps, reward −2.4→13.2) via Ray RLlib across 8 parallel workers (2.6× speedup). Exported to ONNX, deployed via Unity Sentis at <2 ms/frame — production-grade in-engine inference at 60 fps, zero Python runtime. Integrated real-time LLM narration (Groq LLaMA-3.3-70B + NeMo Guardrails over TCP, 114–352 ms). RL boss outlasted scripted FSM baseline by 85% across 50 evaluation episodes.</p>
+      <p class="proj-desc">PPO boss agent trained with 3-stage curriculum (300K steps, reward −2.4→13.2). Ray RLlib distributed across 8 workers for 2.6× speedup. Exported to ONNX → Unity Sentis for <2 ms/frame inference at 60 fps. Real-time LLM taunts via Groq + NeMo Guardrails (114–352 ms). RL boss outlasts scripted FSM by 85% across 50 episodes.</p>
       <div class="proj-metrics"><span class="metric">2.6× RLlib speedup</span><span class="metric">&lt;2 ms/frame</span><span class="metric">60 fps</span><span class="metric">85% outlast FSM</span></div>
       <a href="https://github.com/MukulRay1603/nemesis-boss-ai" target="_blank" class="proj-link">View on GitHub ↗</a>
     </div>
@@ -632,7 +650,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
       <div class="proj-type">NLI · Safety Guardrails · Emotion-Conditioned RAG · DeBERTa · captum</div>
       <h3 class="proj-title">EmpathRAG — NLI Safety Guardrail & Emotion-Conditioned RAG</h3>
-      <p class="proj-desc">Fine-tuned DeBERTa-v3-base on 232K NLI pairs (crisis-hypothesis framing); 0.9629 crisis recall on 30 adversarial probes across 6 attack categories. captum Integrated Gradients on every safety intercept for auditable token-level XAI. Built 5-stage emotion-conditioned RAG over a 1.67M-vector FAISS index (RoBERTa + LoRA, 0.7127 F1). Four-condition ablation: emotion alignment 0.88 vs. 0.30 BM25 baseline — Wilcoxon p = 3.62 × 10⁻⁸.</p>
+      <p class="proj-desc">DeBERTa-v3-base fine-tuned on 232K NLI pairs — 0.9629 crisis recall across 30 adversarial probes in 6 attack categories. captum Integrated Gradients on every safety intercept. 5-stage emotion-conditioned RAG over 1.67M FAISS vectors (RoBERTa + LoRA). Ablation: 0.88 emotion alignment vs. 0.30 BM25 — Wilcoxon p = 3.62×10⁻⁸.</p>
       <div class="proj-metrics"><span class="metric">0.9629 recall</span><span class="metric">1.67M vectors</span><span class="metric">p = 3.62e-8</span><span class="metric">0.88 alignment</span></div>
       <a href="https://github.com/MukulRay1603/Empath-RAG" target="_blank" class="proj-link">View on GitHub ↗</a>
     </div>
@@ -641,7 +659,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
       <div class="proj-type">Multi-Agent · LangGraph · Agentic AI · Staleness Detection</div>
       <h3 class="proj-title">RECON — Agentic ML Research Navigator</h3>
-      <p class="proj-desc">Four-agent LangGraph state machine (planner → retriever → critic → synthesizer) with a retry loop. Critic applies a 4-verdict taxonomy (PASS / STALE / CONTRADICTED / INSUFFICIENT) — catching 52% of superseded ML claims vs. 0% for single-pass RAG on a 130-question ground-truth eval. Ablated 3 recency-decay formulas; linear decay optimal (52% vs. 42% no-decay, 38% log-decay). Position accuracy 43.9% vs. 32.3% baseline.</p>
+      <p class="proj-desc">4-agent LangGraph state machine with retry loop. Critic applies PASS/STALE/CONTRADICTED/INSUFFICIENT verdicts — catches 52% of superseded ML claims vs. 0% single-pass RAG (130-question eval). Linear decay optimal across 3 ablated formulas. Position accuracy 43.9% vs. 32.3% baseline.</p>
       <div class="proj-metrics"><span class="metric">52% staleness catch</span><span class="metric">130-question eval</span><span class="metric">43.9% position acc.</span></div>
       <a href="https://huggingface.co/spaces/MukulRay/recon" target="_blank" class="proj-link">Live Demo ↗</a>
       <a href="https://github.com/MukulRay1603/project-recon" target="_blank" class="proj-link" style="margin-left:1.2rem">View Source ↗</a>
@@ -651,7 +669,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🎬</span>gif coming soon</div></div>
       <div class="proj-type">LLMOps · QLoRA Fine-Tuning · RAG · CI/CD · HuggingFace Spaces</div>
       <h3 class="proj-title">Irminsul — Production LLMOps System</h3>
-      <p class="proj-desc">Fine-tuned Llama 3.1 8B with QLoRA (rank 16, lr 2e-4); selected winning checkpoint from 3 MLflow-tracked experiments by semantic similarity (0.826) and ROUGE-L (0.466). Deployed FastAPI + LangChain + Pinecone RAG with guardrails and confidence-gated web fallback on HuggingFace Spaces. Companion corpus pipeline autonomously ingests 840 documents across 3 trust tiers and upserts 6,876 vectors to Pinecone weekly via GitHub Actions.</p>
+      <p class="proj-desc">Llama 3.1 8B fine-tuned with QLoRA (rank 16). Best checkpoint from 3 MLflow experiments: sim 0.826, ROUGE-L 0.466. FastAPI + LangChain + Pinecone RAG with guardrails and confidence-gated web fallback. Auto corpus pipeline ingests 840 docs → 6,876 vectors weekly via GitHub Actions.</p>
       <div class="proj-metrics"><span class="metric">Sim 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric">6,876 vectors</span><span class="metric">840 docs</span></div>
       <a href="https://huggingface.co/spaces/MukulRay/Irminsul" target="_blank" class="proj-link">Live Demo ↗</a>
       <a href="https://github.com/MukulRay1603/Irminsul" target="_blank" class="proj-link" style="margin-left:1.2rem">View Source ↗</a>
@@ -731,77 +749,55 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 <!-- ══ SKILLS ══ -->
 <div class="s-wrap" id="skills" style="padding-top:2rem">
   <div class="s-head"><span class="s-num">04</span><h2 class="s-title">Skills</h2></div>
-  <div class="skills-grid">
-
-  <div class="skill-panel reveal">
-    <div class="skill-panel-title">Languages</div>
-    <div class="chips" style="gap:.5rem">
-      <span class="chip">Python</span><span class="chip">SQL</span>
-      <span class="chip">C++</span><span class="chip">C#</span>
-      <span class="chip">Bash</span>
+  <div class="talent-wrap">
+  <div class="talent-group reveal">
+    <h3 class="talent-label">Languages</h3>
+    <div class="talent-tags">
+      <span class="t-tag">Python</span><span class="t-tag">SQL</span><span class="t-tag">C++</span><span class="t-tag">C#</span><span class="t-tag">Bash</span>
     </div>
   </div>
-
-  <div class="skill-panel reveal">
-    <div class="skill-panel-title">GenAI & LLMs</div>
-    <div class="chips" style="gap:.5rem">
-      <span class="chip">LangChain</span><span class="chip">LangGraph</span>
-      <span class="chip">PEFT / LoRA / QLoRA</span><span class="chip">RAG</span>
-      <span class="chip">Agentic AI</span><span class="chip">Multi-Agent Systems</span>
-      <span class="chip">Prompt Engineering</span><span class="chip">Fine-tuning</span>
-      <span class="chip">vLLM</span><span class="chip">Pinecone</span>
-      <span class="chip">ChromaDB</span><span class="chip">Guardrails</span>
-      <span class="chip">Ragas</span><span class="chip">Groq</span>
+  <div class="talent-sep"></div>
+  <div class="talent-group reveal">
+    <h3 class="talent-label">GenAI & LLMs</h3>
+    <div class="talent-tags">
+      <span class="t-tag accent">LangChain</span><span class="t-tag accent">LangGraph</span><span class="t-tag">PEFT / LoRA / QLoRA</span><span class="t-tag accent">RAG</span><span class="t-tag">Agentic AI</span><span class="t-tag">Multi-Agent Systems</span><span class="t-tag">Prompt Engineering</span><span class="t-tag">Fine-tuning</span><span class="t-tag">vLLM</span><span class="t-tag">Pinecone</span><span class="t-tag">ChromaDB</span><span class="t-tag">Guardrails</span><span class="t-tag">Ragas</span><span class="t-tag">Groq</span>
     </div>
   </div>
-
-  <div class="skill-panel reveal">
-    <div class="skill-panel-title">ML & Deep Learning</div>
-    <div class="chips" style="gap:.5rem">
-      <span class="chip">PyTorch</span><span class="chip">TensorFlow</span>
-      <span class="chip">HuggingFace Transformers</span>
-      <span class="chip">Reinforcement Learning</span>
-      <span class="chip">Scikit-learn</span><span class="chip">OpenCV</span>
-      <span class="chip">NumPy</span><span class="chip">Pandas</span>
+  <div class="talent-sep"></div>
+  <div class="talent-group reveal">
+    <h3 class="talent-label">ML & Deep Learning</h3>
+    <div class="talent-tags">
+      <span class="t-tag accent">PyTorch</span><span class="t-tag">TensorFlow</span><span class="t-tag">HuggingFace Transformers</span><span class="t-tag accent">Reinforcement Learning</span><span class="t-tag">Scikit-learn</span><span class="t-tag">OpenCV</span><span class="t-tag">NumPy</span><span class="t-tag">Pandas</span>
     </div>
   </div>
-
-  <div class="skill-panel reveal">
-    <div class="skill-panel-title">MLOps & Infrastructure</div>
-    <div class="chips" style="gap:.5rem">
-      <span class="chip">MLflow</span><span class="chip">FastAPI</span>
-      <span class="chip">Docker</span><span class="chip">ONNX</span>
-      <span class="chip">Unity Sentis</span><span class="chip">Ray RLlib</span>
-      <span class="chip">AWS (EC2 / S3)</span><span class="chip">Azure (ACR / ACI)</span>
-      <span class="chip">GitHub Actions CI/CD</span>
-      <span class="chip">HuggingFace Spaces</span>
-      <span class="chip">CUDA</span><span class="chip">Linux</span>
+  <div class="talent-sep"></div>
+  <div class="talent-group reveal">
+    <h3 class="talent-label">MLOps & Infra</h3>
+    <div class="talent-tags">
+      <span class="t-tag">MLflow</span><span class="t-tag">FastAPI</span><span class="t-tag accent">Docker</span><span class="t-tag accent">ONNX</span><span class="t-tag accent">Unity Sentis</span><span class="t-tag accent">Ray RLlib</span><span class="t-tag">AWS (EC2/S3)</span><span class="t-tag">Azure (ACR/ACI)</span><span class="t-tag">GitHub Actions CI/CD</span><span class="t-tag">HuggingFace Spaces</span><span class="t-tag">CUDA</span><span class="t-tag">Linux</span>
     </div>
   </div>
-
-  <div class="skill-panel reveal">
-    <div class="skill-panel-title">Game AI & Engines</div>
-    <div class="chips" style="gap:.5rem">
-      <span class="chip">Unity 2022.3 LTS</span><span class="chip">Unity ML-Agents</span>
-      <span class="chip">Unity Sentis</span><span class="chip">C# Scripting</span>
-      <span class="chip">ONNX Runtime</span><span class="chip">NeMo Guardrails</span>
+  <div class="talent-sep"></div>
+  <div class="talent-group reveal">
+    <h3 class="talent-label">Game AI & Engines</h3>
+    <div class="talent-tags">
+      <span class="t-tag accent">Unity 2022.3 LTS</span><span class="t-tag">Unity ML-Agents</span><span class="t-tag accent">Unity Sentis</span><span class="t-tag">C# Scripting</span><span class="t-tag">ONNX Runtime</span><span class="t-tag">NeMo Guardrails</span>
     </div>
   </div>
-
 </div>
 </div>
 
 <!-- ══ BEYOND CODE ══ -->
 <div class="s-wrap" id="beyond" style="padding-top:2rem">
   <div class="s-head"><span class="s-num">05</span><h2 class="s-title">Beyond Code</h2></div>
-  <div class="beyond-grid">
+  <div class="beyond-scroll">
     <div class="beyond-card reveal"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 60 since 2021. Full 36-star Spiral Abyss clears — often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis? Yeah, that's basically a love letter to Azhdaha.</div></div>
     <div class="beyond-card reveal"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen battle arcs, psychological thrillers, and anything with a hard magic system. Currently on a hunter exam binge. Always looking for the next arc that hits like Chimera Ant or Shibuya — send recs.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Former sprinter — hurdles and 4×100 relay. That start-gun adrenaline never goes away. Shipping a model to prod has the same vibe: explode off the blocks, hold your form, don't look back until you cross.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">Fingerstyle acoustic when I need to think. Covers, improvisation, and the occasional failed attempt at music theory. Turns out chord progressions and attention mechanisms both love patterns — who knew.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">Operations supervisor at UMD's climbing wall — promoted from belay staff in 7 months. I manage daily ops, run safety protocols, and send routes when it's quiet. Beta-reading a crimpy overhang? Same logic as debugging: find the sequence, commit, don't second-guess mid-move.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery</div><div class="beyond-text">Target range sessions at UMD — recurve bow, Olympic-style. The mental game is everything: breath control, shoulder alignment, anchor consistency. You get one clean release per arrow. No iteration, no rollback.</div></div>
-    <div class="beyond-card reveal"><span class="beyond-icon">⛸️</span><div class="beyond-name">Figure Skating</div><div class="beyond-text">UMD Figure Skating club. Edges, crossovers, and single jumps. Ice doesn't forgive hesitation — commit to the edge or eat it. The physics are unforgiving, but that's exactly why it's addictive.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Sprinter — hurdles and 4×100 relay. I ran track competitively and the start-gun adrenaline honestly never goes away.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">I play acoustic covers when I need a break. Nothing fancy — just vibing with whatever sounds right.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">I work at UMD's climbing facility and climb regularly. Managing patron safety and sending problems on a 55 ft wall in the same shift is pretty great honestly.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery</div><div class="beyond-text">Range sessions at UMD Archery Club. Recurve bow, target shooting. Nothing clears the head like a clean release.</div></div>
+    <div class="beyond-card reveal"><span class="beyond-icon">⛸️</span><div class="beyond-name">Figure Skating</div><div class="beyond-text">UMD Figure Skating Club. Still learning edges and crossovers but the ice is genuinely addictive.</div></div>
   </div>
 </div>
 
@@ -809,7 +805,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 <div class="contact-wrap" id="contact">
   <div class="contact-box reveal">
     <h2 class="contact-title">Let's Build Something Extraordinary</h2>
-    <p class="contact-sub">Graduating May 2026 from UMD with an M.S. in Applied ML. Looking for full-time roles where I can build production AI systems — LLMOps, agentic RAG, game AI, RL, or anything that involves making models actually work in the real world. STEM OPT eligible. Let's talk.</p>
+    <p class="contact-sub"><strong>M.S. Applied Machine Learning</strong> · University of Maryland · May 2026<br>Seeking: <strong>AI/ML Engineer</strong> · <strong>LLMOps</strong> · <strong>GenAI</strong> · <strong>Game AI</strong> · <strong>RL Engineer</strong><br><strong>STEM OPT eligible</strong> · Open to relocate</p>
     <div class="contact-links">
       <a href="mailto:mukulray@terpmail.umd.edu" class="c-link">✉ Email</a>
       <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="c-link">LinkedIn ↗</a>
