@@ -1,23 +1,40 @@
+# Development directories
 _drafts/
+node_modules/
+.cache/
+
+# OS files
 .DS_Store
 Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 
-# Claude / AI artifacts
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AI tools
 .claude/
 .cursorrules
 CLAUDE.md
 *.claude
 .aider*
 .continue/
+.cursor/
 
-# OS
-Desktop.ini
-.Spotlight-V100
-.Trashes
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Temp files
+*.tmp
+*.temp
+.env
+.env.local
