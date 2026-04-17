@@ -142,6 +142,19 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .btn-gold:hover{box-shadow:0 8px 40px rgba(201,168,76,.5)}
 .btn-ghost{background:transparent;color:var(--gold);border:1px solid var(--bdr-b)}
 .btn-ghost:hover{background:rgba(201,168,76,.07);box-shadow:0 0 28px rgba(201,168,76,.15)}
+.btn-resume{
+  background:transparent;color:var(--gold-l);
+  border:2px solid var(--gold);
+  box-shadow:0 0 20px rgba(201,168,76,.15),inset 0 0 20px rgba(201,168,76,.05);
+  position:relative}
+.btn-resume::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold-l),transparent);
+  animation:shimmer 3s linear infinite}
+.btn-resume:hover{
+  background:rgba(201,168,76,.12);
+  box-shadow:0 0 30px rgba(201,168,76,.3),inset 0 0 25px rgba(201,168,76,.08);
+  border-color:var(--gold-l)}
 
 /* ── PHOTO FRAME ── */
 .hero-photo-col{display:flex;flex-direction:column;align-items:center;gap:1rem;animation:fadeup .9s .45s ease both}
@@ -359,10 +372,9 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .carousel-dot:hover{background:rgba(201,168,76,.4)}
 .carousel-dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(201,168,76,.6);transform:scale(1.4)}
 .carousel-arrows{
-  position:absolute;top:50%;left:0;right:0;
-  display:flex;justify-content:space-between;
-  padding:0 1rem;pointer-events:none;z-index:15;
-  transform:translateY(-50%)}
+  position:absolute;top:0;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 .5rem;pointer-events:none;z-index:15}
 .carousel-arrow{
   pointer-events:auto;background:rgba(3,5,16,.7);
   border:1px solid rgba(201,168,76,.35);
@@ -418,6 +430,38 @@ nav.scrolled{background:rgba(3,5,16,.97)}
   transition:all .3s;
   clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
 .c-link:hover{background:rgba(201,168,76,.1);transform:translateY(-3px);box-shadow:0 10px 36px rgba(201,168,76,.22)}
+.contact-primary{
+  display:flex;justify-content:center;gap:1.2rem;
+  flex-wrap:wrap;margin-bottom:1.8rem;position:relative;z-index:2}
+.contact-secondary{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:.8rem;
+  margin-bottom:2.5rem;position:relative;z-index:2}
+.contact-form-wrap{
+  max-width:480px;margin:0 auto;position:relative;z-index:2;
+  border-top:1px solid var(--bdr);padding-top:2rem}
+.form-label{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);text-align:center;margin-bottom:1.2rem}
+.contact-form{display:flex;flex-direction:column;gap:.8rem}
+.cf-input{
+  font-family:'Rajdhani',sans-serif;font-size:.92rem;
+  padding:.85rem 1.1rem;
+  background:rgba(201,168,76,.04);
+  border:1px solid rgba(201,168,76,.18);
+  color:var(--text);outline:none;
+  transition:border-color .3s,box-shadow .3s;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.cf-input:focus{
+  border-color:rgba(201,168,76,.5);
+  box-shadow:0 0 15px rgba(201,168,76,.1)}
+.cf-input::placeholder{color:var(--dim);font-size:.85rem}
+.cf-textarea{resize:vertical;min-height:100px;font-family:'Rajdhani',sans-serif}
+.cf-send{margin-top:.4rem}
+.cf-sent{
+  text-align:center;padding:1.5rem;
+  font-family:'Rajdhani',sans-serif;font-size:1rem;
+  color:var(--teal)}
 
 /* ─── FOOTER ─── */
 footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.12em}
@@ -620,10 +664,10 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <p class="hero-desc">I build AI systems that actually ship — LLMOps pipelines, multi-agent RAG, and RL agents that run in game engines at 60 fps. M.S. Applied ML @ UMD (May 2026). IEEE-published. If it involves transformers, vector databases, or teaching a neural net to beat you at your own game, I'm in.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-gold">Explore Projects</a>
+        <a href="assets/MukulRay_Resume.pdf" target="_blank" class="btn btn-resume">Resume</a>
         <a href="https://github.com/MukulRay1603" target="_blank" class="btn btn-ghost">GitHub ↗</a>
         <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
         <a href="https://huggingface.co/spaces/MukulRay" target="_blank" class="btn btn-ghost">HuggingFace ↗</a>
-        <a href="assets/MukulRay_Resume.pdf" target="_blank" class="btn btn-gold">Resume ↓</a>
       </div>
     </div>
 
@@ -850,13 +894,30 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   <div class="contact-box reveal">
     <h2 class="contact-title">Let's Build Something Extraordinary</h2>
     <p class="contact-sub"><strong>M.S. Applied Machine Learning</strong> · University of Maryland · May 2026<br>Seeking: <strong>AI/ML Engineer</strong> · <strong>LLMOps</strong> · <strong>GenAI</strong> · <strong>Game AI</strong> · <strong>RL Engineer</strong><br><strong>STEM OPT eligible</strong> · Open to relocate</p>
-    <div class="contact-links">
-      <a href="mailto:mukulray@terpmail.umd.edu" class="c-link">✉ Email</a>
-      <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="c-link">LinkedIn ↗</a>
+
+    <!-- Primary contact -->
+    <div class="contact-primary">
+      <a href="mailto:mukulray@terpmail.umd.edu" class="btn btn-gold" style="min-width:200px;text-align:center">✉ Email Me</a>
+      <a href="https://linkedin.com/in/mukul-rayana" target="_blank" class="btn btn-resume" style="min-width:200px;text-align:center">LinkedIn ↗</a>
+    </div>
+
+    <!-- Secondary links -->
+    <div class="contact-secondary">
       <a href="https://github.com/MukulRay1603" target="_blank" class="c-link">GitHub ↗</a>
       <a href="https://huggingface.co/spaces/MukulRay" target="_blank" class="c-link">HuggingFace ↗</a>
-      <a href="assets/MukulRay_Resume.pdf" target="_blank" class="c-link">Resume ↓</a>
+      <a href="assets/MukulRay_Resume.pdf" target="_blank" class="c-link">Resume ↗</a>
       <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="c-link">IEEE Paper ↗</a>
+    </div>
+
+    <!-- Contact form -->
+    <div class="contact-form-wrap">
+      <p class="form-label">Or drop me a message directly:</p>
+      <div class="contact-form" id="contactForm">
+        <input type="text" id="cfName" class="cf-input" placeholder="Your name" />
+        <input type="email" id="cfEmail" class="cf-input" placeholder="your@email.com" />
+        <textarea id="cfMsg" class="cf-input cf-textarea" placeholder="Open to opportunities, collaborations, or just connecting..." rows="4"></textarea>
+        <button type="button" class="btn btn-gold cf-send" id="cfSend" style="width:100%">Send Message ↗</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1091,6 +1152,40 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
   arrange();
   resetAuto();
+})();
+
+/* ══ CONTACT FORM ══ */
+(function() {
+  var btn = document.getElementById('cfSend');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    var name = document.getElementById('cfName').value.trim();
+    var email = document.getElementById('cfEmail').value.trim();
+    var msg = document.getElementById('cfMsg').value.trim();
+    if (!name || !email || !msg) {
+      btn.textContent = 'Please fill all fields';
+      btn.style.opacity = '.6';
+      setTimeout(function() { btn.textContent = 'Send Message ↗'; btn.style.opacity = '1'; }, 2000);
+      return;
+    }
+    // Formspree endpoint
+    var formId = 'mzdyeoqz';
+    fetch('https://formspree.io/f/' + formId, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, message: msg })
+    }).then(function(r) {
+      if (r.ok) {
+        document.getElementById('contactForm').innerHTML = '<div class="cf-sent">Thanks, ' + name + '! I\'ll get back to you soon. ✦</div>';
+      } else {
+        btn.textContent = 'Something went wrong — try email instead';
+        btn.style.opacity = '.6';
+      }
+    }).catch(function() {
+      // Fallback: open mailto
+      window.location.href = 'mailto:mukulray@terpmail.umd.edu?subject=From ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(msg + '\n\nFrom: ' + name + ' (' + email + ')');
+    });
+  });
 })();
 
 /* ══ HAMBURGER ══ */
