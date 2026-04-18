@@ -287,9 +287,10 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .proj-media-icon{font-size:2rem;display:block;margin-bottom:.2rem;opacity:.4}
 .proj-type{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.65rem}
 .proj-title{font-family:'Cinzel',serif;font-size:1.02rem;font-weight:600;color:var(--gold-l);margin-bottom:.85rem;line-height:1.35}
-.proj-desc{font-size:.95rem;line-height:1.75;color:var(--dim);margin-bottom:1.2rem;flex:1;text-align:justify}
+.proj-desc{font-size:.95rem;line-height:1.75;color:var(--dim);margin-bottom:1.2rem;flex:1}
 .proj-metrics{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.3rem}
 .metric{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);padding:.26rem .6rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15)}
+.proj-links{display:flex;flex-wrap:wrap;gap:.8rem}
 .proj-link{
   font-family:'Rajdhani',sans-serif;font-size:.77rem;font-weight:700;
   letter-spacing:.18em;text-transform:uppercase;color:var(--teal);text-decoration:none;
@@ -304,7 +305,7 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
   background:linear-gradient(180deg,var(--gold),var(--teal) 60%,transparent)}
 .tl-item{position:relative;margin-bottom:3.2rem}
 .tl-dot{
-  position:absolute;left:-2rem;top:.35rem;
+  position:absolute;left:calc(-2rem - 5.5px);top:.35rem;
   width:11px;height:11px;background:var(--gold);transform:rotate(45deg);
   border:2px solid var(--bg);box-shadow:0 0 12px rgba(201,168,76,.65)}
 .tl-date{font-family:'JetBrains Mono',monospace;font-size:.61rem;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.45rem}
@@ -738,7 +739,9 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <h3 class="proj-title">Nemesis — Distributed RL Boss AI with Real-Time LLM Narration</h3>
       <p class="proj-desc">PPO boss agent trained with 3-stage curriculum (300K steps, reward −2.4→13.2). Ray RLlib distributed across 8 workers for 2.6× speedup. Exported to ONNX → Unity Sentis for <2 ms/frame inference at 60 fps. Real-time LLM taunts via Groq + NeMo Guardrails (114–352 ms). RL boss outlasts scripted FSM by 85% across 50 episodes.</p>
       <div class="proj-metrics"><span class="metric">2.6× RLlib speedup</span><span class="metric">&lt;2 ms/frame</span><span class="metric">60 fps</span><span class="metric">85% outlast FSM</span></div>
-      <a href="https://github.com/MukulRay1603/nemesis-boss-ai" target="_blank" class="proj-link">View on GitHub ↗</a>
+      <div class="proj-links">
+        <a href="https://github.com/MukulRay1603/nemesis-boss-ai" target="_blank" class="proj-link">View on GitHub ↗</a>
+      </div>
     </div>
 
     <div class="proj-card reveal">
@@ -747,7 +750,9 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <h3 class="proj-title">EmpathRAG — NLI Safety Guardrail & Emotion-Conditioned RAG</h3>
       <p class="proj-desc">DeBERTa-v3-base fine-tuned on 232K NLI pairs — 0.9629 crisis recall across 30 adversarial probes in 6 attack categories. captum Integrated Gradients on every safety intercept. 5-stage emotion-conditioned RAG over 1.67M FAISS vectors (RoBERTa + LoRA). Ablation: 0.88 emotion alignment vs. 0.30 BM25 — Wilcoxon p = 3.62×10⁻⁸.</p>
       <div class="proj-metrics"><span class="metric">0.9629 recall</span><span class="metric">1.67M vectors</span><span class="metric">p = 3.62e-8</span><span class="metric">0.88 alignment</span></div>
-      <a href="https://github.com/MukulRay1603/Empath-RAG" target="_blank" class="proj-link">View on GitHub ↗</a>
+      <div class="proj-links">
+        <a href="https://github.com/MukulRay1603/Empath-RAG" target="_blank" class="proj-link">View on GitHub ↗</a>
+      </div>
     </div>
 
     <div class="proj-card reveal">
@@ -756,8 +761,10 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <h3 class="proj-title">RECON — Agentic ML Research Navigator</h3>
       <p class="proj-desc">4-agent LangGraph state machine with retry loop. Critic applies PASS/STALE/CONTRADICTED/INSUFFICIENT verdicts — catches 52% of superseded ML claims vs. 0% single-pass RAG (130-question eval). Linear decay optimal across 3 ablated formulas. Position accuracy 43.9% vs. 32.3% baseline.</p>
       <div class="proj-metrics"><span class="metric">52% staleness catch</span><span class="metric">130-question eval</span><span class="metric">43.9% position acc.</span></div>
-      <a href="https://huggingface.co/spaces/MukulRay/recon" target="_blank" class="proj-link">Live Demo ↗</a>
-      <a href="https://github.com/MukulRay1603/project-recon" target="_blank" class="proj-link" style="margin-left:1.2rem">View Source ↗</a>
+      <div class="proj-links">
+        <a href="https://huggingface.co/spaces/MukulRay/recon" target="_blank" class="proj-link">Live Demo ↗</a>
+        <a href="https://github.com/MukulRay1603/project-recon" target="_blank" class="proj-link">View Source ↗</a>
+      </div>
     </div>
 
     <div class="proj-card reveal">
@@ -766,8 +773,10 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <h3 class="proj-title">Irminsul — Production LLMOps System</h3>
       <p class="proj-desc">Llama 3.1 8B fine-tuned with QLoRA (rank 16). Best checkpoint from 3 MLflow experiments: sim 0.826, ROUGE-L 0.466. FastAPI + LangChain + Pinecone RAG with guardrails and confidence-gated web fallback. Auto corpus pipeline ingests 840 docs → 6,876 vectors weekly via GitHub Actions.</p>
       <div class="proj-metrics"><span class="metric">Sim 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric">6,876 vectors</span><span class="metric">840 docs</span></div>
-      <a href="https://huggingface.co/spaces/MukulRay/Irminsul" target="_blank" class="proj-link">Live Demo ↗</a>
-      <a href="https://github.com/MukulRay1603/Irminsul" target="_blank" class="proj-link" style="margin-left:1.2rem">View Source ↗</a>
+      <div class="proj-links">
+        <a href="https://huggingface.co/spaces/MukulRay/Irminsul" target="_blank" class="proj-link">Live Demo ↗</a>
+        <a href="https://github.com/MukulRay1603/Irminsul" target="_blank" class="proj-link">View Source ↗</a>
+      </div>
     </div>
 
     <div class="proj-card reveal">
@@ -776,7 +785,9 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <h3 class="proj-title">Voice-Driven Panoramic VR Generation — IEEE IDCIoT 2024</h3>
       <p class="proj-desc">Speech → 360° image pipeline: Whisper (speech recognition) → GPT-Neo (text generation) → Stable Diffusion (image synthesis). Attention slicing and xFormers optimizations delivered 2.3× throughput within a 10 GB VRAM budget. Peer-reviewed and published at IEEE IDCIoT 2024.</p>
       <div class="proj-metrics"><span class="metric">2.3× throughput</span><span class="metric">10 GB VRAM</span><span class="metric">IEEE Published</span></div>
-      <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="proj-link">Read Paper ↗</a>
+      <div class="proj-links">
+        <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="proj-link">Read Paper ↗</a>
+      </div>
     </div>
 
   </div>
