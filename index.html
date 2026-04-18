@@ -106,7 +106,7 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 @keyframes fadeup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .badge{
   display:inline-flex;align-items:center;gap:.6rem;
-  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;
   color:var(--teal);letter-spacing:.2em;text-transform:uppercase;
   padding:.45rem 1.1rem;margin-bottom:1.6rem;
   border:1px solid rgba(79,209,197,.3);background:rgba(79,209,197,.05);
@@ -238,7 +238,7 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .stat-l{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem}
 .stat-v{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold-l)}
 .chips{display:flex;flex-wrap:wrap;gap:.42rem}
-.chip{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.28rem .65rem;border:1px solid var(--bdr);color:var(--teal);letter-spacing:.07em;transition:all .22s;cursor:default}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.28rem .65rem;border:1px solid var(--bdr);color:var(--teal);letter-spacing:.07em;transition:all .22s;cursor:default}
 .chip:hover{border-color:var(--teal-d);background:rgba(79,209,197,.08);color:var(--gold-l);transform:translateY(-2px)}
 
 /* ─── SECTIONS ─── */
@@ -285,14 +285,14 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .proj-card:hover .proj-media{border-color:rgba(201,168,76,.45)}
 .proj-media-in{text-align:center;position:relative;z-index:1;line-height:2}
 .proj-media-icon{font-size:2rem;display:block;margin-bottom:.2rem;opacity:.4}
-.proj-type{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.65rem}
+.proj-type{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.65rem}
 .proj-title{font-family:'Cinzel',serif;font-size:1.02rem;font-weight:600;color:var(--gold-l);margin-bottom:.85rem;line-height:1.35}
 .proj-desc{font-size:.95rem;line-height:1.75;color:var(--dim);margin-bottom:1.2rem;flex:1}
 .proj-metrics{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.3rem}
 .metric{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);padding:.26rem .6rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15)}
 .proj-links{display:flex;flex-wrap:wrap;gap:.8rem}
 .proj-link{
-  font-family:'Rajdhani',sans-serif;font-size:.77rem;font-weight:700;
+  font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;
   letter-spacing:.18em;text-transform:uppercase;color:var(--teal);text-decoration:none;
   display:inline-flex;align-items:center;gap:.5rem;
   transition:gap .2s,color .2s;position:relative;z-index:2}
@@ -301,14 +301,14 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 /* ─── TIMELINE ─── */
 .timeline{position:relative;padding-left:2.5rem}
 .timeline::before{
-  content:'';position:absolute;left:.5rem;top:0;bottom:0;width:1px;
+  content:'';position:absolute;left:.5rem;top:.35rem;bottom:0;width:1px;
   background:linear-gradient(180deg,var(--gold),var(--teal) 60%,transparent)}
 .tl-item{position:relative;margin-bottom:3.2rem}
 .tl-dot{
   position:absolute;left:calc(-2rem - 5.5px);top:.35rem;
   width:11px;height:11px;background:var(--gold);transform:rotate(45deg);
   border:2px solid var(--bg);box-shadow:0 0 12px rgba(201,168,76,.65)}
-.tl-date{font-family:'JetBrains Mono',monospace;font-size:.61rem;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.45rem}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.45rem}
 .tl-role{font-family:'Cinzel',serif;font-size:1.08rem;font-weight:600;color:var(--gold-l);margin-bottom:.12rem}
 .tl-co{font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:500;color:var(--dim);margin-bottom:.9rem}
 .tl-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
@@ -847,7 +847,6 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <ul class="tl-list">
         <li>IEEE Publication: Voice-Driven Panoramic VR Generation (IDCIoT 2024) — speech-to-360° image pipeline with 2.3× throughput improvement.</li>
         <li>IBM Data Science Professional Certificate (Coursera) · UC San Diego Data Structures & Algorithms (Coursera)</li>
-        <li>Head of Operations (Symposium Events) · Photography Head</li>
       </ul>
     </div>
   </div>
