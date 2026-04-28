@@ -290,23 +290,24 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
   opacity:.55;animation:navProgress 9s linear forwards}
 .proj-split--paused .proj-nav-item.active .proj-nav-bar{animation-play-state:paused}
 @keyframes navProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.proj-nav-text{min-width:0;flex:1}
+.proj-nav-text{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center}
 .proj-nav-num{
-  display:block;font-family:'JetBrains Mono',monospace;font-size:.56rem;
-  color:var(--dim);letter-spacing:.2em;margin-bottom:.15rem}
+  font-family:'JetBrains Mono',monospace;font-size:.55rem;
+  color:var(--dim);letter-spacing:.2em;line-height:1;margin-bottom:.2rem}
 .proj-nav-item.active .proj-nav-num{color:var(--gold-d)}
 .proj-nav-name{
-  display:block;font-family:'Cinzel',serif;font-size:.92rem;font-weight:600;
-  color:var(--text);line-height:1.3;margin-bottom:.2rem;
+  font-family:'Cinzel',serif;font-size:.88rem;font-weight:600;
+  color:var(--text);line-height:1.15;margin-bottom:.15rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   transition:color .25s}
 .proj-nav-item.active .proj-nav-name,.proj-nav-item:hover .proj-nav-name{color:var(--gold-l)}
 .proj-nav-sub{
-  display:block;font-family:'JetBrains Mono',monospace;font-size:.54rem;
-  color:var(--dim);letter-spacing:.06em;
+  font-family:'JetBrains Mono',monospace;font-size:.54rem;
+  color:var(--dim);letter-spacing:.06em;line-height:1;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* detail panel */
-.proj-panel{min-height:460px}
+.proj-panel{min-height:600px}
 .proj-detail{
   display:none;position:relative;overflow:hidden;
   background:linear-gradient(135deg,rgba(10,16,36,.94),rgba(6,10,22,.98));
