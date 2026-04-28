@@ -38,3 +38,6 @@ yarn-error.log*
 *.temp
 .env
 .env.local
+
+# Old resume versions
+assets/MukulRay_Resume_AI_Engineer_2026.pdf
