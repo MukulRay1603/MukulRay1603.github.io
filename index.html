@@ -249,48 +249,64 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .proj-split{display:grid;grid-template-columns:260px 1fr;gap:2.5rem;align-items:start}
 
 /* constellation rail */
-.proj-nav-wrap{position:sticky;top:7rem}
-.proj-nav{display:flex;flex-direction:column;gap:5px}
+.proj-nav-wrap{
+  position:sticky;top:7rem;
+  background:rgba(6,9,22,.55);
+  border:1px solid rgba(201,168,76,.08);
+  border-radius:2px}
+.proj-nav-line{
+  position:absolute;left:calc(1.2rem + 3px);top:1rem;bottom:1rem;width:1px;
+  background:linear-gradient(180deg,transparent,var(--bdr) 8%,var(--bdr) 92%,transparent);
+  pointer-events:none;z-index:0}
+.proj-nav{display:flex;flex-direction:column;position:relative;z-index:1}
 .proj-nav-item{
-  display:grid;grid-template-columns:38px 1fr;
-  align-items:center;height:58px;
-  cursor:pointer;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,rgba(8,12,28,.75),rgba(4,7,18,.85));
-  border:1px solid rgba(201,168,76,.1);
-  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  display:flex;align-items:flex-start;gap:.85rem;
+  padding:.8rem 1.2rem;cursor:pointer;position:relative;
+  border-left:2px solid transparent;
   transition:border-color .25s,background .25s}
-.proj-nav-item:hover{
-  border-color:rgba(201,168,76,.32);
-  background:linear-gradient(135deg,rgba(12,18,40,.85),rgba(6,10,22,.9))}
-.proj-nav-item.active{
-  border-color:rgba(201,168,76,.55);
-  background:linear-gradient(135deg,rgba(14,20,46,.92),rgba(8,12,30,.96))}
-.proj-nav-num{
-  display:flex;align-items:center;justify-content:center;height:100%;
-  font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.15em;
-  color:var(--dim);border-right:1px solid rgba(201,168,76,.1);flex-shrink:0;
-  transition:color .25s,border-color .25s}
-.proj-nav-item.active .proj-nav-num{color:var(--gold);border-right-color:rgba(201,168,76,.3)}
-.proj-nav-text{padding:0 .85rem;min-width:0}
-.proj-nav-name{
-  display:block;font-family:'Cinzel',serif;font-size:.82rem;font-weight:600;
-  color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  margin-bottom:.18rem;transition:color .25s}
-.proj-nav-item.active .proj-nav-name,.proj-nav-item:hover .proj-nav-name{color:var(--gold-l)}
-.proj-nav-sub{
-  display:block;font-family:'JetBrains Mono',monospace;font-size:.52rem;
-  color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-nav-item:hover{background:rgba(201,168,76,.04);border-left-color:rgba(201,168,76,.28)}
+.proj-nav-item.active{border-left-color:var(--gold);background:rgba(201,168,76,.06)}
+.proj-nav-dot{
+  position:relative;width:8px;height:8px;border-radius:50%;flex-shrink:0;
+  margin-top:5px;background:rgba(122,138,186,.5);
+  transition:background .3s}
+.proj-nav-item:hover .proj-nav-dot{background:rgba(201,168,76,.55)}
+.proj-nav-item.active .proj-nav-dot{background:var(--gold)}
+.proj-nav-dot::before{
+  content:'';position:absolute;inset:-5px;border-radius:50%;
+  border:1px solid rgba(201,168,76,0);
+  transition:border-color .3s}
+.proj-nav-item.active .proj-nav-dot::before{
+  animation:nodePulse 2.4s ease infinite}
+@keyframes nodePulse{
+  0%{opacity:.8;transform:scale(1)}
+  70%{opacity:0;transform:scale(2.4)}
+  100%{opacity:0;transform:scale(2.4)}}
 /* auto-advance progress bar */
 .proj-nav-bar{
   position:absolute;bottom:0;left:0;right:0;height:1px;
   background:var(--gold);transform:scaleX(0);transform-origin:left;opacity:0}
 .proj-nav-item.active .proj-nav-bar{
-  opacity:.6;animation:navProgress 9s linear forwards}
+  opacity:.55;animation:navProgress 9s linear forwards}
 .proj-split--paused .proj-nav-item.active .proj-nav-bar{animation-play-state:paused}
 @keyframes navProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.proj-nav-text{min-width:0;flex:1}
+.proj-nav-num{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:.56rem;
+  color:var(--dim);letter-spacing:.2em;margin-bottom:.15rem}
+.proj-nav-item.active .proj-nav-num{color:var(--gold-d)}
+.proj-nav-name{
+  display:block;font-family:'Cinzel',serif;font-size:.92rem;font-weight:600;
+  color:var(--text);line-height:1.3;margin-bottom:.2rem;
+  transition:color .25s}
+.proj-nav-item.active .proj-nav-name,.proj-nav-item:hover .proj-nav-name{color:var(--gold-l)}
+.proj-nav-sub{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:.54rem;
+  color:var(--dim);letter-spacing:.06em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* detail panel */
-.proj-panel{min-height:600px}
+.proj-panel{min-height:460px}
 .proj-detail{
   display:none;position:relative;overflow:hidden;
   background:linear-gradient(135deg,rgba(10,16,36,.94),rgba(6,10,22,.98));
@@ -580,20 +596,15 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   .s-head{margin-bottom:2.5rem}
   .proj-split{grid-template-columns:1fr;gap:1.2rem}
   .proj-nav-wrap{position:static}
-  .proj-nav{flex-direction:row;overflow-x:auto;gap:5px;padding-bottom:.4rem;scrollbar-width:none}
+  .proj-nav-line{display:none}
+  .proj-nav{flex-direction:row;overflow-x:auto;gap:.3rem;padding-bottom:.5rem;scrollbar-width:none}
   .proj-nav::-webkit-scrollbar{display:none}
-  .proj-nav-item{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    grid-template-columns:unset;height:auto;min-width:72px;flex-shrink:0;
-    padding:.6rem .8rem;clip-path:none;gap:.2rem;
-    border-bottom:2px solid rgba(201,168,76,.12)}
-  .proj-nav-item.active{border-bottom-color:rgba(201,168,76,.55)}
-  .proj-nav-num{
-    border-right:none;height:auto;font-size:.54rem;
-    display:block;text-align:center}
-  .proj-nav-text{padding:0;text-align:center}
+  .proj-nav-item{flex-direction:column;align-items:center;text-align:center;border-left:none;border-bottom:2px solid transparent;padding:.65rem .9rem;min-width:64px;gap:.35rem;flex-shrink:0}
+  .proj-nav-item:hover{border-bottom-color:rgba(201,168,76,.35);background:rgba(201,168,76,.04)}
+  .proj-nav-item.active{border-left-color:transparent;border-bottom-color:var(--gold);background:rgba(201,168,76,.06)}
+  .proj-nav-dot{display:none}
   .proj-nav-sub{display:none}
-  .proj-nav-name{font-size:.74rem;margin-bottom:0}
+  .proj-nav-name{font-size:.8rem}
   .proj-detail-media{height:230px}
   .proj-detail-body{padding:1.8rem 1.8rem}
   .talent-wrap{padding:1.8rem 1.5rem}
@@ -796,61 +807,69 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   <div class="s-head"><h2 class="s-title">Projects</h2></div>
   <div class="proj-split reveal">
 
-    <!-- ── Nav rail ── -->
+    <!-- ── Constellation rail ── -->
     <div class="proj-nav-wrap">
+      <div class="proj-nav-line"></div>
       <nav class="proj-nav" id="projNav">
 
         <div class="proj-nav-item active" data-idx="0">
-          <span class="proj-nav-num">01</span>
+          <div class="proj-nav-dot"></div>
           <div class="proj-nav-text">
+            <span class="proj-nav-num">01</span>
             <span class="proj-nav-name">PharmaChain</span>
             <span class="proj-nav-sub">LangGraph · Multi-Agent</span>
           </div>
         </div>
 
         <div class="proj-nav-item" data-idx="1">
-          <span class="proj-nav-num">02</span>
+          <div class="proj-nav-dot"></div>
           <div class="proj-nav-text">
+            <span class="proj-nav-num">02</span>
             <span class="proj-nav-name">Nemesis</span>
             <span class="proj-nav-sub">RL · Unity Sentis</span>
           </div>
         </div>
 
         <div class="proj-nav-item" data-idx="2">
-          <span class="proj-nav-num">03</span>
+          <div class="proj-nav-dot"></div>
           <div class="proj-nav-text">
+            <span class="proj-nav-num">03</span>
             <span class="proj-nav-name">EmpathRAG</span>
             <span class="proj-nav-sub">DeBERTa · Safety</span>
           </div>
         </div>
 
         <div class="proj-nav-item" data-idx="3">
-          <span class="proj-nav-num">04</span>
+          <div class="proj-nav-dot"></div>
           <div class="proj-nav-text">
+            <span class="proj-nav-num">04</span>
             <span class="proj-nav-name">RECON</span>
             <span class="proj-nav-sub">LangGraph · Agentic</span>
           </div>
         </div>
 
         <div class="proj-nav-item" data-idx="4">
-          <span class="proj-nav-num">05</span>
+          <div class="proj-nav-dot"></div>
           <div class="proj-nav-text">
+            <span class="proj-nav-num">05</span>
             <span class="proj-nav-name">Irminsul</span>
             <span class="proj-nav-sub">LLMOps · QLoRA</span>
           </div>
         </div>
 
         <div class="proj-nav-item" data-idx="5">
-          <span class="proj-nav-num">06</span>
+          <div class="proj-nav-dot"></div>
           <div class="proj-nav-text">
+            <span class="proj-nav-num">06</span>
             <span class="proj-nav-name">DocPilot</span>
             <span class="proj-nav-sub">RoBERTa · ONNX</span>
           </div>
         </div>
 
         <div class="proj-nav-item" data-idx="6">
-          <span class="proj-nav-num">07</span>
+          <div class="proj-nav-dot"></div>
           <div class="proj-nav-text">
+            <span class="proj-nav-num">07</span>
             <span class="proj-nav-name">VR Generation</span>
             <span class="proj-nav-sub">IEEE · Stable Diffusion</span>
           </div>
