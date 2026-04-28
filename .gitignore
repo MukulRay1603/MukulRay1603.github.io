@@ -1,0 +1,43 @@
+# Development directories
+_drafts/
+node_modules/
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AI tools
+.claude/
+.cursorrules
+CLAUDE.md
+*.claude
+.aider*
+.continue/
+.cursor/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temp files
+*.tmp
+*.temp
+.env
+.env.local
+
+# Old resume versions
+assets/MukulRay_Resume_AI_Engineer_2026.pdf
