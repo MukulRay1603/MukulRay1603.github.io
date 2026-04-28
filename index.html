@@ -1017,10 +1017,13 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   }, { passive: true });
 
   (function tickRing() {
-    rx += (mx - rx) * 0.1;
-    ry += (my - ry) * 0.1;
-    curR.style.left = rx + 'px';
-    curR.style.top  = ry + 'px';
+    var newRx = rx + (mx - rx) * 0.1;
+    var newRy = ry + (my - ry) * 0.1;
+    if (Math.abs(newRx - rx) > 0.08 || Math.abs(newRy - ry) > 0.08) {
+      rx = newRx; ry = newRy;
+      curR.style.left = rx + 'px';
+      curR.style.top  = ry + 'px';
+    }
     requestAnimationFrame(tickRing);
   })();
 
@@ -1111,7 +1114,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       ctx.fillStyle='rgba(215,228,255,'+alpha+')';
       ctx.fill();
     });
-    if (Math.random() < (W < 768 ? .001 : .004))
+    if (Math.random() < (W < 768 ? .003 : .009))
       shooters.push({x:Math.random()*W*.65,y:Math.random()*H*.4,vx:4+Math.random()*5,vy:1.5+Math.random()*3,life:1});
     shooters = shooters.filter(function(s) {
       s.x+=s.vx; s.y+=s.vy; s.life-=.02;
