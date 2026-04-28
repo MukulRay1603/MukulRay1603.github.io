@@ -11,7 +11,6 @@
 <meta property="og:url" content="https://mukulray1603.github.io">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#030510">
 <link rel="canonical" href="https://mukulray1603.github.io">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +18,7 @@
 <style>
 /* ─── RESET & VARS ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{overflow-x:hidden;-webkit-text-size-adjust:100%;width:100%;max-width:100vw;scroll-behavior:smooth;scroll-padding-top:90px}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%;width:100%;max-width:100vw;scroll-behavior:smooth}
 :root{
   --gold:#c9a84c;--gold-l:#f5e09a;--gold-d:#7a5e20;
   --teal:#4fd1c5;--teal-d:#2a8a84;
@@ -29,19 +28,12 @@ html{overflow-x:hidden;-webkit-text-size-adjust:100%;width:100%;max-width:100vw;
   --text:#ccd6f6;--dim:#7a8aba;
   --bdr:rgba(201,168,76,.18);--bdr-b:rgba(201,168,76,.55);
 }
-#scroll-bar{
-  position:fixed;top:0;left:0;height:2px;width:0%;z-index:997;
-  background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--teal));
-  pointer-events:none;
-  transition:width .1s linear;
-  box-shadow:0 0 8px rgba(201,168,76,.5);
-}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;max-width:100vw;cursor:none}
 
 /* ─── CUSTOM CURSOR ─── */
-#cur,#cur-r{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;will-change:transform}
-#cur{width:10px;height:10px;background:var(--gold);border-radius:50%;transition:background .2s ease;opacity:0}
-#cur-r{width:36px;height:36px;border:1.5px solid rgba(201,168,76,.55);border-radius:50%;z-index:9998;transition:width .25s,height .25s,border-color .25s;opacity:0}
+#cur,#cur-r{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cur{width:10px;height:10px;background:var(--gold);border-radius:50%;transition:transform .15s ease,background .2s ease;top:0;left:0;opacity:0;will-change:transform}
+#cur-r{width:36px;height:36px;border:1.5px solid rgba(201,168,76,.55);border-radius:50%;z-index:9998;transition:width .25s,height .25s,border-color .25s;top:0;left:0;opacity:0;will-change:transform}
 
 /* ─── NOISE GRAIN ─── */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
@@ -50,7 +42,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;o
 #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* ─── NAV ─── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5vw;background:linear-gradient(180deg,rgba(3,5,16,.95) 0%,transparent 100%);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.09);transition:background .4s}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5vw;background:linear-gradient(180deg,rgba(3,5,16,.95) 0%,transparent 100%);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.09);transition:background .4s}
 nav.scrolled{background:rgba(3,5,16,.97)}
 .nav-logo{font-family:'Cinzel Decorative',serif;font-size:1rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.1em}
 .nav-logo span{color:var(--teal)}
@@ -68,7 +60,7 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 .ham.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* mobile menu overlay */
-.mob-overlay{display:none;position:fixed;inset:0;background:rgba(3,5,16,.97);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(3,5,16,.97);backdrop-filter:blur(20px);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
 .mob-overlay.open{display:flex}
 .mob-overlay a{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:600;color:var(--text);text-decoration:none;letter-spacing:.12em;transition:color .25s}
 .mob-overlay a:hover{color:var(--gold)}
@@ -76,7 +68,7 @@ nav.scrolled{background:rgba(3,5,16,.97)}
 body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 
 /* ─── HERO ─── */
-#hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:8rem 5vw 5rem}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:8rem 5vw 5rem}
 
 /* parallax bg layers */
 .p-layer{position:absolute;inset:-15%;pointer-events:none;will-change:transform}
@@ -124,26 +116,11 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .hero-name{
   font-family:'Cinzel Decorative',serif;
   font-size:clamp(2.5rem,5vw,5rem);font-weight:900;line-height:.95;
-  color:#fff;margin-bottom:.6rem}
+  color:#fff;margin-bottom:.6rem;animation:fadeup .9s .1s ease both}
 .hero-name .accent{
   display:block;
   background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 45%,var(--gold-d) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.char-wrap{display:inline}
-.char{
-  display:inline-block;
-  opacity:0;
-  transform:translateY(32px) rotate(4deg);
-  animation:charIn .65s cubic-bezier(.22,1,.36,1) both;
-  animation-delay:calc(.35s + var(--i) * .055s);
-}
-.hero-name .accent .char{
-  background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 45%,var(--gold-d) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-@keyframes charIn{
-  to{opacity:1;transform:translateY(0) rotate(0deg);}
-}
 .hero-sub{
   font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;
   letter-spacing:.35em;text-transform:uppercase;color:var(--dim);
@@ -268,93 +245,13 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .s-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;color:#fff;letter-spacing:.06em}
 .s-head::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
 
-/* ─── PROJECT CAROUSEL ─── */
-.proj-carousel-shell{position:relative}
-.proj-controls{
-  display:flex;align-items:center;justify-content:flex-end;
-  gap:.9rem;margin-bottom:1.6rem}
-.proj-counter{
-  font-family:'JetBrains Mono',monospace;font-size:.72rem;
-  color:var(--dim);letter-spacing:.18em;margin-right:.6rem}
-.proj-counter .proj-counter-cur{color:var(--gold-l)}
-.proj-arrow{
-  width:42px;height:42px;border-radius:50%;
-  background:rgba(3,5,16,.6);border:1px solid rgba(201,168,76,.4);
-  color:var(--gold);font-size:1.1rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .25s,border-color .25s,transform .2s,box-shadow .25s;
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.proj-arrow:hover{
-  background:rgba(201,168,76,.12);border-color:var(--gold);
-  box-shadow:0 0 18px rgba(201,168,76,.25);transform:scale(1.05)}
-.proj-arrow:disabled{opacity:.3;cursor:not-allowed}
-.proj-carousel-wrap{
-  position:relative;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%)}
-.proj-carousel{
-  display:flex;gap:1.5rem;
-  overflow-x:auto;overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  padding:.5rem 1rem 1.5rem;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(201,168,76,.3) transparent;
-  -webkit-overflow-scrolling:touch;
-  cursor:grab;
-  user-select:none}
-.proj-carousel.dragging{cursor:grabbing;scroll-behavior:auto}
-.proj-carousel::-webkit-scrollbar{height:4px}
-.proj-carousel::-webkit-scrollbar-track{background:transparent}
-.proj-carousel::-webkit-scrollbar-thumb{background:rgba(201,168,76,.18);border-radius:2px}
-.proj-carousel::-webkit-scrollbar-thumb:hover{background:rgba(201,168,76,.4)}
-.proj-carousel .proj-card{
-  flex:0 0 420px;
-  scroll-snap-align:start;
-  scroll-margin-left:1rem}
-.proj-carousel .proj-card a{cursor:pointer}
-.proj-card--featured{
-  border-color:rgba(201,168,76,.4);
-  box-shadow:0 0 26px rgba(201,168,76,.07),inset 0 0 32px rgba(201,168,76,.03)}
-.featured-stamp{
-  position:absolute;top:14px;right:14px;z-index:5;
-  display:inline-flex;align-items:center;gap:.4rem;
-  font-family:'JetBrains Mono',monospace;font-size:.58rem;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold-l);
-  padding:.32rem .7rem;
-  background:linear-gradient(135deg,rgba(201,168,76,.22),rgba(79,209,197,.1));
-  border:1px solid rgba(201,168,76,.5);
-  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
-  box-shadow:0 4px 14px rgba(0,0,0,.45),0 0 12px rgba(201,168,76,.2);
-  pointer-events:none}
-.proj-dots{
-  display:flex;justify-content:center;gap:.5rem;margin-top:1.4rem}
-.proj-dot{
-  width:22px;height:3px;background:rgba(201,168,76,.18);
-  border:none;cursor:pointer;padding:0;
-  transition:background .3s,width .3s,box-shadow .3s}
-.proj-dot:hover{background:rgba(201,168,76,.45)}
-.proj-dot.active{
-  background:var(--gold);width:38px;
-  box-shadow:0 0 8px rgba(201,168,76,.6)}
-@media(max-width:1100px){
-  .proj-carousel .proj-card{flex:0 0 380px}
-}
-@media(max-width:768px){
-  .proj-carousel-wrap{
-    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%);
-    mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%)}
-  .proj-carousel{padding:.5rem .5rem 1.5rem;gap:1rem}
-  .proj-carousel .proj-card{flex:0 0 calc(100vw - 14vw)}
-  .proj-arrow{width:36px;height:36px;font-size:1rem}
-  .featured-stamp{top:10px;right:10px;font-size:.54rem;padding:.26rem .55rem}
-}
+/* ─── PROJECT CARDS ─── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
 .proj-card{
   position:relative;overflow:hidden;
   background:linear-gradient(135deg,rgba(10,16,36,.92),rgba(6,10,22,.96));
   border:1px solid var(--bdr);padding:2.1rem;
-  transition:transform .3s cubic-bezier(.25,.46,.45,.94),border-color .3s,box-shadow .3s;
+  transition:transform .45s cubic-bezier(.25,.46,.45,.94),border-color .45s,box-shadow .45s;
   clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
   display:flex;flex-direction:column}
 .proj-card:hover{transform:translateY(-6px) scale(1.01);border-color:rgba(201,168,76,.42)}
@@ -446,60 +343,69 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .t-tag:hover{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.08);transform:translateY(-2px);box-shadow:0 4px 12px rgba(201,168,76,.15)}
 .talent-sep{height:1px;background:linear-gradient(90deg,transparent,var(--bdr),transparent);margin:1.5rem 0}
 
-/* ─── BEYOND CAROUSEL ─── */
-.beyond-carousel{position:relative;height:460px;perspective:1400px;overflow:hidden;margin:0 auto}
-.beyond-track{position:relative;width:100%;height:390px;transform-style:preserve-3d}
+/* ─── BEYOND ─── */
+.beyond-carousel{position:relative;height:520px;perspective:1400px;overflow:hidden;margin:0 auto;padding:0}
+.beyond-track{
+  position:relative;width:100%;height:460px;
+  transform-style:preserve-3d}
 .beyond-card{
-  position:absolute;width:320px;height:340px;
-  left:50%;top:50%;margin-left:-160px;margin-top:-170px;
+  position:absolute;width:320px;min-width:320px;min-height:280px;left:50%;top:50%;
+  margin-left:-160px;margin-top:-160px;
   background:linear-gradient(135deg,rgba(10,16,36,.93),rgba(6,10,22,.97));
-  border:1px solid var(--bdr);padding:2.2rem 2.4rem;
-  text-align:center;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
+  border:1px solid var(--bdr);padding:2.4rem 2.8rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   clip-path:polygon(0 0,calc(100% - 13px) 0,100% 13px,100% 100%,13px 100%,0 calc(100% - 13px));
-  transition:transform .65s cubic-bezier(.25,.46,.45,.94),opacity .5s,box-shadow .5s;
-  backface-visibility:hidden}
+  transition:transform .7s cubic-bezier(.25,.46,.45,.94),opacity .7s,filter .5s,box-shadow .7s;
+  backface-visibility:hidden;will-change:transform,opacity}
 .beyond-card.active{
   border-color:rgba(201,168,76,.5);
-  box-shadow:0 0 40px rgba(201,168,76,.12),0 20px 55px rgba(0,0,0,.4)}
-.beyond-card:not(.active){opacity:.35}
-.beyond-icon{font-size:2.6rem;margin-bottom:.9rem;display:block;filter:drop-shadow(0 0 14px rgba(201,168,76,.55));line-height:1}
-.beyond-name{font-family:'Cinzel',serif;font-size:.9rem;font-weight:600;color:var(--gold);margin-bottom:.5rem;letter-spacing:.04em}
-.beyond-text{font-size:.84rem;color:var(--dim);line-height:1.68}
-.carousel-nav{display:flex;justify-content:center;gap:.9rem;margin-top:1.4rem;position:relative;z-index:20}
+  box-shadow:0 0 40px rgba(201,168,76,.12),0 20px 60px rgba(0,0,0,.4)}
+.beyond-card:not(.active){opacity:.4;filter:brightness(.55) blur(.5px)}
+.beyond-icon{font-size:2.5rem;margin-bottom:.8rem;display:block;filter:drop-shadow(0 0 14px rgba(201,168,76,.55))}
+.beyond-name{font-family:'Cinzel',serif;font-size:.88rem;font-weight:600;color:var(--gold);margin-bottom:.5rem}
+.beyond-text{font-size:.84rem;color:var(--dim);line-height:1.7}
+
+/* carousel controls */
+.carousel-nav{display:flex;justify-content:center;gap:1rem;margin-top:1.5rem;position:relative;z-index:20}
 .carousel-dot{
-  width:9px;height:9px;border-radius:50%;
+  width:10px;height:10px;border-radius:50%;
   background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.25);
-  cursor:pointer;transition:all .3s;padding:0}
-.carousel-dot:hover{background:rgba(201,168,76,.45)}
-.carousel-dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(201,168,76,.6);transform:scale(1.35)}
+  cursor:pointer;transition:all .35s;padding:0}
+.carousel-dot:hover{background:rgba(201,168,76,.4)}
+.carousel-dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(201,168,76,.6);transform:scale(1.4)}
 .carousel-arrows{
   position:absolute;top:50%;left:0;right:0;
   transform:translateY(-50%);
-  display:flex;justify-content:space-between;
+  display:flex;justify-content:space-between;align-items:center;
   padding:0 1rem;pointer-events:none;z-index:15}
 .carousel-arrow{
   pointer-events:auto;background:rgba(3,5,16,.7);
   border:1px solid rgba(201,168,76,.35);
-  color:var(--gold);font-size:1.4rem;width:42px;height:42px;
+  color:var(--gold);font-size:1.5rem;width:44px;height:44px;
   border-radius:50%;cursor:pointer;transition:all .3s;
   display:flex;align-items:center;justify-content:center;
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.carousel-arrow:hover{border-color:var(--gold);background:rgba(201,168,76,.15);box-shadow:0 0 20px rgba(201,168,76,.25);transform:scale(1.1)}
+  backdrop-filter:blur(8px)}
+.carousel-arrow:hover{
+  border-color:var(--gold);background:rgba(201,168,76,.15);
+  box-shadow:0 0 20px rgba(201,168,76,.25);transform:scale(1.1)}
+
+/* mobile carousel */
 @media(max-width:768px){
+  .beyond-carousel{height:440px}
+  .beyond-track{height:380px}
+  .beyond-card{width:260px;min-width:260px;min-height:240px;margin-left:-130px;margin-top:-140px;padding:1.8rem 2rem}
+  .beyond-icon{font-size:2rem}
+  .beyond-name{font-size:.8rem}
+  .beyond-text{font-size:.78rem}
+  .carousel-arrow{width:36px;height:36px;font-size:1.2rem}
+}
+@media(max-width:480px){
   .beyond-carousel{height:400px}
   .beyond-track{height:340px}
-  .beyond-card{width:260px;height:300px;margin-left:-130px;margin-top:-150px;padding:1.6rem 1.8rem}
-  .beyond-icon{font-size:2rem}
-  .beyond-name{font-size:.82rem}
-  .beyond-text{font-size:.8rem}
-  .carousel-arrow{width:36px;height:36px;font-size:1.1rem}}
-@media(max-width:480px){
-  .beyond-carousel{height:370px}
-  .beyond-track{height:310px}
-  .beyond-card{width:240px;height:280px;margin-left:-120px;margin-top:-140px;padding:1.4rem 1.6rem}
-  .carousel-arrows{padding:0 .2rem}
-  .carousel-arrow{width:30px;height:30px;font-size:.95rem}}
+  .beyond-card{width:230px;min-width:230px;height:270px;margin-left:-115px;margin-top:-135px;padding:1.4rem 1.6rem}
+  .carousel-arrows{padding:0 .3rem}
+  .carousel-arrow{width:32px;height:32px;font-size:1rem}
+}
 
 /* ─── CONTACT ─── */
 .contact-wrap{max-width:1300px;margin:0 auto;padding:5rem 5vw}
@@ -566,7 +472,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 /* ─── SCROLL REVEAL ─── */
 /* Default: visible. JS adds js-reveal to opt into animation. */
 .reveal{opacity:1;transform:none}
-.reveal.js-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal.js-reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.22,1,.36,1)}
 .reveal.js-reveal.lft{transform:translateX(-30px)}
 .reveal.js-reveal.on{opacity:1;transform:none}
 
@@ -579,26 +485,19 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
    RESPONSIVE
 ══════════════════════════════════ */
 
-@media(max-width:1300px){
-  .nav-links{gap:1.6rem}
-  .nav-links a{font-size:.78rem;letter-spacing:.12em}
-}
-
-@media(max-width:1100px){
-  nav{padding:1rem 4vw}
-  .nav-links{display:none}
-  .ham{display:flex}
-}
-
 /* 901–1199 — medium laptop */
 @media(max-width:1199px){
   .hero-inner{gap:2rem}
   .photo-frame{width:190px;height:190px}
   .orbit-outer{inset:-25px}
+  .proj-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 }
 
 /* 769–900 — tablet landscape */
 @media(max-width:900px){
+  nav{padding:1rem 4vw}
+  .nav-links{display:none}
+  .ham{display:flex}
   .hero-inner{
     grid-template-columns:1fr 1fr;
     grid-template-rows:auto auto;
@@ -609,6 +508,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   .photo-frame{width:160px;height:160px}
   .orbit-outer{inset:-22px}
   .s-wrap,.contact-wrap{padding:4rem 4vw}
+  .proj-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
   .contact-box{padding:3rem 2.5rem}
 }
 
@@ -630,6 +530,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   .hero-desc{max-width:100%}
   .s-wrap,.contact-wrap{padding:3.5rem 4vw}
   .s-head{margin-bottom:2.5rem}
+  .proj-grid{grid-template-columns:1fr}
   .talent-wrap{padding:1.8rem 1.5rem}
   .stat-grid{grid-template-columns:1fr 1fr}
   .contact-box{padding:2.5rem 1.5rem}
@@ -679,26 +580,9 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   .s-wrap,.contact-wrap{padding:2.5rem 4vw}
   .hero-card{padding:1.2rem}
 }
-
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important}
-  #starfield{display:none}
-  .rune-svg,.rune-inner{animation:none}
-  .orb{animation:none}
-  .char{animation:none;opacity:1;transform:none}
-  #scroll-bar{transition:none}
-  .photo-frame::before{animation:none}
-  .orbit-outer,.orbit-inner{animation:none}
-}
 </style>
 </head>
 <body>
-
-<!-- SCROLL PROGRESS BAR -->
-<div id="scroll-bar"></div>
 
 <!-- CURSOR ELEMENTS -->
 <div id="cur"></div>
@@ -788,15 +672,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     <!-- LEFT — text & CTA -->
     <div class="hero-left">
       <div class="badge"><span class="bdot"></span>M.S. Applied ML · UMD · Graduating May 2026</div>
-      <h1 class="hero-name" id="heroName">
-        <span class="char-wrap">
-          <span class="char" style="--i:0">M</span><span class="char" style="--i:1">u</span><span class="char" style="--i:2">k</span><span class="char" style="--i:3">u</span><span class="char" style="--i:4">l</span>
-        </span>
-        <br>
-        <span class="accent char-wrap">
-          <span class="char" style="--i:5">R</span><span class="char" style="--i:6">a</span><span class="char" style="--i:7">y</span><span class="char" style="--i:8">a</span><span class="char" style="--i:9">n</span><span class="char" style="--i:10">a</span>
-        </span>
-      </h1>
+      <h1 class="hero-name">Mukul<br><span class="accent">Rayana</span></h1>
       <p class="hero-sub">AI/ML Engineer · LLMOps · Game AI · Reinforcement Learning</p>
       <p class="hero-desc">I build AI systems that actually ship — LLMOps pipelines, multi-agent RAG, and RL agents that run in game engines at 60 fps. M.S. Applied ML @ UMD (May 2026). IEEE-published. If it involves transformers, vector databases, or teaching a neural net to beat you at your own game, I'm in.</p>
       <div class="hero-cta">
@@ -814,7 +690,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
         <div class="orbit-outer"></div>
         <div class="orbit-inner"></div>
         <div class="photo-img-wrap">
-          <img src="assets/images/Mypic.jpeg" alt="Mukul Rayana" fetchpriority="high" decoding="async">
+          <img src="assets/images/Mypic.jpeg" alt="Mukul Rayana">
         </div>
       </div>
       <p class="photo-nametag">Mukul Rayana</p>
@@ -853,21 +729,14 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 <!-- ══ PROJECTS ══ -->
 <div class="s-wrap" id="projects">
   <div class="s-head"><h2 class="s-title">Projects</h2></div>
-  <div class="proj-carousel-shell">
-    <div class="proj-controls">
-      <span class="proj-counter"><span class="proj-counter-cur" id="projCur">01</span> / <span id="projTotal">07</span></span>
-      <button class="proj-arrow" id="projPrev" aria-label="Previous project">←</button>
-      <button class="proj-arrow" id="projNext" aria-label="Next project">→</button>
-    </div>
-    <div class="proj-carousel-wrap">
-      <div class="proj-carousel" id="projCarousel">
+  <div class="proj-grid">
 
-    <div class="proj-card proj-card--featured reveal">
-      <div class="featured-stamp">🏆 1st · UMD Smith 2026</div>
+    <div class="proj-card reveal">
+      <div class="proj-media"><div class="proj-media-in"><span class="proj-media-icon">🏆</span>1st Place · UMD Smith 2026</div></div>
       <div class="proj-type">1st Place · $4K Prize · LangGraph · XGBoost · Multi-Agent · FastAPI</div>
       <h3 class="proj-title">PharmaChain — AI Cargo Monitor · UMD Smith Agentic AI Challenge</h3>
       <p class="proj-desc">Won 1st place and a $4K team prize at the 2026 UMD Smith Agentic AI Challenge. Built a LangGraph orchestration of 8 specialized agents for pharmaceutical cold-chain risk triage. Hybrid risk engine fuses 8 deterministic checks with XGBoost (ROC-AUC 0.9446) and SHAP explanations. RAG-based GDP/FDA compliance checks over 417 regulatory chunks. Human-in-the-loop approval gates — only 2–3 of the 8 agents use an LLM. The rest are deterministic by design.</p>
-      <div class="proj-metrics"><span class="metric">ROC-AUC 0.9446</span><span class="metric" data-count="8" data-suffix=" agents">0</span><span class="metric" data-count="417" data-suffix=" reg. chunks">0</span><span class="metric">Built in 1 Day</span><span class="metric">1st Place $4K</span></div>
+      <div class="proj-metrics"><span class="metric">ROC-AUC 0.9446</span><span class="metric">8 agents</span><span class="metric">417 reg. chunks</span><span class="metric">Built in 30 days</span><span class="metric">1st Place $4K</span></div>
       <div class="proj-links">
         <a href="https://lnkd.in/ehMHMRPv" target="_blank" class="proj-link">Live Demo ↗</a>
         <a href="https://github.com/MukulRay1603/PharmaChain" target="_blank" class="proj-link">View on GitHub ↗</a>
@@ -879,7 +748,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">Reinforcement Learning · Game AI · Ray RLlib · Unity Sentis · Groq</div>
       <h3 class="proj-title">Nemesis — Distributed RL Boss AI with Real-Time LLM Narration</h3>
       <p class="proj-desc">PPO boss agent trained with 3-stage curriculum (300K steps, reward −2.4→13.2). Ray RLlib distributed across 8 workers for 2.6× speedup. Exported to ONNX → Unity Sentis for <2 ms/frame inference at 60 fps. Real-time LLM taunts via Groq + NeMo Guardrails (114–352 ms). RL boss outlasts scripted FSM by 85% across 50 episodes.</p>
-      <div class="proj-metrics"><span class="metric" data-count="2.6" data-suffix="× RLlib speedup">0</span><span class="metric">&lt;2 ms/frame</span><span class="metric" data-count="60" data-suffix=" fps">0</span><span class="metric" data-count="85" data-suffix="% outlast FSM">0</span></div>
+      <div class="proj-metrics"><span class="metric">2.6× RLlib speedup</span><span class="metric">&lt;2 ms/frame</span><span class="metric">60 fps</span><span class="metric">85% outlast FSM</span></div>
       <div class="proj-links">
         <a href="https://github.com/MukulRay1603/nemesis-boss-ai" target="_blank" class="proj-link">View on GitHub ↗</a>
       </div>
@@ -890,7 +759,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">NLI · Safety Guardrails · Emotion-Conditioned RAG · DeBERTa · captum</div>
       <h3 class="proj-title">EmpathRAG — NLI Safety Guardrail & Emotion-Conditioned RAG</h3>
       <p class="proj-desc">DeBERTa-v3-base fine-tuned on 232K NLI pairs — 0.9629 crisis recall across 30 adversarial probes in 6 attack categories. captum Integrated Gradients on every safety intercept. 5-stage emotion-conditioned RAG over 1.67M FAISS vectors (RoBERTa + LoRA). Ablation: 0.88 emotion alignment vs. 0.30 BM25 — Wilcoxon p = 3.62×10⁻⁸.</p>
-      <div class="proj-metrics"><span class="metric" data-count="0.9629" data-suffix=" recall">0</span><span class="metric" data-count="1.67" data-suffix="M vectors">0</span><span class="metric">p = 3.62e-8</span><span class="metric" data-count="0.88" data-suffix=" alignment">0</span></div>
+      <div class="proj-metrics"><span class="metric">0.9629 recall</span><span class="metric">1.67M vectors</span><span class="metric">p = 3.62e-8</span><span class="metric">0.88 alignment</span></div>
       <div class="proj-links">
         <a href="https://github.com/MukulRay1603/Empath-RAG" target="_blank" class="proj-link">View on GitHub ↗</a>
       </div>
@@ -901,7 +770,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">Multi-Agent · LangGraph · Agentic AI · Staleness Detection</div>
       <h3 class="proj-title">RECON — Agentic ML Research Navigator</h3>
       <p class="proj-desc">4-agent LangGraph state machine with retry loop. Critic applies PASS/STALE/CONTRADICTED/INSUFFICIENT verdicts — catches 52% of superseded ML claims vs. 0% single-pass RAG (130-question eval). Linear decay optimal across 3 ablated formulas. Position accuracy 43.9% vs. 32.3% baseline.</p>
-      <div class="proj-metrics"><span class="metric" data-count="52" data-suffix="% staleness catch">0</span><span class="metric" data-count="130" data-suffix="-question eval">0</span><span class="metric" data-count="43.9" data-suffix="% position acc.">0</span></div>
+      <div class="proj-metrics"><span class="metric">52% staleness catch</span><span class="metric">130-question eval</span><span class="metric">43.9% position acc.</span></div>
       <div class="proj-links">
         <a href="https://huggingface.co/spaces/MukulRay/recon" target="_blank" class="proj-link">Live Demo ↗</a>
         <a href="https://github.com/MukulRay1603/project-recon" target="_blank" class="proj-link">View Source ↗</a>
@@ -913,7 +782,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">LLMOps · QLoRA Fine-Tuning · RAG · CI/CD · HuggingFace Spaces</div>
       <h3 class="proj-title">Irminsul — Production LLMOps System</h3>
       <p class="proj-desc">Llama 3.1 8B fine-tuned with QLoRA (rank 16). Best checkpoint from 3 MLflow experiments: sim 0.826, ROUGE-L 0.466. FastAPI + LangChain + Pinecone RAG with guardrails and confidence-gated web fallback. Auto corpus pipeline ingests 840 docs → 6,876 vectors weekly via GitHub Actions.</p>
-      <div class="proj-metrics"><span class="metric">Sim 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric" data-count="6876" data-suffix=" vectors">0</span><span class="metric" data-count="840" data-suffix=" docs">0</span></div>
+      <div class="proj-metrics"><span class="metric">Sim 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric">6,876 vectors</span><span class="metric">840 docs</span></div>
       <div class="proj-links">
         <a href="https://huggingface.co/spaces/MukulRay/Irminsul" target="_blank" class="proj-link">Live Demo ↗</a>
         <a href="https://github.com/MukulRay1603/Irminsul" target="_blank" class="proj-link">View Source ↗</a>
@@ -925,7 +794,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">Document Intelligence · RoBERTa · ONNX · BM25 · BGE · Security</div>
       <h3 class="proj-title">DocPilot — Secure Document Intelligence Platform</h3>
       <p class="proj-desc">Production-hardened QA architecture with prompt-injection defense, PII redaction, RBAC, and append-only audit logging. RoBERTa-squad2 optimized with ONNX INT8 to 90ms P95 latency and 66.0% end-to-end F1. BM25 + BGE dense retrieval with cross-encoder reranking for source-grounded answers.</p>
-      <div class="proj-metrics"><span class="metric" data-count="90" data-suffix="ms P95">0</span><span class="metric" data-count="66.0" data-suffix="% F1">0</span><span class="metric">ONNX INT8</span><span class="metric">Prompt Injection Defense</span></div>
+      <div class="proj-metrics"><span class="metric">90ms P95</span><span class="metric">66.0% F1</span><span class="metric">ONNX INT8</span><span class="metric">Prompt Injection Defense</span></div>
       <div class="proj-links">
         <a href="https://github.com/MukulRay1603/DocPilot" target="_blank" class="proj-link">View on GitHub ↗</a>
       </div>
@@ -936,16 +805,13 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">IEEE Publication · GenAI · VR · Stable Diffusion</div>
       <h3 class="proj-title">Voice-Driven Panoramic VR Generation — IEEE IDCIoT 2024</h3>
       <p class="proj-desc">Speech → 360° image pipeline: Whisper (speech recognition) → GPT-Neo (text generation) → Stable Diffusion (image synthesis). Attention slicing and xFormers optimizations delivered 2.3× throughput within a 10 GB VRAM budget. Peer-reviewed and published at IEEE IDCIoT 2024.</p>
-      <div class="proj-metrics"><span class="metric" data-count="2.3" data-suffix="× throughput">0</span><span class="metric" data-count="10" data-suffix=" GB VRAM">0</span><span class="metric">IEEE Published</span></div>
+      <div class="proj-metrics"><span class="metric">2.3× throughput</span><span class="metric">10 GB VRAM</span><span class="metric">IEEE Published</span></div>
       <div class="proj-links">
         <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="proj-link">Read Paper ↗</a>
       </div>
     </div>
 
-      </div><!-- /.proj-carousel -->
-    </div><!-- /.proj-carousel-wrap -->
-    <div class="proj-dots" id="projDots"></div>
-  </div><!-- /.proj-carousel-shell -->
+  </div>
 </div>
 
 <!-- ══ EXPERIENCE ══ -->
@@ -1081,49 +947,21 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 <div class="s-wrap" id="beyond" style="padding-top:2rem">
   <div class="s-head"><h2 class="s-title">Beyond Code</h2></div>
   <div class="beyond-carousel" id="beyondCarousel">
-    <div class="carousel-arrows">
-      <button class="carousel-arrow" id="carPrev" aria-label="Previous">←</button>
-      <button class="carousel-arrow" id="carNext" aria-label="Next">→</button>
-    </div>
-    <div class="beyond-track" id="beyondTrack">
-      <div class="beyond-card">
-        <span class="beyond-icon">⚔️</span>
-        <div class="beyond-name">Genshin Impact</div>
-        <div class="beyond-text">AR 60 since 2021. Full 36-star Spiral Abyss clears — often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis is basically a love letter to Azhdaha.</div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-icon">🎌</span>
-        <div class="beyond-name">Anime</div>
-        <div class="beyond-text">Shonen battle arcs, psychological thrillers, and anything with a hard magic system. Currently on a hunter exam binge. Always looking for the next arc that hits like Chimera Ant or Shibuya — send recs.</div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-icon">🏃</span>
-        <div class="beyond-name">Track & Field</div>
-        <div class="beyond-text">Sprinter — hurdles and 4×100 relay. I ran track competitively and the start-gun adrenaline honestly never goes away.</div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-icon">🎸</span>
-        <div class="beyond-name">Guitar</div>
-        <div class="beyond-text">I play acoustic covers when I need a break. Nothing fancy — just vibing with whatever sounds right.</div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-icon">🧗</span>
-        <div class="beyond-name">Rock Climbing</div>
-        <div class="beyond-text">I work at UMD's climbing facility and climb regularly. Managing patron safety and sending problems on a 55 ft wall in the same shift is genuinely great.</div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-icon">🏹</span>
-        <div class="beyond-name">Archery</div>
-        <div class="beyond-text">Range sessions at UMD Archery Club. Recurve bow, target shooting. Nothing clears the head like a clean release.</div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-icon">⛸️</span>
-        <div class="beyond-name">Figure Skating</div>
-        <div class="beyond-text">UMD Figure Skating Club. Still learning edges and crossovers but the ice is genuinely addictive.</div>
-      </div>
-    </div>
-    <div class="carousel-nav" id="carouselNav"></div>
+  <div class="carousel-arrows">
+    <button class="carousel-arrow" id="carPrev" aria-label="Previous">←</button>
+    <button class="carousel-arrow" id="carNext" aria-label="Next">→</button>
   </div>
+  <div class="beyond-track" id="beyondTrack">
+    <div class="beyond-card"><span class="beyond-icon">⚔️</span><div class="beyond-name">Genshin Impact</div><div class="beyond-text">AR 60 since 2021. Full 36-star Spiral Abyss clears — often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis? Yeah, that's basically a love letter to Azhdaha.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🎌</span><div class="beyond-name">Anime</div><div class="beyond-text">Shonen battle arcs, psychological thrillers, and anything with a hard magic system. Currently on a hunter exam binge. Always looking for the next arc that hits like Chimera Ant or Shibuya — send recs.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🏃</span><div class="beyond-name">Track & Field</div><div class="beyond-text">Sprinter — hurdles and 4×100 relay. I ran track competitively and the start-gun adrenaline honestly never goes away.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🎸</span><div class="beyond-name">Guitar</div><div class="beyond-text">I play acoustic covers when I need a break. Nothing fancy — just vibing with whatever sounds right.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🧗</span><div class="beyond-name">Rock Climbing</div><div class="beyond-text">I work at UMD's climbing facility and climb regularly. Managing patron safety and sending problems on a 55 ft wall in the same shift is pretty great honestly.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">🏹</span><div class="beyond-name">Archery</div><div class="beyond-text">Range sessions at UMD Archery Club. Recurve bow, target shooting. Nothing clears the head like a clean release.</div></div>
+    <div class="beyond-card"><span class="beyond-icon">⛸️</span><div class="beyond-name">Figure Skating</div><div class="beyond-text">UMD Figure Skating Club. Still learning edges and crossovers but the ice is genuinely addictive.</div></div>
+  </div>
+  <div class="carousel-nav" id="carouselNav"></div>
+</div>
 </div>
 
 <!-- ══ CONTACT ══ -->
@@ -1170,64 +1008,38 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   var mx = window.innerWidth/2, my = window.innerHeight/2;
   var rx = mx, ry = my;
 
-  /* translate(calc(Xpx - 50%), calc(Ypx - 50%)) centers the element at (X,Y)
-     regardless of its current width/height — no layout reads, pure compositor */
-  function pos(x, y) {
-    return 'translate(calc(' + x + 'px - 50%),calc(' + y + 'px - 50%))';
-  }
-
-  var visible = false;
   document.addEventListener('mousemove', function(e) {
     mx = e.clientX; my = e.clientY;
-    cur.style.transform = pos(mx, my);
-    if (!visible) {
-      cur.style.opacity = '1';
-      curR.style.opacity = '0.85';
-      visible = true;
-    }
+    cur.style.left = mx + 'px';
+    cur.style.top  = my + 'px';
+    cur.style.opacity = '1';
+    curR.style.opacity = '0.85';
   }, { passive: true });
 
   (function tickRing() {
-    var newRx = rx + (mx - rx) * 0.1;
-    var newRy = ry + (my - ry) * 0.1;
-    if (Math.abs(newRx - rx) > 0.05 || Math.abs(newRy - ry) > 0.05) {
-      rx = newRx; ry = newRy;
-      curR.style.transform = pos(rx, ry);
-    }
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    curR.style.left = rx + 'px';
+    curR.style.top  = ry + 'px';
     requestAnimationFrame(tickRing);
   })();
 
   document.querySelectorAll('a, button').forEach(function(el) {
     el.addEventListener('mouseenter', function() {
+      cur.style.transform  = 'translate(-50%,-50%) scale(2.4)';
       cur.style.background = '#4fd1c5';
       curR.style.width  = '58px';
       curR.style.height = '58px';
       curR.style.borderColor = 'rgba(79,209,197,.5)';
     });
     el.addEventListener('mouseleave', function() {
+      cur.style.transform  = 'translate(-50%,-50%) scale(1)';
       cur.style.background = '#c9a84c';
       curR.style.width  = '36px';
       curR.style.height = '36px';
       curR.style.borderColor = 'rgba(201,168,76,.55)';
     });
   });
-})();
-
-/* ══ SCROLL PROGRESS BAR ══ */
-(function() {
-  var bar = document.getElementById('scroll-bar');
-  if (!bar) return;
-  var bTick = false;
-  window.addEventListener('scroll', function() {
-    if (bTick) return;
-    bTick = true;
-    requestAnimationFrame(function() {
-      var total = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = total > 0 ? (window.scrollY / total) * 100 : 0;
-      bar.style.width = pct + '%';
-      bTick = false;
-    });
-  }, { passive: true });
 })();
 
 /* ══ STARFIELD ══ */
@@ -1243,16 +1055,16 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 
   function mkStars() {
     stars = [];
-    var _pc = window.innerWidth < 768 ? 50 : (window.innerWidth < 1400 ? 100 : 130);
+    var _pc = window.innerWidth < 768 ? 100 : 240;
     for (var i = 0; i < _pc; i++) {
       stars.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4+.2,
-        a:Math.random(), drift:(Math.random()-.5)*.11, linked:Math.random()<.14, tw:Math.random()*Math.PI*2 });
+        a:Math.random(), drift:(Math.random()-.5)*.11, linked:Math.random()<.18, tw:Math.random()*Math.PI*2 });
     }
   }
   mkStars();
 
   var mouseX = W/2, mouseY = H/2;
-  document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
+  document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; }, { passive: true });
 
   var lastT = 0;
   function draw(t) {
@@ -1320,7 +1132,6 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   var layers = document.querySelectorAll('.p-layer[data-depth]');
   var isTouch = window.matchMedia('(hover:none)').matches;
   var mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
-  var navEl = document.getElementById('navbar');
   if (!isTouch) {
     var pTick = false;
     document.addEventListener('mousemove', function(e) {
@@ -1336,9 +1147,10 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
           pTick = false;
         });
       }
-    });
+    }, { passive: true });
   }
   var sTick = false;
+  var navEl = document.getElementById('navbar');
   window.addEventListener('scroll', function() {
     if (sTick) return;
     sTick = true;
@@ -1377,100 +1189,6 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
 })();
 
-
-/* ══ PROJECT CAROUSEL ══ */
-(function() {
-  var carousel = document.getElementById('projCarousel');
-  var prevBtn = document.getElementById('projPrev');
-  var nextBtn = document.getElementById('projNext');
-  var curEl = document.getElementById('projCur');
-  var totalEl = document.getElementById('projTotal');
-  var dotsBox = document.getElementById('projDots');
-  if (!carousel) return;
-
-  var cards = carousel.querySelectorAll('.proj-card');
-  var total = cards.length;
-  totalEl.textContent = String(total).padStart(2, '0');
-
-  for (var i = 0; i < total; i++) {
-    (function(idx) {
-      var dot = document.createElement('button');
-      dot.className = 'proj-dot' + (idx === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', 'Go to project ' + (idx + 1));
-      dot.addEventListener('click', function() {
-        cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-      });
-      dotsBox.appendChild(dot);
-    })(i);
-  }
-
-  function scrollByCard(dir) {
-    var first = cards[0];
-    var gap = parseInt(getComputedStyle(carousel).gap) || 24;
-    carousel.scrollBy({ left: dir * (first.offsetWidth + gap), behavior: 'smooth' });
-  }
-  prevBtn.addEventListener('click', function() { scrollByCard(-1); });
-  nextBtn.addEventListener('click', function() { scrollByCard(1); });
-
-  var sticking = false;
-  carousel.addEventListener('scroll', function() {
-    if (sticking) return;
-    sticking = true;
-    requestAnimationFrame(function() {
-      var center = carousel.scrollLeft + carousel.clientWidth / 2;
-      var closestIdx = 0;
-      var minDist = Infinity;
-      for (var i = 0; i < cards.length; i++) {
-        var c = cards[i];
-        var cardCenter = c.offsetLeft + c.offsetWidth / 2;
-        var dist = Math.abs(cardCenter - center);
-        if (dist < minDist) { minDist = dist; closestIdx = i; }
-      }
-      curEl.textContent = String(closestIdx + 1).padStart(2, '0');
-      var dots = dotsBox.querySelectorAll('.proj-dot');
-      for (var j = 0; j < dots.length; j++) {
-        dots[j].classList.toggle('active', j === closestIdx);
-      }
-      prevBtn.disabled = carousel.scrollLeft < 5;
-      nextBtn.disabled = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 5;
-      sticking = false;
-    });
-  }, { passive: true });
-
-  prevBtn.disabled = true;
-
-  if (!window.matchMedia('(hover:none)').matches) {
-    var isDown = false, startX = 0, startScroll = 0, moved = false;
-    carousel.addEventListener('mousedown', function(e) {
-      if (e.target.closest('a, button')) return;
-      isDown = true;
-      moved = false;
-      carousel.classList.add('dragging');
-      startX = e.pageX;
-      startScroll = carousel.scrollLeft;
-    });
-    document.addEventListener('mouseup', function() {
-      isDown = false;
-      carousel.classList.remove('dragging');
-    });
-    document.addEventListener('mousemove', function(e) {
-      if (!isDown) return;
-      var dx = e.pageX - startX;
-      if (Math.abs(dx) > 4) moved = true;
-      carousel.scrollLeft = startScroll - dx;
-    });
-    carousel.addEventListener('click', function(e) {
-      if (moved) { e.preventDefault(); e.stopPropagation(); }
-    }, true);
-  }
-
-  carousel.setAttribute('tabindex', '0');
-  carousel.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight') { e.preventDefault(); scrollByCard(1); }
-    if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollByCard(-1); }
-  });
-})();
-
 /* ══ BEYOND CAROUSEL ══ */
 (function() {
   var track = document.getElementById('beyondTrack');
@@ -1482,8 +1200,8 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   var total = cards.length;
   var current = 0;
   var autoTimer;
-  var touchStartX = 0;
 
+  // create dots
   for (var i = 0; i < total; i++) {
     var dot = document.createElement('button');
     dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -1493,18 +1211,17 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   }
 
   function arrange() {
-    var isMob = window.innerWidth < 768;
-    var spacing = isMob ? 270 : 340;
     var dots = nav.querySelectorAll('.carousel-dot');
     cards.forEach(function(card, i) {
       var offset = i - current;
+      // wrap around
       if (offset > Math.floor(total / 2)) offset -= total;
       if (offset < -Math.floor(total / 2)) offset += total;
-      var x = offset * spacing;
-      var z = -Math.abs(offset) * 110;
-      var rotY = offset * -10;
-      var scale = offset === 0 ? 1 : Math.max(0.78, 1 - Math.abs(offset) * 0.09);
-      card.style.transform = 'translateX('+x+'px) translateZ('+z+'px) rotateY('+rotY+'deg) scale('+scale+')';
+      var x = offset * (window.innerWidth < 768 ? 260 : 340);
+      var z = -Math.abs(offset) * 120;
+      var rotY = offset * -12;
+      var scale = offset === 0 ? 1 : Math.max(0.75, 1 - Math.abs(offset) * 0.1);
+      card.style.transform = 'translateX(' + x + 'px) translateZ(' + z + 'px) rotateY(' + rotY + 'deg) scale(' + scale + ')';
       card.style.zIndex = total - Math.abs(offset);
       card.classList.toggle('active', offset === 0);
     });
@@ -1528,18 +1245,10 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     autoTimer = setInterval(next, 7000);
   }
 
+  // pause on hover
   track.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
   track.addEventListener('mouseleave', resetAuto);
 
-  track.addEventListener('touchstart', function(e) {
-    touchStartX = e.touches[0].clientX;
-  }, { passive: true });
-  track.addEventListener('touchend', function(e) {
-    var dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
-  }, { passive: true });
-
-  window.addEventListener('resize', arrange);
   arrange();
   resetAuto();
 })();
@@ -1602,36 +1311,6 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   document.querySelectorAll('.mob-nav-link').forEach(function(a) {
     a.addEventListener('click', function() { setMenu(false); });
   });
-})();
-
-/* ══ METRIC COUNTERS ══ */
-(function() {
-  var counters = document.querySelectorAll('.metric[data-count]');
-  if (!counters.length) return;
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (!e.isIntersecting) return;
-      var el = e.target;
-      var target = parseFloat(el.dataset.count);
-      var suffix = el.dataset.suffix || '';
-      var isDecimal = el.dataset.count.indexOf('.') !== -1;
-      var decimals = isDecimal ? (el.dataset.count.split('.')[1] || '').length : 0;
-      var start = null;
-      var duration = 1400;
-      function step(ts) {
-        if (!start) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3);
-        var val = target * ease;
-        el.textContent = (decimals > 0 ? val.toFixed(decimals) : Math.floor(val)) + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-        else el.textContent = (decimals > 0 ? target.toFixed(decimals) : target) + suffix;
-      }
-      requestAnimationFrame(step);
-      obs.unobserve(el);
-    });
-  }, { threshold: 0.3 });
-  counters.forEach(function(el) { obs.observe(el); });
 })();
 </script>
 </body>
