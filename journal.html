@@ -4,71 +4,233 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Journal · Mukul Rayana</title>
+<meta name="description" content="Field notes from building at the edge of AI — Mukul Rayana.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --gold:#c9a84c;--gold-l:#f5e09a;--gold-d:#7a5e20;
-  --teal:#4fd1c5;--bg:#030510;--text:#ccd6f6;--dim:#7a8aba;
+  --teal:#4fd1c5;--teal-d:#2a8a84;
+  --violet:#9b7fe8;--crimson:#e63946;
+  --bg:#030510;--panel:rgba(8,12,28,.88);
+  --text:#ccd6f6;--dim:#7a8aba;
+  --bdr:rgba(201,168,76,.18);--bdr-b:rgba(201,168,76,.55);
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;min-height:100vh}
 
-.tape-wrap{position:relative;width:100%;max-width:700px;text-align:center;padding:4rem 2rem}
+/* ─── STARFIELD ─── */
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* construction tape */
+/* ─── NOISE GRAIN ─── */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5vw;background:linear-gradient(180deg,rgba(3,5,16,.95) 0%,transparent 100%);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.09)}
+.nav-logo{font-family:'Cinzel Decorative',serif;font-size:1rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.1em}
+.nav-logo span{color:var(--teal)}
+.nav-back{font-family:'Rajdhani',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .3s}
+.nav-back:hover{color:var(--gold-l)}
+
+/* ─── MAIN WRAP ─── */
+.journal-wrap{max-width:780px;margin:0 auto;padding:8rem 5vw 5rem;position:relative;z-index:10}
+
+/* ─── PAGE HEADER ─── */
+.journal-header{margin-bottom:3.5rem;text-align:center}
+.journal-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--gold-l);text-shadow:0 0 40px rgba(201,168,76,.25);margin-bottom:.6rem}
+.journal-sub{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--teal);letter-spacing:.2em;text-transform:uppercase}
+
+/* ─── POST CARD ─── */
+.post-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(10,16,36,.93),rgba(6,10,22,.97));
+  border:1px solid var(--bdr);padding:2.8rem 3rem;
+  clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+  margin-bottom:3rem}
+.post-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--teal),var(--violet),transparent);
+  background-size:200%;animation:shimmer 4s linear infinite}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.post-card::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(201,168,76,.06),transparent 65%)}
+
+/* post meta */
+.post-meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem;position:relative;z-index:2}
+.post-date{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--teal);letter-spacing:.15em;text-transform:uppercase}
+.post-tag{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--gold);letter-spacing:.1em;padding:.18rem .6rem;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.05)}
+.post-sep{color:var(--dim);opacity:.4;font-size:.7rem}
+
+/* post title */
+.post-title{font-family:'Cinzel',serif;font-size:clamp(1.3rem,3vw,1.85rem);font-weight:700;color:var(--gold-l);line-height:1.25;margin-bottom:1.8rem;position:relative;z-index:2}
+
+/* post body */
+.post-body{position:relative;z-index:2}
+.post-body p{font-family:'Rajdhani',sans-serif;font-size:1rem;line-height:1.85;color:var(--text);margin-bottom:1.3rem}
+.post-body p:last-child{margin-bottom:0}
+
+/* metrics bar */
+.post-metrics{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.8rem;margin-bottom:1.8rem;position:relative;z-index:2}
+.post-metric{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);padding:.26rem .6rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15)}
+
+/* post links */
+.post-links{display:flex;flex-wrap:wrap;gap:.9rem;position:relative;z-index:2}
+.post-link{
+  font-family:'Rajdhani',sans-serif;font-size:.82rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--teal);text-decoration:none;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:gap .2s,color .2s}
+.post-link:hover{gap:1rem;color:var(--gold-l)}
+
+/* ─── CONSTRUCTION ZONE ─── */
+.construction-zone{position:relative;margin-top:2rem;margin-bottom:3rem}
 .tape{
-  position:absolute;left:-5%;width:110%;height:38px;
+  position:relative;width:100%;height:38px;overflow:hidden;
   background:repeating-linear-gradient(-45deg,#f5c518,#f5c518 20px,#1a1a1a 20px,#1a1a1a 40px);
   background-size:56px 56px;
-  opacity:.85;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.5);
+  opacity:.85;box-shadow:0 4px 20px rgba(0,0,0,.5);
   animation:scrolltape 8s linear infinite}
 @keyframes scrolltape{to{background-position:56px 0}}
-.tape-top{top:-10px;transform:rotate(-2deg)}
-.tape-bottom{bottom:-10px;transform:rotate(1.5deg)}
+.tape-top{transform:rotate(-1deg);margin-bottom:0}
+.tape-bottom{transform:rotate(.8deg);margin-top:0}
 
+.wip-inner{
+  background:linear-gradient(135deg,rgba(10,16,36,.92),rgba(6,10,22,.96));
+  border:1px solid rgba(201,168,76,.15);
+  border-top:none;border-bottom:none;
+  padding:2.8rem 3rem;text-align:center}
 .wip-title{
-  font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,3.5rem);
-  font-weight:900;color:var(--gold-l);margin-bottom:1rem;
-  text-shadow:0 0 40px rgba(201,168,76,.3)}
+  font-family:'Cinzel',serif;font-size:clamp(1rem,2.5vw,1.4rem);
+  font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:.7rem}
 .wip-sub{
-  font-family:'Rajdhani',sans-serif;font-size:1.1rem;
-  color:var(--dim);line-height:1.8;max-width:500px;margin:0 auto 2.5rem}
-.wip-back{
-  font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
-  padding:.85rem 2rem;color:var(--gold);border:1px solid rgba(201,168,76,.55);
-  transition:all .3s;display:inline-block}
-.wip-back:hover{background:rgba(201,168,76,.1);transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,168,76,.2)}
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  color:var(--dim);letter-spacing:.1em;line-height:1.8}
 
-/* starfield background (simplified) */
-.stars{position:fixed;inset:0;z-index:0}
-.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite alternate}
-@keyframes twinkle{from{opacity:.2}to{opacity:.8}}
+/* ─── BACK LINK ─── */
+.back-wrap{text-align:center;padding-bottom:3rem;position:relative;z-index:10}
+.back-link{
+  font-family:'Rajdhani',sans-serif;font-size:.84rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+  padding:.88rem 2.1rem;display:inline-block;position:relative;
+  color:var(--gold);border:1px solid var(--bdr-b);
+  transition:all .3s;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.back-link:hover{background:rgba(201,168,76,.08);transform:translateY(-3px);box-shadow:0 10px 36px rgba(201,168,76,.2)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  .post-card{padding:2rem 1.6rem}
+  .wip-inner{padding:2rem 1.6rem}
+  .journal-wrap{padding:7rem 4vw 4rem}
+}
+@media(max-width:480px){
+  .post-card{padding:1.6rem 1.2rem;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+  .post-title{font-size:1.2rem}
+}
 </style>
 </head>
 <body>
 
-<!-- simple starfield -->
-<div class="stars" id="stars"></div>
+<canvas id="starfield"></canvas>
 
-<div class="tape-wrap" style="position:relative;z-index:5">
-  <div class="tape tape-top"></div>
-  <div class="tape tape-bottom"></div>
-  <h1 class="wip-title">Under Construction</h1>
-  <p class="wip-sub">The journal is still under construction. Eventually: deep dives on RL training runs, Genshin theorycrafting, archery form breakdowns, and whatever rabbit holes I fall into. For now, just this tape.</p>
-  <a href="index.html" class="wip-back">← Back to Portfolio</a>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">M<span>.</span>R</a>
+  <a href="index.html" class="nav-back">← Portfolio</a>
+</nav>
+
+<!-- JOURNAL CONTENT -->
+<div class="journal-wrap">
+
+  <!-- Page header -->
+  <div class="journal-header">
+    <h1 class="journal-title">Journal</h1>
+    <p class="journal-sub">Field notes from building at the edge of AI.</p>
+  </div>
+
+  <!-- Published post -->
+  <article class="post-card">
+    <div class="post-meta">
+      <span class="post-date">April 2026</span>
+      <span class="post-sep">·</span>
+      <span class="post-tag">Competition</span>
+      <span class="post-tag">Agentic AI</span>
+      <span class="post-tag">LLMOps</span>
+    </div>
+    <h2 class="post-title">We Won. Here's What I Actually Learned.</h2>
+    <div class="post-body">
+      <p>Team Synapse just won 1st place at the 2026 UMD Smith Agentic AI Challenge. $4,000. Real industry problem. Built and shipped in a day.</p>
+      <p>The problem came from OnAsset Intelligence — pharmaceutical shipments moving across the world, live sensor data streaming in real time, and operations teams consistently finding out about failures too late. Temperature deviations, shock events, routing delays — by the time the alert reaches the right person, the damage is already downstream.</p>
+      <p>We built an AI Cargo Monitor: 8 agents that coordinate the moment a shipment is at risk — flagging compliance issues, finding backup facilities, rerouting carriers, rescheduling patient appointments, and drafting insurance claims. A human stays in the loop and signs off before anything is acted on.</p>
+      <p>The decision I'm most proud of: only 2–3 of those 8 agents use an LLM. The rest are deterministic. Pharma logistics doesn't need creativity — it needs auditable, traceable decisions that hold up to scrutiny. Knowing when not to use an LLM turned out to be the real engineering challenge.</p>
+      <p>Grateful to have figured that out alongside Karthik Ramanathan, Nikhil Sumesh, Rahul Sharma and Yash Oulkar — and to Professor Manmohan Aseri and the Robert H. Smith School of Business for building a challenge around problems that actually matter to someone.</p>
+    </div>
+    <div class="post-metrics">
+      <span class="post-metric">🏆 1st Place</span>
+      <span class="post-metric">$4,000 Prize</span>
+      <span class="post-metric">8-Agent System</span>
+      <span class="post-metric">Built in 1 Day</span>
+    </div>
+    <div class="post-links">
+      <a href="https://lnkd.in/ehMHMRPv" target="_blank" class="post-link">View Demo →</a>
+    </div>
+  </article>
+
+  <!-- Construction zone for future posts -->
+  <div class="construction-zone">
+    <div class="tape tape-top"></div>
+    <div class="wip-inner">
+      <div class="wip-title">More Field Notes Loading...</div>
+      <div class="wip-sub">RL training runs · Genshin theorycrafting · archery form breakdowns<br>and whatever rabbit holes come next.</div>
+    </div>
+    <div class="tape tape-bottom"></div>
+  </div>
+
+  <!-- Back link -->
+  <div class="back-wrap">
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+  </div>
+
 </div>
 
 <script>
-// simple star dots
-var s=document.getElementById('stars');
-for(var i=0;i<80;i++){
-  var d=document.createElement('div');d.className='star';
-  d.style.cssText='width:'+(.5+Math.random()*2)+'px;height:'+(.5+Math.random()*2)+'px;left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--d:'+(2+Math.random()*4)+'s;animation-delay:-'+Math.random()*4+'s';
-  s.appendChild(d);
-}
+/* starfield */
+(function() {
+  var canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, stars = [];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', function() { resize(); mkStars(); });
+
+  function mkStars() {
+    stars = [];
+    for (var i = 0; i < 80; i++) {
+      stars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.4+.2,
+        a: Math.random(), tw: Math.random()*Math.PI*2 });
+    }
+  }
+  mkStars();
+
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(function(s) {
+      var tw = Math.sin(t*.0008 + s.tw)*.35 + .65;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,' + (s.a * tw) + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
 </script>
 </body>
 </html>
