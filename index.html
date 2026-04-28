@@ -19,7 +19,7 @@
 <style>
 /* ─── RESET & VARS ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{overflow-x:hidden;-webkit-text-size-adjust:100%;width:100%;max-width:100vw;scroll-behavior:smooth}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%;width:100%;max-width:100vw}
 :root{
   --gold:#c9a84c;--gold-l:#f5e09a;--gold-d:#7a5e20;
   --teal:#4fd1c5;--teal-d:#2a8a84;
@@ -1052,7 +1052,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       var target = document.querySelector(this.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        lenis.scrollTo(target, { offset: -80, duration: 1.6 });
+        lenis.scrollTo(target, { offset: -100, duration: 1.6 });
       }
     });
   });
