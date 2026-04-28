@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <style>
 /* ─── RESET & VARS ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -27,6 +28,13 @@ html{overflow-x:hidden;-webkit-text-size-adjust:100%;width:100%;max-width:100vw;
   --bg:#030510;--panel:rgba(8,12,28,.88);
   --text:#ccd6f6;--dim:#7a8aba;
   --bdr:rgba(201,168,76,.18);--bdr-b:rgba(201,168,76,.55);
+}
+#scroll-bar{
+  position:fixed;top:0;left:0;height:2px;width:0%;z-index:9999;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--teal));
+  pointer-events:none;
+  transition:width .1s linear;
+  box-shadow:0 0 8px rgba(201,168,76,.5);
 }
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;max-width:100vw;cursor:none}
 
@@ -116,11 +124,26 @@ body.menu-open{overflow:hidden;position:fixed;width:100%;height:100%}
 .hero-name{
   font-family:'Cinzel Decorative',serif;
   font-size:clamp(2.5rem,5vw,5rem);font-weight:900;line-height:.95;
-  color:#fff;margin-bottom:.6rem;animation:fadeup .9s .1s ease both}
+  color:#fff;margin-bottom:.6rem}
 .hero-name .accent{
   display:block;
   background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 45%,var(--gold-d) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.char-wrap{display:inline}
+.char{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(32px) rotate(4deg);
+  animation:charIn .65s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:calc(.35s + var(--i) * .055s);
+}
+.hero-name .accent .char{
+  background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 45%,var(--gold-d) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+@keyframes charIn{
+  to{opacity:1;transform:translateY(0) rotate(0deg);}
+}
 .hero-sub{
   font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;
   letter-spacing:.35em;text-transform:uppercase;color:var(--dim);
@@ -585,6 +608,9 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 </head>
 <body>
 
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-bar"></div>
+
 <!-- CURSOR ELEMENTS -->
 <div id="cur"></div>
 <div id="cur-r"></div>
@@ -673,7 +699,15 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
     <!-- LEFT — text & CTA -->
     <div class="hero-left">
       <div class="badge"><span class="bdot"></span>M.S. Applied ML · UMD · Graduating May 2026</div>
-      <h1 class="hero-name">Mukul<br><span class="accent">Rayana</span></h1>
+      <h1 class="hero-name" id="heroName">
+        <span class="char-wrap">
+          <span class="char" style="--i:0">M</span><span class="char" style="--i:1">u</span><span class="char" style="--i:2">k</span><span class="char" style="--i:3">u</span><span class="char" style="--i:4">l</span>
+        </span>
+        <br>
+        <span class="accent char-wrap">
+          <span class="char" style="--i:5">R</span><span class="char" style="--i:6">a</span><span class="char" style="--i:7">y</span><span class="char" style="--i:8">a</span><span class="char" style="--i:9">n</span><span class="char" style="--i:10">a</span>
+        </span>
+      </h1>
       <p class="hero-sub">AI/ML Engineer · LLMOps · Game AI · Reinforcement Learning</p>
       <p class="hero-desc">I build AI systems that actually ship — LLMOps pipelines, multi-agent RAG, and RL agents that run in game engines at 60 fps. M.S. Applied ML @ UMD (May 2026). IEEE-published. If it involves transformers, vector databases, or teaching a neural net to beat you at your own game, I'm in.</p>
       <div class="hero-cta">
@@ -737,7 +771,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">1st Place · $4K Prize · LangGraph · XGBoost · Multi-Agent · FastAPI</div>
       <h3 class="proj-title">PharmaChain — AI Cargo Monitor · UMD Smith Agentic AI Challenge</h3>
       <p class="proj-desc">Won 1st place and a $4K team prize at the 2026 UMD Smith Agentic AI Challenge. Built a LangGraph orchestration of 8 specialized agents for pharmaceutical cold-chain risk triage. Hybrid risk engine fuses 8 deterministic checks with XGBoost (ROC-AUC 0.9446) and SHAP explanations. RAG-based GDP/FDA compliance checks over 417 regulatory chunks. Human-in-the-loop approval gates — only 2–3 of the 8 agents use an LLM. The rest are deterministic by design.</p>
-      <div class="proj-metrics"><span class="metric">ROC-AUC 0.9446</span><span class="metric">8 agents</span><span class="metric">417 reg. chunks</span><span class="metric">Built in 30 days</span><span class="metric">1st Place $4K</span></div>
+      <div class="proj-metrics"><span class="metric">ROC-AUC 0.9446</span><span class="metric" data-count="8" data-suffix=" agents">0</span><span class="metric" data-count="417" data-suffix=" reg. chunks">0</span><span class="metric">Built in 30 days</span><span class="metric">1st Place $4K</span></div>
       <div class="proj-links">
         <a href="https://lnkd.in/ehMHMRPv" target="_blank" class="proj-link">Live Demo ↗</a>
         <a href="https://github.com/MukulRay1603/PharmaChain" target="_blank" class="proj-link">View on GitHub ↗</a>
@@ -749,7 +783,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">Reinforcement Learning · Game AI · Ray RLlib · Unity Sentis · Groq</div>
       <h3 class="proj-title">Nemesis — Distributed RL Boss AI with Real-Time LLM Narration</h3>
       <p class="proj-desc">PPO boss agent trained with 3-stage curriculum (300K steps, reward −2.4→13.2). Ray RLlib distributed across 8 workers for 2.6× speedup. Exported to ONNX → Unity Sentis for <2 ms/frame inference at 60 fps. Real-time LLM taunts via Groq + NeMo Guardrails (114–352 ms). RL boss outlasts scripted FSM by 85% across 50 episodes.</p>
-      <div class="proj-metrics"><span class="metric">2.6× RLlib speedup</span><span class="metric">&lt;2 ms/frame</span><span class="metric">60 fps</span><span class="metric">85% outlast FSM</span></div>
+      <div class="proj-metrics"><span class="metric" data-count="2.6" data-suffix="× RLlib speedup">0</span><span class="metric">&lt;2 ms/frame</span><span class="metric" data-count="60" data-suffix=" fps">0</span><span class="metric" data-count="85" data-suffix="% outlast FSM">0</span></div>
       <div class="proj-links">
         <a href="https://github.com/MukulRay1603/nemesis-boss-ai" target="_blank" class="proj-link">View on GitHub ↗</a>
       </div>
@@ -760,7 +794,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">NLI · Safety Guardrails · Emotion-Conditioned RAG · DeBERTa · captum</div>
       <h3 class="proj-title">EmpathRAG — NLI Safety Guardrail & Emotion-Conditioned RAG</h3>
       <p class="proj-desc">DeBERTa-v3-base fine-tuned on 232K NLI pairs — 0.9629 crisis recall across 30 adversarial probes in 6 attack categories. captum Integrated Gradients on every safety intercept. 5-stage emotion-conditioned RAG over 1.67M FAISS vectors (RoBERTa + LoRA). Ablation: 0.88 emotion alignment vs. 0.30 BM25 — Wilcoxon p = 3.62×10⁻⁸.</p>
-      <div class="proj-metrics"><span class="metric">0.9629 recall</span><span class="metric">1.67M vectors</span><span class="metric">p = 3.62e-8</span><span class="metric">0.88 alignment</span></div>
+      <div class="proj-metrics"><span class="metric" data-count="0.9629" data-suffix=" recall">0</span><span class="metric" data-count="1.67" data-suffix="M vectors">0</span><span class="metric">p = 3.62e-8</span><span class="metric" data-count="0.88" data-suffix=" alignment">0</span></div>
       <div class="proj-links">
         <a href="https://github.com/MukulRay1603/Empath-RAG" target="_blank" class="proj-link">View on GitHub ↗</a>
       </div>
@@ -771,7 +805,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">Multi-Agent · LangGraph · Agentic AI · Staleness Detection</div>
       <h3 class="proj-title">RECON — Agentic ML Research Navigator</h3>
       <p class="proj-desc">4-agent LangGraph state machine with retry loop. Critic applies PASS/STALE/CONTRADICTED/INSUFFICIENT verdicts — catches 52% of superseded ML claims vs. 0% single-pass RAG (130-question eval). Linear decay optimal across 3 ablated formulas. Position accuracy 43.9% vs. 32.3% baseline.</p>
-      <div class="proj-metrics"><span class="metric">52% staleness catch</span><span class="metric">130-question eval</span><span class="metric">43.9% position acc.</span></div>
+      <div class="proj-metrics"><span class="metric" data-count="52" data-suffix="% staleness catch">0</span><span class="metric" data-count="130" data-suffix="-question eval">0</span><span class="metric" data-count="43.9" data-suffix="% position acc.">0</span></div>
       <div class="proj-links">
         <a href="https://huggingface.co/spaces/MukulRay/recon" target="_blank" class="proj-link">Live Demo ↗</a>
         <a href="https://github.com/MukulRay1603/project-recon" target="_blank" class="proj-link">View Source ↗</a>
@@ -783,7 +817,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">LLMOps · QLoRA Fine-Tuning · RAG · CI/CD · HuggingFace Spaces</div>
       <h3 class="proj-title">Irminsul — Production LLMOps System</h3>
       <p class="proj-desc">Llama 3.1 8B fine-tuned with QLoRA (rank 16). Best checkpoint from 3 MLflow experiments: sim 0.826, ROUGE-L 0.466. FastAPI + LangChain + Pinecone RAG with guardrails and confidence-gated web fallback. Auto corpus pipeline ingests 840 docs → 6,876 vectors weekly via GitHub Actions.</p>
-      <div class="proj-metrics"><span class="metric">Sim 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric">6,876 vectors</span><span class="metric">840 docs</span></div>
+      <div class="proj-metrics"><span class="metric">Sim 0.826</span><span class="metric">ROUGE-L 0.466</span><span class="metric" data-count="6876" data-suffix=" vectors">0</span><span class="metric" data-count="840" data-suffix=" docs">0</span></div>
       <div class="proj-links">
         <a href="https://huggingface.co/spaces/MukulRay/Irminsul" target="_blank" class="proj-link">Live Demo ↗</a>
         <a href="https://github.com/MukulRay1603/Irminsul" target="_blank" class="proj-link">View Source ↗</a>
@@ -795,7 +829,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">Document Intelligence · RoBERTa · ONNX · BM25 · BGE · Security</div>
       <h3 class="proj-title">DocPilot — Secure Document Intelligence Platform</h3>
       <p class="proj-desc">Production-hardened QA architecture with prompt-injection defense, PII redaction, RBAC, and append-only audit logging. RoBERTa-squad2 optimized with ONNX INT8 to 90ms P95 latency and 66.0% end-to-end F1. BM25 + BGE dense retrieval with cross-encoder reranking for source-grounded answers.</p>
-      <div class="proj-metrics"><span class="metric">90ms P95</span><span class="metric">66.0% F1</span><span class="metric">ONNX INT8</span><span class="metric">Prompt Injection Defense</span></div>
+      <div class="proj-metrics"><span class="metric" data-count="90" data-suffix="ms P95">0</span><span class="metric" data-count="66.0" data-suffix="% F1">0</span><span class="metric">ONNX INT8</span><span class="metric">Prompt Injection Defense</span></div>
       <div class="proj-links">
         <a href="https://github.com/MukulRay1603/DocPilot" target="_blank" class="proj-link">View on GitHub ↗</a>
       </div>
@@ -806,7 +840,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="proj-type">IEEE Publication · GenAI · VR · Stable Diffusion</div>
       <h3 class="proj-title">Voice-Driven Panoramic VR Generation — IEEE IDCIoT 2024</h3>
       <p class="proj-desc">Speech → 360° image pipeline: Whisper (speech recognition) → GPT-Neo (text generation) → Stable Diffusion (image synthesis). Attention slicing and xFormers optimizations delivered 2.3× throughput within a 10 GB VRAM budget. Peer-reviewed and published at IEEE IDCIoT 2024.</p>
-      <div class="proj-metrics"><span class="metric">2.3× throughput</span><span class="metric">10 GB VRAM</span><span class="metric">IEEE Published</span></div>
+      <div class="proj-metrics"><span class="metric" data-count="2.3" data-suffix="× throughput">0</span><span class="metric" data-count="10" data-suffix=" GB VRAM">0</span><span class="metric">IEEE Published</span></div>
       <div class="proj-links">
         <a href="https://ieeexplore.ieee.org/document/10467441" target="_blank" class="proj-link">Read Paper ↗</a>
       </div>
@@ -1000,6 +1034,30 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
 <footer>© 2026 Mukul Rayana · College Park, MD · Forged in caffeine and curiosity</footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ══ LENIS SMOOTH SCROLL ══ */
+(function() {
+  if (window.matchMedia('(hover:none)').matches) return;
+  var lenis = new Lenis({
+    duration: 1.25,
+    easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+    smooth: true
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -80, duration: 1.6 });
+      }
+    });
+  });
+})();
+
 /* ══ CURSOR ══ */
 (function() {
   var cur  = document.getElementById('cur');
@@ -1041,6 +1099,38 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       curR.style.borderColor = 'rgba(201,168,76,.55)';
     });
   });
+})();
+
+/* ══ MAGNETIC BUTTONS ══ */
+(function() {
+  if (window.matchMedia('(hover:none)').matches) return;
+  var magnetics = document.querySelectorAll('.btn-gold, .btn-resume');
+  magnetics.forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var rect = btn.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var dx = (e.clientX - cx) * 0.28;
+      var dy = (e.clientY - cy) * 0.28;
+      btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px) translateY(-3px)';
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = '';
+      btn.style.transition = 'transform .5s cubic-bezier(.22,1,.36,1),box-shadow .3s';
+      setTimeout(function() { btn.style.transition = ''; }, 500);
+    });
+  });
+})();
+
+/* ══ SCROLL PROGRESS BAR ══ */
+(function() {
+  var bar = document.getElementById('scroll-bar');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
 })();
 
 /* ══ STARFIELD ══ */
@@ -1298,6 +1388,36 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
   document.querySelectorAll('.mob-nav-link').forEach(function(a) {
     a.addEventListener('click', function() { setMenu(false); });
   });
+})();
+
+/* ══ METRIC COUNTERS ══ */
+(function() {
+  var counters = document.querySelectorAll('.metric[data-count]');
+  if (!counters.length) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseFloat(el.dataset.count);
+      var suffix = el.dataset.suffix || '';
+      var isDecimal = el.dataset.count.indexOf('.') !== -1;
+      var decimals = isDecimal ? (el.dataset.count.split('.')[1] || '').length : 0;
+      var start = null;
+      var duration = 1400;
+      function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        var val = target * ease;
+        el.textContent = (decimals > 0 ? val.toFixed(decimals) : Math.floor(val)) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = (decimals > 0 ? target.toFixed(decimals) : target) + suffix;
+      }
+      requestAnimationFrame(step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+  counters.forEach(function(el) { obs.observe(el); });
 })();
 </script>
 </body>
