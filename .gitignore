@@ -22,6 +22,7 @@ ehthumbs.db
 .claude/
 .cursorrules
 CLAUDE.md
+CLAUDE_CHECKPOINT.md
 *.claude
 .aider*
 .continue/
