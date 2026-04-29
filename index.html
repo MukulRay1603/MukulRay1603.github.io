@@ -768,7 +768,7 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       <div class="badge"><span class="bdot"></span>M.S. Applied ML · UMD · Graduating May 2026</div>
       <h1 class="hero-name">Mukul<br><span class="accent">Rayana</span></h1>
       <p class="hero-sub">AI/ML Engineer · LLMOps · Game AI · Reinforcement Learning</p>
-      <p class="hero-desc">I build AI systems that actually ship — LLMOps pipelines, multi-agent RAG, and RL agents that run in game engines at 60 fps. M.S. Applied ML @ UMD (May 2026). IEEE-published. If it involves transformers, vector databases, or teaching a neural net to beat you at your own game, I'm in.</p>
+      <p class="hero-desc">AI/ML Engineer finishing an M.S. in Applied Machine Learning at the University of Maryland (May 2026). I design and ship production-grade AI — multi-agent systems, LLMOps pipelines, RAG architectures, and reinforcement learning agents. IEEE-published, 1st-place hackathon winner, and genuinely excited about the problems at the frontier of what AI can do.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-gold">Explore Projects</a>
         <a href="assets/Mukul_Rayana_Resume.pdf" target="_blank" class="btn btn-resume">Resume</a>
@@ -1442,9 +1442,15 @@ footer{border-top:1px solid var(--bdr);padding:2rem 5vw;text-align:center;font-f
       target.addEventListener('animationend', function() {
         target.classList.add('anim-done');
       }, { once: true });
-      /* on mobile: scroll active tab into view */
+      /* on mobile: scroll active tab horizontally into view (no page scroll) */
       if (window.innerWidth <= 768) {
-        items[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        var nav = document.querySelector('.proj-nav');
+        if (nav) {
+          var itemLeft = items[idx].offsetLeft;
+          var itemW = items[idx].offsetWidth;
+          var navW = nav.offsetWidth;
+          nav.scrollTo({ left: itemLeft - navW / 2 + itemW / 2, behavior: 'smooth' });
+        }
       }
     }
     /* restart progress bar animation by cloning the bar */
