@@ -110,6 +110,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
   font-family:'JetBrains Mono',monospace;font-size:.68rem;
   color:var(--dim);letter-spacing:.1em;line-height:1.8}
 
+/* ─── PHOTO CAROUSEL ─── */
+.photo-carousel{position:relative;margin:1.8rem 0 .6rem;overflow:hidden;border:1px solid rgba(201,168,76,.2);border-radius:4px}
+.pc-track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);will-change:transform}
+.pc-slide{min-width:100%;flex-shrink:0}
+.pc-slide img{width:100%;display:block;max-height:460px;object-fit:cover}
+.pc-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(3,5,16,.72);border:1px solid rgba(201,168,76,.35);
+  color:var(--gold);font-size:1.1rem;line-height:1;
+  width:2.4rem;height:2.4rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,border-color .2s;backdrop-filter:blur(6px);z-index:5}
+.pc-btn:hover{background:rgba(201,168,76,.15);border-color:var(--gold)}
+.pc-prev{left:.7rem}.pc-next{right:.7rem}
+.pc-dots{
+  position:absolute;bottom:.65rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:.45rem;z-index:5}
+.pc-dot{
+  width:.55rem;height:.55rem;border-radius:50%;cursor:pointer;
+  background:rgba(201,168,76,.3);border:1px solid rgba(201,168,76,.4);
+  transition:background .2s,transform .2s;padding:0}
+.pc-dot.active{background:var(--gold);transform:scale(1.25)}
+.pc-cap{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  color:#5a6a9a;letter-spacing:.12em;text-align:center;
+  text-transform:uppercase;margin:0 0 1.8rem}
+
 /* ─── BACK LINK ─── */
 .back-wrap{text-align:center;padding-bottom:3rem;position:relative;z-index:10}
 .back-link{
@@ -152,7 +179,54 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
     <p class="journal-sub">Field notes from building at the edge of AI.</p>
   </div>
 
-  <!-- Published post -->
+  <!-- Graduation post -->
+  <article class="post-card">
+    <div class="post-meta">
+      <span class="post-date">May 19, 2026</span>
+      <span class="post-sep">·</span>
+      <span class="post-tag">Graduation</span>
+      <span class="post-tag">M.S. Applied ML</span>
+      <span class="post-tag">UMD</span>
+    </div>
+    <h2 class="post-title">Two Years. Done. Ready for What's Next.</h2>
+    <div class="post-body">
+      <p>Two years ago I moved to College Park and hit the ground running. And I never really stopped.</p>
+      <p>The M.S. in Applied Machine Learning kept me sharp and constantly adapting. This field does not wait for anyone, and learning to move with it week after week became its own discipline. Alongside that, working as a Climbing Wall Supervisor at the UMD RecWell Adventure Program added a whole different dimension: leading people, staying composed under pressure, and showing up with full accountability every shift.</p>
+      <p>Every day had something going on. Between the coursework, the job, and the friends who matched that same energy and showed up consistently, there was never a dull moment. College Park had a way of keeping you in motion.</p>
+      <p>I came in with a direction and left with a much clearer sense of what I am capable of and where I want to go.</p>
+      <p>May 19th, M.S. in Applied Machine Learning, University of Maryland. Done.</p>
+      <p>Ready for what is next. Let's go. 🐢</p>
+
+      <div class="photo-carousel" id="gradCarousel">
+        <div class="pc-track" id="gradTrack">
+          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic1.jpg" alt="Graduation photo 1"></div>
+          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic2.jpg" alt="Graduation photo 2"></div>
+          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic3.jpg" alt="Graduation photo 3"></div>
+          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic4.jpg" alt="Graduation photo 4"></div>
+          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic5.jpg" alt="Graduation photo 5"></div>
+          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic6.jpg" alt="Graduation photo 6"></div>
+        </div>
+        <button class="pc-btn pc-prev" data-carousel="gradCarousel">←</button>
+        <button class="pc-btn pc-next" data-carousel="gradCarousel">→</button>
+        <div class="pc-dots" id="gradDots">
+          <button class="pc-dot active"></button>
+          <button class="pc-dot"></button>
+          <button class="pc-dot"></button>
+          <button class="pc-dot"></button>
+          <button class="pc-dot"></button>
+          <button class="pc-dot"></button>
+        </div>
+      </div>
+      <p class="pc-cap">M.S. Applied Machine Learning · University of Maryland · May 19, 2026</p>
+    </div>
+    <div class="post-metrics">
+      <span class="post-metric">🎓 M.S. Applied ML</span>
+      <span class="post-metric">University of Maryland</span>
+      <span class="post-metric">Class of 2026</span>
+    </div>
+  </article>
+
+  <!-- Hackathon post -->
   <article class="post-card">
     <div class="post-meta">
       <span class="post-date">April 24, 2026</span>
@@ -168,14 +242,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
       <p>We built an AI Cargo Monitor: 8 agents that coordinate the moment a shipment is at risk — flagging compliance issues, finding backup facilities, rerouting carriers, rescheduling patient appointments, and drafting insurance claims. A human stays in the loop and signs off before anything is acted on.</p>
       <p>The decision I'm most proud of: only 2–3 of those 8 agents use an LLM. The rest are deterministic. Pharma logistics doesn't need creativity — it needs auditable, traceable decisions that hold up to scrutiny. Knowing when not to use an LLM turned out to be the real engineering challenge.</p>
       <p>Grateful to have figured that out alongside Karthik Ramanathan, Nikhil Sumesh, Rahul Sharma and Yash Oulkar — and to Professor Manmohan Aseri and the Robert H. Smith School of Business for building a challenge around problems that actually matter to someone.</p>
-      <img
-        src="assets/images/Team_Synapse.jpg"
-        alt="Team Synapse at the 2026 UMD Smith Agentic AI Challenge"
-        style="width:100%;display:block;object-fit:cover;max-height:420px;border:1px solid rgba(201,168,76,.25);border-radius:4px;margin:1.8rem 0 .8rem"
-      >
-      <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#5a6a9a;letter-spacing:.12em;text-align:center;margin-bottom:1.8rem;text-transform:uppercase">
-        Team Synapse · UMD Smith Agentic AI Challenge · April 24, 2026 · 1st Place
-      </p>
+      <div class="photo-carousel" id="hackCarousel">
+        <div class="pc-track" id="hackTrack">
+          <div class="pc-slide"><img src="assets/images/Blogs/TeamSynapse_AgenticAI_Smith_UMD_Hackathon%202026/Team_Synapse.jpg" alt="Team Synapse at the 2026 UMD Smith Agentic AI Challenge"></div>
+          <div class="pc-slide"><img src="assets/images/Blogs/TeamSynapse_AgenticAI_Smith_UMD_Hackathon%202026/Team%20Synapse%20winning%20photo.jpg" alt="Team Synapse winning moment"></div>
+        </div>
+        <button class="pc-btn pc-prev" data-carousel="hackCarousel">←</button>
+        <button class="pc-btn pc-next" data-carousel="hackCarousel">→</button>
+        <div class="pc-dots" id="hackDots">
+          <button class="pc-dot active"></button>
+          <button class="pc-dot"></button>
+        </div>
+      </div>
+      <p class="pc-cap">Team Synapse · UMD Smith Agentic AI Challenge · April 24, 2026 · 1st Place</p>
     </div>
     <div class="post-metrics">
       <span class="post-metric">🏆 1st Place</span>
@@ -206,6 +285,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
 </div>
 
 <script>
+/* photo carousels */
+(function() {
+  var carousels = [
+    { track: 'gradTrack', dots: 'gradDots', total: 6 },
+    { track: 'hackTrack', dots: 'hackDots', total: 2 }
+  ];
+  carousels.forEach(function(c) {
+    var track = document.getElementById(c.track);
+    var dotsEl = document.getElementById(c.dots);
+    if (!track || !dotsEl) return;
+    var idx = 0;
+    var dots = dotsEl.querySelectorAll('.pc-dot');
+    var container = track.parentElement;
+    function go(n) {
+      idx = (n + c.total) % c.total;
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+    }
+    container.querySelector('.pc-prev').addEventListener('click', function() { go(idx - 1); });
+    container.querySelector('.pc-next').addEventListener('click', function() { go(idx + 1); });
+    dots.forEach(function(d, i) { d.addEventListener('click', function() { go(i); }); });
+    /* swipe */
+    var sx = 0;
+    track.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) go(dx < 0 ? idx + 1 : idx - 1);
+    }, {passive:true});
+  });
+})();
+
 /* starfield */
 (function() {
   var canvas = document.getElementById('starfield');
