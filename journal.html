@@ -35,82 +35,113 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
 .nav-back:hover{color:var(--gold-l)}
 
 /* ─── MAIN WRAP ─── */
-.journal-wrap{max-width:780px;margin:0 auto;padding:8rem 5vw 5rem;position:relative;z-index:10}
+.journal-wrap{max-width:900px;margin:0 auto;padding:8rem 5vw 5rem;position:relative;z-index:10}
 
 /* ─── PAGE HEADER ─── */
 .journal-header{margin-bottom:3.5rem;text-align:center}
 .journal-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--gold-l);text-shadow:0 0 40px rgba(201,168,76,.25);margin-bottom:.6rem}
 .journal-sub{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--teal);letter-spacing:.2em;text-transform:uppercase}
 
-/* ─── POST CARD ─── */
-.post-card{
-  position:relative;overflow:hidden;
-  background:linear-gradient(135deg,rgba(10,16,36,.93),rgba(6,10,22,.97));
-  border:1px solid var(--bdr);padding:2.8rem 3rem;
-  clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
-  margin-bottom:3rem}
-.post-card::before{
+/* ─── PREVIEW GRID ─── */
+.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;margin-bottom:3rem}
+@media(max-width:640px){.post-grid{grid-template-columns:1fr}}
+
+/* ─── PREVIEW CARD ─── */
+.post-preview{
+  position:relative;cursor:pointer;overflow:hidden;
+  border:1px solid var(--bdr);
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+  background:linear-gradient(135deg,rgba(10,16,36,.95),rgba(6,10,22,.98));
+  transition:transform .25s,box-shadow .25s,border-color .25s}
+.post-preview:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(201,168,76,.12);border-color:rgba(201,168,76,.42)}
+.post-preview::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,transparent,var(--gold),var(--teal),var(--violet),transparent);
-  background-size:200%;animation:shimmer 4s linear infinite}
+  background-size:200%;animation:shimmer 4s linear infinite;z-index:3}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-.post-card::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(201,168,76,.06),transparent 65%)}
 
-/* post meta */
-.post-meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem;position:relative;z-index:2}
-.post-date{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--teal);letter-spacing:.15em;text-transform:uppercase}
-.post-tag{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--gold);letter-spacing:.1em;padding:.18rem .6rem;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.05)}
-.post-sep{color:var(--dim);opacity:.4;font-size:.7rem}
+/* thumbnail */
+.pv-thumb{
+  width:100%;height:190px;overflow:hidden;position:relative}
+.pv-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.post-preview:hover .pv-thumb img{transform:scale(1.04)}
+.pv-thumb-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(3,5,16,.08) 40%,rgba(3,5,16,.85) 100%)}
 
-/* post title */
-.post-title{font-family:'Cinzel',serif;font-size:clamp(1.3rem,3vw,1.85rem);font-weight:700;color:var(--gold-l);line-height:1.25;margin-bottom:1.8rem;position:relative;z-index:2}
+/* card body */
+.pv-body{padding:1.4rem 1.6rem 1.6rem;position:relative;z-index:2}
+.pv-meta{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.8rem}
+.pv-date{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--teal);letter-spacing:.14em;text-transform:uppercase}
+.pv-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--gold);letter-spacing:.09em;padding:.14rem .5rem;border:1px solid rgba(201,168,76,.28);background:rgba(201,168,76,.05)}
+.pv-title{font-family:'Cinzel',serif;font-size:clamp(1rem,2.2vw,1.22rem);font-weight:700;color:var(--gold-l);line-height:1.3;margin-bottom:.8rem}
+.pv-excerpt{font-family:'Rajdhani',sans-serif;font-size:.9rem;line-height:1.7;color:var(--dim);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pv-cta{
+  display:inline-flex;align-items:center;gap:.45rem;margin-top:1.1rem;
+  font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--teal);
+  transition:gap .2s,color .2s}
+.post-preview:hover .pv-cta{gap:.8rem;color:var(--gold-l)}
 
-/* post body */
-.post-body{position:relative;z-index:2}
-.post-body p{font-family:'Rajdhani',sans-serif;font-size:1rem;line-height:1.85;color:var(--text);margin-bottom:1.3rem}
-.post-body p:last-child{margin-bottom:0}
+/* ─── MODAL OVERLAY ─── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(3,5,16,.82);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
 
-/* metrics bar */
-.post-metrics{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.8rem;margin-bottom:1.8rem;position:relative;z-index:2}
-.post-metric{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);padding:.26rem .6rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15)}
+/* ─── MODAL WINDOW ─── */
+.modal-window{
+  position:relative;width:100%;max-width:820px;max-height:88vh;
+  display:flex;flex-direction:column;
+  background:linear-gradient(155deg,rgba(10,16,36,.97),rgba(5,8,20,.99));
+  border:1px solid rgba(201,168,76,.32);
+  clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px));
+  box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 60px rgba(201,168,76,.06);
+  transform:scale(.94) translateY(12px);transition:transform .3s,opacity .3s;opacity:0}
+.modal-overlay.open .modal-window{transform:scale(1) translateY(0);opacity:1}
+.modal-window::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--teal),var(--violet),transparent);
+  background-size:200%;animation:shimmer 4s linear infinite;z-index:5}
 
-/* post links */
-.post-links{display:flex;flex-wrap:wrap;gap:.9rem;position:relative;z-index:2}
-.post-link{
+/* close button */
+.modal-close{
+  position:absolute;top:.9rem;right:1rem;z-index:10;
+  background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.28);
+  color:var(--gold);font-size:1.1rem;line-height:1;
+  width:2.2rem;height:2.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,color .2s}
+.modal-close:hover{background:rgba(201,168,76,.2);color:var(--gold-l)}
+
+/* scrollable body */
+.modal-scroll{
+  overflow-y:auto;padding:2.6rem 2.8rem 2.4rem;flex:1;min-height:0;
+  scrollbar-width:thin;scrollbar-color:rgba(201,168,76,.3) transparent}
+.modal-scroll::-webkit-scrollbar{width:4px}
+.modal-scroll::-webkit-scrollbar-track{background:transparent}
+.modal-scroll::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:2px}
+
+/* modal content styles */
+.modal-meta{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.modal-date{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--teal);letter-spacing:.15em;text-transform:uppercase}
+.modal-tag{font-family:'JetBrains Mono',monospace;font-size:.61rem;color:var(--gold);letter-spacing:.1em;padding:.16rem .55rem;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.05)}
+.modal-sep{color:var(--dim);opacity:.4;font-size:.7rem}
+.modal-title{font-family:'Cinzel',serif;font-size:clamp(1.3rem,3vw,1.85rem);font-weight:700;color:var(--gold-l);line-height:1.25;margin-bottom:1.8rem}
+.modal-body p{font-family:'Rajdhani',sans-serif;font-size:1rem;line-height:1.85;color:var(--text);margin-bottom:1.3rem}
+.modal-metrics{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.8rem;margin-bottom:1.4rem}
+.modal-metric{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--gold);padding:.26rem .6rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15)}
+.modal-links{display:flex;flex-wrap:wrap;gap:.9rem}
+.modal-link{
   font-family:'Rajdhani',sans-serif;font-size:.82rem;font-weight:700;
   letter-spacing:.18em;text-transform:uppercase;color:var(--teal);text-decoration:none;
-  display:inline-flex;align-items:center;gap:.5rem;
-  transition:gap .2s,color .2s}
-.post-link:hover{gap:1rem;color:var(--gold-l)}
+  display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s,color .2s}
+.modal-link:hover{gap:1rem;color:var(--gold-l)}
 
-/* ─── CONSTRUCTION ZONE ─── */
-.construction-zone{position:relative;margin-top:2rem;margin-bottom:3rem}
-.tape{
-  position:relative;width:100%;height:38px;overflow:hidden;
-  background:repeating-linear-gradient(-45deg,#f5c518,#f5c518 20px,#1a1a1a 20px,#1a1a1a 40px);
-  background-size:56px 56px;
-  opacity:.85;box-shadow:0 4px 20px rgba(0,0,0,.5);
-  animation:scrolltape 8s linear infinite}
-@keyframes scrolltape{to{background-position:56px 0}}
-.tape-top{transform:rotate(-1deg);margin-bottom:0}
-.tape-bottom{transform:rotate(.8deg);margin-top:0}
-
-.wip-inner{
-  background:linear-gradient(135deg,rgba(10,16,36,.92),rgba(6,10,22,.96));
-  border:1px solid rgba(201,168,76,.15);
-  border-top:none;border-bottom:none;
-  padding:2.8rem 3rem;text-align:center}
-.wip-title{
-  font-family:'Cinzel',serif;font-size:clamp(1rem,2.5vw,1.4rem);
-  font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:.7rem}
-.wip-sub{
-  font-family:'JetBrains Mono',monospace;font-size:.68rem;
-  color:var(--dim);letter-spacing:.1em;line-height:1.8}
-
-/* ─── PHOTO CAROUSEL ─── */
+/* ─── PHOTO CAROUSEL (inside modal) ─── */
 .photo-carousel{position:relative;margin:1.8rem 0 .6rem;overflow:hidden;border:1px solid rgba(201,168,76,.2);border-radius:4px}
 .pc-track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);will-change:transform}
 .pc-slide{min-width:100%;flex-shrink:0}
@@ -135,7 +166,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
 .pc-cap{
   font-family:'JetBrains Mono',monospace;font-size:.62rem;
   color:#5a6a9a;letter-spacing:.12em;text-align:center;
-  text-transform:uppercase;margin:0 0 1.8rem}
+  text-transform:uppercase;margin:.5rem 0 1.8rem}
+
+/* ─── CONSTRUCTION ZONE ─── */
+.construction-zone{position:relative;margin-top:2rem;margin-bottom:3rem}
+.tape{
+  position:relative;width:100%;height:38px;overflow:hidden;
+  background:repeating-linear-gradient(-45deg,#f5c518,#f5c518 20px,#1a1a1a 20px,#1a1a1a 40px);
+  background-size:56px 56px;
+  opacity:.85;box-shadow:0 4px 20px rgba(0,0,0,.5);
+  animation:scrolltape 8s linear infinite}
+@keyframes scrolltape{to{background-position:56px 0}}
+.tape-top{transform:rotate(-1deg)}.tape-bottom{transform:rotate(.8deg)}
+.wip-inner{
+  background:linear-gradient(135deg,rgba(10,16,36,.92),rgba(6,10,22,.96));
+  border:1px solid rgba(201,168,76,.15);border-top:none;border-bottom:none;
+  padding:2.8rem 3rem;text-align:center}
+.wip-title{font-family:'Cinzel',serif;font-size:clamp(1rem,2.5vw,1.4rem);font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem}
+.wip-sub{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--dim);letter-spacing:.1em;line-height:1.8}
 
 /* ─── BACK LINK ─── */
 .back-wrap{text-align:center;padding-bottom:3rem;position:relative;z-index:10}
@@ -150,13 +198,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:768px){
-  .post-card{padding:2rem 1.6rem}
-  .wip-inner{padding:2rem 1.6rem}
+  .modal-scroll{padding:2rem 1.6rem}
   .journal-wrap{padding:7rem 4vw 4rem}
 }
 @media(max-width:480px){
-  .post-card{padding:1.6rem 1.2rem;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
-  .post-title{font-size:1.2rem}
+  .modal-window{clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+  .modal-scroll{padding:1.6rem 1.2rem}
+  .modal-title{font-size:1.2rem}
+  .pv-body{padding:1.1rem 1.2rem 1.3rem}
 }
 </style>
 </head>
@@ -173,96 +222,53 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
 <!-- JOURNAL CONTENT -->
 <div class="journal-wrap">
 
-  <!-- Page header -->
   <div class="journal-header">
     <h1 class="journal-title">Journal</h1>
     <p class="journal-sub">Field notes from building at the edge of AI.</p>
   </div>
 
-  <!-- Graduation post -->
-  <article class="post-card">
-    <div class="post-meta">
-      <span class="post-date">May 19, 2026</span>
-      <span class="post-sep">·</span>
-      <span class="post-tag">Graduation</span>
-      <span class="post-tag">M.S. Applied ML</span>
-      <span class="post-tag">UMD</span>
-    </div>
-    <h2 class="post-title">Two Years. Done. Ready for What's Next.</h2>
-    <div class="post-body">
-      <p>Two years ago I moved to College Park and hit the ground running. And I never really stopped.</p>
-      <p>The M.S. in Applied Machine Learning kept me sharp and constantly adapting. This field does not wait for anyone, and learning to move with it week after week became its own discipline. Alongside that, working as a Climbing Wall Supervisor at the UMD RecWell Adventure Program added a whole different dimension: leading people, staying composed under pressure, and showing up with full accountability every shift.</p>
-      <p>Every day had something going on. Between the coursework, the job, and the friends who matched that same energy and showed up consistently, there was never a dull moment. College Park had a way of keeping you in motion.</p>
-      <p>I came in with a direction and left with a much clearer sense of what I am capable of and where I want to go.</p>
-      <p>May 19th, M.S. in Applied Machine Learning, University of Maryland. Done.</p>
-      <p>Ready for what is next. Let's go. 🐢🎓</p>
+  <!-- ── PREVIEW GRID ── -->
+  <div class="post-grid">
 
-      <div class="photo-carousel" id="gradCarousel">
-        <div class="pc-track" id="gradTrack">
-          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic1.jpg" alt="Graduation photo 1"></div>
-          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic2.jpg" alt="Graduation photo 2"></div>
-          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic3.jpg" alt="Graduation photo 3"></div>
-          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic4.jpg" alt="Graduation photo 4"></div>
-          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic5.jpg" alt="Graduation photo 5"></div>
-          <div class="pc-slide"><img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic6.jpg" alt="Graduation photo 6"></div>
-        </div>
-        <button class="pc-btn pc-prev" data-carousel="gradCarousel">←</button>
-        <button class="pc-btn pc-next" data-carousel="gradCarousel">→</button>
-        <div class="pc-dots" id="gradDots">
-          <button class="pc-dot active"></button>
-          <button class="pc-dot"></button>
-          <button class="pc-dot"></button>
-          <button class="pc-dot"></button>
-          <button class="pc-dot"></button>
-          <button class="pc-dot"></button>
-        </div>
+    <!-- Card: Graduation -->
+    <div class="post-preview" data-modal="modal-grad">
+      <div class="pv-thumb">
+        <img src="assets/images/Blogs/Graduation UMD_MSML_2026/Grad_pic1.jpg" alt="Graduation">
+        <div class="pv-thumb-overlay"></div>
       </div>
-      <p class="pc-cap">M.S. Applied Machine Learning · University of Maryland · May 19, 2026</p>
+      <div class="pv-body">
+        <div class="pv-meta">
+          <span class="pv-date">May 19, 2026</span>
+          <span class="pv-tag">Graduation</span>
+          <span class="pv-tag">M.S. Applied ML</span>
+        </div>
+        <div class="pv-title">Two Years. Done. Ready for What's Next.</div>
+        <div class="pv-excerpt">Two years ago I moved to College Park and hit the ground running. And I never really stopped. The M.S. in Applied Machine Learning kept me sharp and constantly adapting.</div>
+        <div class="pv-cta">Read more →</div>
+      </div>
     </div>
-    <div class="post-metrics">
-      <span class="post-metric">🎓 M.S. Applied ML</span>
-      <span class="post-metric">University of Maryland</span>
-      <span class="post-metric">Class of 2026</span>
-    </div>
-  </article>
 
-  <!-- Hackathon post -->
-  <article class="post-card">
-    <div class="post-meta">
-      <span class="post-date">April 24, 2026</span>
-      <span class="post-sep">·</span>
-      <span class="post-tag">Competition</span>
-      <span class="post-tag">Agentic AI</span>
-      <span class="post-tag">LLMOps</span>
+    <!-- Card: Hackathon -->
+    <div class="post-preview" data-modal="modal-hack">
+      <div class="pv-thumb">
+        <img src="assets/images/Blogs/TeamSynapse_AgenticAI_Smith_UMD_Hackathon 2026/Team_Synapse.jpg" alt="Team Synapse">
+        <div class="pv-thumb-overlay"></div>
+      </div>
+      <div class="pv-body">
+        <div class="pv-meta">
+          <span class="pv-date">April 24, 2026</span>
+          <span class="pv-tag">Competition</span>
+          <span class="pv-tag">Agentic AI</span>
+        </div>
+        <div class="pv-title">We Won. Here's What I Actually Learned.</div>
+        <div class="pv-excerpt">Team Synapse just won 1st place at the 2026 UMD Smith Agentic AI Challenge. $4,000. Real industry problem. Built and shipped in a day.</div>
+        <div class="pv-cta">Read more →</div>
+      </div>
     </div>
-    <h2 class="post-title">We Won. Here's What I Actually Learned.</h2>
-    <div class="post-body">
-      <p>Team Synapse just won 1st place at the 2026 UMD Smith Agentic AI Challenge. $4,000. Real industry problem. Built and shipped in a day.</p>
-      <p>The problem came from OnAsset Intelligence — pharmaceutical shipments moving across the world, live sensor data streaming in real time, and operations teams consistently finding out about failures too late. Temperature deviations, shock events, routing delays — by the time the alert reaches the right person, the damage is already downstream.</p>
-      <p>We built an AI Cargo Monitor: 8 agents that coordinate the moment a shipment is at risk — flagging compliance issues, finding backup facilities, rerouting carriers, rescheduling patient appointments, and drafting insurance claims. A human stays in the loop and signs off before anything is acted on.</p>
-      <p>The decision I'm most proud of: only 2–3 of those 8 agents use an LLM. The rest are deterministic. Pharma logistics doesn't need creativity — it needs auditable, traceable decisions that hold up to scrutiny. Knowing when not to use an LLM turned out to be the real engineering challenge.</p>
-      <p>Grateful to have figured that out alongside Karthik Ramanathan, Nikhil Sumesh, Rahul Sharma and Yash Oulkar — and to Professor Manmohan Aseri and the Robert H. Smith School of Business for building a challenge around problems that actually matter to someone.</p>
-      <img
-        src="assets/images/Blogs/TeamSynapse_AgenticAI_Smith_UMD_Hackathon%202026/Team_Synapse.jpg"
-        alt="Team Synapse at the 2026 UMD Smith Agentic AI Challenge"
-        style="width:100%;display:block;object-fit:cover;max-height:420px;border:1px solid rgba(201,168,76,.25);border-radius:4px;margin:1.8rem 0 .8rem"
-      >
-      <p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#5a6a9a;letter-spacing:.12em;text-align:center;margin-bottom:1.8rem;text-transform:uppercase">
-        Team Synapse · UMD Smith Agentic AI Challenge · April 24, 2026 · 1st Place
-      </p>
-    </div>
-    <div class="post-metrics">
-      <span class="post-metric">🏆 1st Place</span>
-      <span class="post-metric">$4,000 Prize</span>
-      <span class="post-metric">8-Agent System</span>
-      <span class="post-metric">Built in 30 Days</span>
-    </div>
-    <div class="post-links">
-      <a href="https://lnkd.in/ehMHMRPv" target="_blank" class="post-link">View Demo →</a>
-    </div>
-  </article>
 
-  <!-- Construction zone for future posts -->
+  </div>
+
+  <!-- Construction zone -->
   <div class="construction-zone">
     <div class="tape tape-top"></div>
     <div class="wip-inner">
@@ -272,55 +278,177 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
     <div class="tape tape-bottom"></div>
   </div>
 
-  <!-- Back link -->
   <div class="back-wrap">
     <a href="index.html" class="back-link">← Back to Portfolio</a>
   </div>
 
 </div>
 
+<!-- ══ MODAL: Graduation ══ -->
+<div class="modal-overlay" id="modal-grad" role="dialog" aria-modal="true">
+  <div class="modal-window">
+    <button class="modal-close" aria-label="Close">✕</button>
+    <div class="modal-scroll">
+      <div class="modal-meta">
+        <span class="modal-date">May 19, 2026</span>
+        <span class="modal-sep">·</span>
+        <span class="modal-tag">Graduation</span>
+        <span class="modal-tag">M.S. Applied ML</span>
+        <span class="modal-tag">UMD</span>
+      </div>
+      <h2 class="modal-title">Two Years. Done. Ready for What's Next.</h2>
+      <div class="modal-body">
+        <p>Two years ago I moved to College Park and hit the ground running. And I never really stopped.</p>
+        <p>The M.S. in Applied Machine Learning kept me sharp and constantly adapting. This field does not wait for anyone, and learning to move with it week after week became its own discipline. Alongside that, working as a Climbing Wall Supervisor at the UMD RecWell Adventure Program added a whole different dimension: leading people, staying composed under pressure, and showing up with full accountability every shift.</p>
+        <p>Every day had something going on. Between the coursework, the job, and the friends who matched that same energy and showed up consistently, there was never a dull moment. College Park had a way of keeping you in motion.</p>
+        <p>I came in with a direction and left with a much clearer sense of what I am capable of and where I want to go.</p>
+        <p>May 19th, M.S. in Applied Machine Learning, University of Maryland. Done.</p>
+        <p>Ready for what is next. Let's go. 🐢🎓</p>
+
+        <div class="photo-carousel" id="gradCarousel">
+          <div class="pc-track" id="gradTrack">
+            <div class="pc-slide"><img src="assets/images/Blogs/Graduation UMD_MSML_2026/Grad_pic1.jpg" alt="Graduation photo 1"></div>
+            <div class="pc-slide"><img src="assets/images/Blogs/Graduation UMD_MSML_2026/Grad_pic2.jpg" alt="Graduation photo 2"></div>
+            <div class="pc-slide"><img src="assets/images/Blogs/Graduation UMD_MSML_2026/Grad_pic3.jpg" alt="Graduation photo 3"></div>
+            <div class="pc-slide"><img src="assets/images/Blogs/Graduation UMD_MSML_2026/Grad_pic4.jpg" alt="Graduation photo 4"></div>
+            <div class="pc-slide"><img src="assets/images/Blogs/Graduation UMD_MSML_2026/Grad_pic5.jpg" alt="Graduation photo 5"></div>
+            <div class="pc-slide"><img src="assets/images/Blogs/Graduation UMD_MSML_2026/Grad_pic6.jpg" alt="Graduation photo 6"></div>
+          </div>
+          <button class="pc-btn pc-prev">←</button>
+          <button class="pc-btn pc-next">→</button>
+          <div class="pc-dots" id="gradDots">
+            <button class="pc-dot active"></button>
+            <button class="pc-dot"></button>
+            <button class="pc-dot"></button>
+            <button class="pc-dot"></button>
+            <button class="pc-dot"></button>
+            <button class="pc-dot"></button>
+          </div>
+        </div>
+        <p class="pc-cap">M.S. Applied Machine Learning · University of Maryland · May 19, 2026</p>
+      </div>
+      <div class="modal-metrics">
+        <span class="modal-metric">🎓 M.S. Applied ML</span>
+        <span class="modal-metric">University of Maryland</span>
+        <span class="modal-metric">Class of 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: Hackathon ══ -->
+<div class="modal-overlay" id="modal-hack" role="dialog" aria-modal="true">
+  <div class="modal-window">
+    <button class="modal-close" aria-label="Close">✕</button>
+    <div class="modal-scroll">
+      <div class="modal-meta">
+        <span class="modal-date">April 24, 2026</span>
+        <span class="modal-sep">·</span>
+        <span class="modal-tag">Competition</span>
+        <span class="modal-tag">Agentic AI</span>
+        <span class="modal-tag">LLMOps</span>
+      </div>
+      <h2 class="modal-title">We Won. Here's What I Actually Learned.</h2>
+      <div class="modal-body">
+        <p>Team Synapse just won 1st place at the 2026 UMD Smith Agentic AI Challenge. $4,000. Real industry problem. Built and shipped in a day.</p>
+        <p>The problem came from OnAsset Intelligence: pharmaceutical shipments moving across the world, live sensor data streaming in real time, and operations teams consistently finding out about failures too late. Temperature deviations, shock events, routing delays; by the time the alert reaches the right person, the damage is already downstream.</p>
+        <p>We built an AI Cargo Monitor: 8 agents that coordinate the moment a shipment is at risk, flagging compliance issues, finding backup facilities, rerouting carriers, rescheduling patient appointments, and drafting insurance claims. A human stays in the loop and signs off before anything is acted on.</p>
+        <p>The decision I'm most proud of: only 2-3 of those 8 agents use an LLM. The rest are deterministic. Pharma logistics doesn't need creativity; it needs auditable, traceable decisions that hold up to scrutiny. Knowing when not to use an LLM turned out to be the real engineering challenge.</p>
+        <p>Grateful to have figured that out alongside Karthik Ramanathan, Nikhil Sumesh, Rahul Sharma and Yash Oulkar, and to Professor Manmohan Aseri and the Robert H. Smith School of Business for building a challenge around problems that actually matter to someone.</p>
+        <img
+          src="assets/images/Blogs/TeamSynapse_AgenticAI_Smith_UMD_Hackathon 2026/Team_Synapse.jpg"
+          alt="Team Synapse at the 2026 UMD Smith Agentic AI Challenge"
+          style="width:100%;display:block;object-fit:cover;max-height:420px;border:1px solid rgba(201,168,76,.25);border-radius:4px;margin:1.8rem 0 .8rem"
+        >
+        <p class="pc-cap">Team Synapse · UMD Smith Agentic AI Challenge · April 24, 2026 · 1st Place</p>
+      </div>
+      <div class="modal-metrics">
+        <span class="modal-metric">🏆 1st Place</span>
+        <span class="modal-metric">$4,000 Prize</span>
+        <span class="modal-metric">8-Agent System</span>
+        <span class="modal-metric">Built in 30 Days</span>
+      </div>
+      <div class="modal-links">
+        <a href="https://lnkd.in/ehMHMRPv" target="_blank" class="modal-link">View Demo →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-/* photo carousels */
+/* ── modal logic ── */
 (function() {
-  var carousels = [
-    { track: 'gradTrack', dots: 'gradDots', total: 6 }
-  ];
-  carousels.forEach(function(c) {
-    var track = document.getElementById(c.track);
-    var dotsEl = document.getElementById(c.dots);
-    if (!track || !dotsEl) return;
-    var idx = 0;
-    var dots = dotsEl.querySelectorAll('.pc-dot');
-    var container = track.parentElement;
-    function go(n) {
-      idx = (n + c.total) % c.total;
-      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
-      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+  var body = document.body;
+
+  function openModal(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('open');
+    body.style.overflow = 'hidden';
+    el.querySelector('.modal-scroll').scrollTop = 0;
+  }
+
+  function closeModal(el) {
+    el.classList.remove('open');
+    body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(function(card) {
+    card.addEventListener('click', function() { openModal(card.dataset.modal); });
+  });
+
+  document.querySelectorAll('.modal-close').forEach(function(btn) {
+    btn.addEventListener('click', function() { closeModal(btn.closest('.modal-overlay')); });
+  });
+
+  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeModal(overlay);
+    });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(closeModal);
     }
-    container.querySelector('.pc-prev').addEventListener('click', function() { go(idx - 1); });
-    container.querySelector('.pc-next').addEventListener('click', function() { go(idx + 1); });
-    dots.forEach(function(d, i) { d.addEventListener('click', function() { go(i); }); });
-    /* swipe */
-    var sx = 0;
-    track.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, {passive:true});
-    track.addEventListener('touchend', function(e) {
-      var dx = e.changedTouches[0].clientX - sx;
-      if (Math.abs(dx) > 40) go(dx < 0 ? idx + 1 : idx - 1);
-    }, {passive:true});
   });
 })();
 
-/* starfield */
+/* ── graduation carousel ── */
+(function() {
+  var track = document.getElementById('gradTrack');
+  var dotsEl = document.getElementById('gradDots');
+  if (!track || !dotsEl) return;
+  var total = 6, idx = 0;
+  var dots = dotsEl.querySelectorAll('.pc-dot');
+  var container = track.parentElement;
+
+  function go(n) {
+    idx = (n + total) % total;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+  }
+  container.querySelector('.pc-prev').addEventListener('click', function() { go(idx - 1); });
+  container.querySelector('.pc-next').addEventListener('click', function() { go(idx + 1); });
+  dots.forEach(function(d, i) { d.addEventListener('click', function() { go(i); }); });
+
+  var sx = 0;
+  track.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) go(dx < 0 ? idx + 1 : idx - 1);
+  }, {passive:true});
+})();
+
+/* ── starfield ── */
 (function() {
   var canvas = document.getElementById('starfield');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var W, H, stars = [];
-
   function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', function() { resize(); mkStars(); });
-
   function mkStars() {
     stars = [];
     for (var i = 0; i < 80; i++) {
@@ -329,15 +457,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
     }
   }
   mkStars();
-
   function draw(t) {
     ctx.clearRect(0, 0, W, H);
     stars.forEach(function(s) {
       var tw = Math.sin(t*.0008 + s.tw)*.35 + .65;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(255,255,255,' + (s.a * tw) + ')';
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,' + (s.a * tw) + ')'; ctx.fill();
     });
     requestAnimationFrame(draw);
   }
