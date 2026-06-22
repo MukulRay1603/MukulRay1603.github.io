@@ -146,13 +146,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
 .photo-carousel{position:relative;overflow:hidden;border:1px solid rgba(201,168,76,.2);border-radius:4px;margin:1.8rem 0 .6rem;height:380px}
 .pc-track{display:flex;height:100%;transition:transform .4s cubic-bezier(.4,0,.2,1);will-change:transform}
 .pc-slide{position:relative;min-width:100%;flex-shrink:0;height:100%;overflow:hidden}
-.pc-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.pc-slide > img{width:100%;height:100%;object-fit:cover;display:block}
 /* slide 1: grid layout */
 .pc-slide-grid{display:grid;grid-template-columns:3fr 2fr;gap:3px}
-.pc-slide-grid .pg-left{overflow:hidden}
-.pc-slide-grid .pg-left img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.pc-slide-grid .pg-right{display:flex;flex-direction:column;gap:3px;overflow:hidden}
-.pc-slide-grid .pg-right img{flex:1;width:100%;object-fit:cover;min-height:0}
+.pc-slide-grid .pg-left{overflow:hidden;height:100%}
+.pc-slide-grid .pg-left img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.pc-slide-grid .pg-right{display:flex;flex-direction:column;gap:3px;height:100%;overflow:hidden}
+.pc-slide-grid .pg-right img{flex:1;width:100%;height:0;min-height:0;object-fit:cover;display:block}
 .pc-btn{
   position:absolute;top:50%;transform:translateY(-50%);
   background:rgba(3,5,16,.72);border:1px solid rgba(201,168,76,.35);
@@ -434,9 +434,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content
 
   function go(n) {
     idx = (n + total) % total;
-    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    track.style.transform = 'translateX(-' + (idx * container.offsetWidth) + 'px)';
     dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
   }
+  window.addEventListener('resize', function() { go(idx); });
   container.querySelector('.pc-prev').addEventListener('click', function() { go(idx - 1); });
   container.querySelector('.pc-next').addEventListener('click', function() { go(idx + 1); });
   dots.forEach(function(d, i) { d.addEventListener('click', function() { go(i); }); });
