@@ -173,6 +173,14 @@
 .stage{display:grid;min-width:0}
 .stage>.art{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(16px) scale(.985);transition:opacity .45s,transform .55s cubic-bezier(.22,1,.36,1),visibility 0s .45s,border-color .25s}
 .stage>.art.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .55s .1s,transform .65s cubic-bezier(.22,1,.36,1) .1s,visibility 0s,border-color .25s}
+@media (min-width:1100px){
+  .stage>.art:not(.art-feat){display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);column-gap:clamp(1.5rem,3vw,3rem);grid-auto-flow:row dense;align-content:center;padding:clamp(1.75rem,3vw,2.75rem)}
+  .stage>.art:not(.art-feat)>*{grid-column:1}
+  .stage>.art:not(.art-feat)>.main-stat{grid-column:2;grid-row:1/span 3;align-self:end;margin-top:0}
+  .stage>.art:not(.art-feat)>.subs{grid-column:2;grid-row:4/span 4;align-self:start}
+  .stage>.art:not(.art-feat) h3{font-size:clamp(1.5rem,2.4vw,2rem)}
+  .stage>.art:not(.art-feat)>.art-links{padding-top:1.25rem}
+}
 
 /* Beyond: 3D coverflow */
 .cover{position:relative;height:27rem;perspective:1400px;overflow:hidden;touch-action:pan-y}
@@ -318,16 +326,16 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="cosmos" aria-hidden="true"><div class="st st1"></div><div class="st st2"></div><div class="st st3"></div><i class="shoot" style="--x:8%;--y:12%;--t:13s;--d:2s"></i><i class="shoot" style="--x:48%;--y:6%;--t:19s;--d:8s"></i></div>
 
-<!-- Element glyph sprite (stylised, not official game assets) -->
+<!-- Domain icon sprite -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
-    <symbol id="g-anemo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 8.5h11a3 3 0 1 0-3-3"/><path d="M3 12.5h15.5a3 3 0 1 1-3 3"/><path d="M5 16.5h6"/></g></symbol>
-    <symbol id="g-dendro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10.5 10.5 4.5 20 4.5 20 13.5 14 19 5 19z"/><path d="M5 19l9-9"/></g></symbol>
-    <symbol id="g-electro" viewBox="0 0 24 24"><path d="M13.5 2.5 5 13.5h6l-1.5 8 9-11.5h-6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
-    <symbol id="g-hydro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3s6.5 7.2 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10.2 12 3 12 3z"/><path d="M9 15a3 3 0 0 0 3 3"/></g></symbol>
-    <symbol id="g-cryo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.5v19M3.8 7.25l16.4 9.5M3.8 16.75l16.4-9.5"/><path d="M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/></g></symbol>
-    <symbol id="g-geo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.5 20.5 8v8L12 21.5 3.5 16V8z"/><path d="M12 8l4 4-4 4-4-4z"/></g></symbol>
-    <symbol id="g-pyro" viewBox="0 0 24 24"><path d="M12 21.5c3.9 0 6.5-2.8 6.5-6.5 0-4.6-4.3-6.5-4.6-12-2.9 2-4.6 5.3-3.9 8.6-1.6-.8-2.5-2.5-2.5-2.5-1.3 1.9-2 3.9-2 5.9 0 3.7 2.6 6.5 6.5 6.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="g-anemo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.3"/><circle cx="5" cy="18" r="2.3"/><circle cx="19" cy="18" r="2.3"/><path d="M10.9 7 6.2 15.9M13.1 7l4.7 8.9M7.3 18h9.4"/></g></symbol>
+    <symbol id="g-electro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></g></symbol>
+    <symbol id="g-hydro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19.5 6v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.4-4.4"/></g></symbol>
+    <symbol id="g-cryo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></g></symbol>
+    <symbol id="g-dendro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 20.5 8 12 12.5 3.5 8z"/><path d="m3.5 12 8.5 4.5 8.5-4.5"/><path d="m3.5 16 8.5 4.5 8.5-4.5"/></g></symbol>
+    <symbol id="g-geo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></g></symbol>
+    <symbol id="g-pyro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7z"/><path d="M19 15c.2 1.6.9 2.3 2.5 2.5-1.6.2-2.3.9-2.5 2.5-.2-1.6-.9-2.3-2.5-2.5 1.6-.2 2.3-.9 2.5-2.5z"/></g></symbol>
   </defs>
 </svg>
 
@@ -473,10 +481,10 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="eyebrow">Artifacts</p>
+        <p class="eyebrow">Selected work</p>
         <h2 class="sec-title" id="projects-title">Projects</h2>
       </div>
-      <p class="sec-note">Each artifact carries an element for its domain: Anemo agents, Electro RL, Hydro safety, Cryo research, Dendro LLMOps, Geo security, Pyro generative AI.</p>
+      <p class="sec-note">Seven builds across agents, reinforcement learning, AI safety, research tooling, LLMOps, security and generative AI. Each leads with its headline result.</p>
     </div>
 
     <div class="archive reveal" id="archive">
@@ -496,7 +504,7 @@
         <span class="shimmer" aria-hidden="true"></span>
         <div class="art-col">
           <div class="art-top">
-            <span class="el el-anemo"><svg aria-hidden="true"><use href="#g-anemo"/></svg>Anemo · Multi-agent</span>
+            <span class="el el-anemo"><svg aria-hidden="true"><use href="#g-anemo"/></svg>Multi-agent</span>
             <span class="art-rank">1st place · $4K prize</span>
           </div>
           <h3>PharmaChain: AI Cargo Monitor</h3>
@@ -530,7 +538,7 @@
 
       <!-- Nemesis -->
       <div class="panel corners art" role="tabpanel" id="proj-1" aria-labelledby="tab-1" inert style="--c:var(--electro)">
-        <div class="art-top"><span class="el el-electro"><svg aria-hidden="true"><use href="#g-electro"/></svg>Electro · Reinforcement learning</span></div>
+        <div class="art-top"><span class="el el-electro"><svg aria-hidden="true"><use href="#g-electro"/></svg>Reinforcement learning</span></div>
         <h3>Nemesis</h3>
         <p class="art-sub">Distributed RL boss AI with real-time LLM narration</p>
         <div class="main-stat"><b>+85%</b><span>longer survival for the RL boss than a scripted FSM, across 50 episodes</span></div>
@@ -549,7 +557,7 @@
 
       <!-- EmpathRAG -->
       <div class="panel corners art" role="tabpanel" id="proj-2" aria-labelledby="tab-2" inert style="--c:var(--hydro)">
-        <div class="art-top"><span class="el el-hydro"><svg aria-hidden="true"><use href="#g-hydro"/></svg>Hydro · AI safety</span></div>
+        <div class="art-top"><span class="el el-hydro"><svg aria-hidden="true"><use href="#g-hydro"/></svg>AI safety</span></div>
         <h3>EmpathRAG</h3>
         <p class="art-sub">NLI safety guardrail &amp; emotion-conditioned RAG</p>
         <div class="main-stat"><b>0.9629</b><span>crisis recall, DeBERTa NLI guardrail · 30 adversarial probes in 6 attack categories</span></div>
@@ -568,7 +576,7 @@
 
       <!-- RECON -->
       <div class="panel corners art" role="tabpanel" id="proj-3" aria-labelledby="tab-3" inert style="--c:var(--cryo)">
-        <div class="art-top"><span class="el el-cryo"><svg aria-hidden="true"><use href="#g-cryo"/></svg>Cryo · Agentic research</span></div>
+        <div class="art-top"><span class="el el-cryo"><svg aria-hidden="true"><use href="#g-cryo"/></svg>Agentic research</span></div>
         <h3>RECON</h3>
         <p class="art-sub">Multi-agent ML research navigator that catches stale claims</p>
         <div class="main-stat"><b>52% vs 0%</b><span>superseded ML claims caught, versus single-pass RAG</span></div>
@@ -587,7 +595,7 @@
 
       <!-- Irminsul -->
       <div class="panel corners art" role="tabpanel" id="proj-4" aria-labelledby="tab-4" inert style="--c:var(--dendro)">
-        <div class="art-top"><span class="el el-dendro"><svg aria-hidden="true"><use href="#g-dendro"/></svg>Dendro · LLMOps &amp; RAG</span></div>
+        <div class="art-top"><span class="el el-dendro"><svg aria-hidden="true"><use href="#g-dendro"/></svg>LLMOps &amp; RAG</span></div>
         <h3>Irminsul</h3>
         <p class="art-sub">Production LLMOps system with a self-healing corpus</p>
         <div class="main-stat"><b>0.826</b><span>semantic similarity, Llama 3.1 8B QLoRA (best of 3 MLflow runs)</span></div>
@@ -607,7 +615,7 @@
 
       <!-- DocPilot -->
       <div class="panel corners art" role="tabpanel" id="proj-5" aria-labelledby="tab-5" inert style="--c:var(--geo)">
-        <div class="art-top"><span class="el el-geo"><svg aria-hidden="true"><use href="#g-geo"/></svg>Geo · Secure document AI</span></div>
+        <div class="art-top"><span class="el el-geo"><svg aria-hidden="true"><use href="#g-geo"/></svg>Secure document AI</span></div>
         <h3>DocPilot</h3>
         <p class="art-sub">Secure document intelligence platform</p>
         <div class="main-stat"><b>90 ms</b><span>P95 latency, RoBERTa-squad2 with ONNX INT8</span></div>
@@ -625,7 +633,7 @@
       <!-- VR Generation -->
       <div class="panel corners art" role="tabpanel" id="proj-6" aria-labelledby="tab-6" inert style="--c:var(--pyro)">
         <div class="art-top">
-          <span class="el el-pyro"><svg aria-hidden="true"><use href="#g-pyro"/></svg>Pyro · Generative AI</span>
+          <span class="el el-pyro"><svg aria-hidden="true"><use href="#g-pyro"/></svg>Generative AI</span>
           <span class="art-rank">IEEE IDCIoT 2024</span>
         </div>
         <h3>Voice-Driven Panoramic VR Generation</h3>
@@ -651,7 +659,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="eyebrow">Commissions</p>
+        <p class="eyebrow">Where I’ve worked</p>
         <h2 class="sec-title" id="experience-title">Experience</h2>
       </div>
     </div>
@@ -691,7 +699,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="eyebrow">Ascension</p>
+        <p class="eyebrow">Education</p>
         <h2 class="sec-title" id="education-title">Education</h2>
       </div>
     </div>
@@ -745,7 +753,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="eyebrow">Talents</p>
+        <p class="eyebrow">Toolkit</p>
         <h2 class="sec-title" id="skills-title">Skills</h2>
       </div>
     </div>
@@ -791,7 +799,7 @@
   <div class="wrap">
     <div class="panel corners contact reveal">
       <div>
-        <p class="eyebrow">Party invite</p>
+        <p class="eyebrow">Get in touch</p>
         <h2 id="contact-title" style="margin-top:.7rem">Let’s build something extraordinary</h2>
         <p class="contact-lede"><b>M.S. Applied Machine Learning</b>, University of Maryland, May 2026. Looking for <b>AI/ML Engineer</b>, <b>LLMOps</b>, <b>GenAI</b>, <b>Game AI</b> and <b>RL Engineer</b> roles. <b>Eligible to work on OPT</b> and open to relocate.</p>
         <div class="hero-cta">
@@ -1039,6 +1047,49 @@
   else seen = true;
   window.addEventListener('resize', arrange);
   arrange(); restart();
+})();
+
+/* headline numbers count up the first time they appear; magnetic hero buttons */
+(function () {
+  var root = document.documentElement;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var els = [].slice.call(document.querySelectorAll('.ql-v, .main-stat b, .xs-v'));
+  function run(el) {
+    if (el.dataset.counted || root.classList.contains('lite')) return;
+    var txt = el.textContent, m = txt.match(/\d[\d,]*\.?\d*/);
+    if (!m) return;
+    el.dataset.counted = '1';
+    var raw = m[0].replace(/,/g, ''), target = parseFloat(raw), dec = (raw.split('.')[1] || '').length;
+    var pre = txt.slice(0, m.index), post = txt.slice(m.index + m[0].length), t0 = 0, dur = 1100;
+    el.style.minWidth = el.offsetWidth + 'px';
+    requestAnimationFrame(function step(t) {
+      if (!t0) t0 = t;
+      var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = pre + (target * e).toFixed(dec) + post;
+      if (k < 1) requestAnimationFrame(step); else { el.textContent = txt; el.style.minWidth = ''; }
+    });
+  }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting && !e.target.closest('[inert]')) { run(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  els.forEach(function (el) { io.observe(el); });
+  /* re-run when a project panel becomes active */
+  document.querySelectorAll('.rail-item').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var p = document.getElementById(t.getAttribute('aria-controls')), b = p && p.querySelector('.main-stat b');
+      if (b) { delete b.dataset.counted; setTimeout(function () { run(b); }, 120); }
+    });
+  });
+
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('.hero-cta .btn').forEach(function (btn) {
+    btn.addEventListener('pointermove', function (e) {
+      if (root.classList.contains('lite')) return;
+      var r = btn.getBoundingClientRect();
+      btn.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * 0.18).toFixed(1) + 'px,' + ((e.clientY - r.top - r.height / 2) * 0.28).toFixed(1) + 'px)';
+    });
+    btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+  });
 })();
 
 /* contact form → Formspree, falls back to mailto */
