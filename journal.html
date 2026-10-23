@@ -16,10 +16,12 @@
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site.js" defer></script>
+<script>try { var t = localStorage.getItem('mr-theme'); if (t === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}</script>
 <style>
 .j-head{padding-block:clamp(3rem,8vw,5rem) clamp(2rem,5vw,3rem);text-align:center}
 .j-head .eyebrow{justify-content:center}
-.j-head h1{margin-top:.8rem;font-size:clamp(2.4rem,6vw,3.6rem);color:#fff}
+.j-head h1{margin-top:.8rem;font-size:clamp(2.4rem,6vw,3.6rem);color:var(--title)}
 .j-head p{margin-top:.7rem;color:var(--muted)}
 
 .posts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
@@ -31,11 +33,11 @@
 .post:hover,.post:focus-within{border-color:var(--line-2);transform:translateY(-2px)}
 .post-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface)}
 .post-thumb img{width:100%;height:100%;object-fit:cover}
-.post-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(6,9,19,.75))}
+.post-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(var(--ink),.75))}
 .post-body{display:flex;flex-direction:column;flex:1;padding:1.25rem 1.4rem 1.4rem}
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem}
 .meta time{font:500 .75rem/1 var(--mono);letter-spacing:.06em;color:var(--anemo)}
-.post h2{margin-top:.8rem;font-size:1.25rem;color:#fff}
+.post h2{margin-top:.8rem;font-size:1.25rem;color:var(--title)}
 .post-body>p:not(.meta){margin-top:.6rem;color:var(--muted);font-size:.93rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .post .more{margin-top:auto;padding-top:1rem;font-size:.9rem;font-weight:500;color:var(--gold-hi)}
 
@@ -46,13 +48,13 @@
 
 /* reading dialog */
 dialog.read{margin:auto;width:min(820px,calc(100% - 2rem));max-height:calc(100dvh - 2rem);padding:0;border:1px solid var(--line-2);border-radius:var(--r);background:linear-gradient(180deg,var(--surface-2),var(--surface));color:var(--text);box-shadow:0 30px 80px rgba(0,0,0,.6)}
-dialog.read::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(6px)}
+dialog.read::backdrop{background:rgba(var(--ink),.78);backdrop-filter:blur(6px)}
 dialog.read[open]{animation:pop .25s ease}
 @keyframes pop{from{opacity:0;transform:translateY(10px)}}
 .read-in{padding:clamp(1.4rem,4vw,2.6rem)}
-.read-close{position:sticky;top:.75rem;float:right;margin:.75rem .75rem 0 0;z-index:2;width:44px;height:44px;border-radius:10px;border:1px solid var(--line-2);background:rgba(6,9,19,.8);color:var(--gold-hi);font-size:1.1rem;cursor:pointer}
+.read-close{position:sticky;top:.75rem;float:right;margin:.75rem .75rem 0 0;z-index:2;width:44px;height:44px;border-radius:10px;border:1px solid var(--line-2);background:rgba(var(--ink),.8);color:var(--gold-hi);font-size:1.1rem;cursor:pointer}
 .read-close:hover{background:rgba(217,184,113,.12)}
-.read h2{margin-top:1rem;font-size:clamp(1.4rem,3.2vw,1.9rem);color:#fff}
+.read h2{margin-top:1rem;font-size:clamp(1.4rem,3.2vw,1.9rem);color:var(--title)}
 .read-body{margin-top:1.4rem}
 .read-body p{margin-bottom:1.1rem;color:var(--text);line-height:1.8}
 .read-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.4rem}
@@ -73,7 +75,7 @@ dialog.read[open]{animation:pop .25s ease}
 .slide-grid .col{display:grid;grid-template-rows:1fr 1fr;gap:3px;min-height:0}
 .slide-grid .col picture{min-height:0}
 .slide-grid img{object-position:center 30%}
-.c-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:rgba(6,9,19,.78);color:var(--gold-hi);cursor:pointer}
+.c-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:rgba(var(--ink),.78);color:var(--gold-hi);cursor:pointer}
 .c-prev{left:.6rem}.c-next{right:.6rem}
 
 @media (max-width:700px){.posts{grid-template-columns:1fr}}
@@ -90,6 +92,12 @@ dialog.read[open]{animation:pop .25s ease}
       M·R<span class="sr-only"> Mukul Rayana, home</span>
     </a>
     <a class="text-link" href="index.html"><span aria-hidden="true">←</span> Portfolio</a>
+    <div class="nav-tools" style="margin-left:.8rem">
+      <button class="icon-btn has-kbd" type="button" id="searchBtn" aria-label="Open command palette" aria-keyshortcuts="Control+K Meta+K"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></g></svg><kbd>⌘K</kbd></button>
+      <button class="icon-btn" type="button" id="themeBtn" aria-label="Daylight theme" aria-pressed="false"><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></g></svg><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
+      <button class="icon-btn" type="button" id="soundBtn" aria-label="Turn ambient sound on" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="i-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="i-off" d="m16 9.5 5 5m0-5-5 5"/></g></svg></button>
+    </div>
+
   </div>
 </header>
 
