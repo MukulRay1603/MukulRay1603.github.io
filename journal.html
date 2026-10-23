@@ -82,6 +82,7 @@ dialog.read[open]{animation:pop .25s ease}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="cosmos" aria-hidden="true"><div class="st st1"></div><div class="st st2"></div><div class="st st3"></div><i class="shoot" style="--x:10%;--y:10%;--t:14s;--d:3s"></i><i class="shoot" style="--x:52%;--y:5%;--t:21s;--d:10s"></i></div>
 
 <header class="nav is-scrolled">
   <div class="wrap nav-in">
@@ -213,6 +214,18 @@ dialog.read[open]{animation:pop .25s ease}
 
 <script>
 (function () {
+  /* star layers drift at three speeds on scroll */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var st = document.querySelectorAll('.cosmos .st'), K = [0.03, 0.08, 0.16], H = [320, 560, 900], tk = false;
+    window.addEventListener('scroll', function () {
+      if (tk) return; tk = true;
+      requestAnimationFrame(function () {
+        st.forEach(function (el, i) { el.style.transform = 'translate3d(0,' + (-((window.scrollY * K[i]) % H[i])).toFixed(2) + 'px,0)'; });
+        tk = false;
+      });
+    }, { passive: true });
+  }
+
   /* reading dialogs: native <dialog> handles focus trap + Escape */
   document.querySelectorAll('[data-open]').forEach(function (btn) {
     btn.addEventListener('click', function () {
