@@ -46,7 +46,7 @@
 .back{display:flex;justify-content:center;padding-block:2.5rem 4rem}
 
 /* reading dialog */
-dialog.read{width:min(820px,calc(100% - 2rem));max-height:calc(100dvh - 2rem);padding:0;border:1px solid var(--line-2);border-radius:var(--r);background:linear-gradient(180deg,var(--surface-2),var(--surface));color:var(--text);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+dialog.read{margin:auto;width:min(820px,calc(100% - 2rem));max-height:calc(100dvh - 2rem);padding:0;border:1px solid var(--line-2);border-radius:var(--r);background:linear-gradient(180deg,var(--surface-2),var(--surface));color:var(--text);box-shadow:0 30px 80px rgba(0,0,0,.6)}
 dialog.read::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(6px)}
 dialog.read[open]{animation:pop .25s ease}
 @keyframes pop{from{opacity:0;transform:translateY(10px)}}
