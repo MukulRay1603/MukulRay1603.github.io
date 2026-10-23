@@ -20,7 +20,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+/* device tier: 'lite' trims layers on weak hardware, data-saver or slow networks; a runtime FPS probe can add it later */
+(function () {
+  var d = document.documentElement, n = navigator, c = n.connection || {};
+  var fx = (location.search.match(/[?&]fx=(full|lite)/) || [])[1];
+  d.classList.add('js');
+  if (fx) { d.dataset.fx = fx; if (fx === 'lite') d.classList.add('lite'); return; }
+  if ((n.hardwareConcurrency && n.hardwareConcurrency <= 2) || (n.deviceMemory && n.deviceMemory <= 2) || c.saveData ||
+      /(^|-)2g/.test(c.effectiveType || '') || matchMedia('(prefers-reduced-data: reduce)').matches) d.classList.add('lite');
+})();
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Mukul Rayana","jobTitle":"AI/ML Engineer","url":"https://mukulray1603.github.io","image":"https://mukulray1603.github.io/assets/images/mukul-portrait.jpg","email":"mailto:mukulray@terpmail.umd.edu","alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Maryland, College Park"},{"@type":"CollegeOrUniversity","name":"SRM Easwari Engineering College"}],"sameAs":["https://github.com/MukulRay1603","https://linkedin.com/in/mukul-rayana","https://huggingface.co/MukulRay"],"knowsAbout":["Machine Learning","Large Language Models","Retrieval-Augmented Generation","Multi-Agent Systems","LLMOps","Reinforcement Learning","Game AI"]}
 </script>
@@ -38,14 +48,29 @@
   radial-gradient(ellipse 35% 35% at 8% 12%,rgba(242,142,98,.05),transparent 55%)}
 .l-grid{background-image:linear-gradient(rgba(217,184,113,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(217,184,113,.035) 1px,transparent 1px);background-size:72px 72px;
   -webkit-mask-image:radial-gradient(ellipse 70% 70% at 60% 45%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 60% 45%,#000 20%,transparent 75%)}
-.rune{position:absolute;left:73%;top:48%;width:min(46rem,92vw);height:auto;aspect-ratio:1;translate:-50% -50%;opacity:.17;animation:spin 90s linear infinite}
-.rune .rune-inner{transform-origin:50% 50%;animation:spin 55s linear infinite reverse}
+.l-rune{perspective:1200px}
+.rune-tilt{position:absolute;left:50%;top:44%;width:min(66rem,135vw);aspect-ratio:1;translate:-50% -50%;transform-style:preserve-3d;will-change:transform}
+.rune{width:100%;height:100%;animation:spin 120s linear infinite}
+.rune .lines{opacity:.26}
+.rune .glyphs{opacity:.5}
+.rune .glyphs circle{fill:#070b17}
+.spotlight{position:absolute;left:0;top:0;width:46rem;height:46rem;margin:-23rem 0 0 -23rem;border-radius:50%;background:radial-gradient(circle,rgba(217,184,113,.075),rgba(111,214,187,.03) 35%,transparent 62%);opacity:0;transition:opacity .6s;will-change:transform}
+.hero:hover .spotlight{opacity:1}
+.motes i{position:absolute;bottom:-12px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;background:var(--mc);box-shadow:0 0 8px var(--mc);opacity:0;animation:mote var(--d) var(--dl) linear infinite}
+@keyframes mote{0%{transform:translate3d(0,0,0);opacity:0}12%{opacity:.85}85%{opacity:.5}100%{transform:translate3d(var(--dx),-90vh,0);opacity:0}}
+.rune .rune-inner{transform-origin:50% 50%;animation:spin 70s linear infinite reverse}
 .orb{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,var(--oc),transparent 68%);animation:float var(--d) ease-in-out infinite alternate}
 @keyframes float{to{transform:translate(var(--tx),var(--ty)) scale(1.14)}}
+/* lite tier: fewer layers, no 3D/blur, still elegant */
+.lite .l-grid,.lite .motes,.lite .spotlight,.lite .shimmer{display:none}
+.lite .rune,.lite .rune .rune-inner,.lite .orb,.lite .hero h1 span{animation:none}
+.lite .rune-tilt{will-change:auto}
+.lite .orb:nth-child(n+3){display:none}
 .hero.is-off *,.hero.is-off *::before,.hero.is-off *::after{animation-play-state:paused!important}
 @keyframes rise{from{transform:translateY(18px)}}
 .hero-grid>*{animation:rise .9s cubic-bezier(.22,1,.36,1) both}
-.hero-grid>*+*{animation-delay:.12s}
+.hero-grid>:nth-child(2){animation-delay:.1s}
+.hero-grid>:nth-child(3){animation-delay:.2s}
 .name-wrap{position:relative;isolation:isolate}
 .figure{position:absolute;z-index:-1;left:22%;top:-8%;width:min(560px,92%);height:auto;pointer-events:none;overflow:visible}
 .figure line{stroke:var(--gold);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.32;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s .2s cubic-bezier(.4,0,.2,1) forwards}
@@ -53,23 +78,40 @@
 .figure .halo{fill:none;stroke:var(--gold);opacity:.3}
 @keyframes draw{to{stroke-dashoffset:0}}
 .no-anim .figure line{stroke-dashoffset:0}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(2rem,4vw,4.5rem);align-items:center}
+.hero-photo{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.photo-tag{font:600 .74rem/1 var(--serif);letter-spacing:.32em;text-transform:uppercase;color:var(--gold);opacity:.85}
+.photo-dots{display:flex;gap:.5rem}
+.photo-dots i{width:5px;height:5px;border-radius:50%;background:var(--faint)}
+.photo-dots i:nth-child(2){background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.photo-dots i:nth-child(3){background:var(--anemo);box-shadow:0 0 6px var(--anemo)}
 .status{display:inline-flex;align-items:center;gap:.55rem;padding:.4rem .8rem;border:1px solid rgba(111,214,187,.3);border-radius:999px;background:rgba(111,214,187,.06);font:500 .75rem/1.2 var(--mono);letter-spacing:.06em;color:var(--anemo)}
 .status i{width:7px;height:7px;border-radius:50%;background:var(--anemo);box-shadow:0 0 0 3px rgba(111,214,187,.18)}
 .hero h1{padding-top:1.4rem;font-size:clamp(2.6rem,7.2vw,5rem);line-height:1.02;font-weight:700;color:#fff;letter-spacing:.015em}
-.hero h1 span{display:block;background:linear-gradient(180deg,var(--gold-hi) 15%,var(--gold) 70%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 span{display:block;background:linear-gradient(100deg,var(--gold-lo) 0%,var(--gold) 28%,var(--gold-hi) 44%,#fff7df 50%,var(--gold-hi) 56%,var(--gold) 72%,var(--gold-lo) 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s 1.5s ease-in-out infinite}
+@keyframes shine{0%,62%{background-position:100% 0}100%{background-position:-60% 0}}
 .role{margin-top:1rem;font-size:clamp(1.05rem,2.2vw,1.3rem);font-weight:500;color:var(--text)}
 .role b{color:var(--gold-hi);font-weight:600}
 .lede{margin-top:1rem;max-width:36rem;color:var(--muted);font-size:1.02rem}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.8rem}
 .hero-links{display:flex;flex-wrap:wrap;gap:.2rem 1.4rem;margin-top:.9rem}
 
-.card-id{padding:1.75rem 1.5rem 1.5rem;text-align:center;max-width:24rem;justify-self:end;width:100%}
-.portrait{position:relative;width:12.5rem;height:12.5rem;margin:1rem auto 0}
+.card-id{padding:1.6rem 1.5rem;max-width:26rem;justify-self:end;width:100%}
+.card-lbl{display:flex;align-items:center;gap:1rem;margin-bottom:1.15rem;font:600 .7rem/1 var(--serif);letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.card-lbl::after{content:"";flex:1;height:1px;background:var(--line-2)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.15rem}
+.stat{padding:.75rem .85rem;border:1px solid var(--line);border-radius:10px;background:rgba(217,184,113,.035);transition:border-color .25s,background .25s}
+.stat:hover{border-color:var(--line-2);background:rgba(217,184,113,.07)}
+.stat span{display:block;font:500 .62rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.stat b{display:block;margin-top:.35rem;font-size:.95rem;font-weight:600;line-height:1.3;color:var(--gold-hi)}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}
+.chips .tag{color:var(--anemo);transition:color .2s,border-color .2s,transform .2s}
+.chips .tag:hover{color:var(--gold-hi);border-color:var(--line-2);transform:translateY(-2px)}
+.portrait{position:relative;width:clamp(12rem,15vw,17rem);height:clamp(12rem,15vw,17rem);margin:1.7rem}
 .portrait img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid var(--bg);transition:transform .6s cubic-bezier(.22,1,.36,1)}
 .portrait picture{position:relative;z-index:1;height:100%;border-radius:50%;overflow:hidden}
-.card-id:hover .portrait img{transform:scale(1.05)}
-.portrait::before{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 0deg,var(--gold-lo),var(--gold-hi),var(--anemo),var(--electro),var(--pyro),var(--gold),var(--gold-lo));
+.portrait:hover img{transform:scale(1.06)}
+.portrait::before{content:"";position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(from 0deg,var(--gold-lo),var(--gold-hi),var(--anemo),var(--electro),var(--pyro),var(--gold),var(--gold-lo));
   -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));animation:spin 9s linear infinite}
 .orbit{position:absolute;inset:-1.6rem;border:1px solid rgba(217,184,113,.2);border-radius:50%;animation:spin 20s linear infinite}
 .orbit::before,.orbit::after{content:"";position:absolute;border-radius:50%}
@@ -78,12 +120,6 @@
 .portrait svg{position:absolute;inset:-9%;width:118%;height:118%;max-width:none;color:var(--gold);pointer-events:none}
 .portrait .ring{animation:spin 90s linear infinite;transform-origin:50% 50%}
 @keyframes spin{to{transform:rotate(360deg)}}
-.id-name{margin-top:1.4rem;font:700 1.05rem/1.2 var(--serif);letter-spacing:.12em;color:var(--gold-hi)}
-.id-title{margin-top:.3rem;font-size:.85rem;color:var(--muted)}
-.id-facts{margin-top:1.2rem;display:grid;gap:.5rem;text-align:left}
-.id-facts li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem .75rem;border:1px solid var(--line);border-radius:10px;background:rgba(6,9,19,.35);font-size:.85rem}
-.id-facts span{color:var(--faint)}
-.id-facts b{font-weight:500;color:var(--text);text-align:right}
 
 /* quest log — headline stats */
 .questlog{margin-top:clamp(2.5rem,6vw,4rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);background:rgba(13,19,36,.7)}
@@ -232,16 +268,20 @@
 .form-status.err{color:var(--pyro)}
 
 /* ─── RESPONSIVE ─── */
+@media (max-width:1100px){
+  .hero-grid{grid-template-columns:1fr 1fr}
+  .hero-grid>:first-child{grid-column:1/-1}
+  .rune-tilt{left:28%;top:62%}
+}
+@media (max-width:700px){
+  .hero-grid{grid-template-columns:1fr}
+  .rune-tilt{left:50%;top:52%}
+}
 @media (max-width:980px){
   .art-feat{grid-template-columns:1fr}
 }
 @media (max-width:860px){
-  .hero-grid{grid-template-columns:1fr}
-  .card-id{justify-self:stretch;max-width:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.25rem;align-items:center;text-align:left;padding:1.25rem}
-  .portrait{width:7rem;height:7rem;margin:1.2rem}
-  .orbit{inset:-1.1rem}
-  .id-name{margin-top:0}
-  .id-facts{grid-column:1/-1;margin-top:.25rem}
+  .card-id{justify-self:stretch;max-width:none}
   .questlog{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ql:nth-child(3){border-left:0}
   .ql:nth-child(n+3){border-top:1px solid var(--line)}
@@ -264,8 +304,8 @@
 @media (max-width:480px){
   .hero h1{font-size:2.55rem}
   .hero-cta .btn{flex:1 1 auto}
-  .card-id{grid-template-columns:1fr;justify-items:center;text-align:center}
-  .card-id .portrait{width:8.5rem;height:8.5rem;margin:1.4rem auto}
+  .portrait{width:11rem;height:11rem}
+  .motes i:nth-child(n+7){display:none}
   .rune{left:50%;top:30%;opacity:.12}
   .orb:nth-child(n+4){display:none}
   .arch .lanes{grid-template-columns:1fr}
@@ -318,14 +358,17 @@
 <!-- ══ HERO ══ -->
 <section class="hero" id="top" aria-labelledby="hero-name">
   <div class="layers" aria-hidden="true">
-    <div class="layer l-nebula" data-depth="10"></div>
-    <div class="layer l-grid" data-depth="4"></div>
-    <div class="layer l-rune" data-depth="24">
+    <div class="spotlight" id="spotlight"></div>
+    <div class="layer l-nebula" data-depth="30"></div>
+    <div class="layer l-grid" data-depth="14"></div>
+    <div class="layer l-rune" data-depth="120">
+      <div class="rune-tilt">
       <svg class="rune" viewBox="0 0 600 600" fill="none" focusable="false">
         <defs>
           <linearGradient id="rg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9b871"/><stop offset="1" stop-color="#6fd6bb"/></linearGradient>
           <linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6fd6bb"/><stop offset="1" stop-color="#bb93f7"/></linearGradient>
         </defs>
+        <g class="lines">
         <circle cx="300" cy="300" r="280" stroke="url(#rg1)" stroke-dasharray="8 16"/>
         <circle cx="300" cy="300" r="258" stroke="url(#rg1)" stroke-width=".5" opacity=".6"/>
         <polygon points="300,30 332,268 570,300 332,332 300,570 268,332 30,300 268,268" stroke="url(#rg2)" stroke-width=".8"/>
@@ -335,9 +378,13 @@
           <polygon points="300,132 378,258 378,342 300,468 222,342 222,258" stroke="url(#rg1)" stroke-width=".8"/>
         </g>
         <g stroke="url(#rg1)" opacity=".7"><path d="M300 22v22M300 556v22M22 300h22M556 300h22M88 88l14 14M498 102l14-14M88 512l14-14M512 512l-14-14"/></g>
+        </g>
+        <g class="glyphs"><g transform="translate(300.0 72.0)"><circle r="17" stroke="#6fd6bb" stroke-opacity=".6"/><use href="#g-anemo" x="-11" y="-11" width="22" height="22" style="color:#6fd6bb"/></g><g transform="translate(478.3 157.8)"><circle r="17" stroke="#eab84f" stroke-opacity=".6"/><use href="#g-geo" x="-11" y="-11" width="22" height="22" style="color:#eab84f"/></g><g transform="translate(522.3 350.7)"><circle r="17" stroke="#bb93f7" stroke-opacity=".6"/><use href="#g-electro" x="-11" y="-11" width="22" height="22" style="color:#bb93f7"/></g><g transform="translate(398.9 505.4)"><circle r="17" stroke="#a9cb4f" stroke-opacity=".6"/><use href="#g-dendro" x="-11" y="-11" width="22" height="22" style="color:#a9cb4f"/></g><g transform="translate(201.1 505.4)"><circle r="17" stroke="#5dbdf2" stroke-opacity=".6"/><use href="#g-hydro" x="-11" y="-11" width="22" height="22" style="color:#5dbdf2"/></g><g transform="translate(77.7 350.7)"><circle r="17" stroke="#f28e62" stroke-opacity=".6"/><use href="#g-pyro" x="-11" y="-11" width="22" height="22" style="color:#f28e62"/></g><g transform="translate(121.7 157.8)"><circle r="17" stroke="#a9dfec" stroke-opacity=".6"/><use href="#g-cryo" x="-11" y="-11" width="22" height="22" style="color:#a9dfec"/></g></g>
       </svg>
+      </div>
     </div>
-    <div class="layer l-orbs" data-depth="38">
+    <div class="motes"><i style="--x:61%;--s:3px;--mc:var(--anemo);--d:17.4s;--dl:11.3s;--dx:29px"></i><i style="--x:89%;--s:2px;--mc:var(--gold-hi);--d:17.7s;--dl:9.3s;--dx:-30px"></i><i style="--x:9%;--s:2px;--mc:var(--electro);--d:11.9s;--dl:5.6s;--dx:-30px"></i><i style="--x:54%;--s:4px;--mc:var(--hydro);--d:13.0s;--dl:8.8s;--dx:-11px"></i><i style="--x:21%;--s:3px;--mc:var(--pyro);--d:12.3s;--dl:9.6s;--dx:-43px"></i><i style="--x:61%;--s:2px;--mc:var(--dendro);--d:12.1s;--dl:11.7s;--dx:-59px"></i><i style="--x:75%;--s:2px;--mc:var(--cryo);--d:18.0s;--dl:3.5s;--dx:55px"></i><i style="--x:54%;--s:2px;--mc:var(--anemo);--d:12.5s;--dl:11.6s;--dx:-36px"></i><i style="--x:93%;--s:3px;--mc:var(--gold-hi);--d:13.4s;--dl:4.3s;--dx:-40px"></i><i style="--x:17%;--s:2px;--mc:var(--electro);--d:13.7s;--dl:9.8s;--dx:10px"></i><i style="--x:59%;--s:3px;--mc:var(--hydro);--d:11.5s;--dl:4.3s;--dx:-23px"></i><i style="--x:68%;--s:2px;--mc:var(--pyro);--d:14.8s;--dl:8.5s;--dx:-53px"></i><i style="--x:94%;--s:2px;--mc:var(--dendro);--d:18.6s;--dl:4.3s;--dx:-11px"></i><i style="--x:55%;--s:3px;--mc:var(--cryo);--d:13.9s;--dl:6.9s;--dx:-59px"></i></div>
+    <div class="layer l-orbs" data-depth="170">
       <i class="orb" style="--x:8%;--y:16%;--s:12rem;--oc:rgba(111,214,187,.16);--d:9s;--tx:24px;--ty:-34px"></i>
       <i class="orb" style="--x:82%;--y:60%;--s:8rem;--oc:rgba(217,184,113,.15);--d:12s;--tx:-18px;--ty:24px"></i>
       <i class="orb" style="--x:52%;--y:6%;--s:6rem;--oc:rgba(187,147,247,.14);--d:7s;--tx:14px;--ty:-18px"></i>
@@ -379,14 +426,13 @@
         </div>
       </div>
 
-      <aside class="panel corners card-id" aria-label="Profile summary">
-        <span class="shimmer" aria-hidden="true"></span>
+      <div class="hero-photo">
         <div class="portrait">
           <span class="orbit" aria-hidden="true"></span>
           <picture>
             <source type="image/avif" srcset="assets/images/mukul-portrait.avif">
             <source type="image/webp" srcset="assets/images/mukul-portrait.webp">
-            <img src="assets/images/mukul-portrait.jpg" width="200" height="200" alt="Portrait of Mukul Rayana under cherry blossoms" fetchpriority="high" decoding="async">
+            <img src="assets/images/mukul-portrait.jpg" width="272" height="272" alt="Portrait of Mukul Rayana under cherry blossoms" fetchpriority="high" decoding="async">
           </picture>
           <svg viewBox="0 0 236 236" aria-hidden="true" focusable="false">
             <circle cx="118" cy="118" r="113" fill="none" stroke="currentColor" stroke-opacity=".35"/>
@@ -394,14 +440,21 @@
             <path d="M118 0l4 5-4 5-4-5zM118 226l4 5-4 5-4-5zM0 118l5-4 5 4-5 4zM226 118l5-4 5 4-5 4z" fill="currentColor"/>
           </svg>
         </div>
-        <div>
-          <p class="id-name">MUKUL RAYANA</p>
-          <p class="id-title">AI/ML Engineer · College Park, MD</p>
+        <p class="photo-tag">Mukul Rayana</p>
+        <div class="photo-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+
+      <aside class="panel corners card-id" aria-label="About me">
+        <span class="shimmer" aria-hidden="true"></span>
+        <p class="card-lbl">About me</p>
+        <div class="stat-grid">
+          <div class="stat"><span>Degree</span><b>M.S. Applied ML</b></div>
+          <div class="stat"><span>University</span><b>University of Maryland</b></div>
+          <div class="stat"><span>Status</span><b>Open to work · OPT</b></div>
+          <div class="stat"><span>Location</span><b>College Park, MD</b></div>
         </div>
-        <ul class="id-facts">
-          <li><span>Degree</span><b>M.S. Applied ML, UMD ’26</b></li>
-          <li><span>Focus</span><b>Agents · RAG · LLMOps · RL</b></li>
-          <li><span>Work status</span><b>OPT · open to relocate</b></li>
+        <ul class="chips" aria-label="Core stack">
+          <li class="tag">Python</li><li class="tag">PyTorch</li><li class="tag">LangGraph</li><li class="tag">LangChain</li><li class="tag">RAG</li><li class="tag">QLoRA</li><li class="tag">XGBoost</li><li class="tag">FAISS</li><li class="tag">Pinecone</li><li class="tag">Unity Sentis</li><li class="tag">ONNX</li><li class="tag">Docker</li><li class="tag">FastAPI</li><li class="tag">MLflow</li><li class="tag">CUDA</li>
         </ul>
       </aside>
     </div>
@@ -817,28 +870,49 @@
   var layers = [].slice.call(document.querySelectorAll('.hero .layer'));
   var stars = [].slice.call(document.querySelectorAll('.cosmos .st'));
   var SK = [0.03, 0.08, 0.16], SH = [320, 560, 900];
-  var tx = 0, ty = 0, cx = 0, cy = 0, sy = window.scrollY, heroOn = true, ticking = false;
+  var root = document.documentElement, tilt3d = document.querySelector('.rune-tilt'), spot = document.getElementById('spotlight');
+  var tx = 0, ty = 0, cx = 0, cy = 0, mx = 0, my = 0, smx = 0, smy = 0, sy = window.scrollY, heroOn = true, ticking = false;
   function frame() {
-    cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
-    if (heroOn) layers.forEach(function (l) {
-      var d = +l.dataset.depth;
-      l.style.transform = 'translate3d(' + (cx * d).toFixed(2) + 'px,' + (cy * d + sy * d / 100).toFixed(2) + 'px,0)';
-    });
+    var lite = root.classList.contains('lite');
+    cx += (tx - cx) * 0.07; cy += (ty - cy) * 0.07;
+    if (heroOn) {
+      var hr = hero.getBoundingClientRect();
+      layers.forEach(function (l) {
+        var d = lite ? +l.dataset.depth * 0.3 : +l.dataset.depth;
+        l.style.transform = 'translate3d(' + (cx * d).toFixed(2) + 'px,' + (cy * d + sy * d / 400).toFixed(2) + 'px,0)';
+      });
+      if (!lite) {
+        tilt3d.style.transform = 'rotateX(' + (cy * -14).toFixed(2) + 'deg) rotateY(' + (cx * 14).toFixed(2) + 'deg)';
+        smx += (mx - smx) * 0.16; smy += (my - smy) * 0.16;
+        spot.style.transform = 'translate3d(' + (smx - hr.left).toFixed(1) + 'px,' + (smy - hr.top).toFixed(1) + 'px,0)';
+      }
+    }
     stars.forEach(function (st, i) {
       st.style.transform = 'translate3d(' + (cx * (i + 1) * 4).toFixed(2) + 'px,' + (-((sy * SK[i]) % SH[i])).toFixed(2) + 'px,0)';
     });
-    if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005) requestAnimationFrame(frame); else ticking = false;
+    if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005 || Math.abs(mx - smx) > 0.5 || Math.abs(my - smy) > 0.5) requestAnimationFrame(frame); else ticking = false;
   }
   function kick() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (!reduce) {
     window.addEventListener('scroll', function () { sy = window.scrollY; kick(); }, { passive: true });
     if (fine) document.addEventListener('pointermove', function (e) {
-      tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; kick();
+      tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; mx = e.clientX; my = e.clientY; kick();
     }, { passive: true });
     new IntersectionObserver(function (es) {
       heroOn = es[0].isIntersecting; hero.classList.toggle('is-off', !heroOn);
     }).observe(hero);
+  }
+
+  /* runtime FPS probe: if the first ~2s run under ~40fps, switch to the lite tier */
+  if (!reduce && !root.classList.contains('lite') && !root.dataset.fx) {
+    var frames = 0, t0 = 0;
+    requestAnimationFrame(function probe(t) {
+      if (!t0) t0 = t;
+      frames++;
+      if (t - t0 < 2000) requestAnimationFrame(probe);
+      else if (frames / ((t - t0) / 1000) < 40) root.classList.add('lite');
+    });
   }
 
   /* cards: cursor light + gentle tilt */
@@ -847,6 +921,7 @@
     var spot = document.createElement('span'); spot.className = 'spot'; el.prepend(spot);
     el.classList.add('fx');
     el.addEventListener('pointermove', function (e) {
+      if (root.classList.contains('lite')) return;
       var r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
       el.style.setProperty('--mx', (px * 100).toFixed(1) + '%'); el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
       if (tilt) el.style.transform = 'perspective(1000px) rotateX(' + ((0.5 - py) * 5).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 5).toFixed(2) + 'deg) translateY(-3px)';
