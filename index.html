@@ -112,7 +112,31 @@
 .xp-minor .bullets{margin-top:.7rem;font-size:.94rem}
 
 /* ─── PROJECTS (artifacts) ─── */
-.artifacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.proj-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.pchips{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;padding:.2rem;margin:-.2rem;min-width:0}
+.pchips::-webkit-scrollbar{display:none}
+.pchip{--c:var(--gold);flex:none;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.45rem;min-height:40px;padding:.4rem .85rem;border:1px solid var(--line);border-radius:999px;background:rgba(13,19,36,.65);color:var(--muted);font-size:.85rem;font-weight:500;white-space:nowrap;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.pchip i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.pchip:hover{color:var(--text)}
+.pchip[aria-current="true"]{color:#fff;border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 10%,rgba(13,19,36,.8))}
+.pchip b{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--c);transform:scaleX(0);transform-origin:left}
+.pchips.auto .pchip[aria-current="true"] b{animation:fill 8s linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.pctrl{display:flex;align-items:center;gap:.6rem;flex:none}
+.pcount{font:500 .85rem/1 var(--mono);color:var(--muted);min-width:4.5em;text-align:center}
+.pbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:rgba(13,19,36,.75);color:var(--gold-hi);font-size:1.05rem;cursor:pointer;transition:background .2s,opacity .2s,transform .2s}
+.pbtn:hover:not(:disabled){background:rgba(217,184,113,.12);transform:scale(1.06)}
+.pbtn:disabled{opacity:.35;cursor:default}
+.pprog{height:2px;border-radius:2px;background:var(--line);overflow:hidden}
+.pprog i{display:block;height:100%;transform-origin:left;transform:scaleX(var(--p,.14));background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi));transition:transform .2s}
+.carousel{position:relative}
+.artifacts{--edge:max(var(--gut),calc((100% - var(--wrap)) / 2 + var(--gut)));position:relative;display:flex;align-items:stretch;gap:1.25rem;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;padding:1.25rem var(--edge) 1.75rem;scroll-padding-inline:var(--edge);cursor:grab}
+.artifacts::-webkit-scrollbar{display:none}
+.artifacts:focus-visible{outline-offset:-4px}
+.artifacts.is-drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.artifacts>.art{flex:0 0 min(27rem,84vw);scroll-snap-align:start;transition:opacity .45s,transform .35s cubic-bezier(.22,1,.36,1),border-color .25s}
+.artifacts>.art-feat{flex-basis:min(56rem,88vw)}
+.artifacts>.art:not(.in-view){opacity:.42}
 .art{--c:var(--gold);display:flex;flex-direction:column;padding:clamp(1.25rem,3vw,1.75rem);transition:border-color .25s,transform .25s}
 .art:hover{border-color:color-mix(in srgb,var(--c) 45%,transparent);transform:translateY(-2px)}
 .art::before{border-color:var(--c)!important}
@@ -137,7 +161,7 @@
 .art-links a{color:var(--text)}
 
 /* featured artifact */
-.art-feat{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start}
+.art-feat{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start}
 .art-feat .art-col{display:flex;flex-direction:column;height:100%}
 .art-feat h3{font-size:clamp(1.45rem,3vw,1.85rem)}
 .arch{padding:1.1rem;border:1px solid var(--line);border-radius:12px;background:rgba(6,9,19,.45)}
@@ -210,6 +234,9 @@
   .artifacts,.two,.contact{grid-template-columns:1fr}
   .talent{grid-template-columns:1fr;gap:.6rem}
   .sec-head{flex-direction:column;align-items:flex-start}
+  .proj-bar{flex-wrap:wrap}
+  .pchips{flex:1 1 100%}
+  .pctrl{margin-left:auto}
 }
 @media (max-width:480px){
   .hero h1{font-size:2.55rem}
@@ -373,10 +400,22 @@
         <p class="eyebrow">Artifacts</p>
         <h2 class="sec-title" id="projects-title">Projects</h2>
       </div>
-      <p class="sec-note">Each one is tagged with an element for its domain: Anemo for agents, Dendro for RAG and LLMOps, Electro for RL, Hydro for safety.</p>
+      <p class="sec-note">Each artifact carries an element for its domain: Anemo agents, Electro RL, Hydro safety, Cryo research, Dendro LLMOps, Geo security, Pyro generative AI.</p>
     </div>
 
-    <div class="artifacts">
+    <div class="proj-bar">
+      <div class="pchips" id="projChips" role="group" aria-label="Jump to project"><button class="pchip" type="button" style="--c:var(--anemo)" data-i="0"><i aria-hidden="true"></i>PharmaChain<b aria-hidden="true"></b></button><button class="pchip" type="button" style="--c:var(--electro)" data-i="1"><i aria-hidden="true"></i>Nemesis<b aria-hidden="true"></b></button><button class="pchip" type="button" style="--c:var(--hydro)" data-i="2"><i aria-hidden="true"></i>EmpathRAG<b aria-hidden="true"></b></button><button class="pchip" type="button" style="--c:var(--cryo)" data-i="3"><i aria-hidden="true"></i>RECON<b aria-hidden="true"></b></button><button class="pchip" type="button" style="--c:var(--dendro)" data-i="4"><i aria-hidden="true"></i>Irminsul<b aria-hidden="true"></b></button><button class="pchip" type="button" style="--c:var(--geo)" data-i="5"><i aria-hidden="true"></i>DocPilot<b aria-hidden="true"></b></button><button class="pchip" type="button" style="--c:var(--pyro)" data-i="6"><i aria-hidden="true"></i>VR Generation<b aria-hidden="true"></b></button></div>
+      <div class="pctrl">
+        <span class="pcount" id="projCount" aria-live="polite">01 / 07</span>
+        <button class="pbtn" type="button" id="projPrev" aria-label="Previous project">←</button>
+        <button class="pbtn" type="button" id="projNext" aria-label="Next project">→</button>
+      </div>
+    </div>
+    <div class="pprog" aria-hidden="true"><i id="projProg"></i></div>
+  </div>
+
+  <div class="carousel">
+    <div class="artifacts" id="projTrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Projects, use arrow keys or drag to browse">
 
       <!-- Featured: PharmaChain -->
       <article class="panel corners art art-feat reveal" style="--c:var(--anemo)">
@@ -801,6 +840,102 @@
     el.style.setProperty('--rd', (sib % 4) * 90 + 'ms');
     if (reduce) el.classList.add('is-in'); else rev.observe(el);
   });
+})();
+
+/* projects carousel: snap track + chips, arrows, keys, mouse drag, gentle autoplay */
+(function () {
+  var track = document.getElementById('projTrack');
+  if (!track) return;
+  var cards = [].slice.call(track.querySelectorAll('.art'));
+  var chipsBox = document.getElementById('projChips');
+  var chips = [].slice.call(chipsBox.querySelectorAll('.pchip'));
+  var prev = document.getElementById('projPrev'), next = document.getElementById('projNext');
+  var count = document.getElementById('projCount'), prog = document.getElementById('projProg');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var n = cards.length, current = 0, ticking = false;
+  var pad = function (k) { return (k < 10 ? '0' : '') + k; };
+  var edge = function () { return parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0; };
+  var maxScroll = function () { return track.scrollWidth - track.clientWidth; };
+
+  function nearest() {
+    var x = track.scrollLeft + edge(), best = 0, d = Infinity;
+    if (track.scrollLeft >= maxScroll() - 4) return n - 1;
+    cards.forEach(function (c, i) { var dd = Math.abs(c.offsetLeft - x); if (dd < d) { d = dd; best = i; } });
+    return best;
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(n - 1, i));
+    track.scrollTo({ left: cards[i].offsetLeft - edge(), behavior: reduce ? 'auto' : 'smooth' });
+  }
+  function update() {
+    ticking = false;
+    current = nearest();
+    chips.forEach(function (c, i) { if (i === current) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current'); });
+    var ch = chips[current]; chipsBox.scrollTo({ left: ch.offsetLeft - chipsBox.clientWidth / 2 + ch.offsetWidth / 2, behavior: 'smooth' });
+    count.textContent = pad(current + 1) + ' / ' + pad(n);
+    var m = maxScroll();
+    prog.style.setProperty('--p', m > 0 ? Math.max(0.06, track.scrollLeft / m) : 1);
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= m - 2;
+  }
+  track.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+
+  /* dim cards that are mostly off-screen */
+  if ('IntersectionObserver' in window) {
+    var vis = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('in-view', e.intersectionRatio > 0.8); });
+    }, { root: track, threshold: [0, 0.8, 1] });
+    cards.forEach(function (c) { vis.observe(c); });
+  } else cards.forEach(function (c) { c.classList.add('in-view'); });
+
+  /* autoplay until the visitor takes over */
+  var auto = null, inView = false, hover = false;
+  function stopAuto() { clearInterval(auto); auto = null; chipsBox.classList.remove('auto'); }
+  function startAuto() {
+    if (reduce || auto === false) return;
+    clearInterval(auto); chipsBox.classList.add('auto');
+    auto = setInterval(function () { if (inView && !hover && !document.hidden) go(current >= n - 1 ? 0 : current + 1); }, 8000);
+  }
+  function takeOver() { stopAuto(); auto = false; }
+  if (!reduce && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { inView = es[0].isIntersecting; if (inView && auto === null) startAuto(); }, { threshold: 0.35 }).observe(track);
+  }
+  track.addEventListener('mouseenter', function () { hover = true; });
+  track.addEventListener('mouseleave', function () { hover = false; });
+  ['touchstart', 'wheel', 'keydown'].forEach(function (ev) { track.addEventListener(ev, takeOver, { passive: true }); });
+
+  chips.forEach(function (c, i) { c.addEventListener('click', function () { takeOver(); go(i); }); });
+  prev.addEventListener('click', function () { takeOver(); go(current - 1); });
+  next.addEventListener('click', function () { takeOver(); go(current + 1); });
+  track.addEventListener('keydown', function (e) {
+    if (e.target !== track) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  });
+
+  /* mouse drag to scroll (touch already swipes natively) */
+  var sx = 0, sl = 0, down = false, moved = false;
+  track.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; takeOver();
+  });
+  track.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    var dx = e.clientX - sx;
+    if (!moved && Math.abs(dx) > 6) { moved = true; track.classList.add('is-drag'); track.setPointerCapture(e.pointerId); }
+    if (moved) track.scrollLeft = sl - dx;
+  });
+  function endDrag() {
+    if (!down) return; down = false;
+    if (moved) { track.classList.remove('is-drag'); go(nearest()); }
+  }
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+  track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  track.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+  update();
 })();
 
 /* contact form → Formspree, falls back to mailto */
