@@ -19,10 +19,12 @@
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site.js" defer></script>
 <script>
 /* device tier: 'lite' trims layers on weak hardware, data-saver or slow networks; a runtime FPS probe can add it later */
 (function () {
   var d = document.documentElement, n = navigator, c = n.connection || {};
+  try { var t = localStorage.getItem('mr-theme'); if (t === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
   var fx = (location.search.match(/[?&]fx=(full|lite)/) || [])[1];
   d.classList.add('js');
   if (fx) { d.dataset.fx = fx; if (fx === 'lite') d.classList.add('lite'); return; }
@@ -84,7 +86,7 @@
 .photo-dots i:nth-child(3){background:var(--anemo);box-shadow:0 0 6px var(--anemo)}
 .status{display:inline-flex;align-items:center;gap:.55rem;padding:.4rem .8rem;border:1px solid rgba(111,214,187,.3);border-radius:999px;background:rgba(111,214,187,.06);font:500 .75rem/1.2 var(--mono);letter-spacing:.06em;color:var(--anemo)}
 .status i{width:7px;height:7px;border-radius:50%;background:var(--anemo);box-shadow:0 0 0 3px rgba(111,214,187,.18)}
-.hero h1{padding-top:1.4rem;font-size:clamp(2.6rem,7.2vw,5rem);line-height:1.02;font-weight:700;color:#fff;letter-spacing:.015em}
+.hero h1{padding-top:1.4rem;font-size:clamp(2.6rem,7.2vw,5rem);line-height:1.02;font-weight:700;color:var(--title);letter-spacing:.015em}
 .hero h1 span{display:block;background:linear-gradient(100deg,var(--gold-lo) 0%,var(--gold) 28%,var(--gold-hi) 44%,#fff7df 50%,var(--gold-hi) 56%,var(--gold) 72%,var(--gold-lo) 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s 1.5s ease-in-out infinite}
 @keyframes shine{0%,62%{background-position:100% 0}100%{background-position:-60% 0}}
 .role{margin-top:1rem;font-size:clamp(1.05rem,2.2vw,1.3rem);font-weight:500;color:var(--text)}
@@ -119,7 +121,7 @@
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* quest log — headline stats */
-.questlog{margin-top:clamp(2.5rem,6vw,4rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);background:rgba(13,19,36,.7)}
+.questlog{margin-top:clamp(2.5rem,6vw,4rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);background:rgba(var(--ink),.7)}
 .ql{padding:1.15rem 1.25rem;border-left:1px solid var(--line)}
 .ql:first-child{border-left:0}
 .ql-v{display:block;font:500 clamp(1.3rem,2.6vw,1.65rem)/1.1 var(--mono);color:var(--gold-hi);letter-spacing:-.01em}
@@ -129,13 +131,13 @@
 .xp-main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;overflow:hidden}
 .xp-body{padding:clamp(1.4rem,3.5vw,2.25rem)}
 .xp-meta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font:400 .8rem/1.4 var(--mono);color:var(--faint);letter-spacing:.04em}
-.xp-role{margin-top:.6rem;font-size:clamp(1.3rem,2.6vw,1.6rem);color:#fff}
+.xp-role{margin-top:.6rem;font-size:clamp(1.3rem,2.6vw,1.6rem);color:var(--title)}
 .xp-co{margin-top:.25rem;font-weight:500;color:var(--gold-hi)}
 .bullets{margin-top:1.1rem;display:grid;gap:.65rem}
 .bullets li{position:relative;padding-left:1.15rem;color:var(--muted)}
 .bullets li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;transform:rotate(45deg);background:var(--gold)}
 .bullets b{color:var(--text);font-weight:600}
-.xp-stats{padding:clamp(1.4rem,3.5vw,2.25rem);border-left:1px solid var(--line);background:rgba(6,9,19,.35);display:grid;gap:1rem;align-content:center}
+.xp-stats{padding:clamp(1.4rem,3.5vw,2.25rem);border-left:1px solid var(--line);background:rgba(var(--ink),.35);display:grid;gap:1rem;align-content:center}
 .xs{display:grid;gap:.2rem}
 .xs-v{font:500 1.5rem/1.1 var(--mono);color:var(--gold-hi)}
 .xs-l{font-size:.82rem;color:var(--muted)}
@@ -147,14 +149,14 @@
 /* ─── PROJECTS (artifacts) ─── */
 /* Stellar Archive: constellation rail + one project on stage, auto-advance */
 .archive{display:grid;grid-template-columns:17.5rem minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start}
-.rail{position:sticky;top:5.5rem;display:flex;flex-direction:column;padding:.5rem 0;border:1px solid var(--line);border-radius:var(--r);background:rgba(10,15,30,.62)}
+.rail{position:sticky;top:5.5rem;display:flex;flex-direction:column;padding:.5rem 0;border:1px solid var(--line);border-radius:var(--r);background:rgba(var(--ink),.62)}
 .rail::before{content:"";position:absolute;left:calc(1.25rem + 5px);top:1.4rem;bottom:1.4rem;width:1px;background:linear-gradient(transparent,var(--line-2) 10%,var(--line-2) 90%,transparent)}
 .rail-item{--c:var(--gold);position:relative;display:flex;align-items:center;gap:.95rem;width:100%;padding:.85rem 1.25rem;border:0;border-left:2px solid transparent;background:none;text-align:left;cursor:pointer;overflow:hidden;transition:background .25s,border-color .25s}
 .rail-item:hover{background:rgba(217,184,113,.045)}
 .rail-item[aria-selected="true"]{border-left-color:var(--c);background:color-mix(in srgb,var(--c) 8%,transparent)}
 .rail-item:focus-visible{outline:2px solid var(--gold-hi);outline-offset:-3px;border-radius:0}
-.rail-dot{position:relative;z-index:1;flex:none;width:9px;height:9px;margin-left:1px;border-radius:50%;background:#46506e;transition:background .3s,box-shadow .3s}
-.rail-item:hover .rail-dot{background:color-mix(in srgb,var(--c) 60%,#46506e)}
+.rail-dot{position:relative;z-index:1;flex:none;width:9px;height:9px;margin-left:1px;border-radius:50%;background:var(--dot);transition:background .3s,box-shadow .3s}
+.rail-item:hover .rail-dot{background:color-mix(in srgb,var(--c) 60%,var(--dot))}
 .rail-item[aria-selected="true"] .rail-dot{background:var(--c);box-shadow:0 0 10px var(--c)}
 .rail-item[aria-selected="true"] .rail-dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--c);animation:pulse 2.4s ease-out infinite}
 @keyframes pulse{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(2.4)}}
@@ -189,7 +191,7 @@
 .cover .hobby-top{flex-direction:column;gap:.9rem}
 .cover .hobby-ic{width:3.6rem;height:3.6rem;box-shadow:0 0 24px rgba(217,184,113,.18)}
 .cover .hobby h3{font-size:1.1rem}
-.cover-btn{position:absolute;top:45%;z-index:20;width:44px;height:44px;margin-top:-22px;border-radius:50%;border:1px solid var(--line-2);background:rgba(6,9,19,.75);color:var(--gold-hi);font-size:1.1rem;cursor:pointer;transition:background .2s,transform .2s}
+.cover-btn{position:absolute;top:45%;z-index:20;width:44px;height:44px;margin-top:-22px;border-radius:50%;border:1px solid var(--line-2);background:rgba(var(--ink),.75);color:var(--gold-hi);font-size:1.1rem;cursor:pointer;transition:background .2s,transform .2s}
 .cover-btn:hover{background:rgba(217,184,113,.14);transform:scale(1.08)}
 .cover-prev{left:.5rem}.cover-next{right:.5rem}
 .cover-dots{position:absolute;left:0;right:0;bottom:.5rem;display:flex;justify-content:center;gap:.4rem;z-index:20}
@@ -201,10 +203,10 @@
 .art::before{border-color:var(--c)!important}
 .art-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
 .art-rank{font:500 .75rem/1 var(--mono);letter-spacing:.04em;color:var(--gold)}
-.art h3{margin-top:1.05rem;font-size:1.35rem;color:#fff}
+.art h3{margin-top:1.05rem;font-size:1.35rem;color:var(--title)}
 .art-sub{margin-top:.3rem;color:var(--muted);font-size:.92rem}
 .main-stat{margin-top:1.15rem;padding:.85rem 1rem;border-radius:10px;border:1px solid color-mix(in srgb,var(--c) 26%,transparent);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 10%,transparent),transparent 80%)}
-.main-stat b{display:block;font:500 1.6rem/1.1 var(--mono);color:#fff}
+.main-stat b{display:block;font:500 1.6rem/1.1 var(--mono);color:var(--title)}
 .main-stat span{display:block;margin-top:.3rem;font-size:.8rem;color:var(--muted)}
 .subs{margin-top:.8rem;display:grid;gap:.1rem}
 .subs li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.42rem 0;border-bottom:1px dashed rgba(217,184,113,.12);font-size:.86rem}
@@ -223,7 +225,7 @@
 .art-feat{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start}
 .art-feat .art-col{display:flex;flex-direction:column;height:100%}
 .art-feat h3{font-size:clamp(1.45rem,3vw,1.85rem)}
-.arch{padding:1.1rem;border:1px solid var(--line);border-radius:12px;background:rgba(6,9,19,.45)}
+.arch{padding:1.1rem;border:1px solid var(--line);border-radius:12px;background:rgba(var(--ink),.45)}
 .arch-title{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:.9rem}
 .arch ol{list-style:none;padding:0;display:grid;gap:.5rem;counter-reset:s}
 .arch li{position:relative;display:grid;gap:.1rem;padding:.65rem .8rem .65rem 2.6rem;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:.85rem;color:var(--muted)}
@@ -237,7 +239,7 @@
 /* ─── EDUCATION / LEADERSHIP ─── */
 .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
 .edu{padding:clamp(1.25rem,3vw,1.75rem)}
-.edu h3{margin-top:.55rem;font-size:1.2rem;color:#fff}
+.edu h3{margin-top:.55rem;font-size:1.2rem;color:var(--title)}
 .edu .xp-co{font-size:.95rem}
 .edu .bullets{font-size:.93rem}
 .sub-head{margin:3rem 0 1.25rem;font:600 .8rem/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:1rem}
@@ -260,18 +262,18 @@
 
 /* ─── CONTACT ─── */
 .contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);padding:clamp(1.5rem,4vw,2.75rem)}
-.contact h2{font-size:clamp(1.6rem,3.6vw,2.3rem);color:#fff}
+.contact h2{font-size:clamp(1.6rem,3.6vw,2.3rem);color:var(--title)}
 .contact-lede{margin-top:.9rem;color:var(--muted)}
 .contact-lede b{color:var(--text);font-weight:600}
 .contact .hero-cta{margin-top:1.5rem}
 .form{display:grid;gap:.85rem}
 .field{display:grid;gap:.35rem}
 .field label{font:500 .75rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
-.field input,.field textarea{width:100%;padding:.8rem .9rem;border-radius:10px;border:1px solid var(--line-2);background:rgba(6,9,19,.6);font-size:1rem;transition:border-color .2s,box-shadow .2s}
+.field input,.field textarea{width:100%;padding:.8rem .9rem;border-radius:10px;border:1px solid var(--line-2);background:rgba(var(--ink),.6);font-size:1rem;transition:border-color .2s,box-shadow .2s}
 .field textarea{min-height:7.5rem;resize:vertical}
 .field input:user-invalid,.field textarea:user-invalid,.field .is-bad{border-color:var(--pyro)}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,184,113,.18)}
-.field ::placeholder{color:#6f7997}
+.field ::placeholder{color:var(--faint)}
 .form-status{min-height:1.4em;font-size:.9rem;color:var(--anemo)}
 .form-status.err{color:var(--pyro)}
 
@@ -375,6 +377,11 @@
         <li><a class="nav-cta" href="assets/Mukul_Rayana_Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
       </ul>
     </nav>
+    <div class="nav-tools">
+      <button class="icon-btn has-kbd" type="button" id="searchBtn" aria-label="Open command palette" aria-keyshortcuts="Control+K Meta+K"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></g></svg><kbd>⌘K</kbd></button>
+      <button class="icon-btn" type="button" id="themeBtn" aria-label="Daylight theme" aria-pressed="false"><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></g></svg><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
+      <button class="icon-btn" type="button" id="soundBtn" aria-label="Turn ambient sound on" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="i-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="i-off" d="m16 9.5 5 5m0-5-5 5"/></g></svg></button>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks"><span class="bars"></span><span class="sr-only">Menu</span></button>
   </div>
 </header>
