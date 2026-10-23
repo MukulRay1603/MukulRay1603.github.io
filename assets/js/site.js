@@ -204,6 +204,28 @@
     if (!/Mac|iPhone|iPad/.test(navigator.platform || '')) { var k = searchBtn.querySelector('kbd'); if (k) k.textContent = 'Ctrl K'; }
   }
 
+
+  /* ─── trailing gold cursor ring (fine pointers, full tier) ─── */
+  if (!reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var ring = document.createElement('div'); ring.className = 'cursor'; ring.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(ring);
+    var tx = -100, ty = -100, rx = -100, ry = -100, moving = false;
+    function follow() {
+      rx += (tx - rx) * 0.2; ry += (ty - ry) * 0.2;
+      ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
+      if (Math.abs(tx - rx) > 0.3 || Math.abs(ty - ry) > 0.3) requestAnimationFrame(follow); else moving = false;
+    }
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse' || root.classList.contains('lite') || (!e.clientX && !e.clientY)) return;
+      tx = e.clientX; ty = e.clientY; ring.classList.add('on');
+      if (!moving) { moving = true; requestAnimationFrame(follow); }
+    }, { passive: true });
+    document.addEventListener('pointerover', function (e) {
+      ring.classList.toggle('hover', !!e.target.closest('a, button, [role="tab"], .cmdk-item, input, textarea'));
+    });
+    document.documentElement.addEventListener('mouseleave', function () { ring.classList.remove('on'); });
+  }
+
   /* small toast for confirmations */
   var toastEl = null, toastT = 0;
   function toast(msg) {
