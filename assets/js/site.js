@@ -104,7 +104,7 @@
   var wantSound = false;
   try { wantSound = sessionStorage.getItem('mr-sound') === 'on'; } catch (e) {}
   if (wantSound) {
-    if (soundBtn) soundBtn.setAttribute('aria-pressed', 'true');
+    if (soundBtn) { soundBtn.setAttribute('aria-pressed', 'true'); soundBtn.setAttribute('aria-label', 'Ambient sound paused; it resumes on your next click or key press'); }
     var kick = function (e) {
       if (soundBtn && soundBtn.contains(e.target)) return; /* the button handles itself */
       ['pointerdown', 'keydown'].forEach(function (t) { document.removeEventListener(t, kick, true); });

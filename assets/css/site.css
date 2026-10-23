@@ -4,11 +4,17 @@
    voice and numbers, Nunito Sans (soft, rounded) for reading.
    ═══════════════════════════════════════════════════════════ */
 
+/* Metric-matched local fallbacks: text keeps its size and line breaks while the webfonts load (no layout shift on slow phones) */
+@font-face{font-family:"Nunito Fallback";src:local("Arial"),local("Liberation Sans"),local("Helvetica Neue"),local("Helvetica");size-adjust:101.88%;ascent-override:99.24%;descent-override:34.65%;line-gap-override:0%}
+@font-face{font-family:"Cormorant Fallback";font-weight:400 500;src:local("Times New Roman"),local("Liberation Serif"),local("Times");size-adjust:97.71%;ascent-override:94.56%;descent-override:29.37%;line-gap-override:0%}
+@font-face{font-family:"Cormorant Fallback";font-weight:600 700;src:local("Times New Roman Bold"),local("TimesNewRomanPS-BoldMT"),local("Liberation Serif Bold"),local("Times Bold");size-adjust:92.04%;ascent-override:100.4%;descent-override:31.18%;line-gap-override:0%}
+
 /* Self-hosted fonts (latin subset, variable weights) */
 @font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500 700;font-display:swap;src:url(../fonts/cormorant-garamond-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:"Nunito Sans";font-style:normal;font-weight:400 700;font-display:swap;src:url(../fonts/nunito-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 
 :root{
+  --shine:#fbf3dc;
   --bg:#070b18;--bg-2:#0b1022;--surface:#0e1426;--surface-2:#131b33;
   --g:216,182,110;
   --line:rgba(var(--g),.16);--line-2:rgba(var(--g),.34);
@@ -16,8 +22,8 @@
   --gold:#d8b66e;--gold-hi:#f0dfaf;--gold-lo:#a07f3e;
   --anemo:#7fd3c0;--dendro:#add06a;--electro:#bf9cf5;--hydro:#6cc0f0;
   --cryo:#ade0ec;--geo:#ebbd5c;--pyro:#f29a72;
-  --serif:"Cormorant Garamond",Garamond,"Times New Roman",serif;
-  --sans:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Cormorant Garamond","Cormorant Fallback",Garamond,"Times New Roman",serif;
+  --sans:"Nunito Sans","Nunito Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:var(--sans);
   --ink:7,11,24;--dot:#4a5372;
   --r:16px;--wrap:1160px;--gut:clamp(1rem,4vw,2.5rem);
@@ -30,7 +36,8 @@
   --g:138,100,32;
   --text:#1d2232;--muted:#454d66;--faint:#5c6580;--title:#141826;--ink:255,251,242;--dot:#b9b2a2;
   --gold:#8a6420;--gold-hi:#6e4d12;--gold-lo:#c09a4c;
-  --anemo:#16805f;--dendro:#557313;--electro:#6d45c4;--hydro:#1a6fa8;--cryo:#23788f;--geo:#8f6200;--pyro:#b24b22;
+  --anemo:#0e6a4e;--dendro:#465f0e;--electro:#6340b5;--hydro:#145b8b;--cryo:#195f72;--geo:#764f00;--pyro:#963a17;
+  --shine:#c28f34;
   color-scheme:light}
 :root[data-theme="light"] body{background-image:radial-gradient(1100px 620px at 82% -8%,rgba(93,189,242,.10),transparent 60%),radial-gradient(900px 600px at -10% 10%,rgba(217,184,113,.16),transparent 60%)}
 :root[data-theme="light"] ::selection{background:rgba(138,100,32,.25);color:var(--title)}
