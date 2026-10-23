@@ -124,10 +124,42 @@ strong{color:var(--text);font-weight:600}
 .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
 .js .reveal.is-in{opacity:1;transform:none}
 
+/* ─── cosmos: page-wide 3-layer starfield (tiles, transform-only parallax) ─── */
+.cosmos{
+  --st1:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Ccircle cx='145' cy='179' r='0.8' fill='%23e6ecff' opacity='0.41'/%3E%3Ccircle cx='163' cy='188' r='0.5' fill='%23e6ecff' opacity='0.43'/%3E%3Ccircle cx='202' cy='254' r='0.4' fill='%23e6ecff' opacity='0.36'/%3E%3Ccircle cx='29' cy='259' r='0.7' fill='%23e6ecff' opacity='0.26'/%3E%3Ccircle cx='314' cy='309' r='0.7' fill='%23e6ecff' opacity='0.47'/%3E%3Ccircle cx='50' cy='5' r='0.6' fill='%23e6ecff' opacity='0.27'/%3E%3Ccircle cx='61' cy='77' r='0.4' fill='%23e6ecff' opacity='0.41'/%3E%3Ccircle cx='141' cy='270' r='0.6' fill='%23e6ecff' opacity='0.47'/%3E%3Ccircle cx='160' cy='212' r='0.6' fill='%23e6ecff' opacity='0.35'/%3E%3Ccircle cx='319' cy='319' r='0.7' fill='%23e6ecff' opacity='0.50'/%3E%3Ccircle cx='101' cy='73' r='0.5' fill='%23e6ecff' opacity='0.27'/%3E%3Ccircle cx='245' cy='128' r='0.7' fill='%23e6ecff' opacity='0.39'/%3E%3Ccircle cx='307' cy='271' r='0.4' fill='%23e6ecff' opacity='0.32'/%3E%3Ccircle cx='291' cy='150' r='0.8' fill='%23e6ecff' opacity='0.39'/%3E%3Ccircle cx='23' cy='201' r='0.7' fill='%23e6ecff' opacity='0.34'/%3E%3Ccircle cx='28' cy='106' r='0.8' fill='%23e6ecff' opacity='0.52'/%3E%3Ccircle cx='38' cy='79' r='0.4' fill='%23e6ecff' opacity='0.27'/%3E%3Ccircle cx='255' cy='57' r='0.6' fill='%23e6ecff' opacity='0.41'/%3E%3Ccircle cx='61' cy='234' r='0.5' fill='%23e6ecff' opacity='0.48'/%3E%3Ccircle cx='37' cy='135' r='0.5' fill='%23e6ecff' opacity='0.34'/%3E%3Ccircle cx='311' cy='257' r='0.5' fill='%23e6ecff' opacity='0.56'/%3E%3Ccircle cx='67' cy='126' r='0.7' fill='%23e6ecff' opacity='0.47'/%3E%3Ccircle cx='32' cy='317' r='0.5' fill='%23e6ecff' opacity='0.34'/%3E%3Ccircle cx='247' cy='105' r='0.5' fill='%23e6ecff' opacity='0.28'/%3E%3Ccircle cx='29' cy='186' r='0.5' fill='%23e6ecff' opacity='0.46'/%3E%3Ccircle cx='119' cy='145' r='0.8' fill='%23e6ecff' opacity='0.42'/%3E%3Ccircle cx='184' cy='277' r='0.5' fill='%23e6ecff' opacity='0.30'/%3E%3Ccircle cx='291' cy='262' r='0.5' fill='%23e6ecff' opacity='0.32'/%3E%3Ccircle cx='237' cy='301' r='0.5' fill='%23e6ecff' opacity='0.58'/%3E%3Ccircle cx='282' cy='193' r='0.6' fill='%23e6ecff' opacity='0.29'/%3E%3Ccircle cx='12' cy='308' r='0.5' fill='%23e6ecff' opacity='0.50'/%3E%3Ccircle cx='82' cy='264' r='0.6' fill='%23e6ecff' opacity='0.35'/%3E%3Ccircle cx='56' cy='231' r='0.4' fill='%23e6ecff' opacity='0.33'/%3E%3Ccircle cx='179' cy='273' r='0.6' fill='%23e6ecff' opacity='0.35'/%3E%3C/svg%3E");
+  --st2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560'%3E%3Ccircle cx='514' cy='114' r='0.7' fill='%23e6ecff' opacity='0.56'/%3E%3Ccircle cx='250' cy='34' r='0.8' fill='%23e6ecff' opacity='0.60'/%3E%3Ccircle cx='320' cy='74' r='0.9' fill='%23e6ecff' opacity='0.81'/%3E%3Ccircle cx='549' cy='368' r='1.0' fill='%23e6ecff' opacity='0.68'/%3E%3Ccircle cx='79' cy='20' r='0.7' fill='%23e6ecff' opacity='0.81'/%3E%3Ccircle cx='393' cy='539' r='0.7' fill='%23e6ecff' opacity='0.70'/%3E%3Ccircle cx='270' cy='409' r='0.9' fill='%23e6ecff' opacity='0.85'/%3E%3Ccircle cx='42' cy='306' r='1.1' fill='%23e6ecff' opacity='0.81'/%3E%3Ccircle cx='413' cy='394' r='1.1' fill='%23e6ecff' opacity='0.82'/%3E%3Ccircle cx='197' cy='384' r='1.2' fill='%23e6ecff' opacity='0.80'/%3E%3Ccircle cx='234' cy='443' r='1.1' fill='%23e6ecff' opacity='0.68'/%3E%3Ccircle cx='350' cy='214' r='1.0' fill='%23e6ecff' opacity='0.69'/%3E%3Ccircle cx='45' cy='358' r='1.2' fill='%23e6ecff' opacity='0.80'/%3E%3Ccircle cx='408' cy='218' r='1.1' fill='%23e6ecff' opacity='0.68'/%3E%3Ccircle cx='247' cy='469' r='0.7' fill='%23e6ecff' opacity='0.75'/%3E%3Ccircle cx='17' cy='337' r='0.9' fill='%23e6ecff' opacity='0.54'/%3E%3C/svg%3E");
+  --st3:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Ccircle cx='629' cy='448' r='5.6' fill='%23d9b871' opacity='0.18'/%3E%3Ccircle cx='629' cy='448' r='1.4' fill='%23fff6dc' opacity='0.98'/%3E%3Ccircle cx='230' cy='10' r='5.0' fill='%23d9b871' opacity='0.16'/%3E%3Ccircle cx='230' cy='10' r='1.3' fill='%23fff6dc' opacity='0.90'/%3E%3Ccircle cx='182' cy='153' r='6.2' fill='%23d9b871' opacity='0.16'/%3E%3Ccircle cx='182' cy='153' r='1.6' fill='%23fff6dc' opacity='0.90'/%3E%3Ccircle cx='398' cy='803' r='5.1' fill='%23d9b871' opacity='0.16'/%3E%3Ccircle cx='398' cy='803' r='1.3' fill='%23fff6dc' opacity='0.90'/%3E%3Ccircle cx='179' cy='388' r='6.0' fill='%23d9b871' opacity='0.18'/%3E%3Ccircle cx='179' cy='388' r='1.5' fill='%23fff6dc' opacity='0.97'/%3E%3Ccircle cx='792' cy='346' r='5.6' fill='%23d9b871' opacity='0.14'/%3E%3Ccircle cx='792' cy='346' r='1.4' fill='%23fff6dc' opacity='0.79'/%3E%3Ccircle cx='123' cy='447' r='6.1' fill='%23d9b871' opacity='0.17'/%3E%3Ccircle cx='123' cy='447' r='1.5' fill='%23fff6dc' opacity='0.95'/%3E%3C/svg%3E");
+  position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.cosmos .st{position:absolute;left:-10%;right:-10%;top:-900px;bottom:-900px;will-change:transform}
+.cosmos .st1{background:var(--st1);animation:twk 7s ease-in-out infinite alternate}
+.cosmos .st2{background:var(--st2);animation:twk 9s 2s ease-in-out infinite alternate}
+.cosmos .st3{background:var(--st3)}
+@keyframes twk{from{opacity:1}to{opacity:.45}}
+.cosmos .shoot{position:absolute;top:var(--y);left:var(--x);width:140px;height:1px;background:linear-gradient(90deg,transparent,rgba(235,240,255,.9));transform:rotate(18deg) translateX(0);opacity:0;animation:shoot var(--t) var(--d) linear infinite}
+@keyframes shoot{0%,92%{opacity:0;transform:rotate(18deg) translateX(0)}93%{opacity:1}100%{opacity:0;transform:rotate(18deg) translateX(520px)}}
+
+/* ─── big screens: scale the whole rem system ─── */
+@media (min-width:1700px){html{font-size:17px}:root{--wrap:1320px}}
+@media (min-width:2200px){html{font-size:18.5px}:root{--wrap:1440px}}
+@media (min-width:3000px){html{font-size:21px}:root{--wrap:1560px}}
+
+/* ─── interactive cards: cursor light + gentle tilt (pointer:fine only, set by JS) ─── */
+.fx{isolation:isolate;--mx:50%;--my:50%;--glow:var(--c,var(--gold));transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .25s}
+.fx>.spot{position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(420px circle at var(--mx) var(--my),color-mix(in srgb,var(--glow) 13%,transparent),transparent 60%)}
+.fx:hover>.spot{opacity:1}
+.shimmer{position:absolute;top:-1px;left:16px;right:16px;height:1px;overflow:hidden;pointer-events:none}
+.shimmer::before{content:"";position:absolute;inset:0 auto 0 0;width:40%;background:linear-gradient(90deg,transparent,var(--c,var(--gold-hi)),transparent);animation:shim 4.5s linear infinite}
+@keyframes shim{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+
+/* staggered reveal */
+.js .reveal{transition-delay:var(--rd,0ms)}
+
 /* ─── reduced motion ─── */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .js .reveal{opacity:1;transform:none}
+  .cosmos .shoot,.shimmer{display:none}
   .btn:hover{transform:none}
 }

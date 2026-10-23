@@ -27,10 +27,25 @@
 <style>
 /* ─── HERO ─── */
 .hero{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(2.5rem,7vw,5.5rem) clamp(2.5rem,6vw,4.5rem)}
-.sky{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
-.sky .dust circle{fill:#dfe6ff;opacity:.5}
-.sky .dust .tw{animation:tw 5s ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.25}50%{opacity:.85}}
+@media (min-width:1000px) and (min-height:720px){.hero{min-height:calc(100svh - 4rem);display:flex;flex-direction:column;justify-content:center}}
+/* parallax layers (moved by JS: mouse on desktop, scroll everywhere) */
+.layers{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.layer{position:absolute;inset:-8%;will-change:transform}
+.l-nebula{background:
+  radial-gradient(ellipse 55% 60% at 78% 38%,rgba(111,214,187,.08),transparent 60%),
+  radial-gradient(ellipse 50% 55% at 18% 72%,rgba(217,184,113,.09),transparent 60%),
+  radial-gradient(ellipse 40% 45% at 88% 85%,rgba(187,147,247,.07),transparent 55%),
+  radial-gradient(ellipse 35% 35% at 8% 12%,rgba(242,142,98,.05),transparent 55%)}
+.l-grid{background-image:linear-gradient(rgba(217,184,113,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(217,184,113,.035) 1px,transparent 1px);background-size:72px 72px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 60% 45%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 60% 45%,#000 20%,transparent 75%)}
+.rune{position:absolute;left:73%;top:48%;width:min(46rem,92vw);height:auto;aspect-ratio:1;translate:-50% -50%;opacity:.17;animation:spin 90s linear infinite}
+.rune .rune-inner{transform-origin:50% 50%;animation:spin 55s linear infinite reverse}
+.orb{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,var(--oc),transparent 68%);animation:float var(--d) ease-in-out infinite alternate}
+@keyframes float{to{transform:translate(var(--tx),var(--ty)) scale(1.14)}}
+.hero.is-off *,.hero.is-off *::before,.hero.is-off *::after{animation-play-state:paused!important}
+@keyframes rise{from{transform:translateY(18px)}}
+.hero-grid>*{animation:rise .9s cubic-bezier(.22,1,.36,1) both}
+.hero-grid>*+*{animation-delay:.12s}
 .name-wrap{position:relative;isolation:isolate}
 .figure{position:absolute;z-index:-1;left:22%;top:-8%;width:min(560px,92%);height:auto;pointer-events:none;overflow:visible}
 .figure line{stroke:var(--gold);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.32;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s .2s cubic-bezier(.4,0,.2,1) forwards}
@@ -49,10 +64,18 @@
 .hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.8rem}
 .hero-links{display:flex;flex-wrap:wrap;gap:.2rem 1.4rem;margin-top:.9rem}
 
-.card-id{padding:1.75rem 1.5rem 1.5rem;text-align:center;max-width:380px;justify-self:end;width:100%}
-.portrait{position:relative;width:200px;height:200px;margin:0 auto}
-.portrait img{width:200px;height:200px;border-radius:50%;object-fit:cover;border:1px solid var(--line-2)}
-.portrait svg{position:absolute;inset:-18px;width:236px;height:236px;max-width:none;color:var(--gold);pointer-events:none}
+.card-id{padding:1.75rem 1.5rem 1.5rem;text-align:center;max-width:24rem;justify-self:end;width:100%}
+.portrait{position:relative;width:12.5rem;height:12.5rem;margin:1rem auto 0}
+.portrait img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid var(--bg);transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.portrait picture{position:relative;z-index:1;height:100%;border-radius:50%;overflow:hidden}
+.card-id:hover .portrait img{transform:scale(1.05)}
+.portrait::before{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 0deg,var(--gold-lo),var(--gold-hi),var(--anemo),var(--electro),var(--pyro),var(--gold),var(--gold-lo));
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));animation:spin 9s linear infinite}
+.orbit{position:absolute;inset:-1.6rem;border:1px solid rgba(217,184,113,.2);border-radius:50%;animation:spin 20s linear infinite}
+.orbit::before,.orbit::after{content:"";position:absolute;border-radius:50%}
+.orbit::before{top:50%;left:-4px;width:8px;height:8px;margin-top:-4px;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.orbit::after{bottom:-3px;left:50%;width:6px;height:6px;margin-left:-3px;background:var(--anemo);box-shadow:0 0 10px var(--anemo)}
+.portrait svg{position:absolute;inset:-9%;width:118%;height:118%;max-width:none;color:var(--gold);pointer-events:none}
 .portrait .ring{animation:spin 90s linear infinite;transform-origin:50% 50%}
 @keyframes spin{to{transform:rotate(360deg)}}
 .id-name{margin-top:1.4rem;font:700 1.05rem/1.2 var(--serif);letter-spacing:.12em;color:var(--gold-hi)}
@@ -175,8 +198,8 @@
 @media (max-width:860px){
   .hero-grid{grid-template-columns:1fr}
   .card-id{justify-self:stretch;max-width:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.25rem;align-items:center;text-align:left;padding:1.25rem}
-  .portrait,.portrait img{width:112px;height:112px}
-  .portrait svg{inset:-11px;width:134px;height:134px}
+  .portrait{width:7rem;height:7rem;margin:1.2rem}
+  .orbit{inset:-1.1rem}
   .id-name{margin-top:0}
   .id-facts{grid-column:1/-1;margin-top:.25rem}
   .questlog{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -192,8 +215,9 @@
   .hero h1{font-size:2.55rem}
   .hero-cta .btn{flex:1 1 auto}
   .card-id{grid-template-columns:1fr;justify-items:center;text-align:center}
-  .card-id .portrait,.card-id .portrait img{width:132px;height:132px}
-  .card-id .portrait svg{inset:-12px;width:156px;height:156px}
+  .card-id .portrait{width:8.5rem;height:8.5rem;margin:1.4rem auto}
+  .rune{left:50%;top:30%;opacity:.12}
+  .orb:nth-child(n+4){display:none}
   .arch .lanes{grid-template-columns:1fr}
   .xp-stats{grid-template-columns:1fr}
   .ql{padding:1rem}
@@ -202,6 +226,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="cosmos" aria-hidden="true"><div class="st st1"></div><div class="st st2"></div><div class="st st3"></div><i class="shoot" style="--x:8%;--y:12%;--t:13s;--d:2s"></i><i class="shoot" style="--x:48%;--y:6%;--t:19s;--d:8s"></i></div>
 
 <!-- Element glyph sprite (stylised, not official game assets) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -242,11 +267,34 @@
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="top" aria-labelledby="hero-name">
-  <svg class="sky" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-    <g class="dust">
-      <circle cx="389" cy="109" r="0.7" class="tw" style="animation-delay:.4s"/><circle cx="643" cy="263" r="0.7"/><circle cx="1092" cy="155" r="0.7"/><circle cx="58" cy="402" r="1.3"/><circle cx="1150" cy="560" r="0.9" class="tw" style="animation-delay:2.1s"/><circle cx="905" cy="48" r="1.1"/><circle cx="730" cy="640" r="0.9"/><circle cx="212" cy="66" r="1.1" class="tw" style="animation-delay:3.3s"/><circle cx="1010" cy="402" r="0.7"/><circle cx="470" cy="690" r="1.1"/><circle cx="820" cy="210" r="1.3" class="tw" style="animation-delay:1.2s"/><circle cx="96" cy="620" r="0.9"/><circle cx="1180" cy="90" r="1.1"/><circle cx="300" cy="560" r="0.7" class="tw" style="animation-delay:4.4s"/><circle cx="540" cy="40" r="0.9"/><circle cx="960" cy="690" r="1.3"/><circle cx="700" cy="120" r="0.7" class="tw" style="animation-delay:2.8s"/><circle cx="20" cy="190" r="1.1"/><circle cx="1110" cy="300" r="1.6" class="tw" style="animation-delay:.9s"/><circle cx="860" cy="520" r="0.7"/><circle cx="640" cy="470" r="0.9" class="tw" style="animation-delay:5.2s"/><circle cx="160" cy="300" r="0.7"/><circle cx="1040" cy="610" r="0.9"/><circle cx="420" cy="180" r="1.1"/><circle cx="760" cy="360" r="0.7" class="tw" style="animation-delay:3.9s"/><circle cx="1150" cy="440" r="0.7"/><circle cx="560" cy="600" r="1.3"/><circle cx="250" cy="680" r="0.9" class="tw" style="animation-delay:1.7s"/><circle cx="980" cy="230" r="0.9"/><circle cx="335" cy="250" r="0.7"/><circle cx="880" cy="420" r="1.1" class="tw" style="animation-delay:4.8s"/><circle cx="120" cy="120" r="0.9"/>
-    </g>
-  </svg>
+  <div class="layers" aria-hidden="true">
+    <div class="layer l-nebula" data-depth="10"></div>
+    <div class="layer l-grid" data-depth="4"></div>
+    <div class="layer l-rune" data-depth="24">
+      <svg class="rune" viewBox="0 0 600 600" fill="none" focusable="false">
+        <defs>
+          <linearGradient id="rg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9b871"/><stop offset="1" stop-color="#6fd6bb"/></linearGradient>
+          <linearGradient id="rg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6fd6bb"/><stop offset="1" stop-color="#bb93f7"/></linearGradient>
+        </defs>
+        <circle cx="300" cy="300" r="280" stroke="url(#rg1)" stroke-dasharray="8 16"/>
+        <circle cx="300" cy="300" r="258" stroke="url(#rg1)" stroke-width=".5" opacity=".6"/>
+        <polygon points="300,30 332,268 570,300 332,332 300,570 268,332 30,300 268,268" stroke="url(#rg2)" stroke-width=".8"/>
+        <g class="rune-inner">
+          <circle cx="300" cy="300" r="178" stroke="url(#rg2)" stroke-dasharray="4 20"/>
+          <circle cx="300" cy="300" r="158" stroke="url(#rg1)" stroke-width=".5" stroke-dasharray="2 10"/>
+          <polygon points="300,132 378,258 378,342 300,468 222,342 222,258" stroke="url(#rg1)" stroke-width=".8"/>
+        </g>
+        <g stroke="url(#rg1)" opacity=".7"><path d="M300 22v22M300 556v22M22 300h22M556 300h22M88 88l14 14M498 102l14-14M88 512l14-14M512 512l-14-14"/></g>
+      </svg>
+    </div>
+    <div class="layer l-orbs" data-depth="38">
+      <i class="orb" style="--x:8%;--y:16%;--s:12rem;--oc:rgba(111,214,187,.16);--d:9s;--tx:24px;--ty:-34px"></i>
+      <i class="orb" style="--x:82%;--y:60%;--s:8rem;--oc:rgba(217,184,113,.15);--d:12s;--tx:-18px;--ty:24px"></i>
+      <i class="orb" style="--x:52%;--y:6%;--s:6rem;--oc:rgba(187,147,247,.14);--d:7s;--tx:14px;--ty:-18px"></i>
+      <i class="orb" style="--x:66%;--y:78%;--s:4.5rem;--oc:rgba(242,142,98,.12);--d:10s;--tx:-10px;--ty:16px"></i>
+      <i class="orb" style="--x:92%;--y:4%;--s:15rem;--oc:rgba(93,189,242,.07);--d:15s;--tx:18px;--ty:-14px"></i>
+    </div>
+  </div>
 
   <div class="wrap">
     <div class="hero-grid">
@@ -282,7 +330,9 @@
       </div>
 
       <aside class="panel corners card-id" aria-label="Profile summary">
+        <span class="shimmer" aria-hidden="true"></span>
         <div class="portrait">
+          <span class="orbit" aria-hidden="true"></span>
           <picture>
             <source type="image/avif" srcset="assets/images/mukul-portrait.avif">
             <source type="image/webp" srcset="assets/images/mukul-portrait.webp">
@@ -330,6 +380,7 @@
 
       <!-- Featured: PharmaChain -->
       <article class="panel corners art art-feat reveal" style="--c:var(--anemo)">
+        <span class="shimmer" aria-hidden="true"></span>
         <div class="art-col">
           <div class="art-top">
             <span class="el el-anemo"><svg aria-hidden="true"><use href="#g-anemo"/></svg>Anemo · Multi-agent</span>
@@ -695,11 +746,59 @@
   }, { rootMargin: '-45% 0px -50% 0px' });
   Object.keys(navMap).forEach(function (id) { var s = document.getElementById(id); if (s) spy.observe(s); });
 
+  /* parallax: hero layers follow the mouse (eased) and scroll; star layers drift at 3 speeds */
+  var hero = document.querySelector('.hero');
+  var layers = [].slice.call(document.querySelectorAll('.hero .layer'));
+  var stars = [].slice.call(document.querySelectorAll('.cosmos .st'));
+  var SK = [0.03, 0.08, 0.16], SH = [320, 560, 900];
+  var tx = 0, ty = 0, cx = 0, cy = 0, sy = window.scrollY, heroOn = true, ticking = false;
+  function frame() {
+    cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+    if (heroOn) layers.forEach(function (l) {
+      var d = +l.dataset.depth;
+      l.style.transform = 'translate3d(' + (cx * d).toFixed(2) + 'px,' + (cy * d + sy * d / 100).toFixed(2) + 'px,0)';
+    });
+    stars.forEach(function (st, i) {
+      st.style.transform = 'translate3d(' + (cx * (i + 1) * 4).toFixed(2) + 'px,' + (-((sy * SK[i]) % SH[i])).toFixed(2) + 'px,0)';
+    });
+    if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005) requestAnimationFrame(frame); else ticking = false;
+  }
+  function kick() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!reduce) {
+    window.addEventListener('scroll', function () { sy = window.scrollY; kick(); }, { passive: true });
+    if (fine) document.addEventListener('pointermove', function (e) {
+      tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; kick();
+    }, { passive: true });
+    new IntersectionObserver(function (es) {
+      heroOn = es[0].isIntersecting; hero.classList.toggle('is-off', !heroOn);
+    }).observe(hero);
+  }
+
+  /* cards: cursor light + gentle tilt */
+  if (fine && !reduce) document.querySelectorAll('.art, .card-id, .hobby, .edu, .xp-main, .xp-minor').forEach(function (el) {
+    var tilt = el.matches('.art:not(.art-feat), .card-id, .hobby');
+    var spot = document.createElement('span'); spot.className = 'spot'; el.prepend(spot);
+    el.classList.add('fx');
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      el.style.setProperty('--mx', (px * 100).toFixed(1) + '%'); el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      if (tilt) el.style.transform = 'perspective(1000px) rotateX(' + ((0.5 - py) * 5).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 5).toFixed(2) + 'deg) translateY(-3px)';
+    });
+    el.addEventListener('pointerleave', function () { el.style.transform = ''; });
+  });
+
   /* scroll reveal (below the fold only; hero is never hidden) */
   var rev = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); rev.unobserve(e.target); } });
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target; el.classList.add('is-in'); rev.unobserve(el);
+      setTimeout(function () { el.classList.remove('reveal', 'is-in'); }, 1100); /* hand transitions back to hover/tilt */
+    });
   }, { rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) {
+    var sib = [].indexOf.call(el.parentNode.children, el);
+    el.style.setProperty('--rd', (sib % 4) * 90 + 'ms');
     if (reduce) el.classList.add('is-in'); else rev.observe(el);
   });
 })();
