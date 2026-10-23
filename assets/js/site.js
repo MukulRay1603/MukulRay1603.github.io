@@ -79,6 +79,7 @@
   function setSound(on) {
     if (on && !ctx && !build()) return;
     playing = on;
+    try { sessionStorage.setItem('mr-sound', on ? 'on' : 'off'); } catch (e) {}
     if (soundBtn) {
       soundBtn.setAttribute('aria-pressed', String(on));
       soundBtn.setAttribute('aria-label', on ? 'Turn ambient sound off' : 'Turn ambient sound on');
@@ -98,6 +99,22 @@
     }
   }
   if (soundBtn) soundBtn.addEventListener('click', function () { setSound(!playing); });
+  /* remember the choice so the ambience follows you between pages; browsers only
+     allow audio after an interaction, so resume on the first click or key press */
+  var wantSound = false;
+  try { wantSound = sessionStorage.getItem('mr-sound') === 'on'; } catch (e) {}
+  if (wantSound) {
+    if (soundBtn) soundBtn.setAttribute('aria-pressed', 'true');
+    var kick = function (e) {
+      if (soundBtn && soundBtn.contains(e.target)) return; /* the button handles itself */
+      ['pointerdown', 'keydown'].forEach(function (t) { document.removeEventListener(t, kick, true); });
+      if (!playing) setSound(true);
+    };
+    ['pointerdown', 'keydown'].forEach(function (t) { document.addEventListener(t, kick, true); });
+    if (soundBtn) soundBtn.addEventListener('click', function () {
+      ['pointerdown', 'keydown'].forEach(function (t) { document.removeEventListener(t, kick, true); });
+    });
+  }
   document.addEventListener('visibilitychange', function () {
     if (!ctx || !playing) return;
     if (document.hidden) ctx.suspend(); else ctx.resume();

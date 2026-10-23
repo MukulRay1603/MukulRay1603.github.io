@@ -128,11 +128,39 @@
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* quest log — headline stats */
-.questlog{margin-top:clamp(2.5rem,6vw,4rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);background:rgba(var(--ink),.7)}
-.ql{padding:1.15rem 1.25rem;border-left:1px solid var(--line)}
-.ql:first-child{border-left:0}
-.ql-v{display:block;font:600 clamp(2rem,3.4vw,2.6rem)/1 var(--serif);font-variant-numeric:lining-nums;color:var(--gold-hi);letter-spacing:.01em}
-.ql-l{display:block;margin-top:.45rem;font-size:.82rem;line-height:1.45;color:var(--muted)}
+.questlog{margin-top:clamp(2.5rem,5vw,3.75rem);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.ql{display:flex;flex-direction:column;padding:1.3rem 1.35rem 1.25rem;border-radius:14px}
+.ql-v{display:block;font:600 clamp(2.1rem,3.2vw,2.7rem)/1 var(--serif);font-variant-numeric:lining-nums;color:var(--gold-hi);letter-spacing:.005em}
+.ql-l{margin-top:.55rem;font-size:.92rem;font-weight:700;line-height:1.35;color:var(--title)}
+.ql-s{margin-top:.25rem;font-size:.84rem;line-height:1.45;color:var(--muted)}
+.ql-x{margin-top:auto;padding-top:1rem}
+/* 1st place: gold-foil shine */
+.foil{background:linear-gradient(100deg,var(--gold) 0%,var(--gold-hi) 30%,#fff8e3 45%,var(--gold-hi) 60%,var(--gold) 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s 2s ease-in-out infinite}
+.ql-award .ql-x{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;color:var(--gold)}
+.ql-award .ql-x::before{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-2),transparent);order:2}
+/* 3x faster: before/after latency bars */
+.bars-cmp{display:grid;gap:.45rem}
+.bar-row{display:grid;grid-template-columns:3.2rem minmax(0,1fr) 3.6rem;align-items:center;gap:.6rem;font-size:.78rem;font-weight:700;color:var(--faint)}
+.bar-row b{text-align:right;color:var(--muted);font-weight:700}
+.bar-track{height:6px;border-radius:999px;background:rgba(var(--g),.1);overflow:hidden}
+.bar-fill{display:block;height:100%;width:var(--w);border-radius:inherit;background:rgba(174,177,194,.45);transform:scaleX(0);transform-origin:left;transition:transform 1.3s cubic-bezier(.22,1,.36,1)}
+.bar-row.now .bar-fill{background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi));box-shadow:0 0 12px rgba(var(--g),.45);transition-delay:.35s}
+.bar-row.now b{color:var(--gold-hi)}
+.questlog.play .bar-fill,.no-anim .bar-fill{transform:scaleX(1)}
+/* IEEE: underline that draws on hover */
+.paper-link{position:relative;display:inline-flex;gap:.35rem;font-size:.88rem;font-weight:700;color:var(--gold-hi);text-decoration:none}
+.paper-link::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--gold);transform:scaleX(.25);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.paper-link:hover::after,.paper-link:focus-visible::after{transform:scaleX(1)}
+/* live demos: pulsing status dots */
+.live-list{display:grid;gap:.15rem}
+.live-list a{display:flex;align-items:center;gap:.6rem;min-height:30px;font-size:.88rem;font-weight:700;color:var(--text);text-decoration:none;transition:color .2s}
+.live-list a:hover{color:var(--gold-hi)}
+.live-list a span{margin-left:auto;color:var(--faint);font-weight:600}
+.live{position:relative;width:7px;height:7px;flex:none;border-radius:50%;background:var(--anemo)}
+.live::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--anemo);animation:ping 2.4s cubic-bezier(0,0,.2,1) infinite}
+.live-list a:nth-child(2) .live::after{animation-delay:.8s}.live-list a:nth-child(3) .live::after{animation-delay:1.6s}
+@keyframes ping{0%{transform:scale(1);opacity:.6}80%,100%{transform:scale(2.8);opacity:0}}
+.lite .foil,.lite .live::after{animation:none}
 
 /* ─── EXPERIENCE ─── */
 .xp-main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;overflow:hidden}
@@ -294,7 +322,6 @@
   .hero-cta{margin-top:1.2rem}
   .portrait{width:10.5rem;height:10.5rem;margin:1.4rem}
   .questlog{margin-top:1.75rem}
-  .ql{padding:.85rem 1.1rem}
 }
 @media (max-width:1400px){.arch .lanes{grid-template-columns:1fr}}
 @media (max-width:1100px){
@@ -312,8 +339,6 @@
 @media (max-width:860px){
   .card-id{justify-self:stretch;max-width:none}
   .questlog{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .ql:nth-child(3){border-left:0}
-  .ql:nth-child(n+3){border-top:1px solid var(--line)}
   .xp-main{grid-template-columns:1fr}
   .xp-stats{border-left:0;border-top:1px solid var(--line);grid-template-columns:repeat(2,minmax(0,1fr))}
   .artifacts,.two,.contact{grid-template-columns:1fr}
@@ -339,7 +364,7 @@
   .orb:nth-child(n+4){display:none}
   .arch .lanes{grid-template-columns:1fr}
   .xp-stats{grid-template-columns:1fr}
-  .ql{padding:1rem}
+  .questlog{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -486,10 +511,35 @@
     </div>
 
     <ul class="questlog" aria-label="Highlights">
-      <li class="ql"><span class="ql-v">1st · $4K</span><span class="ql-l">UMD Smith Agentic AI Challenge 2026, Team Synapse</span></li>
-      <li class="ql"><span class="ql-v">3× faster</span><span class="ql-l">QA inference at BeeBox Studios, 185 → 62 ms P95</span></li>
-      <li class="ql"><span class="ql-v">0.9629</span><span class="ql-l">crisis recall on EmpathRAG’s NLI safety guardrail</span></li>
-      <li class="ql"><span class="ql-v">IEEE</span><span class="ql-l">published at IDCIoT 2024, voice-driven VR generation</span></li>
+      <li class="panel ql ql-award">
+        <span class="ql-v"><span class="foil">1st place</span></span>
+        <p class="ql-l">UMD Smith Agentic AI Challenge 2026</p>
+        <p class="ql-s">PharmaChain, an 8-agent LangGraph system for pharma cold-chain risk</p>
+        <p class="ql-x">$4K prize · Team Synapse</p>
+      </li>
+      <li class="panel ql">
+        <span class="ql-v" data-count>3× faster</span>
+        <p class="ql-l">Production QA inference at BeeBox Studios</p>
+        <div class="ql-x bars-cmp" role="img" aria-label="P95 latency fell from 185 milliseconds to 62 milliseconds">
+          <div class="bar-row"><span>Before</span><span class="bar-track"><i class="bar-fill" style="--w:100%"></i></span><b>185 ms</b></div>
+          <div class="bar-row now"><span>After</span><span class="bar-track"><i class="bar-fill" style="--w:33.5%"></i></span><b>62 ms</b></div>
+        </div>
+      </li>
+      <li class="panel ql">
+        <span class="ql-v">IEEE</span>
+        <p class="ql-l">Published at IDCIoT 2024</p>
+        <p class="ql-s">Voice-driven panoramic VR generation: speech to 360° scenes</p>
+        <p class="ql-x"><a class="paper-link" href="https://ieeexplore.ieee.org/document/10467441" target="_blank" rel="noopener">Read the paper <span class="arrow" aria-hidden="true">↗</span></a></p>
+      </li>
+      <li class="panel ql">
+        <span class="ql-v" data-count>3 live demos</span>
+        <p class="ql-l">Agents and RAG you can try right now</p>
+        <div class="ql-x live-list">
+          <a href="https://ai-cargo-monitor-prod.vercel.app" target="_blank" rel="noopener"><i class="live" aria-hidden="true"></i>PharmaChain<span aria-hidden="true">↗</span></a>
+          <a href="https://huggingface.co/spaces/MukulRay/recon" target="_blank" rel="noopener"><i class="live" aria-hidden="true"></i>RECON<span aria-hidden="true">↗</span></a>
+          <a href="https://huggingface.co/spaces/MukulRay/Irminsul" target="_blank" rel="noopener"><i class="live" aria-hidden="true"></i>Irminsul<span aria-hidden="true">↗</span></a>
+        </div>
+      </li>
     </ul>
   </div>
 </section>
@@ -958,8 +1008,13 @@
     });
   }
 
+  /* highlight cards: play the latency bars once they are on screen */
+  new IntersectionObserver(function (es, o) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('play'); o.disconnect(); } });
+  }, { threshold: 0.4 }).observe(document.querySelector('.questlog'));
+
   /* cards: cursor light + gentle tilt */
-  if (fine && !reduce) document.querySelectorAll('.art, .card-id, .edu, .xp-main, .xp-minor').forEach(function (el) {
+  if (fine && !reduce) document.querySelectorAll('.art, .card-id, .edu, .xp-main, .xp-minor, .ql').forEach(function (el) {
     var tilt = el.matches('.art:not(.art-feat), .card-id');
     var spot = document.createElement('span'); spot.className = 'spot'; el.prepend(spot);
     el.classList.add('fx');
@@ -1091,7 +1146,7 @@
 (function () {
   var root = document.documentElement;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-  var els = [].slice.call(document.querySelectorAll('.ql-v, .main-stat b, .xs-v'));
+  var els = [].slice.call(document.querySelectorAll('.ql-v[data-count], .main-stat b, .xs-v'));
   function run(el) {
     if (root.classList.contains('lite')) return;
     var fin = el.dataset.final || (el.dataset.final = el.textContent); /* real value, captured once */
