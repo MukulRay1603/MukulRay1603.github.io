@@ -151,6 +151,36 @@
     if (document.hidden) ctx.suspend(); else ctx.resume();
   });
 
+  /* ─── resumé viewer: centred dialog on desktop, plain PDF on phones/tablets ─── */
+  var CV = 'assets/Mukul_Rayana_Resume.pdf';
+  var cvDirect = function () {
+    return navigator.pdfViewerEnabled === false || matchMedia('(max-width: 760px), (pointer: coarse)').matches;
+  };
+  var cv = document.createElement('dialog');
+  cv.className = 'cv';
+  cv.setAttribute('aria-labelledby', 'cvTitle');
+  cv.innerHTML =
+    '<div class="cv-bar"><h2 id="cvTitle">Resumé <small>Mukul Rayana · PDF</small></h2>' +
+    '<div class="cv-acts"><a class="cv-btn" href="' + CV + '" download="Mukul_Rayana_Resume.pdf">Download PDF</a>' +
+    '<a class="cv-btn" href="' + CV + '" target="_blank" rel="noopener">Open in new tab <span aria-hidden="true">↗</span></a>' +
+    '<button type="button" class="cv-x" aria-label="Close resumé"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>' +
+    '<div class="cv-doc"><iframe title="Mukul Rayana resumé (PDF)" loading="lazy"></iframe></div>';
+  document.body.appendChild(cv);
+  var cvFrame = cv.querySelector('iframe');
+  cv.querySelector('.cv-x').addEventListener('click', function () { cv.close(); });
+  cv.addEventListener('click', function (e) { if (e.target === cv) cv.close(); });
+  window.openResume = function () {
+    if (cvDirect()) { window.open(CV, '_blank', 'noopener'); return; }
+    if (!cvFrame.src) cvFrame.src = CV + '#view=FitH';
+    if (!cv.open) cv.showModal();
+  };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href$="Mukul_Rayana_Resume.pdf"]');
+    if (!a || cv.contains(a) || e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0 || cvDirect()) return;
+    e.preventDefault();
+    window.openResume();
+  });
+
   /* ─── command palette (Ctrl/⌘ K, or "/") ─── */
   var go = function (href) { return function () {
     var el = href.charAt(0) === '#' && document.querySelector(href);
@@ -177,7 +207,7 @@
     } });
   });
   items.push(
-    { g: 'Links', t: 'Resumé (PDF)', hint: 'opens', run: open('assets/Mukul_Rayana_Resume.pdf') },
+    { g: 'Links', t: 'Resumé (PDF)', hint: 'opens', run: function () { window.openResume(); } },
     { g: 'Links', t: 'GitHub', hint: 'opens', run: open('https://github.com/MukulRay1603') },
     { g: 'Links', t: 'LinkedIn', hint: 'opens', run: open('https://linkedin.com/in/mukul-rayana') },
     { g: 'Links', t: 'Hugging Face', hint: 'opens', run: open('https://huggingface.co/spaces/MukulRay') },

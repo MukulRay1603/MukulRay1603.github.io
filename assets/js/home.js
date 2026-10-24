@@ -177,6 +177,24 @@
     else if (e.key === 'Home') { e.preventDefault(); show(0, true); }
     else if (e.key === 'End') { e.preventDefault(); show(tabs.length - 1, true); }
   });
+  /* phones: side-swipe the card to move between projects */
+  var stage = arc.querySelector('.stage'), narrow = window.matchMedia('(max-width: 860px)'), sx = 0, sy = 0, sOn = false;
+  stage.addEventListener('touchstart', function (e) {
+    sOn = narrow.matches && e.touches.length === 1;
+    if (sOn) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }
+  }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    if (!sOn) return; sOn = false;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    var d = dx < 0 ? 1 : -1;
+    show(cur + d);
+    if (!reduce) {
+      var p = panels[cur]; p.classList.remove('sw-next', 'sw-prev'); void p.offsetWidth;
+      p.classList.add(d > 0 ? 'sw-next' : 'sw-prev');
+      p.addEventListener('animationend', function () { p.classList.remove('sw-next', 'sw-prev'); }, { once: true });
+    }
+  }, { passive: true });
   if (reduce || window.matchMedia('(max-width: 860px)').matches) return;
   arc.classList.add('auto');
   arc.addEventListener('mouseenter', function () { hover = true; sync(); });
