@@ -78,6 +78,7 @@ strong{color:var(--text);font-weight:700}
 :focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
 .skip{position:absolute;left:1rem;top:-4rem;z-index:1000;padding:.6rem 1rem;background:var(--gold);color:#140f04;font-weight:700;border-radius:999px;text-decoration:none}
 .skip:focus{top:1rem}
+[hidden]{display:none!important}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 .wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
