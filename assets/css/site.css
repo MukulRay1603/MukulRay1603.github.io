@@ -159,6 +159,11 @@ dialog.cmdk[open]{animation:cmdkIn .18s ease-out}
 /* trailing gold cursor ring (fine pointers, full tier; native cursor stays) */
 .has-cursor,.has-cursor a,.has-cursor button,.has-cursor [role="tab"]{cursor:none}
 .has-cursor input,.has-cursor textarea{cursor:text}
+.modal-open,.modal-open *{cursor:auto!important}
+.modal-open a,.modal-open button,.modal-open .cmdk-item{cursor:pointer!important}
+.modal-open input{cursor:text!important}
+.modal-open .cur,.modal-open .cur-r{opacity:0!important}
+.has-cursor .cover .hobby,.has-cursor .cover .hobby *{cursor:none}
 .cur,.cur-r{position:fixed;left:0;top:0;z-index:2500;border-radius:50%;pointer-events:none;opacity:0;will-change:transform}
 .cur{width:9px;height:9px;margin:-4.5px 0 0 -4.5px;background:var(--gold);box-shadow:0 0 10px rgba(var(--g),.8);transition:background .2s,width .2s,height .2s,margin .2s,opacity .3s}
 .cur-r{width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid rgba(var(--g),.55);transition:width .25s,height .25s,margin .25s,border-color .25s,opacity .3s}

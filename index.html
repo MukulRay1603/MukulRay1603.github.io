@@ -27,7 +27,7 @@
   try { var t = localStorage.getItem('mr-theme'); if (t === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
   var fx = (location.search.match(/[?&]fx=(full|lite)/) || [])[1];
   d.classList.add('js');
-  try { if (sessionStorage.getItem('mr-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('intro-done'); } catch (e) { d.classList.add('intro-done'); }
+  try { if (sessionStorage.getItem('mr-intro') || location.hash || (document.referrer && new URL(document.referrer).origin === location.origin) || matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('intro-done'); } catch (e) { d.classList.add('intro-done'); }
   if (fx) { d.dataset.fx = fx; if (fx === 'lite') d.classList.add('lite'); return; }
   if ((n.hardwareConcurrency && n.hardwareConcurrency <= 2) || (n.deviceMemory && n.deviceMemory <= 2) || c.saveData ||
       /(^|-)2g/.test(c.effectiveType || '') || matchMedia('(prefers-reduced-data: reduce)').matches) d.classList.add('lite');
@@ -216,6 +216,7 @@
 @keyframes pulse{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(2.4)}}
 .rail-text{display:grid;min-width:0}
 .rail-num{font:700 .72rem/1 var(--serif);letter-spacing:.1em;font-variant-numeric:lining-nums;color:var(--gold)}
+[data-theme="light"] .rail-num{color:var(--gold-hi)}
 .rail-name{margin-top:.25rem;font:700 .98rem/1.2 var(--serif);color:var(--text);transition:color .25s}
 .rail-item:hover .rail-name,.rail-item[aria-selected="true"] .rail-name{color:var(--gold-hi)}
 .rail-sub{margin-top:.2rem;font-size:.78rem;line-height:1.3;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -478,14 +479,14 @@
         <p class="role"><b>AI/ML Engineer</b> · multi-agent systems, RAG, LLMOps &amp; reinforcement learning</p>
         <p class="lede">M.S. in Applied Machine Learning, University of Maryland (May 2026). I design and ship production-grade AI, and I'm drawn to the hard problems: making it reliable, fast, and useful where it actually matters.</p>
         <div class="hero-cta">
-          <a class="btn btn-gold" href="assets/Mukul_Rayana_Resume.pdf" target="_blank" rel="noopener">View résumé <span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="btn btn-gold" href="assets/Mukul_Rayana_Resume.pdf" target="_blank" rel="noopener">View Resumé <span class="arrow" aria-hidden="true">↗</span></a>
           <a class="btn btn-line" href="#projects">Explore projects</a>
         </div>
         <div class="hero-links">
           <a class="text-link" href="https://github.com/MukulRay1603" target="_blank" rel="noopener"><svg class="si" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub</a>
           <a class="text-link" href="https://linkedin.com/in/mukul-rayana" target="_blank" rel="noopener"><svg class="si" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3-1.9 0-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.3zM5.3 7.4a2.1 2.1 0 1 1 0-4.1 2.1 2.1 0 0 1 0 4.1zm1.8 13.1H3.6V9h3.5v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg>LinkedIn</a>
           <a class="text-link" href="https://huggingface.co/spaces/MukulRay" target="_blank" rel="noopener"><svg class="si" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="10.5" r="8.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9" r="1.25"/><circle cx="15" cy="9" r="1.25"/><path d="M8.4 12.6c.9 1.7 2.2 2.5 3.6 2.5s2.7-.8 3.6-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="5.2" cy="19.2" rx="2.6" ry="1.9"/><ellipse cx="18.8" cy="19.2" rx="2.6" ry="1.9"/></svg>Hugging Face</a>
-          <a class="text-link" href="mailto:mukulray@terpmail.umd.edu">Email</a>
+          <a class="text-link" href="mailto:mukulray@terpmail.umd.edu"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>Email</a>
         </div>
       </div>
 
@@ -948,8 +949,8 @@
     if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setMenu(false); toggle.focus(); }
   });
   document.addEventListener('click', function (e) {
-    if (toggle.getAttribute('aria-expanded') === 'true' && !e.target.closest('.nav')) setMenu(false);
-  });
+    if (toggle.getAttribute('aria-expanded') === 'true' && !e.target.closest('.nav')) { e.preventDefault(); e.stopPropagation(); setMenu(false); }
+  }, true);
 
   if (!('IntersectionObserver' in window)) {
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
@@ -1015,13 +1016,15 @@
     stars.forEach(function (st, i) {
       st.style.transform = 'translate3d(' + (cx * (i + 1) * 4).toFixed(2) + 'px,' + (-((sy * SK[i]) % SH[i])).toFixed(2) + 'px,0)';
     });
-    if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005 || Math.abs(mx - smx) > 0.5 || Math.abs(my - smy) > 0.5) requestAnimationFrame(frame); else ticking = false;
+    var spotMoving = heroOn && !lite && (Math.abs(mx - smx) > 0.5 || Math.abs(my - smy) > 0.5);
+    if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005 || spotMoving) requestAnimationFrame(frame); else ticking = false;
   }
   function kick() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (!reduce) {
     window.addEventListener('scroll', function () { sy = window.scrollY; kick(); }, { passive: true });
     if (fine) document.addEventListener('pointermove', function (e) {
+      if (!e.clientX && !e.clientY) return;
       tx = e.clientX / window.innerWidth - 0.5; ty = e.clientY / window.innerHeight - 0.5; mx = e.clientX; my = e.clientY; kick();
     }, { passive: true });
     new IntersectionObserver(function (es) {
