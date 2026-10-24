@@ -256,7 +256,6 @@
       if (Math.abs(tx - rx) > 0.3 || Math.abs(ty - ry) > 0.3) requestAnimationFrame(follow); else moving = false;
     }
     document.addEventListener('pointermove', function (e) {
-      if (root.classList.contains('lite')) { root.classList.remove('has-cursor'); return; }
       if (e.pointerType !== 'mouse' || (!e.clientX && !e.clientY)) return;
       tx = e.clientX; ty = e.clientY;
       dot.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0)';

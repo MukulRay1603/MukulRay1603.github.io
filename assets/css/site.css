@@ -165,7 +165,7 @@ dialog.cmdk[open]{animation:cmdkIn .18s ease-out}
 .cur.on,.cur-r.on{opacity:1}
 .cur.hover{background:var(--anemo);box-shadow:0 0 12px var(--anemo)}
 .cur-r.hover{width:56px;height:56px;margin:-28px 0 0 -28px;border-color:rgba(127,211,192,.55)}
-.lite .cur,.lite .cur-r{display:none}
+
 
 /* ─── buttons & links (pill-shaped, like Genshin's own UI) ─── */
 .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;padding:.75rem 1.6rem;border-radius:999px;font-size:.95rem;font-weight:700;letter-spacing:.01em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .25s,background .25s,border-color .25s,box-shadow .25s}
