@@ -12,7 +12,9 @@
     var setMenu = function (open) { toggle.setAttribute('aria-expanded', String(open)); links.classList.toggle('is-open', open); };
     toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
-    document.addEventListener('click', function (e) { if (!e.target.closest('.nav')) setMenu(false); });
+    document.addEventListener('click', function (e) {
+      if (toggle.getAttribute('aria-expanded') === 'true' && !e.target.closest('.nav')) { e.preventDefault(); e.stopPropagation(); setMenu(false); }
+    }, true);
     var ind = links.querySelector('.nav-ind'), cur = links.querySelector('[aria-current]');
     var move = function (a) {
       if (!ind) return;
@@ -267,6 +269,10 @@
       dot.classList.toggle('hover', h); ring.classList.toggle('hover', h);
     });
     document.documentElement.addEventListener('mouseleave', function () { dot.classList.remove('on'); ring.classList.remove('on'); });
+    new MutationObserver(function () {
+      var modal = !!document.querySelector('dialog[open]');
+      root.classList.toggle('modal-open', modal);
+    }).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['open'] });
   }
 
   /* small toast for confirmations */
