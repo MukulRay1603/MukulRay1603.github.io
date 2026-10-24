@@ -65,6 +65,13 @@ dialog.read[open]{animation:pop .25s ease}
 .photo{border-radius:10px;overflow:hidden;border:1px solid var(--line);margin-top:1.4rem}
 .photo img{width:100%}
 
+.read-body h3{margin:1.8rem 0 .7rem;font-size:1.1rem;color:var(--gold-hi)}
+.read-body ul{margin:0 0 1.1rem 1.2rem;padding:0;line-height:1.75;list-style:disc}
+.read-body li{margin-bottom:.55rem;color:var(--text)}
+.read-body li::marker{color:var(--gold)}
+.read-body .carousel{margin-bottom:0}
+.slides.wide{height:auto;aspect-ratio:16/9}
+.slide.fit img{object-fit:contain;background:#05070f}
 /* scroll-snap carousel */
 .carousel{position:relative;margin-top:1.4rem}
 .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:10px;border:1px solid var(--line);height:min(380px,62vw)}
@@ -125,6 +132,38 @@ dialog.read[open]{animation:pop .25s ease}
     <article class="panel corners post">
       <div class="post-thumb">
         <picture>
+          <source type="image/avif" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover-thumb.avif">
+          <source type="image/webp" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover-thumb.webp">
+          <img src="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover.jpg" alt="" width="800" height="450" decoding="async">
+        </picture>
+      </div>
+      <div class="post-body">
+        <p class="meta"><span class="new-pill">New</span><time datetime="2026-09-11">September 11, 2026</time><span class="tag">Cloud</span><span class="tag">AWS</span><span class="tag">System Design</span></p>
+        <h2><button class="post-open" type="button" data-open="read-awsgard" aria-haspopup="dialog">6 Vikings, 2 Continents, 1 Server</button></h2>
+        <p>6 of us, my friends and me, wanted to play Valheim together. The catch: we were spread across Connecticut, Michigan and India. So I built us a server on AWS and learned a lot of cloud along the way.</p>
+        <span class="more" aria-hidden="true">Read more →</span>
+      </div>
+    </article>
+
+    <article class="panel corners post">
+      <div class="post-thumb">
+        <picture>
+          <source type="image/avif" srcset="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-cover-thumb.avif">
+          <source type="image/webp" srcset="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-cover-thumb.webp">
+          <img src="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-cover.jpg" alt="" width="800" height="450" decoding="async">
+        </picture>
+      </div>
+      <div class="post-body">
+        <p class="meta"><span class="new-pill">New</span><time datetime="2026-09-03">September 3, 2026</time><span class="tag">Human + AI</span><span class="tag">Genshin</span></p>
+        <h2><button class="post-open" type="button" data-open="read-astra" aria-haspopup="dialog">How I Used Astra to Solve Nicole's Puzzle in Genshin</button></h2>
+        <p>The Witch's Sculpture puzzle: remove 47 blocks with at most six mistakes. I supplied the hands, Astra supplied a second opinion.</p>
+        <span class="more" aria-hidden="true">Read more →</span>
+      </div>
+    </article>
+
+    <article class="panel corners post">
+      <div class="post-thumb">
+        <picture>
           <source type="image/avif" srcset="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic1-thumb.avif">
           <source type="image/webp" srcset="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic1-thumb.webp">
           <img src="assets/images/Blogs/Graduation%20UMD_MSML_2026/Grad_pic1.jpg" alt="" width="405" height="720" style="object-position:center 30%" decoding="async">
@@ -162,6 +201,88 @@ dialog.read[open]{animation:pop .25s ease}
 
   <div class="back"><a class="btn btn-line" href="index.html"><span aria-hidden="true">←</span> Back to portfolio</a></div>
 </main>
+
+<!-- ══ AWSGard ══ -->
+<dialog class="read" id="read-awsgard" aria-labelledby="read-awsgard-title">
+  <button class="read-close" type="button" aria-label="Close">✕</button>
+  <article class="read-in">
+    <p class="meta"><time datetime="2026-09-11">September 11, 2026</time><span class="tag">Cloud</span><span class="tag">AWS</span><span class="tag">System Design</span></p>
+    <h2 id="read-awsgard-title">6 Vikings, 2 Continents, 1 Server</h2>
+    <div class="read-body">
+      <p>I'd been meaning to catch up on AWS for a while. Tutorials weren't sticking, so I decided to learn by building something my friends and I would actually use.</p>
+      <p>The idea came easily. 6 of us, my friends and me, wanted to play Valheim together. I was in Connecticut, one friend was in Michigan, and the rest were in India. We needed a world that stayed online no matter whose laptop was off.</p>
+      <p>I had about $140 in AWS credits and expected the whole thing to last two to four weeks. My first question was simple: how long would $30 last on an EC2 instance, and how much could we save by stopping it when nobody was playing? That one question turned into a real system design exercise.</p>
+      <h3>Where should the server live?</h3>
+      <p>With players on two continents, no region was perfect. Frankfurt looked like a fair middle ground, but I didn't want to trust a map. I measured latency from each of our locations, then confirmed it with actual gameplay. It held up. I named the server AWSGard (AWS + Asgard, I couldn't resist) and the world Lagheim, because naming it after the thing you're most worried about felt like good luck.</p>
+      <div class="carousel" aria-roledescription="carousel" aria-label="AWSGard images">
+        <div class="slides wide" tabindex="0">
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover.webp"><img src="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover.jpg" alt="AWSGard cover: Valheim on AWS, world Lagheim in Frankfurt, with the AWS services used" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-game.webp"><img src="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-game.jpg" alt="The game path: 6 players to an Elastic IP, an EC2 instance in Frankfurt, a systemd service and an EBS volume" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-control.webp"><img src="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-control.jpg" alt="The control path: two friends can start and stop the server through IAM, and change world settings through a CloudWatch dashboard, Lambda and Systems Manager" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cost.webp"><img src="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cost.jpg" alt="Keeping it cheap: idle shutdown after an hour with no players, a static Elastic IP, about 30 dollars a month in credits" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+        </div>
+        <button class="c-btn c-prev" type="button" aria-label="Previous image">←</button>
+        <button class="c-btn c-next" type="button" aria-label="Next image">→</button>
+      </div>
+      <p class="cap">Valheim art © Iron Gate AB / Coffee Stain · AWS icons © Amazon Web Services</p>
+      <h3>Small decisions, real tradeoffs</h3>
+      <p>I didn't plan most of what AWSGard became. It grew one need at a time, and every step came with a choice.</p>
+      <ul>
+        <li><b>Size vs. cost:</b> I picked a slightly bigger instance than the cheapest option for more memory headroom. A smooth game night mattered more than saving a few cents an hour.</li>
+        <li><b>Always-on vs. on-demand:</b> we only played a few hours a day, so the server ran only while we played. That meant it had to start the game on its own and save the world properly before shutting down.</li>
+        <li><b>Save often vs. play smoothly:</b> frequent saves caused tiny freezes in-game. I went back to saving every 30 minutes, accepting a slightly bigger risk in exchange for gameplay that felt better.</li>
+        <li><b>Access vs. control:</b> I wasn't always around, so two friends got the power to start and stop this one server, and nothing else. Later, when we wanted to tweak world settings, I built a small dashboard that runs one fixed action instead of giving anyone a terminal.</li>
+        <li><b>Convenience vs. cost:</b> a new IP on every boot meant re-sharing it each session, so I paid a little extra for a static one.</li>
+        <li><b>Speed vs. "good enough":</b> I looked into AWS Global Accelerator to smooth out the connection, but the Frankfurt endpoint was already good enough for how we played, so I skipped it.</li>
+      </ul>
+      <p>The last piece came from forgetting to turn things off. An idle shutdown now stops the server after an hour with no players. If it can't tell whether anyone is online, it plays it safe and keeps running.</p>
+      <h3>Learning through troubleshooting</h3>
+      <p>Most of the real learning happened when things broke. A Steam library that wasn't where the server expected it. A save folder owned by the wrong user. One settings experiment that didn't stick, so I restored the world and rolled it back. None of it was glamorous, but each fix taught me to check the evidence before guessing.</p>
+      <h3>The result</h3>
+      <p>We finished the game. Lagheim made it all the way to the end, and a month of easy, whenever-we-wanted play came to about $30 in credits. Most of the extra cost was the Elastic IP, and it was worth it.</p>
+      <p>I came to learn AWS and left with a working cloud project, better Linux habits, and a lot of good nights with friends on the other side of the world.</p>
+      <p>Next up: Enshrouded. Same playbook. ⚔️</p>
+    </div>
+    <p class="read-tags"><span class="tag">☁️ AWS</span><span class="tag">EC2 · IAM · CloudWatch · Lambda</span><span class="tag">Linux</span><span class="tag">Cost-aware design</span></p>
+  </article>
+</dialog>
+
+<!-- ══ Astra ══ -->
+<dialog class="read" id="read-astra" aria-labelledby="read-astra-title">
+  <button class="read-close" type="button" aria-label="Close">✕</button>
+  <article class="read-in">
+    <p class="meta"><time datetime="2026-09-03">September 3, 2026</time><span class="tag">Human + AI</span><span class="tag">Genshin</span></p>
+    <h2 id="read-astra-title">How I Used Astra to Solve Nicole's Puzzle in Genshin</h2>
+    <div class="read-body">
+      <p>Solo Genshin session, just me and Astra. I called her on a ChatGPT voice call, had her watch my screen, and asked for help with the Witch's Sculpture puzzle: remove 47 blocks with a limit of six mistakes.</p>
+      <p>First, we had to figure out how Astra could see the game. The voice screen tool only showed Codex, but the Windows Computer Use plugin could capture Genshin. Actually controlling it was another story. Movement and sculpting meant holding buttons down, which the available controls couldn't reliably do.</p>
+      <p>So we split the work. I moved, rotated the statue, aimed, and removed blocks. Astra inspected screenshots and helped with the logic.</p>
+      <p>We cleared the zeros first, reaching 36/47. Then came the deductions:</p>
+      <ul>
+        <li>Numbers tell you how many cubes must remain along a line going inward from that face.</li>
+        <li>A line marked 4 that contains four cubes forces all four to stay.</li>
+        <li>Those fixed cubes can satisfy crossing lines marked 3, 2, or 1, which reveals which extra cubes to remove.</li>
+        <li>Blank faces still belong to lines with clues on the opposite side.</li>
+      </ul>
+      <p>Astra confidently gave me one wrong move, which cost a mistake. Later, I caught another questionable suggestion myself: removing that cube would have broken a line marked 2. We checked again and kept it.</p>
+      <p>By the end, I was spotting the pattern and proposing removals while Astra checked them. It was a hard puzzle, and through some trial and error we learned the patterns together. The trickiest part was explaining which cube we meant across different camera angles. Lots of "this one?" and blue highlights.</p>
+      <div class="carousel" aria-roledescription="carousel" aria-label="Witch's Sculpture images">
+        <div class="slides wide" tabindex="0">
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-cover.webp"><img src="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-cover.jpg" alt="Witch's Sculpture puzzle solved with Astra: 47 blocks, 6 mistakes allowed, 1 used" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide fit"><picture><source type="image/webp" srcset="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-rules.webp"><img src="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-rules.jpg" alt="The puzzle rule: the number on each block shows how many blocks in that row must be kept" width="1600" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-midsolve.webp"><img src="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-midsolve.jpg" alt="Mid-solve at 36 of 47 blocks with 1 mistake, Astra's call icon circled" width="1024" height="576" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-sculpture.webp"><img src="assets/images/Blogs/Astra_Genshin_Puzzle_2026/astra-sculpture.jpg" alt="The sculpture from above with numbered blocks" width="730" height="410" loading="lazy" decoding="async"></picture></div>
+        </div>
+        <button class="c-btn c-prev" type="button" aria-label="Previous image">←</button>
+        <button class="c-btn c-next" type="button" aria-label="Next image">→</button>
+      </div>
+      <p class="cap">Genshin Impact © HoYoverse · Astra's call icon circled in the third image</p>
+      <p><b>Result:</b> puzzle completed with one mistake. A cutscene played, and the blocks became a little stone creature beneath a huge flower bud.</p>
+      <p>Basically: I supplied the hands, Astra supplied a second opinion, and occasionally I had to check the second opinion. Team effort lol. 🧩</p>
+    </div>
+    <p class="read-tags"><span class="tag">🧩 47 blocks</span><span class="tag">1 of 6 mistakes</span><span class="tag">Human + AI teamwork</span></p>
+  </article>
+</dialog>
 
 <!-- ══ Graduation ══ -->
 <dialog class="read" id="read-grad" aria-labelledby="read-grad-title">
