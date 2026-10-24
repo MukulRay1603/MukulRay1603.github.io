@@ -28,6 +28,14 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { move(cur); });
   })();
 
+  /* ─── email: assembled at runtime so scrapers reading the HTML never see it ─── */
+  var MAIL = ['ai.mukulray', 'gmail.com'].join(String.fromCharCode(64));
+  document.querySelectorAll('[data-mail]').forEach(function (a) { a.href = 'mailto:' + MAIL; });
+  window.copyEmail = function () {
+    if (navigator.clipboard) navigator.clipboard.writeText(MAIL).then(function () { toast('Email copied: ' + MAIL); }, function () { location.href = 'mailto:' + MAIL; });
+    else location.href = 'mailto:' + MAIL;
+  };
+
   /* ─── theme ─── */
   var themeBtn = document.getElementById('themeBtn');
   function applyTheme(t) {
@@ -174,11 +182,7 @@
     { g: 'Links', t: 'LinkedIn', hint: 'opens', run: open('https://linkedin.com/in/mukul-rayana') },
     { g: 'Links', t: 'Hugging Face', hint: 'opens', run: open('https://huggingface.co/spaces/MukulRay') },
     { g: 'Links', t: 'PharmaChain live demo', hint: 'opens', run: open('https://ai-cargo-monitor-prod.vercel.app') },
-    { g: 'Actions', t: 'Copy email address', hint: 'mukulray@terpmail.umd.edu', run: function () {
-      var mail = 'mukulray@terpmail.umd.edu';
-      if (navigator.clipboard) navigator.clipboard.writeText(mail).then(function () { toast('Email copied'); }, function () { location.href = 'mailto:' + mail; });
-      else location.href = 'mailto:' + mail;
-    } },
+    { g: 'Actions', t: 'Copy email address', run: function () { window.copyEmail(); } },
     { g: 'Actions', t: 'Toggle daylight theme', run: function () { toggleTheme(); } },
     { g: 'Actions', t: 'Toggle ambient sound', run: function () { setSound(!playing); } }
   );
