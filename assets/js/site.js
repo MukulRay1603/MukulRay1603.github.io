@@ -151,6 +151,16 @@
     if (document.hidden) ctx.suspend(); else ctx.resume();
   });
 
+  /* ─── "New" pill on the Journal nav link until the latest post has been seen ─── */
+  var LATEST_POST = '2026-09-11';
+  try {
+    if (!onHome) localStorage.setItem('mr-journal-seen', LATEST_POST);
+    else if (localStorage.getItem('mr-journal-seen') !== LATEST_POST) {
+      var jl = document.querySelector('.nav-links a[href="journal.html"]');
+      if (jl) jl.insertAdjacentHTML('beforeend', '<span class="new-pill">New<span class="sr-only"> posts</span></span>');
+    }
+  } catch (e) {}
+
   /* ─── resumé viewer: centred dialog on desktop, plain PDF on phones/tablets ─── */
   var CV = 'assets/Mukul_Rayana_Resume.pdf';
   var cvDirect = function () {

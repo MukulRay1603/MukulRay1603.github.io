@@ -300,3 +300,10 @@ dialog.cv::before{content:"";position:absolute;inset:0;border-radius:inherit;pad
 .cv-doc{flex:1;min-height:0;background:#525659}
 .cv-doc iframe{display:block;width:100%;height:100%;border:0}
 @media (prefers-reduced-motion:reduce){dialog.cv[open]{animation:none}.cv-x:hover{transform:none}}
+
+/* "New" pill (journal cards + nav) */
+.new-pill{display:inline-flex;align-items:center;padding:.22rem .5rem .2rem;border-radius:999px;font:800 .62rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#2a1d05;background:linear-gradient(135deg,#f6e7bd,#d8b66e 60%,#b8913f);box-shadow:0 0 12px rgba(216,182,110,.45)}
+.nav-links a .new-pill{position:absolute;top:-.3rem;right:-.15rem;padding:.16rem .36rem .14rem;font-size:.5rem;animation:newGlow 2.4s ease-in-out infinite}
+@keyframes newGlow{50%{box-shadow:0 0 18px rgba(216,182,110,.8)}}
+@media (max-width:900px){.nav-links a .new-pill{position:static;margin-left:.5rem;vertical-align:.15em}}
+@media (prefers-reduced-motion:reduce){.nav-links a .new-pill{animation:none}}
