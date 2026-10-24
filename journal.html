@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; frame-src 'none'; media-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Journal · Mukul Rayana</title>
 <meta name="description" content="Field notes from building at the edge of AI — Mukul Rayana.">
@@ -17,7 +19,7 @@
 <link rel="preload" href="assets/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 <script src="assets/js/site.js" defer></script>
-<script>try { var t = localStorage.getItem('mr-theme'); if (t === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}</script>
+<script src="assets/js/head.js"></script>
 <style>
 .j-head{padding-block:clamp(3rem,8vw,5rem) clamp(2rem,5vw,3rem);text-align:center}
 .j-head .eyebrow{justify-content:center}
@@ -230,49 +232,6 @@ dialog.read[open]{animation:pop .25s ease}
   </div>
 </footer>
 
-<script>
-(function () {
-  /* star layers drift at three speeds on scroll */
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var st = document.querySelectorAll('.cosmos .st'), K = [0.03, 0.08, 0.16], H = [320, 560, 900], tk = false;
-    window.addEventListener('scroll', function () {
-      if (tk) return; tk = true;
-      requestAnimationFrame(function () {
-        st.forEach(function (el, i) { el.style.transform = 'translate3d(0,' + (-((window.scrollY * K[i]) % H[i])).toFixed(2) + 'px,0)'; });
-        tk = false;
-      });
-    }, { passive: true });
-  }
-
-  /* reading dialogs: native <dialog> handles focus trap + Escape */
-  document.querySelectorAll('[data-open]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var d = document.getElementById(btn.dataset.open);
-      if (!d) return;
-      d.showModal();
-      d.scrollTop = 0;
-      document.body.style.overflow = 'hidden';
-    });
-  });
-  document.querySelectorAll('dialog.read').forEach(function (d) {
-    d.addEventListener('close', function () { document.body.style.overflow = ''; });
-    d.querySelector('.read-close').addEventListener('click', function () { d.close(); });
-    d.addEventListener('click', function (e) { if (e.target === d) d.close(); }); /* backdrop */
-  });
-
-  /* carousel buttons scroll the snap track by one slide */
-  document.querySelectorAll('.carousel').forEach(function (c) {
-    var track = c.querySelector('.slides');
-    function go(dir) {
-      var w = track.clientWidth, max = track.scrollWidth - w;
-      var x = track.scrollLeft + dir * w;
-      if (x > max + 2) x = 0; else if (x < -2) x = max;
-      track.scrollTo({ left: x, behavior: 'smooth' });
-    }
-    c.querySelector('.c-prev').addEventListener('click', function () { go(-1); });
-    c.querySelector('.c-next').addEventListener('click', function () { go(1); });
-  });
-})();
-</script>
+<script src="assets/js/journal.js" defer></script>
 </body>
 </html>
