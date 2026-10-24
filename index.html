@@ -27,6 +27,7 @@
   try { var t = localStorage.getItem('mr-theme'); if (t === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
   var fx = (location.search.match(/[?&]fx=(full|lite)/) || [])[1];
   d.classList.add('js');
+  try { if (sessionStorage.getItem('mr-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('intro-done'); } catch (e) { d.classList.add('intro-done'); }
   if (fx) { d.dataset.fx = fx; if (fx === 'lite') d.classList.add('lite'); return; }
   if ((n.hardwareConcurrency && n.hardwareConcurrency <= 2) || (n.deviceMemory && n.deviceMemory <= 2) || c.saveData ||
       /(^|-)2g/.test(c.effectiveType || '') || matchMedia('(prefers-reduced-data: reduce)').matches) d.classList.add('lite');
@@ -36,6 +37,20 @@
 {"@context":"https://schema.org","@type":"Person","name":"Mukul Rayana","jobTitle":"AI/ML Engineer","url":"https://mukulray1603.github.io","image":"https://mukulray1603.github.io/assets/images/mukul-portrait.jpg","email":"mailto:mukulray@terpmail.umd.edu","alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Maryland, College Park"},{"@type":"CollegeOrUniversity","name":"SRM Easwari Engineering College"}],"sameAs":["https://github.com/MukulRay1603","https://linkedin.com/in/mukul-rayana","https://huggingface.co/MukulRay"],"knowsAbout":["Machine Learning","Large Language Models","Retrieval-Augmented Generation","Multi-Agent Systems","LLMOps","Reinforcement Learning","Game AI"]}
 </script>
 <style>
+/* ─── opening: the star draws, the name settles, then we zoom through it ─── */
+.intro{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;align-content:center;gap:1.6rem;background:radial-gradient(circle at 50% 45%,#111a33,#070b18 65%);animation:introOut .7s 1.55s cubic-bezier(.7,0,.3,1) forwards}
+.intro-done .intro{display:none}
+.intro-star{width:min(42vmin,300px);height:auto;filter:drop-shadow(0 0 18px rgba(216,182,110,.55));animation:introZoom .7s 1.55s cubic-bezier(.7,0,.3,1) forwards}
+.intro-star *{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s cubic-bezier(.4,0,.2,1) forwards}
+.intro-star circle{stroke-dasharray:.012 .02;stroke-dashoffset:0;opacity:0;animation:introFade .8s .25s forwards}
+.intro-star polygon+polygon{animation-delay:.3s}
+.intro-name{font:700 clamp(1.2rem,3vw,1.9rem)/1 var(--serif);letter-spacing:.6em;text-transform:uppercase;color:#f7f1e1;opacity:0;animation:introName 1s .45s cubic-bezier(.22,1,.36,1) forwards}
+.intro-name span+span{color:#d8b66e}
+@keyframes introName{to{opacity:1;letter-spacing:.22em}}
+@keyframes introFade{to{opacity:.8}}
+@keyframes introZoom{to{transform:scale(7) rotate(25deg);opacity:0}}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
+
 /* ─── HERO ─── */
 .hero{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(2.5rem,7vw,5.5rem) clamp(2.5rem,6vw,4.5rem)}
 @media (min-width:1000px) and (min-height:720px){.hero{min-height:calc(100svh - 4rem);display:flex;flex-direction:column;justify-content:center}}
@@ -51,7 +66,7 @@
   -webkit-mask-image:radial-gradient(ellipse 70% 70% at 60% 45%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 60% 45%,#000 20%,transparent 75%)}
 .hero-photo{position:relative}
 .hero-photo .portrait{z-index:1}
-.hero .l-rune{position:absolute;left:50%;top:50%;inset:auto;width:min(680px,92vw);height:auto;aspect-ratio:1;margin:calc(min(680px,92vw) / -2) 0 0 calc(min(680px,92vw) / -2);z-index:-1;perspective:1200px;pointer-events:none}
+.hero .l-rune{position:absolute;inset:auto;left:50%;top:50%;width:min(680px,92vw);height:auto;aspect-ratio:1;margin:calc(min(680px,92vw) / -2) 0 0 calc(min(680px,92vw) / -2);z-index:-1;perspective:1200px;pointer-events:none}
 .rune-tilt{width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
 .rune{width:100%;height:100%;opacity:.32;animation:spin 60s linear infinite}
 .rune .rune-inner{transform-origin:50% 50%;animation:spin 38s linear infinite reverse}
@@ -187,7 +202,7 @@
 
 /* ─── PROJECTS (artifacts) ─── */
 /* Stellar Archive: constellation rail + one project on stage, auto-advance */
-.archive{display:grid;grid-template-columns:17.5rem minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start}
+.archive{display:grid;grid-template-columns:20rem minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start}
 .rail{position:sticky;top:5.5rem;display:flex;flex-direction:column;padding:.5rem 0;border:1px solid var(--line);border-radius:var(--r);background:rgba(var(--ink),.62)}
 .rail::before{content:"";position:absolute;left:calc(1.25rem + 5px);top:1.4rem;bottom:1.4rem;width:1px;background:linear-gradient(transparent,var(--line-2) 10%,var(--line-2) 90%,transparent)}
 .rail-item{--c:var(--gold);position:relative;display:flex;align-items:center;gap:.95rem;width:100%;padding:.85rem 1.25rem;border:0;border-left:2px solid transparent;background:none;text-align:left;cursor:pointer;overflow:hidden;transition:background .25s,border-color .25s}
@@ -293,6 +308,8 @@
 
 /* ─── BEYOND ─── */
 .hobby{padding:1.2rem 1.25rem}
+.ql,.xp-main,.xp-minor,.edu,.talents,.contact{transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .3s}
+.ql:hover,.xp-main:hover,.xp-minor:hover,.edu:hover,.talents:hover{transform:translateY(-6px);box-shadow:0 26px 50px -24px rgba(0,0,0,.75),0 0 0 1px rgba(var(--g),.28),0 0 34px -10px rgba(var(--g),.35)}
 .hobby-top{display:flex;align-items:center;gap:.7rem}
 .hobby-ic{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid var(--line-2);font-size:1.25rem;line-height:1;background:radial-gradient(circle,rgba(var(--g),.14),transparent 70%)}
 .cover .hobby-ic{width:4rem;height:4rem;font-size:2rem;filter:drop-shadow(0 0 14px rgba(var(--g),.45))}
@@ -386,6 +403,10 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="intro" id="intro" aria-hidden="true">
+  <svg class="intro-star" viewBox="0 0 600 600" fill="none"><circle cx="300" cy="300" r="250" stroke="#d8b66e" stroke-width="1.2" stroke-dasharray="6 14" pathLength="1"/><polygon points="300,30 332,268 570,300 332,332 300,570 268,332 30,300 268,268" stroke="#f0dfaf" stroke-width="2" pathLength="1"/><polygon points="300,150 366,266 366,334 300,450 234,334 234,266" stroke="#7fd3c0" stroke-width="1.2" pathLength="1"/></svg>
+  <p class="intro-name"><span>Mukul</span> <span>Rayana</span></p>
+</div>
 <div class="cosmos" aria-hidden="true"><div class="st st1"></div><div class="st st2"></div><div class="st st3"></div><i class="shoot" style="--x:8%;--y:12%;--t:13s;--d:2s"></i><i class="shoot" style="--x:48%;--y:6%;--t:19s;--d:8s"></i></div>
 
 
@@ -1011,12 +1032,14 @@
   /* runtime FPS probe: if the first ~2s run under ~40fps, switch to the lite tier */
   if (!reduce && !root.classList.contains('lite') && !root.dataset.fx) {
     var frames = 0, t0 = 0;
-    requestAnimationFrame(function probe(t) {
-      if (!t0) t0 = t;
-      frames++;
-      if (t - t0 < 2000) requestAnimationFrame(probe);
-      else if (frames / ((t - t0) / 1000) < 40) root.classList.add('lite');
-    });
+    setTimeout(function () {
+      requestAnimationFrame(function probe(t) {
+        if (!t0) t0 = t;
+        frames++;
+        if (t - t0 < 2000) requestAnimationFrame(probe);
+        else if (frames / ((t - t0) / 1000) < 28) root.classList.add('lite');
+      });
+    }, 2500);
   }
 
   /* highlight cards: play the latency bars once they are on screen */
@@ -1188,6 +1211,17 @@
     });
     btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
   });
+})();
+
+/* opening animation: once per visit; any click or key skips it */
+(function () {
+  var intro = document.getElementById('intro');
+  if (!intro || document.documentElement.classList.contains('intro-done')) return;
+  try { sessionStorage.setItem('mr-intro', '1'); } catch (e) {}
+  var done = function () { document.documentElement.classList.add('intro-done'); };
+  intro.addEventListener('animationend', function (e) { if (e.target === intro) done(); });
+  ['pointerdown', 'keydown'].forEach(function (t) { addEventListener(t, done, { once: true }); });
+  setTimeout(done, 2600);
 })();
 
 /* contact form → Formspree, falls back to mailto */
