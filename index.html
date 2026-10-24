@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; frame-src 'none'; media-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; frame-src 'self'; media-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mukul Rayana · AI/ML Engineer | LLMOps, RAG, Game AI, Reinforcement Learning</title>
@@ -379,6 +379,8 @@
 @media (max-width:980px){
   .art-feat{grid-template-columns:1fr}
 }
+@keyframes swNext{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes swPrev{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
 @media (max-width:860px){
   .card-id{justify-self:stretch;max-width:none}
   .questlog{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -397,6 +399,9 @@
   .rail-dot,.rail-sub{display:none}
   .rail-name{font-size:.9rem}
   .stage>.art:not(.is-on){display:none}
+  .stage{touch-action:pan-y}
+  .stage>.art.sw-next{animation:swNext .42s cubic-bezier(.22,1,.36,1)}
+  .stage>.art.sw-prev{animation:swPrev .42s cubic-bezier(.22,1,.36,1)}
   .cover{height:29rem}
 }
 @media (max-width:480px){
