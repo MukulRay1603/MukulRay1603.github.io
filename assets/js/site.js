@@ -5,6 +5,27 @@
   var onHome = !!document.getElementById('projects');
   var home = function (hash) { return onHome ? hash : 'index.html' + hash; };
 
+  /* ─── nav on secondary pages (journal): mobile toggle + highlight on the current link ─── */
+  if (!onHome) (function () {
+    var toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');
+    if (!toggle || !links) return;
+    var setMenu = function (open) { toggle.setAttribute('aria-expanded', String(open)); links.classList.toggle('is-open', open); };
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.nav')) setMenu(false); });
+    var ind = links.querySelector('.nav-ind'), cur = links.querySelector('[aria-current]');
+    var move = function (a) {
+      if (!ind) return;
+      if (!a || innerWidth <= 900) { ind.classList.remove('on'); return; }
+      ind.style.width = a.offsetWidth + 'px'; ind.style.transform = 'translateX(' + a.offsetLeft + 'px)'; ind.classList.add('on');
+    };
+    links.addEventListener('mouseover', function (e) { var a = e.target.closest('a'); if (a) move(a); });
+    links.addEventListener('mouseleave', function () { move(cur); });
+    addEventListener('resize', function () { move(cur); });
+    move(cur);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { move(cur); });
+  })();
+
   /* ─── theme ─── */
   var themeBtn = document.getElementById('themeBtn');
   function applyTheme(t) {
@@ -146,7 +167,7 @@
     } });
   });
   items.push(
-    { g: 'Links', t: 'Résumé (PDF)', hint: 'opens', run: open('assets/Mukul_Rayana_Resume.pdf') },
+    { g: 'Links', t: 'Resumé (PDF)', hint: 'opens', run: open('assets/Mukul_Rayana_Resume.pdf') },
     { g: 'Links', t: 'GitHub', hint: 'opens', run: open('https://github.com/MukulRay1603') },
     { g: 'Links', t: 'LinkedIn', hint: 'opens', run: open('https://linkedin.com/in/mukul-rayana') },
     { g: 'Links', t: 'Hugging Face', hint: 'opens', run: open('https://huggingface.co/spaces/MukulRay') },
@@ -222,25 +243,31 @@
   }
 
 
-  /* ─── trailing gold cursor ring (fine pointers, full tier) ─── */
+  /* ─── gold cursor: dot + trailing ring (fine pointers, full tier) ─── */
   if (!reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    var ring = document.createElement('div'); ring.className = 'cursor'; ring.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(ring);
+    var dot = document.createElement('div'), ring = document.createElement('div');
+    dot.className = 'cur'; ring.className = 'cur-r';
+    dot.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(ring); document.body.appendChild(dot);
     var tx = -100, ty = -100, rx = -100, ry = -100, moving = false;
     function follow() {
-      rx += (tx - rx) * 0.2; ry += (ty - ry) * 0.2;
+      rx += (tx - rx) * 0.16; ry += (ty - ry) * 0.16;
       ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
       if (Math.abs(tx - rx) > 0.3 || Math.abs(ty - ry) > 0.3) requestAnimationFrame(follow); else moving = false;
     }
     document.addEventListener('pointermove', function (e) {
-      if (e.pointerType !== 'mouse' || root.classList.contains('lite') || (!e.clientX && !e.clientY)) return;
-      tx = e.clientX; ty = e.clientY; ring.classList.add('on');
+      if (root.classList.contains('lite')) { root.classList.remove('has-cursor'); return; }
+      if (e.pointerType !== 'mouse' || (!e.clientX && !e.clientY)) return;
+      tx = e.clientX; ty = e.clientY;
+      dot.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0)';
+      if (!dot.classList.contains('on')) { dot.classList.add('on'); ring.classList.add('on'); root.classList.add('has-cursor'); }
       if (!moving) { moving = true; requestAnimationFrame(follow); }
     }, { passive: true });
     document.addEventListener('pointerover', function (e) {
-      ring.classList.toggle('hover', !!e.target.closest('a, button, [role="tab"], .cmdk-item, input, textarea'));
+      var h = !!e.target.closest('a, button, [role="tab"], .cmdk-item, .hobby');
+      dot.classList.toggle('hover', h); ring.classList.toggle('hover', h);
     });
-    document.documentElement.addEventListener('mouseleave', function () { ring.classList.remove('on'); });
+    document.documentElement.addEventListener('mouseleave', function () { dot.classList.remove('on'); ring.classList.remove('on'); });
   }
 
   /* small toast for confirmations */
