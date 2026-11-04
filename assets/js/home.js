@@ -219,7 +219,7 @@
     var d = document.createElement('button'); d.type = 'button';
     d.setAttribute('aria-label', 'Show ' + c.querySelector('h3').textContent);
     d.addEventListener('click', function () { go(i); }); dotsBox.appendChild(d);
-    c.addEventListener('click', function () { if (i !== cur) go(i); });
+    c.addEventListener('click', function (e) { if (i !== cur) { e.preventDefault(); go(i); } });
   });
   var dots = [].slice.call(dotsBox.children);
   function arrange() {
@@ -234,6 +234,7 @@
       c.style.pointerEvents = a > 2 ? 'none' : '';
       c.classList.toggle('is-on', a === 0);
       c.setAttribute('aria-hidden', String(a !== 0));
+      c.querySelectorAll('a').forEach(function (l) { l.tabIndex = a ? -1 : 0; });
     });
     dots.forEach(function (d, i) { if (i === cur) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
   }
