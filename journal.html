@@ -132,9 +132,9 @@ dialog.read[open]{animation:pop .25s ease}
     <article class="panel corners post">
       <div class="post-thumb">
         <picture>
-          <source type="image/avif" srcset="assets/images/Blogs/Eldervale_2026/qa-01-wayfall-thumb.avif">
-          <source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/qa-01-wayfall-thumb.webp">
-          <img src="assets/images/Blogs/Eldervale_2026/qa-01-wayfall.jpg" alt="" width="800" height="450" decoding="async">
+          <source type="image/avif" srcset="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings-thumb.avif">
+          <source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings-thumb.webp">
+          <img src="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings.jpg" alt="" width="800" height="450" decoding="async">
         </picture>
       </div>
       <div class="post-body">
@@ -253,9 +253,11 @@ dialog.read[open]{animation:pop .25s ease}
       <div class="carousel" aria-roledescription="carousel" aria-label="Eldervale screenshots">
         <div class="slides wide" tabindex="0">
           <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-keyart.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-keyart.jpg" alt="Aster and Rowan overlooking the valley of Eldervale" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
-          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings.jpg" alt="The two heroes at a puzzle ring on the cliff" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
-          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-cliff-stair.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-cliff-stair.jpg" alt="A root stair woven down the cliff" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
-          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/qa-01-wayfall.webp"><img src="assets/images/Blogs/Eldervale_2026/qa-01-wayfall.jpg" alt="The first scene with the goal card, controls and the narrator's line on screen" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-title-screen.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-title-screen.jpg" alt="Eldervale title screen over the valley, with Play solo and Play together" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/qa-01-wayfall.webp"><img src="assets/images/Blogs/Eldervale_2026/qa-01-wayfall.jpg" alt="The first scene, with the goal card, controls and the narrator Tessil's line on screen" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-coop-hum-weave.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-coop-hum-weave.jpg" alt="A live co-op moment: Aster hums a note while Rowan weaves roots into a path" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-field-journal.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-field-journal.jpg" alt="The Field Journal with collected clues and a map of the valley" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-dusk.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-dusk.jpg" alt="Aster and Rowan in the valley at dusk" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
         </div>
         <button class="c-btn c-prev" type="button" aria-label="Previous image">←</button>
         <button class="c-btn c-next" type="button" aria-label="Next image">→</button>
@@ -275,7 +277,7 @@ dialog.read[open]{animation:pop .25s ease}
         <li><b>Kind to every player:</b> a gentler story mode, hints that grow clearer, larger text, reduced motion and captions. Every note has a shape and colour, so you can finish it with the sound off.</li>
       </ul>
       <h3>Tested like a product</h3>
-      <p>I tested it four ways: my own rounds on PC and phone, real players on the live site, AI playtest agents, and 130 automated tests. When eight blind AI testers all stalled at the mill puzzle, I cut it from four steps to two. The final release, v0.14.18, came after 136 commits. What humans and AI caught turned into its own study, in the next post.</p>
+      <p>I tested it four ways: my own rounds on PC and phone, real players on the live site, AI playtest agents, and 130 automated tests. When eight blind AI testers all stalled at the mill puzzle, I cut it from four steps to two. The latest release, v0.14.19, came after 137 commits. What humans and AI caught became its own study, in a separate post.</p>
       <p>Go wake the valley. 🌿</p>
     </div>
     <p class="read-tags"><span class="tag">🎮 Free in your browser</span><span class="tag">2-player online co-op</span><span class="tag">3 endings</span><span class="tag">Three.js · TypeScript · WebRTC</span></p>
@@ -293,16 +295,20 @@ dialog.read[open]{animation:pop .25s ease}
       <p>While building <a class="text-link" href="https://eldervale-game.netlify.app" target="_blank" rel="noopener">Eldervale</a>, my two-player browser game, I ran two kinds of playtests side by side: real people, and AI playtest agents. The agents were scripted players driven by language models, playing blind from screenshots like a first-time player would. Then I compared what each side actually found.</p>
       <h3>The headline</h3>
       <p>Of 22 distinct issues on the main findings list, humans found 13 and the agents found 11. <b>Only 2 were found by both.</b> AI testers weren't a cheaper copy of human testers. They were a second, very different set of eyes, and the game needed both.</p>
-      <div class="carousel" aria-roledescription="carousel" aria-label="Playtest study charts">
+      <div class="carousel" aria-roledescription="carousel" aria-label="Playtest study images and charts">
         <div class="slides wide" tabindex="0">
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings.jpg" alt="The two heroes at a puzzle ring on the cliff" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
           <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-overlap.webp"><img src="assets/images/Blogs/Eldervale_2026/study-overlap.jpg" alt="Chart: of 22 distinct issues, 11 were found only by humans, 9 only by AI agents, and 2 by both" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
           <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-funnel.webp"><img src="assets/images/Blogs/Eldervale_2026/study-funnel.jpg" alt="Chart: of 30 AI agent sessions, 21 passed the first puzzle, 1 entered the caves and 1 reached an ending; live-site human milestone events were 10 first scene, 7 valley, 5 caverns and 3 endings" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
           <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-claims.webp"><img src="assets/images/Blogs/Eldervale_2026/study-claims.jpg" alt="Chart: of 56 agent claims checked against the code, 34 held up, 13 were tester error or test artifacts, and 9 were unsure or other" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-play-together.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-play-together.jpg" alt="The co-op lobby: create a room or join with a five-letter code" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-cliff-stair.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-cliff-stair.jpg" alt="A root stair woven down the cliff" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/qa-02-hessas-mill.webp"><img src="assets/images/Blogs/Eldervale_2026/qa-02-hessas-mill.jpg" alt="Arriving at Hessa's Mill, the puzzle where every blind AI tester stalled" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
         </div>
         <button class="c-btn c-prev" type="button" aria-label="Previous image">←</button>
         <button class="c-btn c-next" type="button" aria-label="Next image">→</button>
       </div>
-      <p class="cap">Figures counted from the playtest logs, 26–30 October 2026</p>
+      <p class="cap">Charts counted from the playtest logs, 26–30 October 2026 · Screenshots from Eldervale</p>
       <h3>The setup</h3>
       <ul>
         <li><b>30 AI agent sessions</b> across 28 runs, including two co-op pairs, on PC and emulated phone screens. Each got a short persona and a first-time-player brief, and played with sound off. 21 of 30 got past the first puzzle; the median session ran 146 actions.</li>
