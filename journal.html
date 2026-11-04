@@ -132,13 +132,45 @@ dialog.read[open]{animation:pop .25s ease}
     <article class="panel corners post">
       <div class="post-thumb">
         <picture>
+          <source type="image/avif" srcset="assets/images/Blogs/Eldervale_2026/study-cover-thumb.avif">
+          <source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-cover-thumb.webp">
+          <img src="assets/images/Blogs/Eldervale_2026/study-cover.jpg" alt="" width="800" height="450" decoding="async">
+        </picture>
+      </div>
+      <div class="post-body">
+        <p class="meta"><span class="new-pill">New</span><time datetime="2026-10-31">October 31, 2026</time><span class="tag">Research</span><span class="tag">AI Agents</span><span class="tag">Playtesting</span></p>
+        <h2><button class="post-open" type="button" data-open="read-playtest" aria-haspopup="dialog">Human vs AI Playtesters: 22 Issues, Only 2 in Common</button></h2>
+        <p>I ran 30 AI playtest sessions alongside real players on my game. Each side found about half the issues, and they barely overlapped.</p>
+        <span class="more" aria-hidden="true">Read more →</span>
+      </div>
+    </article>
+
+    <article class="panel corners post">
+      <div class="post-thumb">
+        <picture>
+          <source type="image/avif" srcset="assets/images/Blogs/Eldervale_2026/eldervale-keyart-thumb.avif">
+          <source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-keyart-thumb.webp">
+          <img src="assets/images/Blogs/Eldervale_2026/eldervale-keyart.jpg" alt="" width="800" height="450" decoding="async">
+        </picture>
+      </div>
+      <div class="post-body">
+        <p class="meta"><span class="new-pill">New</span><time datetime="2026-10-30">October 30, 2026</time><span class="tag">Game Dev</span><span class="tag">Three.js</span><span class="tag">Multiplayer</span></p>
+        <h2><button class="post-open" type="button" data-open="read-eldervale" aria-haspopup="dialog">I Built a Two-Player Mystery Game in 3.5 Weeks</button></h2>
+        <p>Eldervale is a cozy 3D co-op mystery that runs in the browser, built for Handshake's multiplayer game challenge. Two heroes, one song, no download.</p>
+        <span class="more" aria-hidden="true">Read more →</span>
+      </div>
+    </article>
+
+    <article class="panel corners post">
+      <div class="post-thumb">
+        <picture>
           <source type="image/avif" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover-thumb.avif">
           <source type="image/webp" srcset="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover-thumb.webp">
           <img src="assets/images/Blogs/AWSGard_Valheim_2026/awsgard-cover.jpg" alt="" width="800" height="450" decoding="async">
         </picture>
       </div>
       <div class="post-body">
-        <p class="meta"><span class="new-pill">New</span><time datetime="2026-09-11">September 11, 2026</time><span class="tag">Cloud</span><span class="tag">AWS</span><span class="tag">System Design</span></p>
+        <p class="meta"><time datetime="2026-09-11">September 11, 2026</time><span class="tag">Cloud</span><span class="tag">AWS</span><span class="tag">System Design</span></p>
         <h2><button class="post-open" type="button" data-open="read-awsgard" aria-haspopup="dialog">6 Vikings, 2 Continents, 1 Server</button></h2>
         <p>6 of us, my friends and me, wanted to play Valheim together. The catch: we were spread across Connecticut, Michigan and India. So I built us a server on AWS and learned a lot of cloud along the way.</p>
         <span class="more" aria-hidden="true">Read more →</span>
@@ -154,7 +186,7 @@ dialog.read[open]{animation:pop .25s ease}
         </picture>
       </div>
       <div class="post-body">
-        <p class="meta"><span class="new-pill">New</span><time datetime="2026-09-03">September 3, 2026</time><span class="tag">Human + AI</span><span class="tag">🎮 Genshin Impact</span></p>
+        <p class="meta"><time datetime="2026-09-03">September 3, 2026</time><span class="tag">Human + AI</span><span class="tag">🎮 Genshin Impact</span></p>
         <h2><button class="post-open" type="button" data-open="read-astra" aria-haspopup="dialog">How I Used Astra to Solve Nicole's Puzzle in Genshin Impact</button></h2>
         <p>A puzzle in the video game Genshin Impact: remove 47 blocks with at most six mistakes. I supplied the hands, Astra supplied a second opinion.</p>
         <span class="more" aria-hidden="true">Read more →</span>
@@ -201,6 +233,116 @@ dialog.read[open]{animation:pop .25s ease}
 
   <div class="back"><a class="btn btn-line" href="index.html"><span aria-hidden="true">←</span> Back to portfolio</a></div>
 </main>
+
+<!-- ══ Eldervale ══ -->
+<dialog class="read" id="read-eldervale" aria-labelledby="read-eldervale-title">
+  <button class="read-close" type="button" aria-label="Close">✕</button>
+  <article class="read-in">
+    <p class="meta"><time datetime="2026-10-30">October 30, 2026</time><span class="tag">Game Dev</span><span class="tag">Three.js</span><span class="tag">Multiplayer</span></p>
+    <h2 id="read-eldervale-title">I Built a Two-Player Mystery Game in 3.5 Weeks</h2>
+    <div class="read-body">
+      <p>Eldervale: Where the River Bends is a cozy 3D mystery adventure for two players, and it runs right in your browser. Free, no download, no account. I designed and built it for Handshake's "Create a Multiplayer Game" challenge, from first commit on October 5 to submission on October 30.</p>
+      <p>The result is a complete game: online co-op, a voiced narrator, a ten-piece soundtrack, three endings, full touch and controller support, and 130 automated tests behind it.</p>
+      <h3>One song, two halves</h3>
+      <p>High above the clouds, the sky islands of Skyhaven are cracking. Two apprentices follow a strange half-song down to Eldervale, a quiet valley of mills, orchards and old roots where the water has been vanishing for two springs.</p>
+      <ul>
+        <li><b>Aster is a Listener.</b> She hears notes hidden in waterfalls, reeds and hollow logs, catches them and hums them back.</li>
+        <li><b>Rowan is a Rootweaver.</b> He weaves the living roots under the valley into bridges, gates and channels, but only while a note is sounding.</li>
+      </ul>
+      <p>So every puzzle needs both of them: one to sing, one to shape. Tessil, a cheerful sprout spirit, narrates like a tabletop game master and gives clearer hints each time you ask. There's no combat and no game over. You wake a root stair down a cliff, set a silent mill turning, and uncover why a grieving rootwarden rerouted a river. In the end, the valley and the sky need the same water, and you decide who gets it.</p>
+      <div class="carousel" aria-roledescription="carousel" aria-label="Eldervale screenshots">
+        <div class="slides wide" tabindex="0">
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-keyart.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-keyart.jpg" alt="Aster and Rowan overlooking the valley of Eldervale" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-title-screen.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-title-screen.jpg" alt="Eldervale title screen over the valley, with Play solo and Play together" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/qa-01-wayfall.webp"><img src="assets/images/Blogs/Eldervale_2026/qa-01-wayfall.jpg" alt="The first scene, with the goal card, controls and the narrator Tessil's line on screen" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-weave-rings.jpg" alt="The two heroes at a puzzle ring on the cliff" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-coop-hum-weave.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-coop-hum-weave.jpg" alt="A live co-op moment: Aster hums a note while Rowan weaves roots into a path" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-cliff-stair.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-cliff-stair.jpg" alt="A root stair woven down the cliff" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-field-journal.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-field-journal.jpg" alt="The Field Journal with collected clues and a map of the valley" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-dusk.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-dusk.jpg" alt="Aster and Rowan in the valley at dusk" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+        </div>
+        <button class="c-btn c-prev" type="button" aria-label="Previous image">←</button>
+        <button class="c-btn c-next" type="button" aria-label="Next image">→</button>
+      </div>
+      <p class="cap">Eldervale: Where the River Bends · Models by Quaternius, textures from Poly Haven</p>
+      <h3>Co-op with no game server</h3>
+      <ul>
+        <li><b>Play together or alone:</b> join a friend's room with a five-letter code or an invite link, or play solo and switch heroes with one button.</li>
+        <li><b>Peer to peer:</b> browsers connect directly over WebRTC, and the player who creates the room hosts it in their own browser. No server to pay for or keep running.</li>
+        <li><b>Same rules everywhere:</b> one deterministic simulation drives both co-op and solo.</li>
+      </ul>
+      <h3>Small, fast, and plays anywhere</h3>
+      <ul>
+        <li><b>About 2 MB to start.</b> Compressed models with near and far detail, voice lines that load one at a time, music that streams per scene, and grass and leaf textures painted in the browser.</li>
+        <li><b>Adapts to your device:</b> it picks a quality tier from the GPU and memory, and a frame-time governor lowers resolution when frames run long. Phones go full screen and can install it like an app.</li>
+        <li><b>Every input:</b> keyboard and mouse, full touch controls, and Xbox and PlayStation controllers, with prompts that switch to whatever you're holding.</li>
+        <li><b>Kind to every player:</b> a gentler story mode, hints that grow clearer, larger text, reduced motion and captions. Every note has a shape and colour, so you can finish it with the sound off.</li>
+      </ul>
+      <h3>Tested like a product</h3>
+      <p>I tested it four ways: my own rounds on PC and phone, real players on the live site, AI playtest agents, and 130 automated tests. When eight blind AI testers all stalled at the mill puzzle, I cut it from four steps to two. The latest release, v0.14.19, came after 137 commits. What humans and AI caught became its own study, in a separate post.</p>
+      <p>Go wake the valley. 🌿</p>
+    </div>
+    <p class="read-tags"><span class="tag">🎮 Free in your browser</span><span class="tag">2-player online co-op</span><span class="tag">3 endings</span><span class="tag">Three.js · TypeScript · WebRTC</span></p>
+    <p class="read-links"><a class="text-link" href="https://eldervale-game.netlify.app" target="_blank" rel="noopener">Play Eldervale <span class="arrow" aria-hidden="true">↗</span></a></p>
+  </article>
+</dialog>
+
+<!-- ══ Playtest study ══ -->
+<dialog class="read" id="read-playtest" aria-labelledby="read-playtest-title">
+  <button class="read-close" type="button" aria-label="Close">✕</button>
+  <article class="read-in">
+    <p class="meta"><time datetime="2026-10-31">October 31, 2026</time><span class="tag">Research</span><span class="tag">AI Agents</span><span class="tag">Playtesting</span></p>
+    <h2 id="read-playtest-title">Human vs AI Playtesters: 22 Issues, Only 2 in Common</h2>
+    <div class="read-body">
+      <p>While building <a class="text-link" href="https://eldervale-game.netlify.app" target="_blank" rel="noopener">Eldervale</a>, my two-player browser game, I ran two kinds of playtests side by side: real people, and AI playtest agents. The agents were scripted players driven by language models, playing blind from screenshots like a first-time player would. Then I compared what each side actually found.</p>
+      <h3>The headline</h3>
+      <p>Of 22 distinct issues on the main findings list, humans found 13 and the agents found 11. <b>Only 2 were found by both.</b> AI testers weren't a cheaper copy of human testers. They were a second, very different set of eyes, and the game needed both.</p>
+      <div class="carousel" aria-roledescription="carousel" aria-label="Playtest study images and charts">
+        <div class="slides wide" tabindex="0">
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-cover.webp"><img src="assets/images/Blogs/Eldervale_2026/study-cover.jpg" alt="Human vs AI playtesters: of 22 issues, 11 were found only by humans, 9 only by AI agents, and 2 by both" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-caught.webp"><img src="assets/images/Blogs/Eldervale_2026/study-caught.jpg" alt="Who caught what. Humans: phone audio buzz, touch feel, pacing, feature wishes. AI agents: a stuck co-op hum, softlocks, a camera trapped in a rock, a form that ate spaces. Both: catching the first note" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-overlap.webp"><img src="assets/images/Blogs/Eldervale_2026/study-overlap.jpg" alt="Chart: of 22 distinct issues, 11 were found only by humans, 9 only by AI agents, and 2 by both" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-funnel.webp"><img src="assets/images/Blogs/Eldervale_2026/study-funnel.jpg" alt="Chart: of 30 AI agent sessions, 21 passed the first puzzle, 1 entered the caves and 1 reached an ending; live-site human milestone events were 10 first scene, 7 valley, 5 caverns and 3 endings" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-claims.webp"><img src="assets/images/Blogs/Eldervale_2026/study-claims.jpg" alt="Chart: of 56 agent claims checked against the code, 34 held up, 13 were tester error or test artifacts, and 9 were unsure or other" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/eldervale-play-together.webp"><img src="assets/images/Blogs/Eldervale_2026/eldervale-play-together.jpg" alt="The co-op lobby: create a room or join with a five-letter code" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/qa-02-hessas-mill.webp"><img src="assets/images/Blogs/Eldervale_2026/qa-02-hessas-mill.jpg" alt="Arriving at Hessa's Mill, the puzzle where every blind AI tester stalled" width="1280" height="720" loading="lazy" decoding="async"></picture></div>
+        </div>
+        <button class="c-btn c-prev" type="button" aria-label="Previous image">←</button>
+        <button class="c-btn c-next" type="button" aria-label="Next image">→</button>
+      </div>
+      <p class="cap">Figures counted from the playtest logs, 26–30 October 2026</p>
+      <h3>The setup</h3>
+      <ul>
+        <li><b>30 AI agent sessions</b> across 28 runs, including two co-op pairs, on PC and emulated phone screens. Each got a short persona and a first-time-player brief, and played with sound off. 21 of 30 got past the first puzzle; the median session ran 146 actions.</li>
+        <li><b>Real players</b> on the live site, with analytics and an in-game feedback form, plus a tester over chat and my own rounds on PC and phone.</li>
+      </ul>
+      <h3>What humans caught</h3>
+      <ul>
+        <li><b>Sound:</b> three separate people heard a radio-like buzz on phones. Muted agents never could.</li>
+        <li><b>Feel:</b> jerky running on touch, dialogue covering the touch buttons, and an opening that felt abrupt.</li>
+        <li><b>Desire:</b> a sprint button, benches to sit on and rocks to climb. No agent asked for anything like that.</li>
+      </ul>
+      <h3>What agents caught</h3>
+      <ul>
+        <li><b>Co-op:</b> no real player opened a co-op room, so the agents were the co-op test team. One pair found a hum that stayed on after its key was released.</li>
+        <li><b>Softlocks:</b> a reset that put you back in the same stuck spot, a fence pocket two resets couldn't escape, and a camera trapped inside a rock.</li>
+        <li><b>Volume:</b> 329 tagged bug and friction notes across 21 runs.</li>
+      </ul>
+      <h3>When both agree, fix it first</h3>
+      <p>Catching the very first musical note was a wall for everyone. A human wrote "I can't catch the round thing", the median agent needed 28.5 actions, and the small model never got it. That agreement made it the top fix. In the final co-op run, both players were through in about 30 actions.</p>
+      <h3>Keeping agents honest</h3>
+      <p>Agents can be confidently wrong, so I added a review step. In one round, 56 agent claims were checked line by line against the code: 34 held up, 13 were tester error or test-setup artifacts, and 9 were unsure. "Cut-off" captions turned out to be screenshots taken mid-typing, and one "freeze" was only the screenshots stalling.</p>
+      <h3>The playbook</h3>
+      <ul>
+        <li>Use agents for breadth: co-op, softlocks, regressions, odd inputs.</li>
+        <li>Use humans for feel: sound, touch and pacing.</li>
+        <li>Fix first where both hit the same wall, and verify every agent report before acting on it.</li>
+      </ul>
+      <p>To keep it honest: the human sample was small, builds changed between runs, and grouping issues was a judgment call. Treat it as a snapshot, not a benchmark. But the pattern was clear enough to change how I test. 🔍</p>
+    </div>
+    <p class="read-tags"><span class="tag">🧪 30 AI agent sessions</span><span class="tag">22 issues compared</span><span class="tag">Only 2 overlapped</span><span class="tag">Human + AI QA</span></p>
+  </article>
+</dialog>
 
 <!-- ══ AWSGard ══ -->
 <dialog class="read" id="read-awsgard" aria-labelledby="read-awsgard-title">

@@ -307,6 +307,9 @@
 .cover .hobby-ic{width:4rem;height:4rem;font-size:2rem;filter:drop-shadow(0 0 14px rgba(var(--g),.45))}
 .hobby h3{font-size:1.05rem;color:var(--gold-hi)}
 .hobby p{margin-top:.65rem;font-size:.9rem;color:var(--muted)}
+.hobby-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;padding:.32rem .75rem;border:1px solid var(--line-2);border-radius:999px;font-size:.78rem;font-weight:700;color:var(--gold-hi);text-decoration:none;transition:border-color .2s,background .2s}
+.hobby-link svg{width:1rem;height:1rem}
+.hobby-link:hover,.hobby-link:focus-visible{border-color:var(--gold);background:rgba(var(--g),.1)}
 
 /* ─── CONTACT ─── */
 .contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);padding:clamp(1.5rem,4vw,2.75rem)}
@@ -896,7 +899,7 @@
       <button class="cover-btn cover-prev" type="button" id="coverPrev" aria-label="Previous">←</button>
       <button class="cover-btn cover-next" type="button" id="coverNext" aria-label="Next">→</button>
       <ul class="cover-track" id="coverTrack">
-      <li class="panel hobby"><div class="hobby-top"><span class="hobby-ic" aria-hidden="true">⚔️</span><h3>Genshin Impact <small class="hobby-kind">video game</small></h3></div><p>AR 60 since 2021. Full 36-star Spiral Abyss clears, often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis? Yeah, that's basically a love letter to Azhdaha.</p></li>
+      <li class="panel hobby"><div class="hobby-top"><span class="hobby-ic" aria-hidden="true">⚔️</span><h3>Genshin Impact <small class="hobby-kind">video game</small></h3></div><p>AR 60 since 2021. Full 36-star Spiral Abyss clears, often with off-meta comps just to see if it's possible. Three years of elemental reaction math and boss pattern memorization. Nemesis? Yeah, that's basically a love letter to Azhdaha.</p><a class="hobby-link" href="https://www.youtube.com/@mukulrayy" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.6 2.6 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3L10 15Z" fill="currentColor"/></svg>My Genshin guides<span class="sr-only"> on YouTube (opens in a new tab)</span></a></li>
       <li class="panel hobby"><div class="hobby-top"><span class="hobby-ic" aria-hidden="true">🎌</span><h3>Anime</h3></div><p>Shonen battle arcs, psychological thrillers, and anything with a hard magic system. Currently on a hunter exam binge. Always looking for the next arc that hits like Chimera Ant or Shibuya. Send recs.</p></li>
       <li class="panel hobby"><div class="hobby-top"><span class="hobby-ic" aria-hidden="true">🧗</span><h3>Rock Climbing</h3></div><p>I supervised at UMD's climbing facility and climb regularly. Managing patron safety and sending problems on a 55 ft wall in the same shift was pretty great honestly.</p></li>
       <li class="panel hobby"><div class="hobby-top"><span class="hobby-ic" aria-hidden="true">🏃</span><h3>Track &amp; Field</h3></div><p>Sprinter: hurdles and 4×100 relay. I ran track competitively and the start-gun adrenaline honestly never goes away.</p></li>
