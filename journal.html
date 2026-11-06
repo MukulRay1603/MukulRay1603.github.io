@@ -132,6 +132,22 @@ dialog.read[open]{animation:pop .25s ease}
     <article class="panel corners post">
       <div class="post-thumb">
         <picture>
+          <source type="image/avif" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-cover-thumb.avif">
+          <source type="image/webp" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-cover-thumb.webp">
+          <img src="assets/images/Blogs/Irminsul_v1_2026/irminsul-cover.jpg" alt="" width="800" height="450" decoding="async">
+        </picture>
+      </div>
+      <div class="post-body">
+        <p class="meta"><span class="new-pill">New</span><time datetime="2026-11-06">November 6, 2026</time><span class="tag">LLMOps</span><span class="tag">RAG</span><span class="tag">🎮 Genshin Impact</span></p>
+        <h2><button class="post-open" type="button" data-open="read-irminsul" aria-haspopup="dialog">Rebuilding Irminsul: From Demo to Something You Can Trust</button></h2>
+        <p>A Genshin assistant that cites every answer, rebuilt around one idea: use a model only where it adds something.</p>
+        <span class="more" aria-hidden="true">Read more →</span>
+      </div>
+    </article>
+
+    <article class="panel corners post">
+      <div class="post-thumb">
+        <picture>
           <source type="image/avif" srcset="assets/images/Blogs/Eldervale_2026/study-cover-thumb.avif">
           <source type="image/webp" srcset="assets/images/Blogs/Eldervale_2026/study-cover-thumb.webp">
           <img src="assets/images/Blogs/Eldervale_2026/study-cover.jpg" alt="" width="800" height="450" decoding="async">
@@ -233,6 +249,43 @@ dialog.read[open]{animation:pop .25s ease}
 
   <div class="back"><a class="btn btn-line" href="index.html"><span aria-hidden="true">←</span> Back to portfolio</a></div>
 </main>
+
+<!-- ══ Irminsul v1 ══ -->
+<dialog class="read" id="read-irminsul" aria-labelledby="read-irminsul-title">
+  <button class="read-close" type="button" aria-label="Close">✕</button>
+  <article class="read-in">
+    <p class="meta"><time datetime="2026-11-06">November 6, 2026</time><span class="tag">LLMOps</span><span class="tag">RAG</span><span class="tag">🎮 Genshin Impact</span></p>
+    <h2 id="read-irminsul-title">Rebuilding Irminsul: From Demo to Something You Can Trust</h2>
+    <div class="read-body">
+      <p>Irminsul is a free assistant for Genshin Impact, the video game. It answers questions about stats, builds, teams and lore, and links the source behind every answer. <a class="text-link" href="https://mukulray-irminsul.hf.space" target="_blank" rel="noopener">Try it here</a>.</p>
+      <p>Players usually piece answers together from wikis, guides and videos, and general chatbots can state a wrong number with full confidence or spoil content that isn't out yet. Irminsul gives one answer with its sources attached, and keeps unreleased content out.</p>
+      <h3>From demo to dependable</h3>
+      <p>The first version, in March, was a fine-tuned model with basic retrieval. It demoed well, but an audit in October exposed the weak spot: numbers came from a model reading text, so a stat could be wrong and still sound right. v1, live since October 26, is built around a different principle.</p>
+      <ul>
+        <li><b>Facts don't need a model.</b> Exact stats come straight from game data, instantly, with nothing to invent.</li>
+        <li><b>Rules hold where prompts bend.</b> Leak and safety guards are plain rules, so no clever phrasing can talk them round.</li>
+        <li><b>A citation isn't proof on its own.</b> Live sampling found answers that cited a source and still got a detail wrong, so every sentence is now checked against its source and dropped if it doesn't match.</li>
+        <li><b>Speed is a design choice.</b> Routing common questions to exact answers took response time from 9.9&nbsp;s to 0.45&nbsp;s with 50 users at once.</li>
+      </ul>
+      <div class="carousel" aria-roledescription="carousel" aria-label="Irminsul screenshots">
+        <div class="slides wide" tabindex="0">
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-cover.webp"><img src="assets/images/Blogs/Irminsul_v1_2026/irminsul-cover.jpg" alt="Irminsul v1: answers from game data, with sources. Every answer cited, every sentence checked, leak-gated, $0 to run" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-conversation.webp"><img src="assets/images/Blogs/Irminsul_v1_2026/irminsul-conversation.jpg" alt="An Irminsul answer with its sources, next to the character dossier" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-stats.webp"><img src="assets/images/Blogs/Irminsul_v1_2026/irminsul-stats.jpg" alt="Comparison and stat cards built from game data, marked No AI used" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-leak.webp"><img src="assets/images/Blogs/Irminsul_v1_2026/irminsul-leak.jpg" alt="A leak question refused by the leak filter before any search, next to a weapon refinement card" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-planner.webp"><img src="assets/images/Blogs/Irminsul_v1_2026/irminsul-planner.jpg" alt="The daily farming planner, saved only on the player's device" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+          <div class="slide"><picture><source type="image/webp" srcset="assets/images/Blogs/Irminsul_v1_2026/irminsul-phone.webp"><img src="assets/images/Blogs/Irminsul_v1_2026/irminsul-phone.jpg" alt="The phone layout and an interactive talent card" width="1600" height="900" loading="lazy" decoding="async"></picture></div>
+        </div>
+        <button class="c-btn c-prev" type="button" aria-label="Previous image">←</button>
+        <button class="c-btn c-next" type="button" aria-label="Next image">→</button>
+      </div>
+      <p class="cap">Irminsul is an unofficial, non-commercial fan project · Genshin Impact © HoYoverse</p>
+      <p>Irminsul now covers 131 characters, refreshes daily and runs at no cost. The model is the last step in the pipeline, not the first, and that ordering is what makes the answers dependable. 🌳</p>
+    </div>
+    <p class="read-tags"><span class="tag">🌳 v1 live beta</span><span class="tag">Every sentence checked</span><span class="tag">Leak-gated</span><span class="tag">$0 to run</span></p>
+    <p class="read-links"><a class="text-link" href="https://mukulray-irminsul.hf.space" target="_blank" rel="noopener">Try Irminsul <span class="arrow" aria-hidden="true">↗</span></a> &nbsp;·&nbsp; <a class="text-link" href="https://github.com/MukulRay1603/Irminsul" target="_blank" rel="noopener">Source on GitHub <span class="arrow" aria-hidden="true">↗</span></a></p>
+  </article>
+</dialog>
 
 <!-- ══ Eldervale ══ -->
 <dialog class="read" id="read-eldervale" aria-labelledby="read-eldervale-title">
