@@ -779,8 +779,9 @@
         <p class="art-sub">Secure document Q&amp;A service</p>
         <div class="main-stat"><svg class="mi" viewBox="-60 -60 120 120" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M-30 -42H14L32 -24V42H-30Z" fill="var(--surface)"/><path d="M14 -42V-24H32"/><path d="M-18 -16H20M-18 -4H20M-18 8H20M-18 20H8" stroke-opacity=".5"/><path d="M-36 -20H38" stroke-width="3" class="mi-scan"/><rect x="22" y="22" width="22" height="18" rx="4" fill="currentColor" stroke="none"/><path d="M27 22V16A6 6 0 0 1 39 16V22"/></g></svg><b>4× smaller</b><span>model with ONNX INT8 quantization (496.5 MB → 125 MB), 2–3× faster per inference on CPU</span></div>
         <ul class="subs">
-                    <li><span>Retrieval</span><b>BM25 + BGE + rerank</b></li>
-          <li><span>Safeguards</span><b>RBAC · PII redaction · injection checks</b></li>
+          <li><span>Search</span><b>BM25 + embeddings, reranked</b></li>
+          <li><span>Access</span><b>RBAC + audit log</b></li>
+          <li><span>Uploads</span><b>PII redaction · injection checks</b></li>
         </ul>
         <p class="art-desc">A FastAPI service with role-based access, audit logging, PII redaction on upload and prompt-injection screening. Hybrid search (BM25 + embeddings) with cross-encoder reranking keeps answers tied to their sources.</p>
         <div class="art-links">
