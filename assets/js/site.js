@@ -198,7 +198,7 @@
     else location.href = href;
   }; };
   var open = function (url) { return function () { window.open(url, '_blank', 'noopener'); }; };
-  var projects = ['PharmaChain', 'Nemesis', 'EmpathRAG', 'RECON', 'Irminsul', 'DocPilot', 'VR Generation'];
+  var projects = ['PharmaChain', 'Irminsul', 'RECON', 'Nemesis', 'VR Generation', 'DocPilot', 'EmpathRAG'];
   var items = [
     { g: 'Navigate', t: 'Projects', run: go(home('#projects')) },
     { g: 'Navigate', t: 'Experience', run: go(home('#experience')) },
