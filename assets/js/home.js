@@ -438,8 +438,7 @@
       v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.poster = src.poster;
       Array.prototype.forEach.call(src.querySelectorAll('source'), function (s) { v.appendChild(s.cloneNode()); });
       body.appendChild(v); if (!still) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
-      note.textContent = 'A quote is kept only if it appears word for word on the page it cites. Open the live demo to try it with sample deals.';
-      note.hidden = false;
+      note.textContent = tile.dataset.note || ''; note.hidden = !tile.dataset.note;
     }
     dlg.showModal();
   }

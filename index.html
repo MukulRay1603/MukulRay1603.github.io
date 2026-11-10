@@ -218,14 +218,31 @@
 .stage>.art{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(16px) scale(.985);transition:opacity .45s,transform .55s cubic-bezier(.22,1,.36,1),visibility 0s .45s,border-color .25s}
 .art-num{display:none}
 .stage>.art.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .55s .1s,transform .65s cubic-bezier(.22,1,.36,1) .1s,visibility 0s,border-color .25s}
+@media (min-width:1100px){.archive{align-items:stretch}}
+@media (min-width:861px) and (max-width:1099px){.stage>.art:not(.is-on){display:none}}
 @media (min-width:1100px){
   .stage>.art:not(.art-feat){display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);column-gap:clamp(1.5rem,3vw,3rem);grid-auto-flow:row dense;align-content:center;padding:clamp(1.75rem,3vw,2.75rem)}
   .stage>.art:not(.art-feat)>*{grid-column:1}
   .stage>.art:not(.art-feat)>.main-stat{grid-column:2;grid-row:1/span 3;align-self:end;margin-top:0}
   .stage>.art:not(.art-feat)>.subs{grid-column:2;grid-row:4/span 4;align-self:start}
-  .stage>.art:not(.art-feat)>.demos{grid-column:2;grid-row:8/span 3;align-self:start}
   .stage>.art:not(.art-feat) h3{font-size:clamp(1.45rem,2.2vw,1.85rem)}
   .stage>.art:not(.art-feat)>.art-links{padding-top:1.25rem}
+  /* project section: list and card share one height; cards with media keep tags and links beside the thumbnails */
+  .stage>.art:has(>.demos)>.subs{grid-row:4}
+  .stage>.art:has(>.demos)>.demos{grid-column:1;grid-row:5;margin-top:1rem}
+  .stage>.art:has(>.demos)>.art-side{grid-column:2;grid-row:5;align-self:center;margin-top:1rem}
+  .art-side .flow{margin-top:0}
+  .art-side .art-links{padding-top:.8rem}
+  /* featured card: wider text column, compact pipeline, only the stat the pipeline doesn't already show */
+  .art-feat{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+  .art-feat .subs{margin-top:.5rem}
+  .art-feat .subs li:not(:nth-child(3)){display:none}
+  .arch{padding:.95rem 1rem}
+  .arch ol{gap:.4rem}
+  .arch li{padding:.5rem .75rem .5rem 2.5rem}
+  .arch li::before{top:.55rem}
+  .arch-title{margin-bottom:.75rem}
+  .arch .lanes span{padding:.3rem .45rem}
   .art-num{position:absolute;right:1.75rem;bottom:.5rem;font:700 clamp(4.5rem,7.5vw,7.5rem)/1 var(--serif);color:var(--c);opacity:.07;pointer-events:none;user-select:none}
 }
 
@@ -284,7 +301,8 @@
 .subs li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.42rem 0;border-bottom:1px dashed rgba(217,184,113,.12);font-size:.86rem}
 .subs li:last-child{border-bottom:0}
 .subs span{color:var(--muted)}
-.subs b{font-size:.88rem;font-weight:700;line-height:1.3;color:var(--gold-hi);text-align:right;white-space:nowrap}
+.subs span{flex:0 1 auto;min-width:5.5rem}
+.subs b{flex:0 1 auto;min-width:0;font-size:.88rem;font-weight:700;line-height:1.3;color:var(--gold-hi);text-align:right;text-wrap:balance;overflow-wrap:anywhere}
 .art-desc{margin-top:.95rem;color:var(--muted);font-size:.93rem}
 .flow{margin-top:.9rem;display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;font-size:.8rem;line-height:1.4;font-weight:600;color:var(--faint)}
 .flow{gap:.35rem 1.15rem}
@@ -296,6 +314,8 @@
 .demo-tile:hover,.demo-tile:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
 .demo-tile:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
 .demo-tag{position:absolute;left:.4rem;bottom:.4rem;display:inline-flex;align-items:center;gap:.35rem;padding:.22rem .55rem .22rem .45rem;border-radius:999px;font-size:.7rem;font-weight:700;color:#14110a;background:var(--gold);box-shadow:0 3px 12px rgba(0,0,0,.35)}
+.demos-one{grid-template-columns:1.15fr 1fr;align-items:center}
+.demo-credit{margin:0;font-size:.78rem;line-height:1.45;color:var(--faint)}
 .demo-tag svg{width:.85rem;height:.85rem}
 .demo-tag .live{width:.5rem;height:.5rem;border-radius:50%;background:#1f8a4c;box-shadow:0 0 0 2px rgba(31,138,76,.25)}
 dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem))}
@@ -317,8 +337,8 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
 .arch li b{color:var(--text);font-weight:600;font-size:.88rem}
 .arch li::before{counter-increment:s;content:counter(s);position:absolute;left:.8rem;top:.7rem;width:1.3rem;height:1.3rem;display:grid;place-items:center;border-radius:50%;border:1px solid var(--c);color:var(--c);font:700 .72rem/1 var(--sans)}
 .arch li+li::after{content:"";position:absolute;left:1.43rem;top:-.55rem;width:1px;height:.55rem;background:var(--c);opacity:.6}
-.arch .lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem;margin-top:.45rem}
-.arch .lanes span{overflow-wrap:anywhere;padding:.4rem .45rem;border:1px dashed color-mix(in srgb,var(--c) 40%,transparent);border-radius:8px;font-size:.76rem;font-weight:600;line-height:1.35;color:var(--text);text-align:center}
+.arch .lanes{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.45rem}
+.arch .lanes span{flex:1 1 auto;overflow-wrap:normal;padding:.4rem .45rem;border:1px dashed color-mix(in srgb,var(--c) 40%,transparent);border-radius:8px;font-size:.76rem;font-weight:600;line-height:1.35;color:var(--text);text-align:center}
 .arch-foot{margin-top:.8rem;font-size:.85rem;font-weight:700;color:var(--c)}
 
 /* ─── EDUCATION / LEADERSHIP ─── */
@@ -708,7 +728,16 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
           <li><span>Running cost</span><b>$0</b></li>
         </ul>
         <p class="art-desc">Stats come straight from game data with no model; everything else is answered only from cited sources, sentence by sentence. Leaks are gated out at build time. Unofficial fan project.</p>
-        <p class="flow"><span>rule-based guards</span><span>game data or cited search</span><span>sentence check</span></p>
+        <div class="demos demos-one" data-title="Irminsul">
+          <button class="demo-tile" type="button" data-open="demo" data-url="https://mukulray-irminsul.hf.space" data-note="Exact stats come from game data with no AI, and every answer shows its source. Unofficial fan project; Genshin Impact content belongs to HoYoverse." aria-label="See the Irminsul demo">
+            <video class="demo-loop" muted loop playsinline preload="none" poster="assets/images/irminsul-poster.jpg" width="640" height="360">
+              <source src="assets/video/irminsul-loop.webm" type="video/webm">
+              <source src="assets/video/irminsul-loop.mp4" type="video/mp4">
+            </video>
+            <span class="demo-tag"><span class="live" aria-hidden="true"></span>Live demo</span>
+          </button>
+          <p class="demo-credit">A question answered straight from game data, with its source shown. Genshin Impact content belongs to HoYoverse.</p>
+        </div>
         <details class="older">
           <summary>Older build (v0.9)</summary>
           <div class="older-body">
@@ -720,9 +749,12 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
             <a class="text-link" href="https://github.com/MukulRay1603/Irminsul/releases/tag/v0" target="_blank" rel="noopener">View on GitHub <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </details>
-        <div class="art-links">
-          <a class="text-link" href="https://mukulray-irminsul.hf.space" target="_blank" rel="noopener">Live demo <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="text-link" href="https://github.com/MukulRay1603/Irminsul" target="_blank" rel="noopener">Source <span class="arrow" aria-hidden="true">↗</span></a>
+        <div class="art-side">
+          <p class="flow"><span>rule-based guards</span><span>game data or cited search</span><span>sentence check</span></p>
+          <div class="art-links">
+            <a class="text-link" href="https://mukulray-irminsul.hf.space" target="_blank" rel="noopener">Live demo <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://github.com/MukulRay1603/Irminsul" target="_blank" rel="noopener">Source <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
 
@@ -837,12 +869,13 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
           <li><span>Review</span><b>people confirm or dispute each item</b></li>
           <li><span>Team</span><b>team of two</b></li>
         </ul>
+        <p class="art-desc">When a city gives a housing developer a tax break or other public support, the developer commits to affordable homes in return: how many, at what income limit, at what rent, for how long. Promise Ledger reads the deal's public records and checks each commitment against the exact page it came from. Code keeps a quote only on a word-for-word match, and people confirm or dispute every item. I led the design and built it with AI coding tools.</p>
         <div class="demos" data-title="Promise Ledger">
           <button class="demo-tile" type="button" data-open="video" data-yt="aD03n_4KfFc" aria-label="Watch the Promise Ledger overview video (2:20)">
             <img src="assets/images/promise-ledger-video-thumb.jpg" width="640" height="360" alt="" loading="lazy" decoding="async">
             <span class="demo-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>Overview · 2:20</span>
           </button>
-          <button class="demo-tile" type="button" data-open="demo" data-url="https://promise-ledger.web.app" aria-label="See the Promise Ledger demo">
+          <button class="demo-tile" type="button" data-open="demo" data-url="https://promise-ledger.web.app" data-note="A quote is kept only if it appears word for word on the page it cites. Open the live demo to try it with sample deals." aria-label="See the Promise Ledger demo">
             <video class="demo-loop" muted loop playsinline preload="none" poster="assets/images/promise-ledger-poster.jpg" width="640" height="508">
               <source src="assets/video/promise-ledger-loop.webm" type="video/webm">
               <source src="assets/video/promise-ledger-loop.mp4" type="video/mp4">
@@ -850,12 +883,13 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
             <span class="demo-tag"><span class="live" aria-hidden="true"></span>Live demo</span>
           </button>
         </div>
-        <p class="art-desc">When a city gives a housing developer a tax break or other public support, the developer commits to affordable homes in return: how many, at what income limit, at what rent, for how long. Promise Ledger reads the deal's public records and checks each commitment against the exact page it came from. Code keeps a quote only on a word-for-word match, and people confirm or dispute every item. I led the design and built it with AI coding tools.</p>
-        <p class="flow"><span>Python</span><span>FastAPI</span><span>Gemini</span><span>Google Cloud Run</span></p>
-        <div class="art-links">
-          <a class="text-link" href="https://promise-ledger.web.app" target="_blank" rel="noopener">Live demo <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="text-link" href="https://youtu.be/aD03n_4KfFc" target="_blank" rel="noopener">Overview video <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="text-link" href="https://github.com/MukulRay1603/promise-ledger" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a>
+        <div class="art-side">
+          <p class="flow"><span>Python</span><span>FastAPI</span><span>Gemini</span><span>Google Cloud Run</span></p>
+          <div class="art-links">
+            <a class="text-link" href="https://promise-ledger.web.app" target="_blank" rel="noopener">Live demo <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://youtu.be/aD03n_4KfFc" target="_blank" rel="noopener">Overview video <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://github.com/MukulRay1603/promise-ledger" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
 
