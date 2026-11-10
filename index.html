@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; frame-src 'self'; media-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; frame-src 'self' https://www.youtube-nocookie.com; media-src 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mukul Rayana · AI Engineer &amp; Forward Deployed Engineer</title>
@@ -223,6 +223,7 @@
   .stage>.art:not(.art-feat)>*{grid-column:1}
   .stage>.art:not(.art-feat)>.main-stat{grid-column:2;grid-row:1/span 3;align-self:end;margin-top:0}
   .stage>.art:not(.art-feat)>.subs{grid-column:2;grid-row:4/span 4;align-self:start}
+  .stage>.art:not(.art-feat)>.demo{grid-column:2;grid-row:8/span 3;align-self:start}
   .stage>.art:not(.art-feat) h3{font-size:clamp(1.45rem,2.2vw,1.85rem)}
   .stage>.art:not(.art-feat)>.art-links{padding-top:1.25rem}
   .art-num{position:absolute;right:1.75rem;bottom:.5rem;font:700 clamp(4.5rem,7.5vw,7.5rem)/1 var(--serif);color:var(--c);opacity:.07;pointer-events:none;user-select:none}
@@ -289,6 +290,14 @@
 .flow{gap:.35rem 1.15rem}
 .flow span{position:relative;padding:.18rem .5rem;border:1px solid var(--line);border-radius:6px;color:var(--text)}
 .flow span+span::before{content:"→";position:absolute;left:-1rem;top:.18rem;color:var(--c)}
+.demo{margin:1rem 0 0}
+.demo-frame{position:relative;aspect-ratio:640/508;max-width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--line-2);background:#0d1222}
+.demo-frame video,.demo-frame iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;display:block}
+.demo-play{position:absolute;left:.75rem;bottom:.75rem;display:inline-flex;align-items:center;gap:.45rem;padding:.5rem .9rem .5rem .7rem;border:0;border-radius:999px;font:inherit;font-size:.8rem;font-weight:700;color:#14110a;background:var(--gold);cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.demo-play svg{width:1rem;height:1rem}
+.demo-play:hover{filter:brightness(1.08)}
+.demo-play:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+.demo figcaption{margin-top:.45rem;font-size:.78rem;color:var(--faint)}
 .art-links{margin-top:auto;padding-top:1rem;display:flex;flex-wrap:wrap;gap:.2rem 1.25rem}
 .art-links a{color:var(--text)}
 
@@ -823,6 +832,18 @@
           <li><span>Review</span><b>people confirm or dispute each item</b></li>
           <li><span>Team</span><b>team of two</b></li>
         </ul>
+        <figure class="demo">
+          <div class="demo-frame">
+            <video class="demo-loop" muted loop playsinline preload="none" poster="assets/images/promise-ledger-poster.jpg" width="640" height="508" aria-label="Promise Ledger finding a quote and showing it highlighted on the original page">
+              <source src="assets/video/promise-ledger-loop.webm" type="video/webm">
+              <source src="assets/video/promise-ledger-loop.mp4" type="video/mp4">
+            </video>
+            <button class="demo-play" type="button" data-yt="aD03n_4KfFc" aria-label="Play the 2 minute 20 second overview video">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span>Watch the 2:20 overview</span>
+            </button>
+          </div>
+          <figcaption>A quote is kept only if it appears word for word on the page it cites.</figcaption>
+        </figure>
         <p class="art-desc">When a city gives a housing developer a tax break or other public support, the developer commits to affordable homes in return: how many, at what income limit, at what rent, for how long. Promise Ledger reads the deal's public records and checks each commitment against the exact page it came from. Code keeps a quote only on a word-for-word match, and people confirm or dispute every item. I led the design and built it with AI coding tools.</p>
         <p class="flow"><span>Python</span><span>FastAPI</span><span>Gemini</span><span>Google Cloud Run</span></p>
         <div class="art-links">

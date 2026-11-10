@@ -404,3 +404,36 @@
     document.getElementById('cfDone').hidden = true; form.hidden = false; document.getElementById('cfName').focus();
   });
 })();
+
+/* project demo loops: play only while visible and on screen, never with reduced motion or lite;
+   the YouTube player loads only after a click (privacy-enhanced domain) */
+(function () {
+  var figs = document.querySelectorAll('.demo');
+  if (!figs.length) return;
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('lite');
+  var io = 'IntersectionObserver' in window && new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting && !v.closest('[inert]') && !still) { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      else v.pause();
+    });
+  }, { threshold: 0.35 });
+  figs.forEach(function (f) {
+    var v = f.querySelector('video'), b = f.querySelector('.demo-play');
+    if (v && io) io.observe(v);
+    if (b) b.addEventListener('click', function () {
+      var fr = document.createElement('iframe');
+      fr.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
+      fr.title = 'Promise Ledger overview video';
+      fr.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      fr.allowFullscreen = true; fr.referrerPolicy = 'strict-origin-when-cross-origin';
+      if (v) { if (io) io.unobserve(v); v.remove(); }
+      b.replaceWith(fr); fr.focus();
+    });
+  });
+  /* re-check when a project tab is switched (inert panels pause) */
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('[role="tab"]') || !io) return;
+    setTimeout(function () { figs.forEach(function (f) { var v = f.querySelector('video'); if (v) { io.unobserve(v); io.observe(v); } }); }, 60);
+  });
+})();
