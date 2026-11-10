@@ -8,7 +8,7 @@ if (window.top !== window.self) {
   try { var t = localStorage.getItem('mr-theme'); if (t === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
   var fx = (location.search.match(/[?&]fx=(full|lite)/) || [])[1];
   d.classList.add('js');
-  try { if (sessionStorage.getItem('mr-intro') || location.hash || (document.referrer && new URL(document.referrer).origin === location.origin) || matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('intro-done'); } catch (e) { d.classList.add('intro-done'); }
+  try { if (sessionStorage.getItem('mr-intro') || location.hash || (document.referrer && new URL(document.referrer).origin === location.origin) || matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 700px)').matches) d.classList.add('intro-done'); } catch (e) { d.classList.add('intro-done'); }
   if (fx) { d.dataset.fx = fx; if (fx === 'lite') d.classList.add('lite'); return; }
   if ((n.hardwareConcurrency && n.hardwareConcurrency <= 2) || (n.deviceMemory && n.deviceMemory <= 2) || c.saveData ||
       /(^|-)2g/.test(c.effectiveType || '') || matchMedia('(prefers-reduced-data: reduce)').matches) d.classList.add('lite');

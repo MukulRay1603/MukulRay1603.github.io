@@ -28,13 +28,13 @@
 </script>
 <style>
 /* ─── opening: the star draws, the name settles, then we zoom through it ─── */
-.intro{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;align-content:center;gap:1.6rem;background:radial-gradient(circle at 50% 45%,#111a33,#070b18 65%);animation:introOut .7s 1.55s cubic-bezier(.7,0,.3,1) forwards}
+.intro{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;align-content:center;gap:1.6rem;background:radial-gradient(circle at 50% 45%,#111a33,#070b18 65%);pointer-events:none;animation:introOut .4s .9s cubic-bezier(.7,0,.3,1) forwards}
 .intro-done .intro{display:none}
-.intro-star{width:min(42vmin,300px);height:auto;filter:drop-shadow(0 0 18px rgba(216,182,110,.55));animation:introZoom .7s 1.55s cubic-bezier(.7,0,.3,1) forwards}
-.intro-star *{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s cubic-bezier(.4,0,.2,1) forwards}
+.intro-star{width:min(42vmin,300px);height:auto;filter:drop-shadow(0 0 18px rgba(216,182,110,.55));animation:introZoom .4s .9s cubic-bezier(.7,0,.3,1) forwards}
+.intro-star *{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .7s cubic-bezier(.4,0,.2,1) forwards}
 .intro-star circle{stroke-dasharray:.012 .02;stroke-dashoffset:0;opacity:0;animation:introFade .8s .25s forwards}
 .intro-star polygon+polygon{animation-delay:.3s}
-.intro-name{font:700 clamp(1.2rem,3vw,1.9rem)/1 var(--serif);letter-spacing:.6em;text-transform:uppercase;color:#f7f1e1;opacity:0;animation:introName 1s .45s cubic-bezier(.22,1,.36,1) forwards}
+.intro-name{font:700 clamp(1.2rem,3vw,1.9rem)/1 var(--serif);letter-spacing:.6em;text-transform:uppercase;color:#f7f1e1;opacity:0;animation:introName .6s .2s cubic-bezier(.22,1,.36,1) forwards}
 .intro-name span+span{color:#d8b66e}
 @keyframes introName{to{opacity:1;letter-spacing:.22em}}
 @keyframes introFade{to{opacity:.8}}
