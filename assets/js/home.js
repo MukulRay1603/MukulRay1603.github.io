@@ -308,7 +308,7 @@
   var done = function () { document.documentElement.classList.add('intro-done'); };
   intro.addEventListener('animationend', function (e) { if (e.target === intro) done(); });
   ['pointerdown', 'keydown'].forEach(function (t) { addEventListener(t, done, { once: true }); });
-  setTimeout(done, 2600);
+  setTimeout(done, 1500);
 })();
 
 /* contact form → Web3Forms (lands in Mukul's inbox; Reply goes to the sender).
