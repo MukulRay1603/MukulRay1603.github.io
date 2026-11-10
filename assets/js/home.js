@@ -405,35 +405,59 @@
   });
 })();
 
-/* project demo loops: play only while visible and on screen, never with reduced motion or lite;
-   the YouTube player loads only after a click (privacy-enhanced domain) */
+/* project demo tiles: a muted preview loop plays only while visible (never with reduced motion or lite);
+   clicking a tile opens a small viewer. The YouTube player (privacy-enhanced domain) loads only on click. */
 (function () {
-  var figs = document.querySelectorAll('.demo');
-  if (!figs.length) return;
+  var groups = document.querySelectorAll('.demos');
+  if (!groups.length) return;
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('lite');
+  var X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  var dlg = document.createElement('dialog');
+  dlg.className = 'cv pv'; dlg.setAttribute('aria-labelledby', 'pvTitle');
+  dlg.innerHTML = '<div class="cv-bar"><h2 id="pvTitle"></h2><div class="cv-acts"><a class="cv-btn" target="_blank" rel="noopener"></a>' +
+    '<button type="button" class="cv-x" aria-label="Close viewer">' + X + '</button></div></div><div class="pv-body"></div><p class="pv-note" hidden></p>';
+  document.body.appendChild(dlg);
+  var body = dlg.querySelector('.pv-body'), title = dlg.querySelector('h2'), link = dlg.querySelector('.cv-btn'), note = dlg.querySelector('.pv-note'), last = null;
+  dlg.querySelector('.cv-x').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', function () { body.innerHTML = ''; if (last) last.focus(); });
+  function open(tile, name) {
+    last = tile; body.innerHTML = ''; note.hidden = true;
+    if (tile.dataset.open === 'video') {
+      title.innerHTML = name + ' <small>Overview video · 2:20</small>';
+      link.href = 'https://youtu.be/' + tile.dataset.yt; link.innerHTML = 'Watch on YouTube <span aria-hidden="true">↗</span>';
+      var fr = document.createElement('iframe');
+      fr.src = 'https://www.youtube-nocookie.com/embed/' + tile.dataset.yt + '?autoplay=1&rel=0';
+      fr.title = name + ' overview video'; fr.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      fr.referrerPolicy = 'strict-origin-when-cross-origin'; body.appendChild(fr);
+    } else {
+      title.innerHTML = name + ' <small>Live demo</small>';
+      link.href = tile.dataset.url; link.innerHTML = 'Open the live demo <span aria-hidden="true">↗</span>';
+      var src = tile.querySelector('video');
+      var v = document.createElement('video');
+      v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.poster = src.poster;
+      Array.prototype.forEach.call(src.querySelectorAll('source'), function (s) { v.appendChild(s.cloneNode()); });
+      body.appendChild(v); if (!still) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      note.textContent = 'A quote is kept only if it appears word for word on the page it cites. Open the live demo to try it with sample deals.';
+      note.hidden = false;
+    }
+    dlg.showModal();
+  }
   var io = 'IntersectionObserver' in window && new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       var v = e.target;
-      if (e.isIntersecting && !v.closest('[inert]') && !still) { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      if (e.isIntersecting && !v.closest('[inert]') && !still) { v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
       else v.pause();
     });
   }, { threshold: 0.35 });
-  figs.forEach(function (f) {
-    var v = f.querySelector('video'), b = f.querySelector('.demo-play');
-    if (v && io) io.observe(v);
-    if (b) b.addEventListener('click', function () {
-      var fr = document.createElement('iframe');
-      fr.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
-      fr.title = 'Promise Ledger overview video';
-      fr.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      fr.allowFullscreen = true; fr.referrerPolicy = 'strict-origin-when-cross-origin';
-      if (v) { if (io) io.unobserve(v); v.remove(); }
-      b.replaceWith(fr); fr.focus();
+  groups.forEach(function (g) {
+    g.querySelectorAll('.demo-tile').forEach(function (t) {
+      var v = t.querySelector('video'); if (v && io) io.observe(v);
+      t.addEventListener('click', function () { open(t, g.dataset.title || ''); });
     });
   });
-  /* re-check when a project tab is switched (inert panels pause) */
   document.addEventListener('click', function (e) {
     if (!e.target.closest('[role="tab"]') || !io) return;
-    setTimeout(function () { figs.forEach(function (f) { var v = f.querySelector('video'); if (v) { io.unobserve(v); io.observe(v); } }); }, 60);
+    setTimeout(function () { groups.forEach(function (g) { g.querySelectorAll('video').forEach(function (v) { io.unobserve(v); io.observe(v); }); }); }, 60);
   });
 })();
