@@ -410,7 +410,8 @@
 (function () {
   var groups = document.querySelectorAll('.demos');
   if (!groups.length) return;
-  var still = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('lite');
+  /* checked every time: the runtime FPS probe can switch the page to lite later */
+  var still = function () { return matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('lite'); };
   var X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
   var dlg = document.createElement('dialog');
   dlg.className = 'cv pv'; dlg.setAttribute('aria-labelledby', 'pvTitle');
@@ -420,7 +421,7 @@
   var body = dlg.querySelector('.pv-body'), title = dlg.querySelector('h2'), link = dlg.querySelector('.cv-btn'), note = dlg.querySelector('.pv-note'), last = null;
   dlg.querySelector('.cv-x').addEventListener('click', function () { dlg.close(); });
   dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-  dlg.addEventListener('close', function () { body.innerHTML = ''; if (last) last.focus(); });
+  dlg.addEventListener('close', function () { body.innerHTML = ''; if (last) last.focus(); sync(); });
   function open(tile, name) {
     last = tile; body.innerHTML = ''; note.hidden = true;
     if (tile.dataset.open === 'video') {
@@ -435,30 +436,42 @@
       link.href = tile.dataset.url; link.innerHTML = 'Open the live demo <span aria-hidden="true">↗</span>';
       var src = tile.querySelector('video');
       var v = document.createElement('video');
-      v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.poster = src.poster;
+      v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.poster = src.poster || src.dataset.poster || '';
       /* the pop-up gets the sharp version (loaded only now); the card keeps the small loop */
       if (tile.dataset.hd) [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(function (f) { var so = document.createElement('source'); so.src = tile.dataset.hd + '.' + f[0]; so.type = f[1]; v.appendChild(so); });
       else Array.prototype.forEach.call(src.querySelectorAll('source'), function (s) { v.appendChild(s.cloneNode()); });
-      body.appendChild(v); if (!still) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      body.appendChild(v); if (!still()) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
       note.textContent = tile.dataset.note || ''; note.hidden = !tile.dataset.note;
     }
-    dlg.showModal();
+    dlg.showModal(); sync();
   }
-  var io = 'IntersectionObserver' in window && new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      var v = e.target;
-      if (e.isIntersecting && !v.closest('[inert]') && !still) { v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
-      else v.pause();
+  /* a card loop plays only while its card is the active one, on screen, in a visible tab */
+  var vids = [], seen = new WeakMap();
+  var sync = function () {
+    vids.forEach(function (v) {
+      if (seen.get(v) && !v.closest('[inert]') && !document.hidden && !dlg.open && !still()) { if (v.paused) { v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } }
+      else if (!v.paused) v.pause();
     });
+  };
+  var io = 'IntersectionObserver' in window && new IntersectionObserver(function (es) {
+    es.forEach(function (e) { seen.set(e.target, e.isIntersecting); }); sync();
   }, { threshold: 0.35 });
+  /* posters load only when the projects section comes near the screen */
+  var near = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.querySelectorAll('video[data-poster]').forEach(function (v) { v.poster = v.dataset.poster; v.removeAttribute('data-poster'); }); near.unobserve(e.target); } });
+  }, { rootMargin: '600px 0px' }) : null;
+  groups.forEach(function (g) { if (near) near.observe(g.closest('.stage') || g); else g.querySelectorAll('video[data-poster]').forEach(function (v) { v.poster = v.dataset.poster; }); });
   groups.forEach(function (g) {
     g.querySelectorAll('.demo-tile').forEach(function (t) {
-      var v = t.querySelector('video'); if (v && io) io.observe(v);
+      var v = t.querySelector('video'); if (v) { vids.push(v); if (io) io.observe(v); }
       t.addEventListener('click', function () { open(t, g.dataset.title || ''); });
     });
   });
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('[role="tab"]') || !io) return;
-    setTimeout(function () { groups.forEach(function (g) { g.querySelectorAll('video').forEach(function (v) { io.unobserve(v); io.observe(v); }); }); }, 60);
-  });
+  /* tab clicks, keys, swipes and auto-rotation all toggle inert/is-on on the panels */
+  if ('MutationObserver' in window) {
+    var mo = new MutationObserver(sync);
+    document.querySelectorAll('.stage>.art').forEach(function (p) { mo.observe(p, { attributes: true, attributeFilter: ['inert', 'class'] }); });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+  document.addEventListener('visibilitychange', sync);
 })();
