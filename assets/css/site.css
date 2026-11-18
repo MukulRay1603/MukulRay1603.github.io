@@ -307,3 +307,24 @@ dialog.cv::before{content:"";position:absolute;inset:0;border-radius:inherit;pad
 @keyframes newGlow{50%{box-shadow:0 0 18px rgba(216,182,110,.8)}}
 @media (max-width:900px){.nav-links a .new-pill{position:static;margin-left:.5rem;vertical-align:.15em}}
 @media (prefers-reduced-motion:reduce){.nav-links a .new-pill{animation:none}}
+
+/* ─── calm preview (only with ?calm): same identity, less intensity ───
+   1. page: near-neutral ink instead of saturated navy (Material dark-theme guidance: dark grey surfaces, desaturated accents)
+   2. gold: slightly softer, and no glow halos on ornaments
+   3. project colours: the four 78–83%-saturation ones brought down to the others' level
+   4. ambient: starfield and shimmer quieter */
+:root.calm:not([data-theme="light"]){
+  --bg:#0b0d13;--bg-2:#0f1219;--surface:#12151d;--surface-2:#181c26;--ink:11,13,19;--dot:#4b5060;
+  --g:207,180,124;--gold:#cfb47c;--gold-hi:#e8dbb9;--gold-lo:#9d8556;--shine:#f4eedf;
+  --title:#f1ede3;--text:#e0ddd4;--muted:#a9abb5;--faint:#878a97;
+  --line:rgba(var(--g),.12);--line-2:rgba(var(--g),.26);
+  --anemo:#8cc4b7;--dendro:#a9c088;--electro:#b3a5d6;--hydro:#88b6d1;--cryo:#b0d0d8;--geo:#d6ba7f;--pyro:#d9a690;
+}
+.calm .logo-mark{filter:none}
+.calm .panel.corners::before,.calm .panel.corners::after,.calm .sec-title::before,.calm .el::before,.calm .cur{box-shadow:none}
+.calm .btn-gold{background:linear-gradient(180deg,#e9d8ae,#cdae6c);box-shadow:0 6px 18px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.35)}
+.calm .btn-gold:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+.calm .btn-line:hover,.calm .tg:hover,.calm .tg[aria-pressed="true"]{box-shadow:none}
+.calm .bar-row.now .bar-fill{box-shadow:none}
+.calm .cosmos{opacity:.55}
+.calm .shimmer::before{opacity:.4}
