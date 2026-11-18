@@ -438,7 +438,7 @@
       var v = document.createElement('video');
       v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.poster = src.poster || src.dataset.poster || '';
       /* the pop-up gets the sharp version (loaded only now); the card keeps the small loop */
-      if (tile.dataset.hd) [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(function (f) { var so = document.createElement('source'); so.src = tile.dataset.hd + '.' + f[0]; so.type = f[1]; v.appendChild(so); });
+      if (tile.dataset.hd) [['mp4', 'video/mp4'], ['webm', 'video/webm']].forEach(function (f) { var so = document.createElement('source'); so.src = tile.dataset.hd + '.' + f[0]; so.type = f[1]; v.appendChild(so); });
       else Array.prototype.forEach.call(src.querySelectorAll('source'), function (s) { v.appendChild(s.cloneNode()); });
       body.appendChild(v); if (!still()) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
       note.textContent = tile.dataset.note || ''; note.hidden = !tile.dataset.note;
