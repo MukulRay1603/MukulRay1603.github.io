@@ -36,32 +36,48 @@
     else location.href = 'mailto:' + MAIL;
   };
 
-  /* ─── theme ─── */
+  /* ─── skies: Dusk (default dark) → Daybreak (light) → Midnight · Legacy (the original deep blue) ─── */
   var themeBtn = document.getElementById('themeBtn');
-  function applyTheme(t) {
-    if (t === 'light') root.dataset.theme = 'light'; else delete root.dataset.theme;
-    if (themeBtn) themeBtn.setAttribute('aria-pressed', String(t === 'light'));
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = t === 'light' ? '#f6f0e3' : (root.classList.contains('midnight') ? '#060913' : '#0b0d13');
-    try { localStorage.setItem('mr-theme', t); } catch (e) {}
+  var SKY = { dusk: 'Dusk', daybreak: 'Daybreak', midnight: 'Midnight · Legacy' };
+  var NEXT = { dusk: 'daybreak', daybreak: 'midnight', midnight: 'dusk' };
+  function sky() { return root.dataset.theme === 'light' ? 'daybreak' : (root.classList.contains('midnight') ? 'midnight' : 'dusk'); }
+  function labelSky() {
+    if (!themeBtn) return;
+    var s = sky(), l = 'Sky: ' + SKY[s] + '. Switch to ' + SKY[NEXT[s]];
+    themeBtn.setAttribute('aria-label', l); themeBtn.title = 'Sky: ' + SKY[s];
   }
-  function toggleTheme(e) {
-    var next = root.dataset.theme === 'light' ? 'dark' : 'light';
-    if (!document.startViewTransition || reduce) { applyTheme(next); return; }
+  function applySky(s) {
+    if (s === 'daybreak') root.dataset.theme = 'light'; else delete root.dataset.theme;
+    root.classList.toggle('midnight', s === 'midnight');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = s === 'daybreak' ? '#f6f0e3' : (s === 'midnight' ? '#060913' : '#0b0d13');
+    try { localStorage.setItem('mr-theme', s === 'daybreak' ? 'light' : 'dark'); localStorage.setItem('mr-sky', s === 'midnight' ? 'midnight' : 'calm'); } catch (e) {}
+    labelSky();
+  }
+  function announce(s) {
+    if (s !== 'midnight') { toast('✦ ' + SKY[s]); return; }
+    var first = true; try { first = !localStorage.getItem('mr-found'); localStorage.setItem('mr-found', '1'); } catch (e) {}
+    toast(first ? '✦ You found the midnight sky, our original look.' : '✦ Midnight · Legacy');
+  }
+  function setSky(next, quiet) {
+    var done = function () { applySky(next); if (!quiet) announce(next); };
+    if (!document.startViewTransition || reduce) { done(); return; }
     /* circular reveal from the button */
     var r = themeBtn ? themeBtn.getBoundingClientRect() : { left: innerWidth / 2, top: 0, width: 0, height: 0 };
     var x = r.left + r.width / 2, y = r.top + r.height / 2;
     var rad = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
     root.classList.add('vt-theme');
-    var vt = document.startViewTransition(function () { applyTheme(next); });
+    var vt = document.startViewTransition(done);
     vt.ready.then(function () {
       root.animate({ clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + rad + 'px at ' + x + 'px ' + y + 'px)'] },
         { duration: 600, easing: 'cubic-bezier(.4,0,.2,1)', pseudoElement: '::view-transition-new(root)' });
     }).catch(function () {});
     vt.finished.then(function () { root.classList.remove('vt-theme'); }, function () { root.classList.remove('vt-theme'); });
   }
+  function toggleTheme() { setSky(NEXT[sky()]); }
+  window.mrSky = { get: sky, set: setSky };
   if (themeBtn) {
-    themeBtn.setAttribute('aria-pressed', String(root.dataset.theme === 'light'));
+    themeBtn.removeAttribute('aria-pressed'); labelSky();
     themeBtn.addEventListener('click', toggleTheme);
   }
 
@@ -223,7 +239,7 @@
     { g: 'Links', t: 'Hugging Face', hint: 'opens', run: open('https://huggingface.co/spaces/MukulRay') },
     { g: 'Links', t: 'PharmaChain live demo', hint: 'opens', run: open('https://ai-cargo-monitor-prod.vercel.app') },
     { g: 'Actions', t: 'Copy email address', run: function () { window.copyEmail(); } },
-    { g: 'Actions', t: 'Toggle daylight theme', run: function () { toggleTheme(); } },
+    { g: 'Actions', t: 'Change the sky (Dusk, Daybreak, Midnight)', run: function () { toggleTheme(); } },
     { g: 'Actions', t: 'Toggle ambient sound', run: function () { setSound(!playing); } }
   );
 
@@ -329,17 +345,10 @@
   window.mrToast = toast;
 })();
 
-/* easter egg: the midnight sky (the original deep-blue palette). Five quick clicks on the logo star, or type "midnight". */
+/* extra shortcuts to the midnight sky for explorers: five quick clicks on the logo star, or type "midnight" */
 (function () {
-  var root = document.documentElement, clicks = [], typed = '';
-  function setSky(on) {
-    root.classList.toggle('midnight', on);
-    if (on && root.dataset.theme === 'light') { delete root.dataset.theme; try { localStorage.setItem('mr-theme', 'dark'); } catch (e) {} }
-    var meta = document.querySelector('meta[name="theme-color"]'); if (meta && root.dataset.theme !== 'light') meta.content = on ? '#060913' : '#0b0d13';
-    try { localStorage.setItem('mr-sky', on ? 'midnight' : 'calm'); } catch (e) {}
-    if (window.mrToast) window.mrToast(on ? '✦ You found the midnight sky. Five more taps on the star to return.' : '✦ Back to calm skies.');
-  }
-  function toggle() { setSky(!root.classList.contains('midnight')); }
+  var clicks = [], typed = '';
+  function toggle() { if (window.mrSky) window.mrSky.set(window.mrSky.get() === 'midnight' ? 'dusk' : 'midnight'); }
   var star = document.querySelector('.logo-mark');
   if (star) star.addEventListener('click', function () {
     var now = Date.now(); clicks = clicks.filter(function (t) { return now - t < 1600; }); clicks.push(now);

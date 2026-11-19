@@ -109,6 +109,7 @@ strong{color:var(--text);font-weight:700}
 .tg:hover,.tg[aria-pressed="true"]{border-color:var(--line-2);box-shadow:0 0 16px rgba(var(--g),.2)}
 .tg-orb{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--gold-hi);background:linear-gradient(90deg,var(--gold-hi) 50%,transparent 50%);transition:transform .6s cubic-bezier(.22,1,.36,1)}
 [data-theme="light"] .tg-orb{transform:rotate(180deg)}
+.midnight:not([data-theme="light"]) .tg-orb{border-color:transparent;background:transparent;box-shadow:inset 4px -3px 0 0 var(--gold-hi);transform:rotate(-15deg)}
 .eq{display:flex;align-items:center;gap:2.5px;height:15px}
 .eq i{display:block;width:2px;height:15px;border-radius:2px;background:var(--gold-hi);transform:scaleY(.22);transition:transform .3s}
 .eq i:nth-child(1){transform:scaleY(.4)}.eq i:nth-child(2){transform:scaleY(.75)}.eq i:nth-child(3){transform:scaleY(.55)}.eq i:nth-child(4){transform:scaleY(.3)}
