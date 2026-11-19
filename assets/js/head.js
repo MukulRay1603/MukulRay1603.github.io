@@ -8,7 +8,7 @@ if (window.top !== window.self) {
   try { var t = localStorage.getItem('mr-theme'); if (t === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
   var fx = (location.search.match(/[?&]fx=(full|lite)/) || [])[1];
   d.classList.add('js');
-  if (/[?&]calm(=|&|$)/.test(location.search)) d.classList.add('calm'); /* colour preview, off by default */
+  try { if (localStorage.getItem('mr-sky') === 'midnight' || /[?&]midnight(=|&|$)/.test(location.search)) { d.classList.add('midnight'); var m = document.querySelector('meta[name="theme-color"]'); if (m && d.dataset.theme !== 'light') m.content = '#060913'; } } catch (e) {} /* easter egg */
   try { if (sessionStorage.getItem('mr-intro') || location.hash || (document.referrer && new URL(document.referrer).origin === location.origin) || matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 700px)').matches) d.classList.add('intro-done'); } catch (e) { d.classList.add('intro-done'); }
   if (fx) { d.dataset.fx = fx; if (fx === 'lite') d.classList.add('lite'); return; }
   if ((n.hardwareConcurrency && n.hardwareConcurrency <= 2) || (n.deviceMemory && n.deviceMemory <= 2) || c.saveData ||

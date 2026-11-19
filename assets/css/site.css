@@ -14,18 +14,18 @@
 @font-face{font-family:"Nunito Sans";font-style:normal;font-weight:400 700;font-display:swap;src:url(../fonts/nunito-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 
 :root{
-  --shine:#fbf3dc;
-  --bg:#070b18;--bg-2:#0b1022;--surface:#0e1426;--surface-2:#131b33;
-  --g:216,182,110;
-  --line:rgba(var(--g),.16);--line-2:rgba(var(--g),.34);
-  --text:#e7e3d7;--muted:#aeb1c2;--faint:#8c91a9;--title:#f7f1e1;
-  --gold:#d8b66e;--gold-hi:#f0dfaf;--gold-lo:#a07f3e;
-  --anemo:#7fd3c0;--dendro:#add06a;--electro:#bf9cf5;--hydro:#6cc0f0;
-  --cryo:#ade0ec;--geo:#ebbd5c;--pyro:#f29a72;
+  --shine:#f4eedf;
+  --bg:#0b0d13;--bg-2:#0f1219;--surface:#12151d;--surface-2:#181c26;
+  --g:207,180,124;
+  --line:rgba(var(--g),.12);--line-2:rgba(var(--g),.26);
+  --text:#e0ddd4;--muted:#a9abb5;--faint:#878a97;--title:#f1ede3;
+  --gold:#cfb47c;--gold-hi:#e8dbb9;--gold-lo:#9d8556;
+  --anemo:#8cc4b7;--dendro:#a9c088;--electro:#b3a5d6;--hydro:#88b6d1;
+  --cryo:#b0d0d8;--geo:#d6ba7f;--pyro:#d9a690;
   --serif:"Cinzel","Cinzel Fallback","Times New Roman",serif;
   --sans:"Nunito Sans","Nunito Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:var(--sans);
-  --ink:7,11,24;--dot:#4a5372;
+  --ink:11,13,19;--dot:#4b5060;
   --r:16px;--wrap:1160px;--gut:clamp(1rem,4vw,2.5rem);
   color-scheme:dark;
 }
@@ -308,23 +308,22 @@ dialog.cv::before{content:"";position:absolute;inset:0;border-radius:inherit;pad
 @media (max-width:900px){.nav-links a .new-pill{position:static;margin-left:.5rem;vertical-align:.15em}}
 @media (prefers-reduced-motion:reduce){.nav-links a .new-pill{animation:none}}
 
-/* ─── calm preview (only with ?calm): same identity, less intensity ───
-   1. page: near-neutral ink instead of saturated navy (Material dark-theme guidance: dark grey surfaces, desaturated accents)
-   2. gold: slightly softer, and no glow halos on ornaments
-   3. project colours: the four 78–83%-saturation ones brought down to the others' level
-   4. ambient: starfield and shimmer quieter */
-:root.calm:not([data-theme="light"]){
-  --bg:#0b0d13;--bg-2:#0f1219;--surface:#12151d;--surface-2:#181c26;--ink:11,13,19;--dot:#4b5060;
-  --g:207,180,124;--gold:#cfb47c;--gold-hi:#e8dbb9;--gold-lo:#9d8556;--shine:#f4eedf;
-  --title:#f1ede3;--text:#e0ddd4;--muted:#a9abb5;--faint:#878a97;
-  --line:rgba(var(--g),.12);--line-2:rgba(var(--g),.26);
-  --anemo:#8cc4b7;--dendro:#a9c088;--electro:#b3a5d6;--hydro:#88b6d1;--cryo:#b0d0d8;--geo:#d6ba7f;--pyro:#d9a690;
+/* ─── midnight sky: the original deep-blue look, kept as an easter egg ───
+   Default dark is the calm palette above. Unlock: click the logo star five times quickly, or type "midnight".
+   (Material dark-theme guidance favours neutral surfaces and desaturated accents, so the calm palette is the default.) */
+:root.midnight:not([data-theme="light"]){
+  --shine:#fbf3dc;--bg:#070b18;--bg-2:#0b1022;--surface:#0e1426;--surface-2:#131b33;--ink:7,11,24;--dot:#4a5372;
+  --g:216,182,110;--line:rgba(var(--g),.16);--line-2:rgba(var(--g),.34);
+  --text:#e7e3d7;--muted:#aeb1c2;--faint:#8c91a9;--title:#f7f1e1;
+  --gold:#d8b66e;--gold-hi:#f0dfaf;--gold-lo:#a07f3e;
+  --anemo:#7fd3c0;--dendro:#add06a;--electro:#bf9cf5;--hydro:#6cc0f0;--cryo:#ade0ec;--geo:#ebbd5c;--pyro:#f29a72;
 }
-.calm .logo-mark{filter:none}
-.calm .panel.corners::before,.calm .panel.corners::after,.calm .sec-title::before,.calm .el::before,.calm .cur{box-shadow:none}
-.calm .btn-gold{background:linear-gradient(180deg,#e9d8ae,#cdae6c);box-shadow:0 6px 18px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.35)}
-.calm .btn-gold:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.35)}
-.calm .btn-line:hover,.calm .tg:hover,.calm .tg[aria-pressed="true"]{box-shadow:none}
-.calm .bar-row.now .bar-fill{box-shadow:none}
-.calm .cosmos{opacity:.55}
-.calm .shimmer::before{opacity:.4}
+/* calm (default dark): no glow halos, flatter gold button, quieter sky; midnight keeps the original glow */
+:root:not(.midnight):not([data-theme="light"]) .logo-mark{filter:none}
+:root:not(.midnight):not([data-theme="light"]) .panel.corners::before,:root:not(.midnight):not([data-theme="light"]) .panel.corners::after,:root:not(.midnight):not([data-theme="light"]) .sec-title::before,:root:not(.midnight):not([data-theme="light"]) .el::before,:root:not(.midnight):not([data-theme="light"]) .cur,:root:not(.midnight):not([data-theme="light"]) .bar-row.now .bar-fill{box-shadow:none}
+:root:not(.midnight):not([data-theme="light"]) .btn-gold{background:linear-gradient(180deg,#e9d8ae,#cdae6c);box-shadow:0 6px 18px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.35)}
+:root:not(.midnight):not([data-theme="light"]) .btn-gold:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+:root:not(.midnight):not([data-theme="light"]) :is(.btn-line:hover,.tg:hover,.tg[aria-pressed="true"]){box-shadow:none}
+:root:not(.midnight):not([data-theme="light"]) .cosmos{opacity:.55}
+:root:not(.midnight):not([data-theme="light"]) .shimmer::before{opacity:.4}
+.sky-shift{transition:background-color .9s ease,color .9s ease}

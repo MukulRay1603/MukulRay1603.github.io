@@ -42,7 +42,7 @@
     if (t === 'light') root.dataset.theme = 'light'; else delete root.dataset.theme;
     if (themeBtn) themeBtn.setAttribute('aria-pressed', String(t === 'light'));
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = t === 'light' ? '#f6f0e3' : '#060913';
+    if (meta) meta.content = t === 'light' ? '#f6f0e3' : (root.classList.contains('midnight') ? '#060913' : '#0b0d13');
     try { localStorage.setItem('mr-theme', t); } catch (e) {}
   }
   function toggleTheme(e) {
@@ -324,6 +324,30 @@
   function toast(msg) {
     if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl); }
     toastEl.textContent = msg; toastEl.classList.add('is-on');
-    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('is-on'); }, 1800);
+    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('is-on'); }, 2600);
   }
+  window.mrToast = toast;
+})();
+
+/* easter egg: the midnight sky (the original deep-blue palette). Five quick clicks on the logo star, or type "midnight". */
+(function () {
+  var root = document.documentElement, clicks = [], typed = '';
+  function setSky(on) {
+    root.classList.toggle('midnight', on);
+    if (on && root.dataset.theme === 'light') { delete root.dataset.theme; try { localStorage.setItem('mr-theme', 'dark'); } catch (e) {} }
+    var meta = document.querySelector('meta[name="theme-color"]'); if (meta && root.dataset.theme !== 'light') meta.content = on ? '#060913' : '#0b0d13';
+    try { localStorage.setItem('mr-sky', on ? 'midnight' : 'calm'); } catch (e) {}
+    if (window.mrToast) window.mrToast(on ? '✦ You found the midnight sky. Five more taps on the star to return.' : '✦ Back to calm skies.');
+  }
+  function toggle() { setSky(!root.classList.contains('midnight')); }
+  var star = document.querySelector('.logo-mark');
+  if (star) star.addEventListener('click', function () {
+    var now = Date.now(); clicks = clicks.filter(function (t) { return now - t < 1600; }); clicks.push(now);
+    if (clicks.length >= 5) { clicks = []; toggle(); }
+  });
+  addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1 || (e.target.closest && e.target.closest('input,textarea,select,[contenteditable]'))) return;
+    typed = (typed + e.key.toLowerCase()).slice(-8);
+    if (typed === 'midnight') { typed = ''; toggle(); }
+  });
 })();
