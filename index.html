@@ -719,15 +719,15 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
         <span class="art-num" aria-hidden="true">02</span>
         <div class="art-top"><span class="el el-dendro">Cited RAG · LLMOps</span><span class="art-rank">Live beta · v1</span></div>
         <h3>Irminsul</h3>
-        <p class="art-sub">Genshin Impact assistant that cites every answer</p>
-        <div class="main-stat"><svg class="mi" viewBox="-60 -60 120 120" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 44V-6M0 16L-22 -2M0 6L22 -10M0 -6L-14 -26M0 -6L14 -30M-22 -2L-34 -8M22 -10L34 -10"/><path d="M-40 44Q-20 36 0 44Q20 36 40 44" stroke-opacity=".6"/><circle cx="-30" cy="-26" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:0.00s"/><circle cx="-12" cy="-40" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:0.35s"/><circle cx="10" cy="-42" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:0.70s"/><circle cx="30" cy="-28" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:1.05s"/><circle cx="-36" cy="-6" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:1.40s"/><circle cx="36" cy="-8" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:1.75s"/><circle cx="0" cy="-24" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:2.10s"/></g></svg><b>95.8%</b><span>live test set (113/118), all 19 safety probes passed</span></div>
+        <p class="art-sub">Genshin Impact Q&amp;A assistant that cites every answer and updates itself after each patch</p>
+        <div class="main-stat"><svg class="mi" viewBox="-60 -60 120 120" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 44V-6M0 16L-22 -2M0 6L22 -10M0 -6L-14 -26M0 -6L14 -30M-22 -2L-34 -8M22 -10L34 -10"/><path d="M-40 44Q-20 36 0 44Q20 36 40 44" stroke-opacity=".6"/><circle cx="-30" cy="-26" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:0.00s"/><circle cx="-12" cy="-40" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:0.35s"/><circle cx="10" cy="-42" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:0.70s"/><circle cx="30" cy="-28" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:1.05s"/><circle cx="-36" cy="-6" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:1.40s"/><circle cx="36" cy="-8" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:1.75s"/><circle cx="0" cy="-24" r="7" fill="currentColor" stroke="none" class="mi-blink" style="animation-delay:2.10s"/></g></svg><b>95.1%</b><span>live test set (117/123), all 24 leak, injection and safety probes handled</span></div>
         <ul class="subs">
           <li><span>Players so far</span><b>15</b></li>
-          <li><span>Right source in top 8</span><b>0.946</b></li>
+          <li><span>Knowledge base, rebuilt daily</span><b>~6,800 docs</b></li>
           <li><span>p95 at 50 users</span><b>0.45 s</b></li>
           <li><span>Running cost</span><b>$0</b></li>
         </ul>
-        <p class="art-desc">Stats come straight from game data with no model; everything else is answered only from cited sources, sentence by sentence. Leaks are gated out at build time. Unofficial fan project.</p>
+        <p class="art-desc">Stats, talents, damage maths and material costs come straight from game data with no AI. Everything else is answered from cited sources, and any sentence they don't support is removed before you see it. It rebuilds itself from game data and the community wiki, a publish gate keeps unreleased content out, and a UID lookup plans what to farm today. Unofficial fan project; theorycrafting from KeqingMains, credited per answer.</p>
         <div class="demos demos-one" data-title="Irminsul">
           <button class="demo-tile" type="button" data-open="demo" data-hd="assets/video/irminsul-demo-hd" data-url="https://mukulray-irminsul.hf.space" data-note="Exact stats come from game data with no AI, and every answer shows its source. Unofficial fan project; Genshin Impact content belongs to HoYoverse." aria-label="See the Irminsul demo">
             <video class="demo-loop" muted loop playsinline preload="none" data-poster="assets/images/irminsul-poster.jpg" width="640" height="360">
@@ -750,9 +750,10 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
           </div>
         </details>
         <div class="art-side">
-          <p class="flow"><span>rule-based guards</span><span>game data or cited search</span><span>sentence check</span></p>
+          <p class="flow"><span>hybrid search + re-ranker</span><span>game data or cited AI</span><span>grounding check</span></p>
           <div class="art-links">
             <a class="text-link" href="https://mukulray-irminsul.hf.space" target="_blank" rel="noopener">Live demo <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://mukulray-irminsul.hf.space/results" target="_blank" rel="noopener">Test results <span class="arrow" aria-hidden="true">↗</span></a>
             <a class="text-link" href="https://github.com/MukulRay1603/Irminsul" target="_blank" rel="noopener">Source <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -859,17 +860,17 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
       <!-- Promise Ledger -->
       <div class="panel corners art" role="tabpanel" id="proj-7" aria-labelledby="tab-7" inert style="--c:var(--gold)">
         <span class="art-num" aria-hidden="true">08</span>
-        <div class="art-top"><span class="el">Civic document AI</span><span class="art-rank">GDG AI for Good 2026 · Nov 2026</span></div>
+        <div class="art-top"><span class="el">Civic document AI</span><span class="art-rank">GDG AI for Good 2026: Housing</span></div>
         <h3>Promise Ledger</h3>
-        <p class="art-sub">Checks the affordable-housing commitments developers make in exchange for tax breaks</p>
-        <div class="main-stat"><svg class="mi" viewBox="-60 -60 120 120" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M-32 -42H32V42H-32Z" fill="var(--surface)"/><path d="M-20 -26H20M-20 -12H20M-20 2H6" stroke-opacity=".5"/><path d="M-6 22L4 32L24 10" stroke-width="3"/></g></svg><b>96.3% / 98.1%</b><span>precision / recall on a 53-claim development set</span></div>
+        <p class="art-sub">Turns a housing deal's public records into one checked receipt of its affordable-home promises</p>
+        <div class="main-stat"><svg class="mi" viewBox="-60 -60 120 120" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M-32 -42H32V42H-32Z" fill="var(--surface)"/><path d="M-20 -26H20M-20 -12H20M-20 2H6" stroke-opacity=".5"/><path d="M-6 22L4 32L24 10" stroke-width="3"/></g></svg><b>811 pages</b><span>of real county records: all 21 Prince George's County, MD PILOT agreements since 2023</span></div>
         <ul class="subs">
-          <li><span>Each commitment</span><b>homes · income limit · rent · how long</b></li>
-          <li><span>Quotes</span><b>kept only on a word-for-word page match</b></li>
-          <li><span>Review</span><b>people confirm or dispute each item</b></li>
-          <li><span>Team</span><b>team of two</b></li>
+          <li><span>Held-out precision / recall</span><b>95.7% / 93.6% on 47 claims</b></li>
+          <li><span>Planted attacks held</span><b>8 of 8</b></li>
+          <li><span>Blank template text found</span><b>in 6 approved deals</b></li>
+          <li><span>Model cost to read all 811 pages</span><b>$0.61</b></li>
         </ul>
-        <p class="art-desc">When a city gives a housing developer a tax break or other public support, the developer commits to affordable homes in return: how many, at what income limit, at what rent, for how long. Promise Ledger reads the deal's public records and checks each commitment against the exact page it came from. Code keeps a quote only on a word-for-word match, and people confirm or dispute every item. I led the design and built it with AI coding tools.</p>
+        <p class="art-desc">When a county gives a housing developer a tax break, the developer promises affordable homes in return. Promise Ledger reads the deal's public records and lists every promise with the exact quote and page that proves it. The final build adds a night 3D map with a column of light at each address, and "Ask the county", which answers one question across every deal: Gemini writes, code checks every number and date, and each sentence links to its source.</p>
         <div class="demos" data-title="Promise Ledger">
           <button class="demo-tile" type="button" data-open="video" data-yt="aD03n_4KfFc" aria-label="Watch the Promise Ledger overview video (2:20)">
             <img src="assets/images/promise-ledger-video-thumb.jpg" width="640" height="360" alt="" loading="lazy" decoding="async">
@@ -884,11 +885,11 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
           </button>
         </div>
         <div class="art-side">
-          <p class="flow"><span>Python</span><span>FastAPI</span><span>Gemini</span><span>Google Cloud Run</span></p>
+          <p class="flow"><span>Python</span><span>FastAPI</span><span>Gemini</span><span>Cloud Run</span><span>Firestore</span></p>
           <div class="art-links">
             <a class="text-link" href="https://promise-ledger.web.app" target="_blank" rel="noopener">Live demo <span class="arrow" aria-hidden="true">↗</span></a>
             <a class="text-link" href="https://youtu.be/aD03n_4KfFc" target="_blank" rel="noopener">Overview video <span class="arrow" aria-hidden="true">↗</span></a>
-            <a class="text-link" href="https://github.com/MukulRay1603/promise-ledger" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://github.com/MukulRay1603/promise-ledger/tree/dec2" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </div>
       </div>
