@@ -50,7 +50,7 @@
     if (s === 'daybreak') root.dataset.theme = 'light'; else delete root.dataset.theme;
     root.classList.toggle('midnight', s === 'midnight');
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = s === 'daybreak' ? '#f6f0e3' : (s === 'midnight' ? '#060913' : '#0b0d13');
+    if (meta) meta.content = s === 'daybreak' ? '#f6f0e3' : (s === 'midnight' ? '#060913' : '#0c1019');
     try { localStorage.setItem('mr-theme', s === 'daybreak' ? 'light' : 'dark'); localStorage.setItem('mr-sky', s === 'midnight' ? 'midnight' : 'calm'); } catch (e) {}
     labelSky();
   }

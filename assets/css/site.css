@@ -15,17 +15,17 @@
 
 :root{
   --shine:#f4eedf;
-  --bg:#0b0d13;--bg-2:#0f1219;--surface:#12151d;--surface-2:#181c26;
+  --bg:#0c1019;--bg-2:#10141f;--surface:#141a26;--surface-2:#1b2231;
   --g:207,180,124;
-  --line:rgba(var(--g),.12);--line-2:rgba(var(--g),.26);
-  --text:#e0ddd4;--muted:#a9abb5;--faint:#878a97;--title:#f1ede3;
-  --gold:#cfb47c;--gold-hi:#e8dbb9;--gold-lo:#9d8556;
+  --line:rgba(var(--g),.14);--line-2:rgba(var(--g),.30);
+  --text:#e8e5dc;--muted:#b4b7c3;--faint:#9296a6;--title:#f5f1e6;
+  --gold:#d6b877;--gold-hi:#eedfb6;--gold-lo:#a3894f;
   --anemo:#8cc4b7;--dendro:#a9c088;--electro:#b3a5d6;--hydro:#88b6d1;
   --cryo:#b0d0d8;--geo:#d6ba7f;--pyro:#d9a690;
   --serif:"Cinzel","Cinzel Fallback","Times New Roman",serif;
   --sans:"Nunito Sans","Nunito Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:var(--sans);
-  --ink:11,13,19;--dot:#4b5060;
+  --ink:12,16,25;--dot:#525a6e;
   --r:16px;--wrap:1160px;--gut:clamp(1rem,4vw,2.5rem);
   color-scheme:dark;
 }
@@ -325,6 +325,9 @@ dialog.cv::before{content:"";position:absolute;inset:0;border-radius:inherit;pad
 :root:not(.midnight):not([data-theme="light"]) .btn-gold{background:linear-gradient(180deg,#e9d8ae,#cdae6c);box-shadow:0 6px 18px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.35)}
 :root:not(.midnight):not([data-theme="light"]) .btn-gold:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.35)}
 :root:not(.midnight):not([data-theme="light"]) :is(.btn-line:hover,.tg:hover,.tg[aria-pressed="true"]){box-shadow:none}
-:root:not(.midnight):not([data-theme="light"]) .cosmos{opacity:.55}
+:root:not(.midnight):not([data-theme="light"]) .cosmos{opacity:.85}
+/* dusk: almost no grain on the flatter sky, and a soft warm glow at the top instead of a cold one */
+:root:not(.midnight):not([data-theme="light"]) body::after{opacity:.015}
+:root:not(.midnight):not([data-theme="light"]) body{background-image:radial-gradient(1100px 620px at 82% -8%,rgba(226,170,120,.085),transparent 60%),radial-gradient(900px 600px at -10% 10%,rgba(150,132,214,.07),transparent 60%)}
 :root:not(.midnight):not([data-theme="light"]) .shimmer::before{opacity:.4}
 .sky-shift{transition:background-color .9s ease,color .9s ease}
