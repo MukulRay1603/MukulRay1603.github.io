@@ -74,9 +74,9 @@
 @keyframes float{to{transform:translate(var(--tx),var(--ty)) scale(1.14)}}
 /* lite tier: fewer layers, no 3D/blur, still elegant */
 .lite .l-grid,.lite .motes,.lite .spotlight,.lite .shimmer{display:none}
-.lite .rune,.lite .rune .rune-inner,.lite .orb,.lite .hero h1 span,.lite .rays{animation:none}
+.lite .rune,.lite .rune .rune-inner,.lite .orb,.lite .hero h1 span,.lite .rays{animation-play-state:paused}
 .lite .rune-tilt{will-change:auto}
-.lite .orb:nth-child(n+3){display:none}
+.orb{transition:opacity .8s}.lite .orb:nth-child(n+3){opacity:0}
 .hero.is-off *,.hero.is-off *::before,.hero.is-off *::after{animation-play-state:paused!important}
 @keyframes rise{from{transform:translateY(18px)}}
 .hero-grid>*{animation:rise .9s cubic-bezier(.22,1,.36,1) both}
@@ -565,6 +565,20 @@ dialog.cv.pv{height:fit-content;max-height:92vh;width:min(60rem,calc(100% - 2rem
   .pager{padding:.25rem .35rem}.pg-btn{width:2rem;height:2rem}.pg-label{font-size:.62rem}
 }
 @media (prefers-reduced-motion:reduce){.m-hint i,.m-next.last{animation:none}.stage{transition:none}}
+
+/* performance: the gold sweeps and stat-icon motions are main-thread repaints, so they play in short bursts only while on screen (driven by home.js) */
+.hero h1 span,.foil{animation:none}
+.hero h1 span.sweep,.foil.sweep{animation:shineOnce 2.6s ease-in-out}
+@keyframes shineOnce{from{background-position:100% 0}to{background-position:-60% 0}}
+.mi:not(.mi-on) *{animation-play-state:paused!important}
+.section.off *,.section.off *::before,.section.off *::after{animation-play-state:paused!important}
+/* hidden project cards keep nothing animating: animation inside hidden elements falls back to the main thread */
+.stage>.art:not(.is-on) *,.stage>.art:not(.is-on) *::before,.stage>.art:not(.is-on) *::after{animation-play-state:paused!important}
+/* the hero's decorative layers wait until the page has arrived, then fade in: no layout jumps on slow connections */
+.layers{transition:opacity .8s ease}
+.js:not(.ready) .layers{visibility:hidden;opacity:0}
+@media (prefers-reduced-motion:reduce){.hero h1 span.sweep,.foil.sweep{animation:none}}
+
 </style>
 </head>
 <body>

@@ -304,10 +304,13 @@ dialog.cv::before{content:"";position:absolute;inset:0;border-radius:inherit;pad
 
 /* "New" pill (journal cards + nav) */
 .new-pill{display:inline-flex;align-items:center;padding:.22rem .5rem .2rem;border-radius:999px;font:800 .62rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#2a1d05;background:linear-gradient(135deg,#f6e7bd,#d8b66e 60%,#b8913f);box-shadow:0 0 12px rgba(216,182,110,.45)}
-.nav-links a .new-pill{position:absolute;top:-.3rem;right:-.15rem;padding:.16rem .36rem .14rem;font-size:.5rem;animation:newGlow 2.4s ease-in-out infinite}
+.nav-links a .new-pill{position:absolute;top:-.3rem;right:-.15rem;padding:.16rem .36rem .14rem;font-size:.5rem}
+/* the glow is a pre-drawn halo that only fades (GPU-cheap), three pulses on arrival */
+.nav-links a .new-pill::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 18px rgba(216,182,110,.8);opacity:0;pointer-events:none;animation:newGlowO 2.4s ease-in-out 3}
+@keyframes newGlowO{50%{opacity:1}}
 @keyframes newGlow{50%{box-shadow:0 0 18px rgba(216,182,110,.8)}}
-@media (max-width:900px){.nav-links a .new-pill{position:static;margin-left:.5rem;vertical-align:.15em}}
-@media (prefers-reduced-motion:reduce){.nav-links a .new-pill{animation:none}}
+@media (max-width:900px){.nav-links a .new-pill{position:relative;margin-left:.5rem;vertical-align:.15em}}
+@media (prefers-reduced-motion:reduce){.nav-links a .new-pill,.nav-links a .new-pill::after{animation:none}}
 
 /* ─── midnight sky: the original deep-blue look, kept as an easter egg ───
    Default dark is the calm palette above. Unlock: click the logo star five times quickly, or type "midnight".
@@ -331,3 +334,10 @@ dialog.cv::before{content:"";position:absolute;inset:0;border-radius:inherit;pad
 :root:not(.midnight):not([data-theme="light"]) body{background-image:radial-gradient(1100px 620px at 82% -8%,rgba(226,170,120,.085),transparent 60%),radial-gradient(900px 600px at -10% 10%,rgba(150,132,214,.07),transparent 60%)}
 :root:not(.midnight):not([data-theme="light"]) .shimmer::before{opacity:.4}
 .sky-shift{transition:background-color .9s ease,color .9s ease}
+/* quality tiers (set in head.js): medium trims the extras, lean is the calm static version of the same design */
+[data-tier="medium"] body::after,[data-tier="medium"] .cosmos .shoot{display:none}
+[data-tier="medium"] .motes i:nth-child(n+7){display:none}
+[data-tier="medium"] .orb:nth-child(n+4){opacity:0}
+.lean .layers,.lean .motes,.lean .rays,.lean .shimmer,.lean .orbit,.lean .cosmos .st2,.lean .cosmos .st3,.lean .cosmos .shoot,.lean .spot{display:none}
+.lean *,.lean *::before,.lean *::after{animation:none!important}
+.lean .nav,.lean .nav-links,.lean .nav.is-scrolled{-webkit-backdrop-filter:none;backdrop-filter:none}

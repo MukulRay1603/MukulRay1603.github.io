@@ -61,7 +61,7 @@
   }
   function setSky(next, quiet) {
     var done = function () { applySky(next); if (!quiet) announce(next); };
-    if (!document.startViewTransition || reduce) { done(); return; }
+    if (!document.startViewTransition || reduce || root.classList.contains('lean')) { done(); return; }
     /* circular reveal from the button */
     var r = themeBtn ? themeBtn.getBoundingClientRect() : { left: innerWidth / 2, top: 0, width: 0, height: 0 };
     var x = r.left + r.width / 2, y = r.top + r.height / 2;
@@ -240,7 +240,14 @@
     { g: 'Links', t: 'PharmaChain live demo', hint: 'opens', run: open('https://ai-cargo-monitor-prod.vercel.app') },
     { g: 'Actions', t: 'Copy email address', run: function () { window.copyEmail(); } },
     { g: 'Actions', t: 'Change the sky (Dusk, Daybreak, Midnight)', run: function () { toggleTheme(); } },
-    { g: 'Actions', t: 'Toggle ambient sound', run: function () { setSound(!playing); } }
+    { g: 'Actions', t: 'Toggle ambient sound', run: function () { setSound(!playing); } },
+    { g: 'Actions', t: 'Visual quality: auto, high, medium, light, lean', run: function () {
+      var cyc = ['auto', 'high', 'medium', 'light', 'lean'], cur = 'auto';
+      try { cur = localStorage.getItem('mr-fx') || 'auto'; } catch (e) {}
+      var nx = cyc[(cyc.indexOf(cur) + 1) % cyc.length];
+      try { if (nx === 'auto') localStorage.removeItem('mr-fx'); else localStorage.setItem('mr-fx', nx); sessionStorage.removeItem('mr-tier'); } catch (e) {}
+      toast('Visual quality: ' + nx + (nx === 'auto' ? ' (picked for this device)' : '')); setTimeout(function () { location.reload(); }, 700);
+    } }
   );
 
   var dlg = document.createElement('dialog');

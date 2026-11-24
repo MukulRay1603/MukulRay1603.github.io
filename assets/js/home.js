@@ -1,3 +1,5 @@
+/* page has arrived: let the hero decoration fade in */
+document.documentElement.classList.add('ready');
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) document.documentElement.classList.add('no-anim');
@@ -64,7 +66,7 @@
   var root = document.documentElement, tilt3d = document.querySelector('.rune-tilt'), spot = document.getElementById('spotlight');
   var tx = 0, ty = 0, cx = 0, cy = 0, mx = 0, my = 0, smx = 0, smy = 0, sy = window.scrollY, heroOn = true, ticking = false;
   function frame() {
-    var lite = root.classList.contains('lite');
+    var lite = root.classList.contains('lite'), rich = root.dataset.tier === 'high';
     cx += (tx - cx) * 0.07; cy += (ty - cy) * 0.07;
     if (heroOn) {
       var hr = hero.getBoundingClientRect();
@@ -72,7 +74,7 @@
         var d = lite ? +l.dataset.depth * 0.3 : +l.dataset.depth;
         l.style.transform = 'translate3d(' + (cx * d).toFixed(2) + 'px,' + (cy * d + sy * d / 400).toFixed(2) + 'px,0)';
       });
-      if (!lite) {
+      if (rich) {
         tilt3d.style.transform = 'rotateX(' + (cy * -14).toFixed(2) + 'deg) rotateY(' + (cx * 14).toFixed(2) + 'deg)';
         smx += (mx - smx) * 0.16; smy += (my - smy) * 0.16;
         spot.style.transform = 'translate3d(' + (smx - hr.left).toFixed(1) + 'px,' + (smy - hr.top).toFixed(1) + 'px,0)';
@@ -81,7 +83,7 @@
     stars.forEach(function (st, i) {
       st.style.transform = 'translate3d(' + (cx * (i + 1) * 4).toFixed(2) + 'px,' + (-((sy * SK[i]) % SH[i])).toFixed(2) + 'px,0)';
     });
-    var spotMoving = heroOn && !lite && (Math.abs(mx - smx) > 0.5 || Math.abs(my - smy) > 0.5);
+    var spotMoving = heroOn && rich && (Math.abs(mx - smx) > 0.5 || Math.abs(my - smy) > 0.5);
     if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005 || spotMoving) requestAnimationFrame(frame); else ticking = false;
   }
   function kick() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
@@ -94,21 +96,50 @@
     }, { passive: true });
     new IntersectionObserver(function (es) {
       heroOn = es[0].isIntersecting; hero.classList.toggle('is-off', !heroOn);
-    }).observe(hero);
+    }, { rootMargin: '-90px 0px 0px 0px' }).observe(hero);
   }
 
-  /* runtime FPS probe: if the first ~2s run under ~40fps, switch to the lite tier */
-  if (!reduce && !root.classList.contains('lite') && !root.dataset.fx) {
-    var frames = 0, t0 = 0;
-    setTimeout(function () {
-      requestAnimationFrame(function probe(t) {
-        if (!t0) t0 = t;
-        frames++;
-        if (t - t0 < 2000) requestAnimationFrame(probe);
-        else if (frames / ((t - t0) / 1000) < 28) root.classList.add('lite');
+  /* smoothness governor: steps the quality tier down when frames run rough, or once up when there is clear headroom (never above the device spec, never below light).
+     Where the browser reports slow frames itself (Chrome, Edge, Android) it just listens, at no cost.
+     Elsewhere it times frames only while the visitor scrolls, when frames are being drawn anyway. */
+  (function () {
+    var T = window.mrTier; if (!T || T.forced || reduce) return;
+    var floor = T.order.indexOf('light'), bad = 0, good = 0, upTried = false, lastChange = 0, t0 = performance.now();
+    function verdict(rough, smooth) {
+      var now = performance.now(), i = T.order.indexOf(T.get());
+      if (rough) { good = 0; if (++bad >= 3 && i > floor && now - lastChange > 3000) { T.set(T.order[i - 1], 'rough frames'); bad = 0; upTried = true; lastChange = now; } }
+      else if (smooth) { bad = 0; if (++good >= 6 && !upTried && i < T.order.indexOf(T.spec) && now - lastChange > 8000) { T.set(T.order[i + 1], 'headroom'); good = 0; upTried = true; lastChange = now; } }
+    }
+    var loaf = window.PerformanceObserver && PerformanceObserver.supportedEntryTypes && PerformanceObserver.supportedEntryTypes.indexOf('long-animation-frame') > -1;
+    if (loaf) {
+      /* every 2 s, judge the long frames the browser reported (frames over 50 ms) */
+      var blocked = 0, slowFrames = 0;
+      new PerformanceObserver(function (l) { l.getEntries().forEach(function (e) { if (document.visibilityState !== 'visible') return; slowFrames++; blocked += Math.max(0, e.duration - 50); }); }).observe({ type: 'long-animation-frame', buffered: false });
+      setInterval(function () {
+        if (document.hidden || performance.now() - t0 < 4000) { blocked = slowFrames = 0; return; }
+        var rough = slowFrames >= 6 || blocked > 400;
+        verdict(rough, slowFrames === 0);
+        blocked = slowFrames = 0;
+      }, 2000);
+      return;
+    }
+    /* fallback: time frames for 2 s after a scroll starts */
+    var running = false, lastScroll = 0;
+    function sample() {
+      if (running || document.hidden) return; running = true;
+      var start = 0, last = 0, gaps = [];
+      requestAnimationFrame(function f(t) {
+        if (!start) start = last = t; else { gaps.push(t - last); last = t; }
+        if (t - start < 2000 && !document.hidden) { requestAnimationFrame(f); return; }
+        running = false; if (gaps.length < 12) return;
+        var s2 = gaps.slice().sort(function (x, y) { return x - y; });
+        var frame = Math.max(6.9, Math.min(16.7, s2[Math.floor(s2.length * 0.1)])), avg = (t - start) / gaps.length;
+        var slow = gaps.filter(function (g) { return g > frame * 2.2; }).length / gaps.length;
+        verdict(avg > frame * 1.6 || slow > 0.2, avg < frame * 1.08 && slow < 0.02);
       });
-    }, 2500);
-  }
+    }
+    addEventListener('scroll', function () { var now = performance.now(); if (now - t0 > 3000 && now - lastScroll > 2500) { lastScroll = now; sample(); } }, { passive: true });
+  })();
 
   /* highlight cards: play the latency bars once they are on screen */
   new IntersectionObserver(function (es, o) {
@@ -121,7 +152,7 @@
     var spot = document.createElement('span'); spot.className = 'spot'; el.prepend(spot);
     el.classList.add('fx');
     el.addEventListener('pointermove', function (e) {
-      if (root.classList.contains('lite')) return;
+      if (root.dataset.tier !== 'high') return;
       var r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
       el.style.setProperty('--mx', (px * 100).toFixed(1) + '%'); el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
       if (tilt) el.style.transform = 'perspective(1000px) rotateX(' + ((0.5 - py) * 5).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 5).toFixed(2) + 'deg) translateY(-3px)';
@@ -538,6 +569,7 @@
   var io = 'IntersectionObserver' in window && new IntersectionObserver(function (es) {
     es.forEach(function (e) { seen.set(e.target, e.isIntersecting); }); sync();
   }, { threshold: 0.35 });
+  document.addEventListener('tierchange', function () { sync(); });
   /* posters load only when the projects section comes near the screen */
   var near = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.querySelectorAll('video[data-poster]').forEach(function (v) { v.poster = v.dataset.poster; v.removeAttribute('data-poster'); }); near.unobserve(e.target); } });
@@ -556,4 +588,36 @@
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
   }
   document.addEventListener('visibilitychange', sync);
+})();
+
+/* motion budget: gold sweeps and stat-icon animations repaint on the main thread, so they run in short bursts, only on screen */
+(function () {
+  var root = document.documentElement;
+  var calm = function () { return root.classList.contains('lite') || matchMedia('(prefers-reduced-motion: reduce)').matches || document.hidden; };
+  if (!('IntersectionObserver' in window)) return;
+  /* a single sweep every 12 s for whatever gold text is on screen */
+  var gold = [].slice.call(document.querySelectorAll('.hero h1 span, .foil')), seen = new WeakMap();
+  var gio = new IntersectionObserver(function (es) { es.forEach(function (e) { seen.set(e.target, e.isIntersecting); }); }, { threshold: 0.2 });
+  gold.forEach(function (g) { gio.observe(g); g.addEventListener('animationend', function () { g.classList.remove('sweep'); }); });
+  function sweep() { if (!calm()) gold.forEach(function (g) { if (seen.get(g)) g.classList.add('sweep'); }); }
+  setTimeout(function () { sweep(); setInterval(sweep, 12000); }, 1500);
+  /* stat icons animate for ~9 s when their card comes into view or becomes the active project, then rest */
+  var icons = [].slice.call(document.querySelectorAll('.mi')), vis = new WeakMap(), timers = new WeakMap();
+  function wake(mi) {
+    var card = mi.closest('.art');
+    if (calm() || !vis.get(mi) || (card && !card.classList.contains('is-on') && card.parentNode && card.parentNode.classList.contains('stage'))) return;
+    mi.classList.add('mi-on'); clearTimeout(timers.get(mi));
+    timers.set(mi, setTimeout(function () { mi.classList.remove('mi-on'); }, 6000));
+  }
+  var mio = new IntersectionObserver(function (es) { es.forEach(function (e) { vis.set(e.target, e.isIntersecting); if (e.isIntersecting) wake(e.target); else e.target.classList.remove('mi-on'); }); }, { threshold: 0.3 });
+  icons.forEach(function (mi) { mio.observe(mi); });
+  /* sections scrolled off screen pause all their animation */
+  var sio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('off', !e.isIntersecting); }); }, { rootMargin: '-90px 0px 0px 0px' });
+  document.querySelectorAll('main > .section, main > section').forEach(function (sec) { sio.observe(sec); });
+  var stage = document.querySelector('.stage');
+  if (stage && 'MutationObserver' in window) new MutationObserver(function (ms) {
+    var arcEl = document.getElementById('archive');
+    if (arcEl && arcEl.classList.contains('auto') && !arcEl.matches(':hover, :focus-within')) return; /* automatic rotation: let the card arrive quietly */
+    ms.forEach(function (m) { if (m.target.classList && m.target.classList.contains('is-on')) m.target.querySelectorAll('.mi').forEach(wake); });
+  }).observe(stage, { subtree: true, attributes: true, attributeFilter: ['class'] });
 })();
