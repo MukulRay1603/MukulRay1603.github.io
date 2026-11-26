@@ -545,8 +545,8 @@ document.documentElement.classList.add('ready');
       fr.title = name + ' overview video'; fr.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       fr.referrerPolicy = 'strict-origin-when-cross-origin'; body.appendChild(fr);
     } else {
-      title.innerHTML = name + ' <small>Live demo</small>';
-      link.href = tile.dataset.url; link.innerHTML = 'Open the live demo <span aria-hidden="true">↗</span>';
+      title.innerHTML = name + ' <small></small>'; title.querySelector('small').textContent = tile.dataset.kind || 'Live demo';
+      link.href = tile.dataset.url; link.innerHTML = '<span></span> <span aria-hidden="true">↗</span>'; link.firstChild.textContent = tile.dataset.link || 'Open the live demo';
       var src = tile.querySelector('video');
       var v = document.createElement('video');
       v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.poster = src.poster || src.dataset.poster || '';

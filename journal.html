@@ -64,6 +64,7 @@ dialog.read[open]{animation:pop .25s ease}
 .cap{margin:.6rem 0 1.4rem;text-align:center;font:400 .75rem/1.5 var(--mono);color:var(--faint)}
 .photo{border-radius:10px;overflow:hidden;border:1px solid var(--line);margin-top:1.4rem}
 .photo img{width:100%}
+.photo video{display:block;width:100%;height:auto;background:#0b0f18}
 
 .read-body h3{margin:1.8rem 0 .7rem;font-size:1.1rem;color:var(--gold-hi)}
 .read-body ul{margin:0 0 1.1rem 1.2rem;padding:0;line-height:1.75;list-style:disc}
@@ -129,6 +130,20 @@ dialog.read[open]{animation:pop .25s ease}
   </div>
 
   <div class="posts">
+    <article class="panel corners post">
+      <div class="post-thumb">
+        <picture>
+          <source type="image/webp" srcset="assets/images/Blogs/Nemesis_2026/nemesis-legacy-thumb.webp">
+          <img src="assets/images/Blogs/Nemesis_2026/nemesis-legacy-thumb.jpg" alt="" width="800" height="450" decoding="async">
+        </picture>
+      </div>
+      <div class="post-body">
+        <p class="meta"><span class="new-pill">New</span><time datetime="2026-11-26">November 26, 2026</time><span class="tag">Reinforcement Learning</span><span class="tag">Game AI</span><span class="tag">Unity</span></p>
+        <h2><button class="post-open" type="button" data-open="read-nemesis" aria-haspopup="dialog">Nemesis: What Testing My RL Boss in the Real Game Showed</button></h2>
+        <p>My boss AI looked good in a Python copy of the fight. Measured inside the actual game, a boss that always attacks did almost as well. Here is what I learned from it.</p>
+        <span class="more" aria-hidden="true">Read more →</span>
+      </div>
+    </article>
     <article class="panel corners post">
       <div class="post-thumb">
         <picture>
@@ -251,6 +266,39 @@ dialog.read[open]{animation:pop .25s ease}
 </main>
 
 <!-- ══ Irminsul v1 ══ -->
+<!-- ══ Nemesis ══ -->
+<dialog class="read" id="read-nemesis" aria-labelledby="read-nemesis-title">
+  <button class="read-close" type="button" aria-label="Close">✕</button>
+  <article class="read-in">
+    <p class="meta"><time datetime="2026-11-26">November 26, 2026</time><span class="tag">Reinforcement Learning</span><span class="tag">Game AI</span><span class="tag">Unity</span></p>
+    <h2 id="read-nemesis-title">Nemesis: What Testing My RL Boss in the Real Game Showed</h2>
+    <div class="read-body">
+      <p>Nemesis is a boss fight in Unity where the boss is driven by a reinforcement learning policy instead of a script. I built the first version between March 30 and April 22, 2026: a PPO boss trained with ML-Agents and run in Unity with Sentis, with a telegraph, attack and recovery cycle, phases that escalate as the fight goes on, and optional LLM taunts.</p>
+      <figure class="photo">
+        <video muted loop playsinline controls preload="none" poster="assets/images/Blogs/Nemesis_2026/nemesis-legacy-cover.jpg" width="1280" height="720">
+          <source src="assets/video/nemesis-demo-hd.mp4" type="video/mp4">
+          <source src="assets/video/nemesis-demo-hd.webm" type="video/webm">
+        </video>
+      </figure>
+      <p class="cap">Version 1.0 (legacy, April 2026): white boss and hunter in the original arena.</p>
+      <h3>The test I had skipped</h3>
+      <p>Version 1.0 was only ever evaluated in a Python re-implementation of the fight, never inside the game itself. In November I measured it properly: seeded, headless runs of the real Unity build, 600 fights per setting, with 95% confidence intervals.</p>
+      <ul>
+        <li><b>The trained boss</b> beat the scripted hunter in 85.0% of fights.</li>
+        <li><b>A boss that always attacks,</b> in the same body, won 82.7%.</li>
+      </ul>
+      <p>So the trained policy was no better than a one-line rule. The reason was simple: it had been trained in an earlier version of the game, and the game had moved on without it.</p>
+      <h3>Retraining found an exploit</h3>
+      <p>Version 2.2 retrained the boss in the game as it ships, with PPO talking to 12 game instances over TCP: about 1.3 to 1.4 million decisions in 75 minutes per model. The new models won 100% of fights, in about 27 seconds each, by using the special attack in 86 to 94% of their decisions.</p>
+      <p>That is not a clever boss, but it is a useful result. The agent worked as an automated playtester and found a balance problem in the special attack. Weakening the move by hand would only swap one trick for another and make the boss feel scripted again.</p>
+      <h3>What comes next</h3>
+      <p>In version 3.0 the hunter becomes an RL agent too, with the human player's moveset and a decision every 0.2 seconds. Both sides train in a self-play league against past snapshots of themselves, the approach behind AlphaStar and For Honor's AI. The goal is a boss whose variety comes from an opponent that keeps learning, not from more scripting. The training code is in place, and I will share results once they are measured.</p>
+    </div>
+    <p class="read-tags"><span class="tag">🎮 Legacy 1.0</span><span class="tag">600 fights per test</span><span class="tag">Self-play next</span></p>
+    <p class="read-links"><a class="text-link" href="https://github.com/MukulRay1603/nemesis-boss-ai" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a> &nbsp;·&nbsp; <a class="text-link" href="https://github.com/MukulRay1603/nemesis-boss-ai/blob/main/docs/VERSIONS.md" target="_blank" rel="noopener">Version history <span class="arrow" aria-hidden="true">↗</span></a></p>
+  </article>
+</dialog>
+
 <dialog class="read" id="read-irminsul" aria-labelledby="read-irminsul-title">
   <button class="read-close" type="button" aria-label="Close">✕</button>
   <article class="read-in">

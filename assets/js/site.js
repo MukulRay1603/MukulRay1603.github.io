@@ -168,7 +168,7 @@
   });
 
   /* ─── "New" pill on the Journal nav link until the latest post has been seen ─── */
-  var LATEST_POST = '2026-11-06';
+  var LATEST_POST = '2026-11-26';
   try {
     if (!onHome) localStorage.setItem('mr-journal-seen', LATEST_POST);
     else if (localStorage.getItem('mr-journal-seen') !== LATEST_POST) {
